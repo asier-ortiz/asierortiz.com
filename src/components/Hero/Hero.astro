@@ -50,13 +50,38 @@ import siteData from "@config/siteData.json";
     animation: glow 4s infinite;
   }
 
-  @media (max-width: 768px) {
+  /* Large desktops and monitors */
+  @media (min-width: 1200px) {
     #hero .max-w-sm {
-      max-width: 75%; // Adjust this value as needed to make the image container smaller on small screens
+      max-width: 100%; // Default size for large screens
     }
+  }
 
-    #hero .animate-glow img {
-      width: 100%; // Make sure the image scales down with the container
+  /* Tablets in landscape mode */
+  @media (max-width: 1199px) and (min-width: 992px) {
+    #hero .max-w-sm {
+      max-width: 70%; // Adjust as needed
+    }
+  }
+
+  /* Tablets in portrait mode and small desktops */
+  @media (max-width: 991px) and (min-width: 768px) {
+    #hero .max-w-sm {
+      max-width: 70%; // Adjust as needed
+    }
+  }
+
+  /* Smartphones in landscape mode */
+  @media (max-width: 767px) and (min-width: 576px) {
+    #hero .max-w-sm {
+      max-width: 40%; // Adjust as needed
+    }
+  }
+
+  /* Smartphones in portrait mode */
+  @media (max-width: 575px) {
+    #hero .max-w-sm {
+      max-width: 40%; // Adjust as needed
     }
   }
 </style>
