@@ -1,0 +1,28 @@
+---
+const { title, center, description, date } = Astro.props;
+---
+
+<div class="relative pb-12 pl-6 border-l-4 border-gray-700">
+  <div class="bullet absolute -left-4 top-0 w-7 h-7 bg-primary-400 rounded-full border-4 border-primary-900"></div>
+  <div class="relative md:pb-0 md:col-span-2">
+    <h3 class="text-xl font-bold text-primary-500">{title}</h3>
+    <h4 class="font-semibold text-xl text-primary-100">{center}</h4>
+    <time class="p-0 m-0 text-sm text-primary-50">{date}</time>
+    <p class="relative flex flex-col gap-2 description text-pretty">{description}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  .bullet {
+    animation: scaleAnimation 2s infinite ease-in-out;
+  }
+
+  @keyframes scaleAnimation {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+</style>

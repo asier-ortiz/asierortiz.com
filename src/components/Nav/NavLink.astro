@@ -1,0 +1,66 @@
+---
+import { type navLinkItem } from "@config/navData.json";
+
+interface Props {
+  navItem: navLinkItem;
+  class?: string;
+}
+
+const { navItem, class: className } = Astro.props as Props;
+const { text, href, label, newTab = false } = navItem;
+const sectionId = href.startsWith('/#') ? href.slice(2) : null;
+---
+
+<li>
+  <a
+      class:list={[
+        `primary-focus group/navlink relative block w-full px-4 py-2 font-medium ${className}`,
+        sectionId ? `navlink-${sectionId}` : ''
+      ]}
+      href={href}
+      data-section={sectionId}
+      aria-label={label}
+      target={newTab ? "_blank" : ""}
+      rel={newTab ? "noopener noreferrer" : ""}
+  >
+    <span
+        class:list={[
+          "navlink__underline-ltr",
+          Astro.url.pathname === href ? "active-navlink" : ""
+        ]}
+    >{text}</span>
+  </a>
+</li>
+
+<style lang="scss">
+  .navlink__underline-ltr {
+    @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300;
+  }
+  .navlink__underline-ltr:hover, .active-navlink {
+    @apply bg-[length:100%_2px];
+  }
+</style>
+
+<script>
+  if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('a[data-section] span');
+
+      const highlightNavLink = () => {
+        let index = sections.length;
+
+        while(--index && window.scrollY + 50 < sections[index].offsetTop) {}
+
+        navLinks.forEach((link) => link.classList.remove('active-navlink'));
+        if (sections[index]) {
+          const activeSection = sections[index].id;
+          document.querySelector(`a[data-section="${activeSection}"] span`)?.classList.add('active-navlink');
+        }
+      };
+
+      highlightNavLink();
+      window.addEventListener('scroll', highlightNavLink);
+    });
+  }
+</script>

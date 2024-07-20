@@ -1,0 +1,42 @@
+---
+import NavLink from "@components/Nav/NavLink.astro";
+import MobileNav from "./MobileNav.astro";
+import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
+import Button from "@components/Button/Button.astro";
+import navData from "@config/navData.json";
+---
+
+<div
+  id="nav__container"
+  class="fixed left-0 top-0 z-30 flex w-full flex-col bg-base-900 py-1 duration-500"
+  transition:name={`nav`}
+>
+  <div class="mx-auto flex w-full">
+    <div class="container flex h-16 w-full items-center">
+      <header class="flex w-full items-center gap-2">
+        <div class="flex flex-auto justify-start">
+          <SiteLogo />
+        </div>
+        <div class="flex flex-auto justify-end">
+          <nav class="hidden md:block">
+            <ul class="flex h-fit items-center px-4">
+              {
+                navData.map((navItem) => <NavLink {navItem} />)
+              }
+            </ul>
+          </nav>
+          <Button
+            variant="primary"
+            class="my-auto hidden md:block"
+            href="mailto:asierortiz@outlook.es"
+          >
+            Contact
+          </Button>
+          <div class="md:hidden">
+            <MobileNav />
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>

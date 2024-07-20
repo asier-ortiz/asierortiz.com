@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../../assets/images/asier-ortiz.webp";
+import siteData from "@config/siteData.json";
+---
+
+<section id="hero" class="relative flex w-full pb-6" data-aos="fade-up">
+  <div class="container grid items-center gap-10 pt-36 md:grid-cols-3 md:gap-20 md:pt-44">
+    <div class="mx-auto max-w-lg md:col-span-2 md:ml-0 md:max-w-full">
+      <h1 class="h1" >Hi, I'm <span class="text-gradient"> {siteData.author.name}</span></h1>
+      <p class="description mt-6 text-pretty">
+        A full stack developer passionate about crafting dynamic web and mobile applications.
+        <span class="description text-pretty font-semibold text-primary-300">
+          With over 5 years of experience in programming,
+        </span>
+        I am currently honing my skills in the world of web development.
+        I thrive on building seamless user experiences and robust backend systems.
+        From database design to front-end interactions, I love diving into every layer of the development process.
+      </p>
+    </div>
+    <div class="mx-auto max-w-sm md:col-span-1 md:max-w-full">
+      <div class="aspect-square overflow-hidden rounded-full animate-glow">
+        <Image
+            src={heroImage}
+            class="w-full object-cover rounded-full"
+            alt="web reaper profile"
+            loading="eager"
+            width={600}
+            densities={[1.5, 2]}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 2px #65a30d, 0 0 4px #65a30d, 0 0 6px #65a30d, 0 0 8px #65a30d;
+    }
+    50% {
+      box-shadow: 0 0 4px #65a30d, 0 0 8px #65a30d, 0 0 12px #65a30d, 0 0 16px #65a30d;
+    }
+    100% {
+      box-shadow: 0 0 2px #65a30d, 0 0 4px #65a30d, 0 0 6px #65a30d, 0 0 8px #65a30d;
+    }
+  }
+
+  .animate-glow {
+    animation: glow 4s infinite;
+  }
+
+</style>

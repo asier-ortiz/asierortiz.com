@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+import Button from "@components/Button/Button.astro";
+import { type ProjectItem } from "@config/projectData.json";
+
+interface Props extends ProjectItem {
+  rest?: any;
+}
+
+const { image, title, description, href, languages, ...rest } = Astro.props as Props;
+---
+
+<div data-aos="zoom-in-up" data-aos-delay=".2" class="flex flex-col border-2 rounded border-base-700 p-4 project-container" {...rest}>
+  <div class="mx-auto max-w-4xl image-container">
+    <Image class="project-image object-cover rounded" src={image} alt={title} height={700} />
+  </div>
+  <div class="mt-4 flex flex-grow flex-col justify-between">
+    <div>
+      <h2 class="h3">{title}</h2>
+      <div class="languages-container">
+        {languages.map((lang) => (
+            <div class="language" key={lang.language}>
+              <span class="language-bullet" style={{ backgroundColor: lang.color }}></span>
+              <span>{lang.language}</span>
+            </div>
+        ))}
+      </div>
+      <p class="description mt-4">{description}</p>
+    </div>
+    <div class="mt-6 flex">
+      <Button
+          variant="ghost"
+          href={href}
+          arrow="right"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover-button"
+      >
+        Check It Out <span class="sr-only">about {title}</span>
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.hover-button');
+    buttons.forEach(button => {
+      const image = button.closest('.project-container').querySelector('.project-image');
+      if (button && image) {
+        button.addEventListener('mouseover', () => {
+          image.classList.add('zoom');
+        });
+        button.addEventListener('mouseout', () => {
+          image.classList.remove('zoom');
+        });
+      }
+    });
+  });
+</script>
+
+<style lang="scss">
+  .language {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .language-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .languages-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .project-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-image {
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .project-image.zoom {
+    transform: scale(1.02);
+  }
+</style>
+

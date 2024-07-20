@@ -1,0 +1,27 @@
+.use-animations [data-aos] {
+  @apply pointer-events-none;
+
+  &.aos-animate {
+    @apply pointer-events-auto;
+  }
+}
+
+.use-animations [data-aos^="fade"][data-aos^="fade"] {
+  @apply opacity-0;
+}
+
+.use-animations [data-aos^="zoom"][data-aos^="zoom"] {
+  @apply opacity-0;
+}
+
+.use-animations [data-aos^="slide"][data-aos^="slide"] {
+  @apply invisible;
+
+  &.aos-animate {
+    @apply visible;
+  }
+}
+
+.use-animations [data-aos^="flip"][data-aos^="flip"] {
+  backface-visibility: hidden;
+}

@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-base-950 font-sans leading-[1.6rem] text-base-50;
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-3 w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-inherit;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-none bg-base-600 bg-opacity-90;
+  }
+
+  ::selection {
+    background-color: #FFE066;
+    color: #000000;
+  }
+}
+
+@layer components {
+  @import "buttons";
+  @import "prose";
+
+  .h1 {
+    @apply text-3xl font-medium md:text-4xl lg:text-5xl;
+  }
+
+  .h2 {
+    @apply text-2xl font-medium md:text-4xl;
+  }
+
+  .h3 {
+    @apply text-xl font-medium md:text-2xl;
+  }
+
+  .description {
+    @apply text-base-400;
+  }
+
+  .container {
+    @apply mx-auto max-w-5xl px-4;
+  }
+
+  p {
+    @apply md:text-base lg:text-lg;
+  }
+
+  .text-gradient {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    background: linear-gradient(to bottom, #65a30d, #f7fee7);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .text-gradient::selection {
+    background: #FFE066;
+    color: #000000;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+  }
+
+  .text-gradient::-moz-selection {
+    background: #FFE066;
+    color: #000000;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+  }
+}
+
+@layer utilities {
+  @import "aos";
+
+  .primary-focus {
+    @apply focus:outline-none focus-visible:outline-primary-600;
+  }
+
+  .underline-ltr {
+    @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px];
+  }
+
+  .pause {
+    animation-play-state: paused !important;
+  }
+}
+
+
+

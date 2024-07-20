@@ -1,0 +1,66 @@
+.button {
+  @apply flex items-center justify-center px-5 py-2 font-semibold rounded transition-transform duration-300;
+  @apply focus:outline-none focus:ring-offset-base-800;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.button--primary {
+  @apply relative border border-primary-500 bg-base-800;
+  @apply hover:bg-primary-500 hover:text-base-800;
+  @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+
+  &::after {
+    content: "";
+    @apply absolute inset-0 -z-50 h-full w-full translate-x-1.5 translate-y-1.5 bg-primary-500 transition-transform duration-300 ease-in-out rounded;
+    @apply hover:translate-x-0 hover:translate-y-0;
+  }
+}
+
+.button--secondary {
+  @apply border border-base-500 bg-base-800;
+  @apply hover:border-primary-500;
+  @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+}
+
+.button--outline {
+  @apply border border-base-500 bg-transparent text-base-800;
+  @apply hover:border-primary-500 hover:text-primary-500;
+  @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+}
+
+.button--ghost {
+  @apply bg-base-700 text-base-300;
+  @apply hover:bg-primary-500 hover:text-base-800;
+  @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+}
+
+.scroll-to-top {
+  @apply fixed bottom-28 right-12 px-5 py-2 bg-base-800 text-base-300 border-2 border-primary-600 rounded cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none transition-transform duration-300 ease-in-out;
+
+  &.visible {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  &:hover {
+    @apply transform scale-110 bg-primary-500 text-base-800;
+  }
+
+  @screen lg {
+    @apply bottom-28; /* Ajuste para pantallas lg y más grandes */
+  }
+
+  @screen md {
+    @apply bottom-24; /* Ajuste para pantallas md y más pequeñas */
+  }
+
+  @screen sm {
+    @apply bottom-20; /* Ajuste para pantallas sm y más pequeñas */
+  }
+
+  @screen xs {
+    @apply bottom-16; /* Ajuste para pantallas xs y más pequeñas */
+  }
+}
+
+
+

@@ -1,0 +1,10 @@
+.prose {
+  @apply prose-base dark:prose-invert;
+  @apply break-words;
+  @apply prose-h1:text-3xl md:prose-h1:text-4xl;
+  @apply prose-h2:text-2xl md:prose-h2:text-3xl;
+  @apply prose-h3:text-xl md:prose-h3:text-2xl;
+  @apply prose-h4:text-lg md:prose-h4:text-xl;
+  @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:font-medium;
+  @apply prose-p:my-4;
+}
