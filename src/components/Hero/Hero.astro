@@ -50,4 +50,13 @@ import siteData from "@config/siteData.json";
     animation: glow 4s infinite;
   }
 
+  @media (max-width: 768px) {
+    #hero .max-w-sm {
+      max-width: 75%; // Adjust this value as needed to make the image container smaller on small screens
+    }
+
+    #hero .animate-glow img {
+      width: 100%; // Make sure the image scales down with the container
+    }
+  }
 </style>
