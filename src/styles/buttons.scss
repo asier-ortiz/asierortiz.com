@@ -35,7 +35,7 @@
 }
 
 .scroll-to-top {
-  @apply fixed bottom-28 right-12 px-5 py-2 bg-base-800 text-base-300 border-2 border-primary-600 rounded cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none transition-transform duration-300 ease-in-out;
+  @apply fixed bottom-12 right-6 px-6 py-3 bg-base-800 text-base-300 border-2 border-primary-600 rounded cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none transition-transform duration-300 ease-in-out;
 
   &.visible {
     @apply opacity-100 pointer-events-auto;
@@ -46,21 +46,22 @@
   }
 
   @screen lg {
-    @apply bottom-28; /* Ajuste para pantallas lg y más grandes */
+    @apply bottom-16 right-8; /* Ajuste para pantallas lg y más grandes */
   }
 
   @screen md {
-    @apply bottom-24; /* Ajuste para pantallas md y más pequeñas */
+    @apply bottom-12 right-6; /* Ajuste para pantallas md y más pequeñas */
   }
 
   @screen sm {
-    @apply bottom-20; /* Ajuste para pantallas sm y más pequeñas */
+    @apply bottom-10 right-4; /* Ajuste para pantallas sm y más pequeñas */
   }
 
   @screen xs {
-    @apply bottom-16; /* Ajuste para pantallas xs y más pequeñas */
+    @apply bottom-8 right-2; /* Ajuste para pantallas xs y más pequeñas */
   }
 }
+
 
 
 
