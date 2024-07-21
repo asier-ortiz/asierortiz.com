@@ -8,12 +8,23 @@ publish = "dist"
 functions = "netlify/functions/"
 
 [[redirects]]
-from = "/api/*" # simplify all calls to serverless functions
-to = "/.netlify/functions/:splat" # all function calls will go to this path
-status = 200 # ok code
-force = true # ensure to always redirect
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
+force = true
 
 [[redirects]]
 from = "/sitemap-index.xml"
 to = "/sitemap-index.xml"
 status = 200
+
+[[redirects]]
+from = "/sitemap.xml"
+to = "/sitemap.xml"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+force = true
