@@ -134,6 +134,81 @@ import navData from "@config/navData.json";
 
   document.addEventListener('DOMContentLoaded', initMobileNav);
   document.addEventListener("astro:after-swap", initMobileNav);
+
+
+  // function toggleMobileNav(event) {
+  //   if (
+  //       mobileNavBurger &&
+  //       mobileNavContent &&
+  //       mobileNavContainer &&
+  //       mobileNavBackdrop
+  //   ) {
+  //     if (!mobileNavContainer.classList.contains("open")) {
+  //       mobileNavContainer.classList.add("open");
+  //       mobileNavBurger.setAttribute("aria-expanded", "true");
+  //
+  //       mobileNavContent.classList.remove("hidden");
+  //       mobileNavContent.classList.remove("mobile-nav--slide-out");
+  //       mobileNavContent.classList.add("mobile-nav--slide-in");
+  //
+  //       mobileNavBackdrop.classList.remove("hidden");
+  //       mobileNavBackdrop.classList.remove("mobile-nav__backdrop--fade-out");
+  //       mobileNavBackdrop.classList.add("mobile-nav__backdrop--fade-in");
+  //
+  //     } else {
+  //       mobileNavContainer.classList.remove("open");
+  //       mobileNavBurger.setAttribute("aria-expanded", "false");
+  //
+  //       mobileNavContent.classList.remove("mobile-nav--slide-in");
+  //       mobileNavContent.classList.add("mobile-nav--slide-out");
+  //
+  //       setTimeout(() => {
+  //         mobileNavContent?.classList.add("hidden");
+  //       }, 300);
+  //
+  //       mobileNavBackdrop.classList.remove("mobile-nav__backdrop--fade-in");
+  //       mobileNavBackdrop.classList.add("mobile-nav__backdrop--fade-out");
+  //     }
+  //
+  //     event.preventDefault();
+  //   }
+  // }
+  //
+  // function highlightNavLink() {
+  //   const sections = document.querySelectorAll('section[id]');
+  //   const navLinks = document.querySelectorAll('a[data-section] span');
+  //
+  //   let index = sections.length;
+  //
+  //   while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+  //
+  //   navLinks.forEach((link) => link.classList.remove('active-navlink'));
+  //   if (sections[index]) {
+  //     const activeSection = sections[index].id;
+  //     document.querySelectorAll(`a[data-section="${activeSection}"] span`)
+  //         .forEach((link) => link.classList.add('active-navlink'));
+  //   }
+  // }
+  //
+  // function initMobileNav() {
+  //   mobileNavContainer = document.getElementById("mobile-nav__container");
+  //   mobileNavBurger = document.getElementById("mobile-nav__burger");
+  //   mobileNavContent = document.getElementById("mobile-nav__content");
+  //   mobileNavCloseBtn = document.getElementById("mobile-nav__close");
+  //   mobileNavBackdrop = document.getElementById("mobile-nav__backdrop");
+  //
+  //   if (mobileNavBurger && mobileNavCloseBtn && mobileNavBackdrop) {
+  //     mobileNavBurger.addEventListener("click", toggleMobileNav);
+  //     mobileNavCloseBtn.addEventListener("click", toggleMobileNav);
+  //     mobileNavBackdrop.addEventListener("click", toggleMobileNav);
+  //   }
+  //
+  //   highlightNavLink();
+  //   window.addEventListener('scroll', highlightNavLink);
+  // }
+  //
+  // document.addEventListener('DOMContentLoaded', initMobileNav);
+  // document.addEventListener("astro:after-swap", initMobileNav);
 </script>
 
 <style lang="scss">
