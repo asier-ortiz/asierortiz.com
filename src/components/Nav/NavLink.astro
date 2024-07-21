@@ -50,12 +50,13 @@ const sectionId = href.startsWith('/#') ? href.slice(2) : null;
             const highlightNavLink = () => {
                 let index = sections.length;
 
-                while(--index && window.scrollY + 50 < sections[index].offsetTop) {}
+                while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
 
                 navLinks.forEach((link) => link.classList.remove('active-navlink'));
                 if (sections[index]) {
                     const activeSection = sections[index].id;
-                    document.querySelector(`a[data-section="${activeSection}"] span`)?.classList.add('active-navlink');
+                    document.querySelectorAll(`a[data-section="${activeSection}"] span`)
+                        .forEach((link) => link.classList.add('active-navlink'));
                 }
             };
 
