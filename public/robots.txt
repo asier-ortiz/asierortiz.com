@@ -1,1 +1,1 @@
-Sitemap: https://asierortiz.dev/sitemap-index.xml
+Sitemap: https://asierortiz.dev/sitemap.xml
