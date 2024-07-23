@@ -35,10 +35,14 @@
 }
 
 .scroll-to-top {
-  @apply fixed bottom-12 right-6 px-6 py-3 bg-base-800 text-base-300 border-2 border-primary-600 rounded cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none transition-transform duration-300 ease-in-out;
+  @apply fixed bottom-12 right-6 px-6 py-3 bg-base-800 text-base-300 border-2 border-primary-600 rounded cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none transition-transform duration-300 ease-in-out transform translate-x-full;
 
   &.visible {
-    @apply opacity-100 pointer-events-auto;
+    @apply opacity-100 pointer-events-auto translate-x-0;
+  }
+
+  &.hiding {
+    @apply translate-x-full;
   }
 
   &:hover {
@@ -61,6 +65,9 @@
     @apply bottom-8 right-2; /* Ajuste para pantallas xs y más pequeñas */
   }
 }
+
+
+
 
 
 

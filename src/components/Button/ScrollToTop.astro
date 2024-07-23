@@ -1,5 +1,5 @@
 ---
-import {Icon} from "astro-icon/components";
+import { Icon } from "astro-icon/components";
 ---
 
 <button id="scrollToTop" class="scroll-to-top">
@@ -24,10 +24,15 @@ import {Icon} from "astro-icon/components";
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 scrollToTopButton.classList.add('visible');
+                scrollToTopButton.classList.remove('hiding');
             } else {
-                scrollToTopButton.classList.remove('visible');
+                if (scrollToTopButton.classList.contains('visible')) {
+                    scrollToTopButton.classList.add('hiding');
+                    setTimeout(() => {
+                        scrollToTopButton.classList.remove('visible');
+                    }, 150); // Match the duration of the CSS transition
+                }
             }
         });
     });
 </script>
-
