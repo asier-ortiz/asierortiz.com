@@ -8,6 +8,7 @@ import RunningTracker from "@images/projects/running-tracker.webp";
 import Trivial from "@images/projects/trivial.webp";
 import ArabaMarket from "@images/projects/araba-market.webp";
 import Arkanoid from "@images/projects/arkanoid.webp";
+import Portfolio from "@images/projects/portfolio.webp";
 
 export interface ProjectItem {
   image: ImageMetadata;
@@ -113,6 +114,24 @@ export const projectData: ProjectItem[] = [
     ],
     type: "web development",
     buttonText: "View on GitHub"
+  },
+  {
+    image: Portfolio,
+    title: "Meta Portfolio Project",
+    description: `Ever wondered what it’s like to see a portfolio within a portfolio? Welcome to the Meta Portfolio, 
+    where clicking on a project link takes you to... another portfolio! It's like "Inception" for web developers. 
+    Dive into this rabbit hole and enjoy the recursive fun.
+    `,
+    href: new URL("https://asierortiz.dev/"),
+    languages: [
+      { language: "Astro", "color": "#FF5A03" },
+      { language: "TypeScript", "color": "#3178C6" },
+      { language: "HTML", "color": "#E34F26" },
+      { language: "TailwindCSS", "color": "#06B6D4" },
+      { language: "Sass", "color": "#CC6699" },
+    ],
+    type: "web development",
+    buttonText: "Visit Website"
   },
   {
     image: RunningTracker,
