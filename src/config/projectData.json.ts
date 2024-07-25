@@ -32,7 +32,8 @@ export const projectData: ProjectItem[] = [
     languages: [
       { language: "JavaScript", "color": "#f1e05a" },
       { language: "HTML", "color": "#e34c26" },
-      { language: "Sass", "color": "#CC6699" }
+      { language: "Sass", "color": "#CC6699" },
+      { language: "Leaflet", "color": "#76B041" }
     ]
   },
   {
@@ -90,6 +91,7 @@ export const projectData: ProjectItem[] = [
     "languages": [
       { language: "Swift", "color": "#F05138" },
       { language: "Realm Swift", "color": "#5C2D91" },
+      { language: "Apple Maps", "color": "#007AFF" }
     ]
   },
   {
@@ -101,7 +103,7 @@ export const projectData: ProjectItem[] = [
     href: new URL("https://github.com/asier-ortiz/trivial/"),
     "languages": [
       { language: "Kotlin", "color": "#A97BFF" },
-      { language: "Realm Kotlin", "color": "#5C2D91" },
+      { language: "Realm Kotlin", "color": "#5C2D91" }
     ]
   },
   {
@@ -117,6 +119,7 @@ export const projectData: ProjectItem[] = [
       { language: "CSS", "color": "#563d7c" },
       { language: "Ionic", "color": "#3880FF" },
       { language: "Vue", "color": "#41B883" },
+      { language: "Leaflet", "color": "#76B041" }
     ]
   },
   {
