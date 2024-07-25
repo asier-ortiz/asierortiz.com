@@ -7,7 +7,7 @@ interface Props extends ProjectItem {
     rest?: any;
 }
 
-const { image, title, description, href, languages, type, ...rest } = Astro.props as Props;
+const { image, title, description, href, languages, type, buttonText, ...rest } = Astro.props as Props;
 ---
 
 <div  class="flex flex-col border-2 rounded border-base-700 p-4 project-container project-card" data-type={type} {...rest}>
@@ -36,7 +36,7 @@ const { image, title, description, href, languages, type, ...rest } = Astro.prop
           rel="noopener noreferrer"
           class="hover-button"
       >
-        Check It Out <span class="sr-only">about {title}</span>
+        {buttonText} <span class="sr-only">about {title}</span>
       </Button>
     </div>
   </div>

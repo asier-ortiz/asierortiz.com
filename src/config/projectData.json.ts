@@ -16,6 +16,7 @@ export interface ProjectItem {
   href: URL;
   languages: Language[];
   type: string;
+  buttonText: string;
 }
 
 export interface Language {
@@ -37,7 +38,8 @@ export const projectData: ProjectItem[] = [
       { language: "Sass", "color": "#CC6699" },
       { language: "Leaflet", "color": "#76B041" }
     ],
-    type: "web development"
+    type: "web development",
+    buttonText: "View on GitHub"
   },
   {
     image: PollMaker,
@@ -53,7 +55,8 @@ export const projectData: ProjectItem[] = [
       { language: "HTML", "color": "#E34F26" },
       { language: "Bootstrap", "color": "#7952B3" }
     ],
-    type: "web development"
+    type: "web development",
+    buttonText: "View on GitHub"
   },
   {
     image: CumpleTuSuenio,
@@ -70,7 +73,8 @@ export const projectData: ProjectItem[] = [
       { language: "HTML", "color": "#E34F26" },
       { language: "Bootstrap", "color": "#563D7C" }
     ],
-    type: "web development"
+    type: "web development",
+    buttonText: "View on GitHub"
   },
   {
     image: TasksApp,
@@ -85,7 +89,8 @@ export const projectData: ProjectItem[] = [
       { language: "Material UI", "color": "#0081CB" },
       { language: "HTML", "color": "#E34F26" }
     ],
-    type: "web development"
+    type: "web development",
+    buttonText: "View on GitHub"
   },
   {
     image: Euskoplan,
@@ -106,7 +111,8 @@ export const projectData: ProjectItem[] = [
       { language: "HTML", "color": "#E34F26" },
       { language: "Mapbox", "color": "#4264FB" }
     ],
-    type: "web development"
+    type: "web development",
+    buttonText: "View on GitHub"
   },
   {
     image: RunningTracker,
@@ -121,7 +127,8 @@ export const projectData: ProjectItem[] = [
       { language: "Realm Swift", "color": "#5C2D91" },
       { language: "Apple Maps", "color": "#007AFF" }
     ],
-    type: "mobile development"
+    type: "mobile development",
+    buttonText: "View on GitHub"
   },
   {
     image: Trivial,
@@ -134,7 +141,8 @@ export const projectData: ProjectItem[] = [
       { language: "Kotlin", "color": "#A97BFF" },
       { language: "Realm Kotlin", "color": "#5C2D91" }
     ],
-    type: "mobile development"
+    type: "mobile development",
+    buttonText: "View on GitHub"
   },
   {
     image: ArabaMarket,
@@ -151,7 +159,8 @@ export const projectData: ProjectItem[] = [
       { language: "Vue", "color": "#41B883" },
       { language: "Leaflet", "color": "#76B041" }
     ],
-    type: "mobile development"
+    type: "mobile development",
+    buttonText: "Download App"
   },
   {
     image: Arkanoid,
@@ -164,7 +173,8 @@ export const projectData: ProjectItem[] = [
       { language: "Unity", color: "#f1e05a" },
       { language: "Firebase", color: "#FF7300" }
     ],
-    type: "mobile development"
+    type: "mobile development",
+    buttonText: "View on GitHub"
   }
 
 ];
