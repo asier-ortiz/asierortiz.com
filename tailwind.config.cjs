@@ -29,6 +29,22 @@ module.exports = {
           900: "#365314",
           950: "#1a2e05",
         },
+        secondary: {
+          50: "#fefce8",
+          100: "#fef9c3",
+          200: "#fef08a",
+          300: "#fde047",
+          400: "#facc15",
+          500: "#eab308",
+          600: "#ca8a04",
+          700: "#a16207",
+          800: "#854d0e",
+          900: "#713f12",
+          950: "#422006",
+        },
+
+        //////////////////////////////////////////////////////////////
+
         slate: {
           50: "#f8fafc",
           100: "#f1f5f9",
@@ -315,6 +331,9 @@ module.exports = {
           900: "#881337",
           950: "#4c0519",
         },
+
+        //////////////////////////////////////////////////////////////
+
         base: colors.neutral,
         info: colors.sky["500"],
         "info-content": colors.sky["950"],
@@ -364,5 +383,16 @@ module.exports = {
       ],
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    function ({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--color-primary-600': theme('colors.primary.600'),
+          '--color-secondary-50': theme('colors.secondary.50'),
+        }
+      });
+    }
+  ],
 };

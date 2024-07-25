@@ -21,7 +21,7 @@
   }
 
   ::selection {
-    background-color: #FFE066;
+    @apply bg-secondary-300;
     color: #000000;
   }
 }
@@ -58,20 +58,20 @@
     position: relative;
     display: inline-block;
     color: transparent;
-    background: linear-gradient(to bottom, #65a30d, #f7fee7);
+    background: linear-gradient(to bottom, var(--color-primary-600), var(--color-secondary-50));
     -webkit-background-clip: text;
     background-clip: text;
   }
 
   .text-gradient::selection {
-    background: #FFE066;
+    @apply bg-secondary-300;
     color: #000000;
     -webkit-background-clip: initial;
     background-clip: initial;
   }
 
   .text-gradient::-moz-selection {
-    background: #FFE066;
+    @apply bg-secondary-300;
     color: #000000;
     -webkit-background-clip: initial;
     background-clip: initial;
