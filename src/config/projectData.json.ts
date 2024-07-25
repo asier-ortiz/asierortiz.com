@@ -5,6 +5,8 @@ import RunningTracker from "@images/projects/running-tracker.webp";
 import Trivial from "@images/projects/trivial.webp";
 import ArabaMarket from "@images/projects/araba-market.webp";
 import Arkanoid from "@images/projects/arkanoid.webp";
+import CumpleTuSuenio from "@images/projects/cumple-tu-suenio.webp";
+import TasksApp from "@images/projects/tasks-app.webp";
 
 export interface ProjectItem {
   image: ImageMetadata;
@@ -27,10 +29,10 @@ export const projectData: ProjectItem[] = [
     the world and track thousands of flights in real time.
     `,
     href: new URL("https://github.com/asier-ortiz/airport-finder/"),
-    "languages": [
-      { "language": "JavaScript", "color": "#f1e05a" },
-      { "language": "HTML", "color": "#e34c26" },
-      { "language": "Sass", "color": "#CC6699" }
+    languages: [
+      { language: "JavaScript", "color": "#f1e05a" },
+      { language: "HTML", "color": "#e34c26" },
+      { language: "Sass", "color": "#CC6699" }
     ]
   },
   {
@@ -40,12 +42,41 @@ export const projectData: ProjectItem[] = [
     featuring functions for different user roles.
     `,
     href: new URL("https://github.com/asier-ortiz/poll-maker/"),
-    "languages": [
-      { "language": "Laravel", "color": "#FF2D20" },
-      { "language": "PHP", "color": "#4F5D95" },
-      { "language": "MySQL", "color": "#00758F" },
-      { "language": "HTML", "color": "#E34F26" },
-      { "language": "Bootstrap", "color": "#7952B3" }
+    languages: [
+      { language: "Laravel", "color": "#FF2D20" },
+      { language: "PHP", "color": "#4F5D95" },
+      { language: "MySQL", "color": "#00758F" },
+      { language: "HTML", "color": "#E34F26" },
+      { language: "Bootstrap", "color": "#7952B3" }
+    ]
+  },
+  {
+    image: CumpleTuSuenio,
+    title: "Cumple tu Sueño",
+    description: `"Cumple tu sueño" is a project made with Django that allows the management of 
+    employees, suppliers, products, keep the track of sales, visualize data in graphs and import and export files in 
+    CSV format. It stores all the data in an embedded SQLite database.
+    `,
+    href: new URL("https://github.com/asier-ortiz/cumple-tu-suenio/"),
+    languages: [
+      { language: "Django", "color": "#092E20" },
+      { language: "Python", "color": "#306998" },
+      { language: "SQLite", "color": "#003B57" },
+      { language: "HTML", "color": "#E34F26" },
+      { language: "Bootstrap", "color": "#563D7C" }
+    ]
+  },
+  {
+    image: TasksApp,
+    title: "Tasks App",
+    description: `Tasks App is an uncomplicated web application build with Angular and Material UI library that consumes
+     Google Tasks API to store, edit, delete and view your own tasks.
+    `,
+    href: new URL("https://github.com/asier-ortiz/tasks-app/"),
+    languages: [
+      { language: "Angular", "color": "#DD0031" },
+      { language: "Material UI", "color": "#0081CB" },
+      { language: "HTML", "color": "#E34F26" }
     ]
   },
   {
@@ -57,8 +88,8 @@ export const projectData: ProjectItem[] = [
     `,
     href: new URL("https://github.com/asier-ortiz/running-tracker/"),
     "languages": [
-      { "language": "Swift", "color": "#F05138" },
-      { "language": "Realm Swift", "color": "#5C2D91" },
+      { language: "Swift", "color": "#F05138" },
+      { language: "Realm Swift", "color": "#5C2D91" },
     ]
   },
   {
@@ -69,8 +100,8 @@ export const projectData: ProjectItem[] = [
     `,
     href: new URL("https://github.com/asier-ortiz/trivial/"),
     "languages": [
-      { "language": "Kotlin", "color": "#A97BFF" },
-      { "language": "Realm Kotlin", "color": "#5C2D91" },
+      { language: "Kotlin", "color": "#A97BFF" },
+      { language: "Realm Kotlin", "color": "#5C2D91" },
     ]
   },
   {
@@ -80,12 +111,12 @@ export const projectData: ProjectItem[] = [
     Developed with the help of my colleagues during my internship at Veiss Comunicación.
     `,
     href: new URL("https://apps.apple.com/es/app/arabamarket/id1574698689/"),
-    "languages": [
-      { "language": "JavaScript", "color": "#f1e05a" },
-      { "language": "HTML", "color": "#e34c26" },
-      { "language": "CSS", "color": "#563d7c" },
-      { "language": "Ionic", "color": "#3880FF" },
-      { "language": "Vue", "color": "#41B883" },
+    languages: [
+      { language: "JavaScript", "color": "#f1e05a" },
+      { language: "HTML", "color": "#e34c26" },
+      { language: "CSS", "color": "#563d7c" },
+      { language: "Ionic", "color": "#3880FF" },
+      { language: "Vue", "color": "#41B883" },
     ]
   },
   {
