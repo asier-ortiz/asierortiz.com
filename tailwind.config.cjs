@@ -391,6 +391,7 @@ module.exports = {
         ':root': {
           '--color-primary-600': theme('colors.primary.600'),
           '--color-secondary-50': theme('colors.secondary.50'),
+          '--theme-color': theme('colors.primary.900'),
         }
       });
     }
