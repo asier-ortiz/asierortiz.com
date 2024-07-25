@@ -55,18 +55,18 @@
   }
 
   @screen lg {
-    @apply bottom-16 right-8; /* Ajuste para pantallas lg y más grandes */
+    @apply bottom-16 right-8;
   }
 
   @screen md {
-    @apply bottom-12 right-6; /* Ajuste para pantallas md y más pequeñas */
+    @apply bottom-12 right-6;
   }
 
   @screen sm {
-    @apply bottom-10 right-4; /* Ajuste para pantallas sm y más pequeñas */
+    @apply bottom-10 right-4;
   }
 
   @screen xs {
-    @apply bottom-8 right-2; /* Ajuste para pantallas xs y más pequeñas */
+    @apply bottom-8 right-2;
   }
 }

@@ -18,10 +18,10 @@ import Button from "@components/Button/Button.astro";
       </p>
     </div>
     <div class="mx-auto mt-10 max-w-lg md:mt-10 md:max-w-full">
-      <div class="flex space-x-4">
-        <Button variant="ghost" class="filter-button button--active" data-filter="all">All</Button>
-        <Button variant="ghost" class="filter-button" data-filter="web development">Web Development</Button>
-        <Button variant="ghost" class="filter-button" data-filter="mobile development">Mobile Development</Button>
+      <div class="flex flex-wrap gap-2">
+        <Button variant="ghost" class="filter-button button--active w-full sm:w-auto" data-filter="all">All</Button>
+        <Button variant="ghost" class="filter-button w-full sm:w-auto" data-filter="web development">Web Development</Button>
+        <Button variant="ghost" class="filter-button w-full sm:w-auto" data-filter="mobile development">Mobile Development</Button>
       </div>
       <div data-aos="zoom-in-up" data-aos-delay=".2" class="grid gap-x-4 gap-y-8 md:grid-cols-2 mt-6 project-container">
         {projectData.map((project) => (
@@ -31,6 +31,7 @@ import Button from "@components/Button/Button.astro";
     </div>
   </div>
 </section>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
