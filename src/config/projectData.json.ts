@@ -1,8 +1,10 @@
-import type {ImageMetadata} from "astro";
-import AirportFinder from "@images/projects/airport-finder.webp"
-import RunningTracker from "@images/projects/running-tracker.webp"
-import Trivial from "@images/projects/trivial.webp"
-import ArabaMarket from "@images/projects/araba-market.webp"
+import type { ImageMetadata } from "astro";
+import AirportFinder from "@images/projects/airport-finder.webp";
+import PollMaker from "@images/projects/poll-maker.webp";
+import RunningTracker from "@images/projects/running-tracker.webp";
+import Trivial from "@images/projects/trivial.webp";
+import ArabaMarket from "@images/projects/araba-market.webp";
+import Arkanoid from "@images/projects/arkanoid.webp";
 
 export interface ProjectItem {
   image: ImageMetadata;
@@ -32,6 +34,21 @@ export const projectData: ProjectItem[] = [
     ]
   },
   {
+    image: PollMaker,
+    title: "Poll Maker",
+    description: `Poll Maker is a web application built with the Laravel framework for creating and managing polls, 
+    featuring functions for different user roles.
+    `,
+    href: new URL("https://github.com/asier-ortiz/poll-maker/"),
+    "languages": [
+      { "language": "Laravel", "color": "#FF2D20" },
+      { "language": "PHP", "color": "#4F5D95" },
+      { "language": "MySQL", "color": "#00758F" },
+      { "language": "HTML", "color": "#E34F26" },
+      { "language": "Bootstrap", "color": "#7952B3" }
+    ]
+  },
+  {
     image: RunningTracker,
     title: "Running Tracker",
     description: `Running Tracker is an iPhone app to track your running workouts. 
@@ -41,6 +58,7 @@ export const projectData: ProjectItem[] = [
     href: new URL("https://github.com/asier-ortiz/running-tracker/"),
     "languages": [
       { "language": "Swift", "color": "#F05138" },
+      { "language": "Realm Swift", "color": "#5C2D91" },
     ]
   },
   {
@@ -52,6 +70,7 @@ export const projectData: ProjectItem[] = [
     href: new URL("https://github.com/asier-ortiz/trivial/"),
     "languages": [
       { "language": "Kotlin", "color": "#A97BFF" },
+      { "language": "Realm Kotlin", "color": "#5C2D91" },
     ]
   },
   {
@@ -69,6 +88,19 @@ export const projectData: ProjectItem[] = [
       { "language": "Vue", "color": "#41B883" },
     ]
   },
+  {
+    image: Arkanoid,
+    title: "Arkanoid",
+    description: `Arkanoid is a classic arcade game developed using Unity and Firebase. 
+    Players can progress through multiple levels and see their scores in a ranking stored in Firebase.
+  `,
+    href: new URL("https://github.com/asier-ortiz/arkanoid"),
+    languages: [
+      { language: "Unity", color: "#f1e05a" },
+      { language: "Firebase", color: "#FF7300" }
+    ]
+  }
+
 ];
 
 export default projectData;
