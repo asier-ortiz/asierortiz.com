@@ -4,6 +4,7 @@ import MobileNav from "@components/Nav/MobileNav.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import Button from "@components/Button/Button.astro";
 import navData from "@config/navData.json";
+import siteData from "@config/siteData.json.ts";
 ---
 
 <div
@@ -28,7 +29,7 @@ import navData from "@config/navData.json";
           <Button
               variant="primary"
               class="my-auto hidden md:block"
-              href="mailto:asierortiz@outlook.es"
+              href={`mailto:${siteData.author.email}`}
           >
             Contact
           </Button>
