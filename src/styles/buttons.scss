@@ -34,6 +34,11 @@
   @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
 }
 
+.button--active {
+  @apply bg-primary-500 text-white;
+  @apply border-primary-500;
+}
+
 .scroll-to-top {
   @apply fixed bottom-12 right-6 px-6 py-3 bg-base-800 text-base-300 border-2 border-primary-600 rounded cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none transition-transform duration-300 ease-in-out transform translate-x-full;
 
@@ -65,10 +70,3 @@
     @apply bottom-8 right-2; /* Ajuste para pantallas xs y más pequeñas */
   }
 }
-
-
-
-
-
-
-

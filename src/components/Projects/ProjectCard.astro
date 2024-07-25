@@ -4,13 +4,13 @@ import Button from "@components/Button/Button.astro";
 import { type ProjectItem } from "@config/projectData.json";
 
 interface Props extends ProjectItem {
-  rest?: any;
+    rest?: any;
 }
 
-const { image, title, description, href, languages, ...rest } = Astro.props as Props;
+const { image, title, description, href, languages, type, ...rest } = Astro.props as Props;
 ---
 
-<div data-aos="zoom-in-up" data-aos-delay=".2" class="flex flex-col border-2 rounded border-base-700 p-4 project-container" {...rest}>
+<div  class="flex flex-col border-2 rounded border-base-700 p-4 project-container project-card" data-type={type} {...rest}>
   <div class="mx-auto max-w-4xl image-container">
     <Image class="project-image object-cover rounded" src={image} alt={title} height={700} />
   </div>
@@ -92,4 +92,3 @@ const { image, title, description, href, languages, ...rest } = Astro.props as P
     transform: scale(1.02);
   }
 </style>
-

@@ -14,6 +14,7 @@ export interface ProjectItem {
   description: string;
   href: URL;
   languages: Language[];
+  type: string;
 }
 
 export interface Language {
@@ -34,7 +35,8 @@ export const projectData: ProjectItem[] = [
       { language: "HTML", "color": "#e34c26" },
       { language: "Sass", "color": "#CC6699" },
       { language: "Leaflet", "color": "#76B041" }
-    ]
+    ],
+    type: "web development"
   },
   {
     image: PollMaker,
@@ -49,7 +51,8 @@ export const projectData: ProjectItem[] = [
       { language: "MySQL", "color": "#00758F" },
       { language: "HTML", "color": "#E34F26" },
       { language: "Bootstrap", "color": "#7952B3" }
-    ]
+    ],
+    type: "web development"
   },
   {
     image: CumpleTuSuenio,
@@ -65,7 +68,8 @@ export const projectData: ProjectItem[] = [
       { language: "SQLite", "color": "#003B57" },
       { language: "HTML", "color": "#E34F26" },
       { language: "Bootstrap", "color": "#563D7C" }
-    ]
+    ],
+    type: "web development"
   },
   {
     image: TasksApp,
@@ -78,7 +82,8 @@ export const projectData: ProjectItem[] = [
       { language: "Angular", "color": "#DD0031" },
       { language: "Material UI", "color": "#0081CB" },
       { language: "HTML", "color": "#E34F26" }
-    ]
+    ],
+    type: "web development"
   },
   {
     image: RunningTracker,
@@ -88,11 +93,12 @@ export const projectData: ProjectItem[] = [
     check the number of calories burned and save each training session into an embedded database.
     `,
     href: new URL("https://github.com/asier-ortiz/running-tracker/"),
-    "languages": [
+    languages: [
       { language: "Swift", "color": "#F05138" },
       { language: "Realm Swift", "color": "#5C2D91" },
       { language: "Apple Maps", "color": "#007AFF" }
-    ]
+    ],
+    type: "mobile development"
   },
   {
     image: Trivial,
@@ -101,10 +107,11 @@ export const projectData: ProjectItem[] = [
       and that includes an embedded database that stores your best scores.
     `,
     href: new URL("https://github.com/asier-ortiz/trivial/"),
-    "languages": [
+    languages: [
       { language: "Kotlin", "color": "#A97BFF" },
       { language: "Realm Kotlin", "color": "#5C2D91" }
-    ]
+    ],
+    type: "mobile development"
   },
   {
     image: ArabaMarket,
@@ -120,7 +127,8 @@ export const projectData: ProjectItem[] = [
       { language: "Ionic", "color": "#3880FF" },
       { language: "Vue", "color": "#41B883" },
       { language: "Leaflet", "color": "#76B041" }
-    ]
+    ],
+    type: "mobile development"
   },
   {
     image: Arkanoid,
@@ -132,7 +140,8 @@ export const projectData: ProjectItem[] = [
     languages: [
       { language: "Unity", color: "#f1e05a" },
       { language: "Firebase", color: "#FF7300" }
-    ]
+    ],
+    type: "mobile development"
   }
 
 ];
