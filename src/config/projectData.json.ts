@@ -1,12 +1,13 @@
 import type { ImageMetadata } from "astro";
 import AirportFinder from "@images/projects/airport-finder.webp";
 import PollMaker from "@images/projects/poll-maker.webp";
+import CumpleTuSuenio from "@images/projects/cumple-tu-suenio.webp";
+import TasksApp from "@images/projects/tasks-app.webp";
+import Euskoplan from "@images/projects/euskoplan.webp";
 import RunningTracker from "@images/projects/running-tracker.webp";
 import Trivial from "@images/projects/trivial.webp";
 import ArabaMarket from "@images/projects/araba-market.webp";
 import Arkanoid from "@images/projects/arkanoid.webp";
-import CumpleTuSuenio from "@images/projects/cumple-tu-suenio.webp";
-import TasksApp from "@images/projects/tasks-app.webp";
 
 export interface ProjectItem {
   image: ImageMetadata;
@@ -80,8 +81,30 @@ export const projectData: ProjectItem[] = [
     href: new URL("https://github.com/asier-ortiz/tasks-app/"),
     languages: [
       { language: "Angular", "color": "#DD0031" },
+      { language: "TypeScript", "color": "#3178C6" },
       { language: "Material UI", "color": "#0081CB" },
       { language: "HTML", "color": "#E34F26" }
+    ],
+    type: "web development"
+  },
+  {
+    image: Euskoplan,
+    title: "Euskoplan",
+    description: `Discover the beauty of the Basque Country with Euskoplan, an interactive web platform designed for 
+    tourism enthusiasts. Create personalized itineraries, explore popular destinations and share your travel plans 
+    with other users.
+    `,
+    href: new URL("https://github.com/asier-ortiz/euskoplan-api/"),
+    languages: [
+      { language: "Laravel", "color": "#FF2D20" },
+      { language: "Angular", "color": "#DD0031" },
+      { language: "PHP", "color": "#4F5D95" },
+      { language: "TypeScript", "color": "#3178C6" },
+      { language: "Material UI", "color": "#0081CB" },
+      { language: "Bootstrap", "color": "#563D7C" },
+      { language: "CSS", "color": "#563d7c" },
+      { language: "HTML", "color": "#E34F26" },
+      { language: "Mapbox", "color": "#4264FB" }
     ],
     type: "web development"
   },
