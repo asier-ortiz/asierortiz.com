@@ -176,7 +176,8 @@ export const projectData: ProjectItem[] = [
       { language: "CSS", "color": "#563d7c" },
       { language: "Ionic", "color": "#3880FF" },
       { language: "Vue", "color": "#41B883" },
-      { language: "Leaflet", "color": "#76B041" }
+      { language: "Leaflet", "color": "#76B041" },
+      { language: "Vuex", color: "#35495E" }
     ],
     type: "mobile development",
     buttonText: "Download App"
