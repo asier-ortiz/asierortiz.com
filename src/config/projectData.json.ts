@@ -27,6 +27,27 @@ export interface Language {
 
 export const projectData: ProjectItem[] = [
   {
+    image: Euskoplan,
+    title: "Euskoplan",
+    description: `Discover the beauty of the Basque Country with Euskoplan, an interactive web platform designed for 
+    tourism enthusiasts. Create personalized itineraries, explore popular destinations and share your travel plans 
+    with other users.
+    `,
+    href: new URL("https://github.com/asier-ortiz/euskoplan-api/"),
+    languages: [
+      { language: "Laravel", "color": "#FF2D20" },
+      { language: "Vue", "color": "#41B883" },
+      { language: "PHP", "color": "#4F5D95" },
+      { language: "TypeScript", "color": "#3178C6" },
+      { language: "Bootstrap", "color": "#563D7C" },
+      { language: "CSS", "color": "#563d7c" },
+      { language: "HTML", "color": "#E34F26" },
+      { language: "Mapbox", "color": "#4264FB" }
+    ],
+    type: "web development",
+    buttonText: "View on GitHub"
+  },
+  {
     image: AirportFinder,
     title: "Airport Finder",
     description: `Airport finder is a web application that lets you to search among hundreds of airports around 
@@ -89,28 +110,6 @@ export const projectData: ProjectItem[] = [
       { language: "TypeScript", "color": "#3178C6" },
       { language: "Material UI", "color": "#0081CB" },
       { language: "HTML", "color": "#E34F26" }
-    ],
-    type: "web development",
-    buttonText: "View on GitHub"
-  },
-  {
-    image: Euskoplan,
-    title: "Euskoplan",
-    description: `Discover the beauty of the Basque Country with Euskoplan, an interactive web platform designed for 
-    tourism enthusiasts. Create personalized itineraries, explore popular destinations and share your travel plans 
-    with other users.
-    `,
-    href: new URL("https://github.com/asier-ortiz/euskoplan-api/"),
-    languages: [
-      { language: "Laravel", "color": "#FF2D20" },
-      { language: "Angular", "color": "#DD0031" },
-      { language: "PHP", "color": "#4F5D95" },
-      { language: "TypeScript", "color": "#3178C6" },
-      { language: "Material UI", "color": "#0081CB" },
-      { language: "Bootstrap", "color": "#563D7C" },
-      { language: "CSS", "color": "#563d7c" },
-      { language: "HTML", "color": "#E34F26" },
-      { language: "Mapbox", "color": "#4264FB" }
     ],
     type: "web development",
     buttonText: "View on GitHub"
