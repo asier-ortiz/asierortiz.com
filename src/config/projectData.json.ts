@@ -42,7 +42,8 @@ export const projectData: ProjectItem[] = [
       { language: "Bootstrap", "color": "#563D7C" },
       { language: "CSS", "color": "#563d7c" },
       { language: "HTML", "color": "#E34F26" },
-      { language: "Mapbox", "color": "#4264FB" }
+      { language: "Mapbox", "color": "#4264FB" },
+      { language: "Pinia Store", color: "#FFD700" }
     ],
     type: "web development",
     buttonText: "View on GitHub"
