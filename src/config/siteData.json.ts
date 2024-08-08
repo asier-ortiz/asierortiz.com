@@ -59,7 +59,7 @@ const siteData: SiteDataProps = {
     },
     {
       platform: "twitter",
-      link: "https://twitter.com/asierortiz",
+      link: "https://x.com/asierortiz_",
     },
     {
       platform: "email",
