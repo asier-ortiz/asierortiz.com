@@ -33,7 +33,7 @@ export const projectData: ProjectItem[] = [
     tourism enthusiasts. Create personalized itineraries, explore popular destinations and share your travel plans 
     with other users.
     `,
-    href: new URL("https://github.com/asier-ortiz/euskoplan-api/"),
+    href: new URL("https://github.com/asier-ortiz/euskoplan-client/"),
     languages: [
       { language: "Laravel", "color": "#FF2D20" },
       { language: "Vue", "color": "#41B883" },
