@@ -33,7 +33,7 @@ export const projectData: ProjectItem[] = [
     tourism enthusiasts. Create personalized itineraries, explore popular destinations and share your travel plans 
     with other users.
     `,
-    href: new URL("https://github.com/asier-ortiz/euskoplan-api/"),
+    href: new URL("https://github.com/asier-ortiz/euskoplan-client/"),
     languages: [
       { language: "Laravel", "color": "#FF2D20" },
       { language: "Vue", "color": "#41B883" },
@@ -43,7 +43,7 @@ export const projectData: ProjectItem[] = [
       { language: "CSS", "color": "#563d7c" },
       { language: "HTML", "color": "#E34F26" },
       { language: "Mapbox", "color": "#4264FB" },
-      { language: "Pinia Store", color: "#FFD700" }
+      { language: "Pinia", color: "#FFD700" }
     ],
     type: "web development",
     buttonText: "View on GitHub"
@@ -176,7 +176,8 @@ export const projectData: ProjectItem[] = [
       { language: "CSS", "color": "#563d7c" },
       { language: "Ionic", "color": "#3880FF" },
       { language: "Vue", "color": "#41B883" },
-      { language: "Leaflet", "color": "#76B041" }
+      { language: "Leaflet", "color": "#76B041" },
+      { language: "Vuex", color: "#35495E" }
     ],
     type: "mobile development",
     buttonText: "Download App"
