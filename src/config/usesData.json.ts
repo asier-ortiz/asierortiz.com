@@ -50,7 +50,7 @@ const usesData: usesItem[] = [
             },
             {
                 title: "Learning",
-                items: ["Astro", "TailwindCSS"],
+                items: ["Astro", "TailwindCSS", "Redis"],
             },
         ],
     },
