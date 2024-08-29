@@ -34,7 +34,7 @@ const usesData: usesItem[] = [
             },
             {
                 title: "IDE",
-                items: ["WebStorm", "PhpStorm", "PyCharm", "Sublime Text", "Android Studio", "Xcode"],
+                items: ["Cursor", "WebStorm", "PhpStorm", "PyCharm", "Android Studio", "Xcode"],
             },
             {
                 title: "Terminal",
