@@ -39,6 +39,19 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 If you have any questions or suggestions, feel free to reach out to me at [asierortiz@outlook.es](mailto:asierortiz@outlook.es).
 
+## Screenshots
+
+<table style="border: none; border-collapse: collapse;">
+  <tr>
+    <td align="center" style="border: none;">
+      <img src="./screenshots/screenshot-1.jpg" alt="Screenshot 1" height="300"/>
+    </td>
+    <td align="center" style="border: none;">
+      <img src="./screenshots/screenshot-2.jpg" alt="Screenshot 2" height="300"/>
+    </td>
+  </tr>
+</table>
+
 ---
 
 Thank you for visiting my portfolio! I hope you find it informative and engaging.
