@@ -1,6 +1,6 @@
-# asierortiz.dev
+# asierortiz.com
 
-This repository contains the source code for my personal portfolio website, [asierortiz.dev](https://asierortiz.dev/). The website is built using [Astro](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/).
+This repository contains the source code for my personal portfolio website, [asierortiz.com](https://asierortiz.com/). The website is built using [Astro](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/).
 
 ## About the Project
 

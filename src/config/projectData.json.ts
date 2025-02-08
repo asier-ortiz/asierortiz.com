@@ -121,7 +121,7 @@ export const projectData: ProjectItem[] = [
     where clicking on a project link takes you to... another portfolio! It's like "Inception" for web developers. 
     Dive into this rabbit hole and enjoy the recursive fun.
     `,
-    href: new URL("https://asierortiz.dev/"),
+    href: new URL("https://asierortiz.com/"),
     languages: [
       { language: "Astro", "color": "#FF5A03" },
       { language: "TypeScript", "color": "#3178C6" },
