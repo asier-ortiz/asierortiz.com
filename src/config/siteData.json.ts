@@ -58,6 +58,10 @@ const siteData: SiteDataProps = {
       link: "https://github.com/asier-ortiz",
     },
     {
+      platform: "linkedin",
+      link: "https://www.linkedin.com/in/asier-ortiz",
+    },
+    {
       platform: "twitter",
       link: "https://x.com/asierortiz_",
     },

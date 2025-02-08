@@ -29,7 +29,7 @@ To get started with the project, you can use the following commands:
 
 ## Deployment
 
-The site is deployed using [Netlify](https://www.netlify.com/). Ensure that your production build is optimized and the necessary environment variables are set up in your Netlify dashboard.
+The site is deployed using [Netlify](https://www.netlify.com/), a platform I chose for its **simplicity, speed, and powerful features** tailored for modern web development.
 
 ## License
 
