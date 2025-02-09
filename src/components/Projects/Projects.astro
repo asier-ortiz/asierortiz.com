@@ -51,6 +51,7 @@ import Button from "@components/Button/Button.astro";
         projectCards.forEach(card => {
           if (filter === 'all' || card.getAttribute('data-type') === filter) {
             card.style.display = '';
+            hasProjects = true;
           } else {
             card.style.display = 'none';
           }
