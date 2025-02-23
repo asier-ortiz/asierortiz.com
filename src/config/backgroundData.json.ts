@@ -31,7 +31,7 @@ const academicData: academicItem[] = [
     },
     {
         date: "2021",
-        title: "Higher Technician in Multiplatform Application Development",
+        title: "Higher Technician in Cross-Platform Application Development",
         center: "Egibide Arriaga",
         description: "In this degree, I studied techniques and tools to create applications that work on different " +
             "devices and operating systems, such as Android, iOS, and Windows. " +

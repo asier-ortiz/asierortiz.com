@@ -47,7 +47,7 @@ export interface SiteDataProps {
 
 const siteData: SiteDataProps = {
   name: "Asier Ortiz",
-  title: "Asier Ortiz - Full Stack Developer",
+  title: "Asier Ortiz - Web & Data Developer",
   description: "Asier Ortiz portfolio website",
   useViewTransitions: true,
   useAnimations: true,
@@ -64,6 +64,10 @@ const siteData: SiteDataProps = {
     {
       platform: "twitter",
       link: "https://x.com/asierortiz_",
+    },
+    {
+      platform: "instagram",
+      link: "https://www.instagram.com/asierortizgarcia",
     },
     {
       platform: "email",
