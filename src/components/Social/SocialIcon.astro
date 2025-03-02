@@ -610,6 +610,28 @@ const { social, href, text = "", class: className } = Astro.props as Props;
     )
   }
 
+  {
+      social === "kaggle" && (
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-kaggle"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 4h4v16h-4z" />
+            <path d="M8 12l8 -8" />
+            <path d="M8 12l8 8" />
+          </svg>
+      )
+  }
+
   {text}
 </a>
 

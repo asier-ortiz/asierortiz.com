@@ -23,7 +23,8 @@ export interface SocialLinkProps {
       | "slack"
       | "whatsapp"
       | "telegram"
-      | "email";
+      | "email"
+      | "kaggle";
   link: string;
 }
 
@@ -56,6 +57,10 @@ const siteData: SiteDataProps = {
     {
       platform: "github",
       link: "https://github.com/asier-ortiz",
+    },
+    {
+      platform: "kaggle",
+      link: "https://www.kaggle.com/asierortiz",
     },
     {
       platform: "linkedin",
