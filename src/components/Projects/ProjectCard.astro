@@ -12,7 +12,7 @@ const { image, title, description, href, languages, type, buttonText, ...rest } 
 
 <div  class="flex flex-col border-2 rounded border-base-700 p-4 project-container project-card" data-type={type} {...rest}>
   <div class="mx-auto max-w-4xl image-container">
-    <Image class="project-image object-cover rounded" src={image} alt={title} height={700} />
+    <Image class="project-image object-cover rounded" src={image} alt={title} loading="eager" height={700} />
   </div>
   <div class="mt-4 flex flex-grow flex-col justify-between">
     <div>
