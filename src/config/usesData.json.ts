@@ -14,11 +14,11 @@ const usesData: usesItem[] = [
         items: [
             {
                 title: "Languages",
-                items: ["PHP", "Java", "Python", "JavaScript", "TypeScript"],
+                items: ["PHP", "JavaScript", "TypeScript", "Java", "Python"],
             },
             {
                 title: "Frontend",
-                items: ["Vue 2, 3", "Angular 14, 15"],
+                items: ["Vue 2, 3", "Angular 14, 15", "Astro 5"],
             },
             {
                 title: "Backend",
@@ -26,7 +26,7 @@ const usesData: usesItem[] = [
             },
             {
                 title: "Styling",
-                items: ["CSS3", "Bootstrap 5"],
+                items: ["CSS3", "Bootstrap 5", "TailwindCSS"],
             },
             {
                 title: "Database",
@@ -34,7 +34,7 @@ const usesData: usesItem[] = [
             },
             {
                 title: "IDE",
-                items: ["Cursor", "WebStorm", "PhpStorm", "PyCharm", "Android Studio", "Xcode"],
+                items: ["Cursor", "WebStorm", "PhpStorm", "PyCharm", "IntelliJ IDEA", "Android Studio", "Xcode"],
             },
             {
                 title: "Terminal",
@@ -50,7 +50,7 @@ const usesData: usesItem[] = [
             },
             {
                 title: "Learning",
-                items: ["Astro", "TailwindCSS", "TensorFlow", "Redis"],
+                items: ["Scikit-learn", "TensorFlow", "PyTorch", "Redis"],
             },
         ],
     },
