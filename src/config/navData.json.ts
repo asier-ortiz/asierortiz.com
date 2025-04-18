@@ -19,6 +19,10 @@ const navConfig = [
     text: "/ uses",
     href: "/uses/",
   },
+  {
+    text: "/ blog",
+    href: "/blog/",
+  },
 ];
 
 export default navConfig;

@@ -2,106 +2,112 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  type?: "button" | "submit" | "reset" | null | undefined;
-  variant?: "primary" | "secondary" | "outline" | "ghost";
-  href?: URL | string;
-  arrow?: "left" | "right" | "none";
-  onclick?: any;
-  class?: string;
-  rest?: any;
+    type?: "button" | "submit" | "reset" | null | undefined;
+    variant?: "primary" | "secondary" | "outline" | "ghost" | "post-ghost";
+    href?: URL | string;
+    arrow?: "left" | "right" | "none";
+    onclick?: any;
+    class?: string;
+    rest?: any;
 }
 
 const {
-  type,
-  variant = "primary",
-  href,
-  arrow = "none",
-  onclick,
-  class: className,
-  ...rest
+    type,
+    variant = "primary",
+    href,
+    arrow = "none",
+    onclick,
+    class: className,
+    ...rest
 } = Astro.props as Props;
 ---
 
 {
-  href && (
+    href && (
     <a
-      class:list={[
-        className,
-        `button group`,
-        {
-          "button--primary": variant === "primary",
-        },
-        {
-          "button--secondary": variant === "secondary",
-        },
-        {
-          "button--outline": variant === "outline",
-        },
-        {
-          "button--ghost": variant === "ghost",
-        },
-      ]}
-      href={href}
-      onclick={onclick}
-      {...rest}
+            class:list={[
+                className,
+                `button group`,
+                {
+                    "button--primary": variant === "primary",
+                },
+                {
+                    "button--secondary": variant === "secondary",
+                },
+                {
+                    "button--outline": variant === "outline",
+                },
+                {
+                    "button--ghost": variant === "ghost",
+                },
+                {
+                    "button--post-ghost": variant === "post-ghost",
+                },
+            ]}
+            href={href}
+            onclick={onclick}
+            {...rest}
     >
-      {arrow === "left" && (
-        <Icon
-          name="tdesign:arrow-left"
-          class="h-6 w-6 transition-[transform] group-hover:-translate-x-1 ml-2"
-          aria-hidden="true"
-        />
-      )}
-      <slot />
-      {arrow === "right" && (
-        <Icon
-          name="tdesign:arrow-right"
-          class="h-6 w-6 transition-[transform] group-hover:translate-x-1 ml-2"
-          aria-hidden="true"
-        />
-      )}
+        {arrow === "left" && (
+                <Icon
+                        name="tdesign:arrow-left"
+                        class="h-6 w-6 transition-[transform] group-hover:-translate-x-1 ml-2"
+                        aria-hidden="true"
+                />
+        )}
+        <slot />
+        {arrow === "right" && (
+                <Icon
+                        name="tdesign:arrow-right"
+                        class="h-6 w-6 transition-[transform] group-hover:translate-x-1 ml-2"
+                        aria-hidden="true"
+                />
+        )}
     </a>
-  )
-}
+        )
+    }
 
 {
-  !href && (
+    !href && (
     <button
-      class:list={[
-        className,
-        `button group`,
-        {
-          "button--primary": variant === "primary",
-        },
-        {
-          "button--secondary": variant === "secondary",
-        },
-        {
-          "button--outline": variant === "outline",
-        },
-        {
-          "button--ghost": variant === "ghost",
-        },
-      ]}
-      type={type}
-      onclick={onclick}
-      {...rest}
+            class:list={[
+                className,
+                `button group`,
+                {
+                    "button--primary": variant === "primary",
+                },
+                {
+                    "button--secondary": variant === "secondary",
+                },
+                {
+                    "button--outline": variant === "outline",
+                },
+                {
+                    "button--ghost": variant === "ghost",
+                },
+                {
+                    "button--post-ghost": variant === "post-ghost",
+                },
+            ]}
+            type={type}
+            onclick={onclick}
+            {...rest}
     >
-      {arrow === "left" && (
-        <Icon
-          name="tdesign:arrow-left"
-          class="h-6 w-6 transition-[transform] group-hover:-translate-x-1 ml-2"
-          aria-hidden="true"
-        />
-      )}
-      <slot />
-      {arrow === "right" && (
-        <Icon
-          name="tdesign:arrow-right"
-          class="h-6 w-6 transition-[transform] group-hover:translate-x-1 ml-2"
-          aria-hidden="true"
-        />
-      )}
+        {arrow === "left" && (
+                <Icon
+                        name="tdesign:arrow-left"
+                        class="h-6 w-6 transition-[transform] group-hover:-translate-x-1 ml-2"
+                        aria-hidden="true"
+                />
+        )}
+        <slot />
+        {arrow === "right" && (
+                <Icon
+                        name="tdesign:arrow-right"
+                        class="h-6 w-6 transition-[transform] group-hover:translate-x-1 ml-2"
+                        aria-hidden="true"
+                />
+        )}
     </button>
-  )
-}
+        )
+    }

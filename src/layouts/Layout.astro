@@ -3,69 +3,84 @@ import "@/styles/global.scss";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import ScrollToTop from "@components/Button/ScrollToTop.astro";
-import {ImageMetadata} from "astro";
+import { ImageMetadata } from "astro";
 import siteData from "@config/siteData.json";
 
 interface Props {
     title: string;
     description: string;
-    image?: ImageMetadata;
+    image?: string;
+    pubDate?: string;
+    isPost?: boolean;
 }
 
-const {
-    title,
-    description,
-    image
-} = Astro.props as Props;
+const { title, description, image, pubDate, isPost } = Astro.props as Props;
+const pageUrl = Astro.url;
+const defaultImage = siteData.defaultImage.src;
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
-        <meta name="generator" content={Astro.generator} />
-        <link rel="sitemap" href="/sitemap-index.xml" />
-        <meta name="description" content={description} />
-        <meta name="theme-color" content="var(--theme-color)" />
-        <link rel="canonical" href={Astro.url} />
-        <title>{title}</title>
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={image} />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={Astro.url} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={image} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"/>
-    </head>
-    <body class:list={["dark overflow-y-scroll", {"use-animations": siteData.useAnimations === true}]}>
-        <div class="flex min-h-[100lvh] flex-col justify-between">
-            <div>
-                <Nav />
-                <main>
-                    <slot />
-                </main>
-            </div>
-            <Footer />
-        </div>
-        <ScrollToTop />
-        <script>
-            import siteData from "@config/siteData.json";
-            import AOS from "@js/aos/aos";
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="var(--theme-color)" />
+    <link rel="canonical" href={pageUrl} />
+    <title>{title}</title>
 
-            if (siteData.useAnimations === true) {
-                AOS.init({ once: true, duration: 0.75, distance: 15 });
-                document.addEventListener("astro:after-swap", AOS.refreshHard);
-            }
-        </script>
-    </body>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={isPost ? "article" : "website"} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${Astro.site}${image ?? defaultImage}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={pageUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${Astro.site}${image ?? defaultImage}`} />
+
+    <!-- Article meta for blog posts -->
+    {isPost && pubDate && (
+            <>
+                <meta property="article:published_time" content={pubDate} />
+                <meta property="article:author" content={siteData.author.name} />
+            </>
+    )}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class:list={["dark overflow-y-scroll", { "use-animations": siteData.useAnimations === true }]}>
+<div class="flex min-h-[100lvh] flex-col justify-between">
+    <div>
+        <Nav />
+        <main>
+            <slot />
+        </main>
+    </div>
+    <Footer />
+</div>
+<ScrollToTop />
+
+<script>
+    import siteData from "@config/siteData.json";
+    import AOS from "@js/aos/aos";
+
+    if (siteData.useAnimations === true) {
+        AOS.init({ once: true, duration: 0.75, distance: 15 });
+        document.addEventListener("astro:after-swap", AOS.refreshHard);
+    }
+</script>
+</body>
 </html>

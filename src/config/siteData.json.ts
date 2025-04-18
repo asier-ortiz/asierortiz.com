@@ -49,7 +49,7 @@ export interface SiteDataProps {
 const siteData: SiteDataProps = {
   name: "Asier Ortiz",
   title: "Asier Ortiz - AI/ML & Web Developer",
-  description: "Asier Ortiz portfolio website",
+  description: "Asier Ortiz portfolio website & blog",
   useViewTransitions: true,
   useAnimations: true,
 
@@ -87,8 +87,8 @@ const siteData: SiteDataProps = {
   },
 
   defaultImage: {
-    src: "/images/logo.jpg", // Default Image for social networks
-    alt: "Asier Ortiz logo",
+    src: "/images/default-og-image.png", // Default Image for social networks
+    alt: "Default social image for Asier Ortiz website & blog.",
   },
 };
 

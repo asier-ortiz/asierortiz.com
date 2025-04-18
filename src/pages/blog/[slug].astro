@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Button from '@/components/Button/Button.astro';
+import SocialShare from '@/components/Social/SocialShare.astro';
+import siteData from "../../config/siteData.json";
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout
+        title={`${siteData.author.name} - ${post.data.title}`}
+        description={post.data.description}
+        image={post.data.image}
+        pubDate={post.data.pubDate}
+        isPost={true}
+>
+    <article class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
+        <header class="text-left mb-12">
+            <h1 class="h1 text-pretty text-gradient pb-2">{post.data.title}</h1>
+            <p class="text-base-400 text-sm mt-4">
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })}
+            </p>
+        </header>
+
+        <div class="mb-16">
+            <img src={post.data.image} alt={post.data.title} class="w-full rounded-lg shadow" />
+            <SocialShare url={Astro.url} title={post.data.title} class="mb-8" />
+        </div>
+        <section class="prose prose-lg mx-auto mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
+            <Content />
+        </section>
+        <div class="flex justify-start mt-16">
+            <Button
+                    href="/blog/"
+                    variant="post-ghost"
+                    arrow="left"
+                    class="hover-button"
+            >
+                Back to all posts
+            </Button>
+        </div>
+    </article>
+</Layout>

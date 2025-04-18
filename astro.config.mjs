@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import compress from "astro-compress";
 import icon from "astro-icon";
+import remarkSlug from 'remark-slug';
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,7 +18,10 @@ export default defineConfig({
     sitemap(),
     compress()
   ],
+  markdown: {
+    remarkPlugins: [remarkSlug],
+  },
   server: {
-    port: 3000
+    port: 3_000
   }
 });

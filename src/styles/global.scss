@@ -81,18 +81,25 @@
 @layer utilities {
   @import "aos";
 
-  .primary-focus {
-    @apply focus:outline-none focus-visible:outline-primary-600;
-  }
-
-  .underline-ltr {
-    @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px];
+  .group:hover .underline-ltr {
+    background-size: 100% 2px;
   }
 
   .pause {
     animation-play-state: paused !important;
   }
+
+  .primary-focus {
+    @apply focus:outline-none focus-visible:outline-primary-600;
+  }
+
+  .underline-ltr {
+    position: relative;
+    display: inline-block;
+    background-image: linear-gradient(to right, var(--color-primary-600), var(--color-primary-600));
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: left bottom;
+    transition: background-size 300ms;
+  }
 }
-
-
-

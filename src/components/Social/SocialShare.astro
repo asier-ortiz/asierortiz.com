@@ -1,0 +1,36 @@
+---
+import SocialIcon from "@components/Social/SocialIcon.astro";
+
+interface Props {
+    url: string;
+    title: string;
+}
+
+const { url, title } = Astro.props as Props;
+
+const shareLinks = [
+    {
+        platform: "twitter",
+        link: `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(title)}`
+    },
+    {
+        platform: "linkedin",
+        link: `https://www.linkedin.com/shareArticle?url=${url}&title=${encodeURIComponent(title)}`
+    },
+];
+---
+
+<div class="flex items-center gap-4 mt-8">
+    <span class="text-base-400 text-sm">Share:</span>
+
+    {shareLinks.map((share) => (
+            <SocialIcon href={share.link} social={share.platform} />
+    ))}
+
+    <button
+            onclick="navigator.clipboard.writeText(window.location.href)"
+            aria-label="Copy link"
+            class="social-icon flex gap-2 p-1 text-base-400 hover:text-primary-600 transition-colors"
+    >
+    </button>
+</div>

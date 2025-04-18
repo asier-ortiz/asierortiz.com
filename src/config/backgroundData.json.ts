@@ -10,15 +10,10 @@ const academicData: academicItem[] = [
         date: "2025",
         title: "Professional Program in Artificial Intelligence and Data Science",
         center: "UNIR - International University of La Rioja",
-        description: "I am currently studying this program, specializing in Artificial Intelligence " +
-            "and Data Science. Through it, I am developing skills in the design, programming, and deployment " +
-            "of AI algorithms (Machine Learning) and intelligent systems applied in the business world. " +
-            "I am gaining a deep understanding of AI implementation in companies and institutions, " +
-            "learning to analyze risks, apply methodologies, and explore AI-driven solutions. " +
-            "The curriculum covers essential topics such as neural networks, Natural Language Processing (NLP), " +
-            "and scalable analytics. Additionally, I am working with industry-standard tools and frameworks, " +
-            "including Python, TensorFlow, Keras, pandas, and NoSQL databases, equipping myself with " +
-            "the necessary skills to tackle AI and Big Data challenges."
+        description: "Specialized in Artificial Intelligence and Data Science, focusing on the design, programming, and deployment of AI algorithms (Machine Learning) and intelligent systems applied in the business world. " +
+            "Developed a deep understanding of AI implementation in companies and institutions, including risk analysis, application of methodologies, and exploration of AI-driven solutions. " +
+            "The curriculum covered key areas such as neural networks, Natural Language Processing (NLP), and scalable analytics. " +
+            "Worked with industry-standard tools and frameworks like Python, TensorFlow, PyTorch, pandas, and NoSQL databases, building strong skills to tackle AI and Big Data challenges."
     },
     {
         date: "2023",
@@ -32,7 +27,7 @@ const academicData: academicItem[] = [
     {
         date: "2021",
         title: "Higher Technician in Cross-Platform Application Development",
-        center: "Egibide Arriaga",
+        center: "Egibide",
         description: "In this degree, I studied techniques and tools to create applications that work on different " +
             "devices and operating systems, such as Android, iOS, and Windows. " +
             "I acquired knowledge in programming, interface design, and database management, " +
