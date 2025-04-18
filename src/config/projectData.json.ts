@@ -116,7 +116,7 @@ export const projectData: ProjectItem[] = [
   },
   {
     image: Portfolio,
-    title: "Meta Portfolio Project",
+    title: "Meta Portfolio & Blog Project",
     description: `Ever wondered what it’s like to see a portfolio within a portfolio? Welcome to the Meta Portfolio, 
     where clicking on a project link takes you to... another portfolio! It's like "Inception" for web developers. 
     Dive into this rabbit hole and enjoy the recursive fun.
