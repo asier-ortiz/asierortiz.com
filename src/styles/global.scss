@@ -27,8 +27,8 @@
 }
 
 @layer components {
-  @import "buttons";
-  @import "prose";
+  @import 'buttons';
+  @import 'prose';
 
   .h1 {
     @apply text-3xl font-medium md:text-4xl lg:text-5xl;
@@ -79,7 +79,7 @@
 }
 
 @layer utilities {
-  @import "aos";
+  @import 'aos';
 
   .group:hover .underline-ltr {
     background-size: 100% 2px;

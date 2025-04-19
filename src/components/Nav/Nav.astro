@@ -1,16 +1,16 @@
 ---
-import NavLink from "@components/Nav/NavLink.astro";
-import MobileNav from "@components/Nav/MobileNav.astro";
-import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
-import Button from "@components/Button/Button.astro";
-import navData from "@config/navData.json";
-import siteData from "@config/siteData.json.ts";
+import NavLink from '@components/Nav/NavLink.astro';
+import MobileNav from '@components/Nav/MobileNav.astro';
+import SiteLogo from '@components/SiteLogo/SiteLogo.astro';
+import Button from '@components/Button/Button.astro';
+import navData from '@config/navData.json';
+import siteData from '@config/siteData.json.ts';
 ---
 
 <div
-    id="nav__container"
-    class="fixed left-0 top-0 z-30 flex w-full flex-col bg-base-900 py-1 duration-500"
-    transition:name={`nav`}
+  id="nav__container"
+  class="fixed left-0 top-0 z-30 flex w-full flex-col bg-base-900 py-1 duration-500"
+  transition:name={`nav`}
 >
   <div class="mx-auto flex w-full">
     <div class="container flex h-16 w-full items-center">
@@ -21,15 +21,13 @@ import siteData from "@config/siteData.json.ts";
         <div class="flex flex-auto justify-end">
           <nav class="hidden md:block">
             <ul class="flex h-fit items-center px-4">
-              {
-                navData.map((navItem) => <NavLink navItem={navItem} />)
-              }
+              {navData.map((navItem) => <NavLink navItem={navItem} />)}
             </ul>
           </nav>
           <Button
-              variant="primary"
-              class="my-auto hidden md:block"
-              href={`mailto:${siteData.author.email}`}
+            variant="primary"
+            class="my-auto hidden md:block"
+            href={`mailto:${siteData.author.email}`}
           >
             Contact
           </Button>

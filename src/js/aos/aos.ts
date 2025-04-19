@@ -22,17 +22,17 @@
  */
 
 // Modules & helpers
-import throttle from "lodash.throttle";
-import debounce from "lodash.debounce";
+import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
 
-import observer from "./libs/observer";
+import observer from './libs/observer';
 
-import detect from "./helpers/detector";
-import handleScroll from "./helpers/handleScroll";
-import prepare from "./helpers/prepare";
-import elements from "./helpers/elements";
-import { type AOSElement, type AOSDefaultOptions } from "./helpers/aosTypes";
-import { getPositionIn, getPositionOut } from "./helpers/offsetCalculator";
+import detect from './helpers/detector';
+import handleScroll from './helpers/handleScroll';
+import prepare from './helpers/prepare';
+import elements from './helpers/elements';
+import { type AOSElement, type AOSDefaultOptions } from './helpers/aosTypes';
+import { getPositionIn, getPositionOut } from './helpers/offsetCalculator';
 
 /**
  * Private variables
@@ -50,12 +50,12 @@ let options: AOSDefaultOptions = {
   distance: 20, // distance the animation should travel (pixels)
   once: false, // whether animation should happen only once - while scrolling down
   mirror: false, // whether elements should animate when scrolling up as well as down
-  easing: "easeOutCubic", // easing function, see https://animejs.com/documentation/#linearEasing for other easing options
+  easing: 'easeOutCubic', // easing function, see https://animejs.com/documentation/#linearEasing for other easing options
   disable: false, // if animations should be disabled
-  anchorPlacement: "top-bottom",
-  startEvent: "DOMContentLoaded", // if you need a different start event from DOMContentLoaded. Recommend not changing this
-  animatedClassName: "aos-animate", // always at least include "aos-animate" for CSS purposes
-  initClassName: "aos-init", // uneccesary but leaving it for now
+  anchorPlacement: 'top-bottom',
+  startEvent: 'DOMContentLoaded', // if you need a different start event from DOMContentLoaded. Recommend not changing this
+  animatedClassName: 'aos-animate', // always at least include "aos-animate" for CSS purposes
+  initClassName: 'aos-init', // uneccesary but leaving it for now
   disableMutationObserver: true,
   throttleDelay: 99,
   debounceDelay: 50,
@@ -71,11 +71,11 @@ const initializeScroll = function initializeScroll() {
    * Handle scroll event to animate elements on scroll
    */
   window.addEventListener(
-    "scroll",
+    'scroll',
     throttle(() => {
       // handleScroll(aosElements, options.once);
       handleScroll(aosElements);
-    }, options.throttleDelay),
+    }, options.throttleDelay)
   );
 
   return aosElements;
@@ -128,10 +128,10 @@ const refreshHard = function refreshHard() {
  */
 const disable = function () {
   aosElements.forEach(function (el: any, i) {
-    el.node.removeAttribute("data-aos");
-    el.node.removeAttribute("data-aos-delay");
-    el.node.removeAttribute("data-aos-distance");
-    el.node.removeAttribute("data-aos-duration");
+    el.node.removeAttribute('data-aos');
+    el.node.removeAttribute('data-aos-delay');
+    el.node.removeAttribute('data-aos-distance');
+    el.node.removeAttribute('data-aos-duration');
 
     if (options.initClassName) {
       el.node.classList.remove(options.initClassName);
@@ -149,10 +149,10 @@ const disable = function () {
 const isDisabled = function (optionDisable) {
   return (
     optionDisable === true ||
-    (optionDisable === "mobile" && detect.mobile()) ||
-    (optionDisable === "phone" && detect.phone()) ||
-    (optionDisable === "tablet" && detect.tablet()) ||
-    (typeof optionDisable === "function" && optionDisable() === true)
+    (optionDisable === 'mobile' && detect.mobile()) ||
+    (optionDisable === 'phone' && detect.phone()) ||
+    (optionDisable === 'tablet' && detect.tablet()) ||
+    (typeof optionDisable === 'function' && optionDisable() === true)
   );
 };
 
@@ -189,7 +189,7 @@ const init = function init(settings?: Partial<AOSDefaultOptions>) {
    * it'll refresh plugin automatically
    */
   if (!options.disableMutationObserver) {
-    observer.ready("[data-aos]", refreshHard);
+    observer.ready('[data-aos]', refreshHard);
   }
 
   /**
@@ -202,7 +202,7 @@ const init = function init(settings?: Partial<AOSDefaultOptions>) {
   /**
    * Handle initializing
    */
-  if (["DOMContentLoaded", "load"].indexOf(options.startEvent) === -1) {
+  if (['DOMContentLoaded', 'load'].indexOf(options.startEvent) === -1) {
     // Listen to options.startEvent and initialize AOS
     document.addEventListener(options.startEvent, function () {
       refresh(true);
@@ -211,7 +211,7 @@ const init = function init(settings?: Partial<AOSDefaultOptions>) {
     // window.addEventListener("load", function () {
     //   refresh(true);
     // });
-    window.addEventListener("DOMContentLoaded", function () {
+    window.addEventListener('DOMContentLoaded', function () {
       refresh(true);
     });
   }
@@ -219,14 +219,11 @@ const init = function init(settings?: Partial<AOSDefaultOptions>) {
   /**
    * Recalculate positions of elements on window resize or orientation change
    */
-  window.addEventListener(
-    "resize",
-    debounce(recalculatePositions, options.debounceDelay, true),
-  );
+  window.addEventListener('resize', debounce(recalculatePositions, options.debounceDelay, true));
 
   window.addEventListener(
-    "orientationchange",
-    debounce(recalculatePositions, options.debounceDelay, true),
+    'orientationchange',
+    debounce(recalculatePositions, options.debounceDelay, true)
   );
 
   return aosElements;

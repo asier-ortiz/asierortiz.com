@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets";
-import heroImage from "@assets/images/asier-ortiz.webp";
-import siteData from "@config/siteData.json";
+import { Image } from 'astro:assets';
+import heroImage from '@assets/images/asier-ortiz.webp';
+import siteData from '@config/siteData.json';
 ---
 
 <section id="hero" class="relative flex w-full" data-aos="fade-up">
@@ -14,19 +14,20 @@ import siteData from "@config/siteData.json";
           With over 5 years of experience
         </span>
         in programming, I specialize in creating seamless user experiences and scalable backend systems.
-        Lately, I’ve been expanding my expertise into Machine Learning and AI, exploring how models can drive smarter applications.
-        From development to model deployment, I love crafting solutions that make an impact.
+        Lately, I’ve been expanding my expertise into Machine Learning and AI, exploring how models can
+        drive smarter applications. From development to model deployment, I love crafting solutions that
+        make an impact.
       </p>
     </div>
     <div class="mx-auto max-w-sm md:col-span-1 md:max-w-full">
       <div class="aspect-square overflow-hidden rounded-full animate-glow">
         <Image
-            src={heroImage}
-            class="w-full object-cover rounded-full"
-            alt="asier ortiz profile"
-            loading="eager"
-            width={600}
-            densities={[1.5, 2]}
+          src={heroImage}
+          class="w-full object-cover rounded-full"
+          alt="asier ortiz profile"
+          loading="eager"
+          width={600}
+          densities={[1.5, 2]}
         />
       </div>
     </div>
@@ -36,13 +37,25 @@ import siteData from "@config/siteData.json";
 <style lang="scss">
   @keyframes glow {
     0% {
-      box-shadow: 0 0 2px var(--color-primary-600), 0 0 4px var(--color-primary-600), 0 0 6px var(--color-primary-600), 0 0 8px var(--color-primary-600);
+      box-shadow:
+        0 0 2px var(--color-primary-600),
+        0 0 4px var(--color-primary-600),
+        0 0 6px var(--color-primary-600),
+        0 0 8px var(--color-primary-600);
     }
     50% {
-      box-shadow: 0 0 4px var(--color-primary-600), 0 0 8px var(--color-primary-600), 0 0 12px var(--color-primary-600), 0 0 16px var(--color-primary-600);
+      box-shadow:
+        0 0 4px var(--color-primary-600),
+        0 0 8px var(--color-primary-600),
+        0 0 12px var(--color-primary-600),
+        0 0 16px var(--color-primary-600);
     }
     100% {
-      box-shadow: 0 0 2px var(--color-primary-600), 0 0 4px var(--color-primary-600), 0 0 6px var(--color-primary-600), 0 0 8px var(--color-primary-600);
+      box-shadow:
+        0 0 2px var(--color-primary-600),
+        0 0 4px var(--color-primary-600),
+        0 0 6px var(--color-primary-600),
+        0 0 8px var(--color-primary-600);
     }
   }
 

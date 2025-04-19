@@ -6,15 +6,15 @@
   }
 }
 
-.use-animations [data-aos^="fade"][data-aos^="fade"] {
+.use-animations [data-aos^='fade'][data-aos^='fade'] {
   @apply opacity-0;
 }
 
-.use-animations [data-aos^="zoom"][data-aos^="zoom"] {
+.use-animations [data-aos^='zoom'][data-aos^='zoom'] {
   @apply opacity-0;
 }
 
-.use-animations [data-aos^="slide"][data-aos^="slide"] {
+.use-animations [data-aos^='slide'][data-aos^='slide'] {
   @apply invisible;
 
   &.aos-animate {
@@ -22,6 +22,6 @@
   }
 }
 
-.use-animations [data-aos^="flip"][data-aos^="flip"] {
+.use-animations [data-aos^='flip'][data-aos^='flip'] {
   backface-visibility: hidden;
 }

@@ -10,16 +10,16 @@
 export default (
   el: Element,
   key: string,
-  fallback?: string | number | boolean,
+  fallback?: string | number | boolean
 ): string | number | boolean => {
-  const attr = el.getAttribute("data-aos-" + key);
+  const attr = el.getAttribute('data-aos-' + key);
 
-  fallback = fallback || "";
+  fallback = fallback || '';
 
-  if (typeof attr !== "undefined") {
-    if (attr === "true") {
+  if (typeof attr !== 'undefined') {
+    if (attr === 'true') {
       return true;
-    } else if (attr === "false") {
+    } else if (attr === 'false') {
       return false;
     }
   }

@@ -1,60 +1,70 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import siteData from "@config/siteData.json";
-import usesData from "@config/usesData.json";
+import Layout from '@layouts/Layout.astro';
+import siteData from '@config/siteData.json';
+import usesData from '@config/usesData.json';
 ---
 
-<Layout title={`${siteData.author.name} - Tools & Setup`} description={`Discover the tools & setup used by ${siteData.author.name}`}>
-    <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
-        <header>
-            <h1 class="h1 text-pretty text-gradient lg:pb-2">
-                My Essential Tools and Setup
-            </h1>
-            <p class="description mt-6 text-pretty">
-                Curious about what tools I use for development and my work setup? Here’s a comprehensive list of my essential software and hardware that power my daily workflow.
-            </p>
-        </header>
-        <section class="prose mt-10">
-            {usesData.sort((a, _) => a.sectionTitle === "Setup" ? -1 : 1).map((usesItem, _) => (
-                    <div>
-                        <h2 class={`h3 text-pretty text-primary-500 ${usesItem.sectionTitle === "Development" ? 'mt-16' : ''}`}>{usesItem.sectionTitle}</h2>
-                        {usesItem.sectionTitle === "Development" ? (
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {usesItem.items.map((item) =>
-                                        typeof item === "string" ? (
-                                                <div>{item}</div>
-                                        ) : (
-                                                <div class="border-2 rounded border-base-700 p-4 bg-base-950 text-white">
-                                                    <h3 class="h4 text-primary-100 font-bold text-lg mb-2">{item.title}</h3>
-                                                    <ul class="list-disc list-inside">
-                                                        {item.items.map((subItem) => (
-                                                                <li>{subItem}</li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                        )
-                                    )}
-                                </div>
-                        ) : (
-                                <ul class="mt-4">
-                                    {usesItem.items.map((item) =>
-                                        typeof item === 'string' ? (
-                                                <li>{item}</li>
-                                        ) : (
-                                                <li>
-                                                    <span class="font-bold">{item.title}</span>
-                                                    <ul class="ml-6 mt-2">
-                                                        {item.items.map((subItem) => (
-                                                                <li>{subItem}</li>
-                                                        ))}
-                                                    </ul>
-                                                </li>
-                                        )
-                                    )}
-                                </ul>
-                        )}
-                    </div>
-            ))}
-        </section>
-    </article>
+<Layout
+  title={`${siteData.author.name} - Tools & Setup`}
+  description={`Discover the tools & setup used by ${siteData.author.name}`}
+>
+  <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
+    <header>
+      <h1 class="h1 text-pretty text-gradient lg:pb-2">My Essential Tools and Setup</h1>
+      <p class="description mt-6 text-pretty">
+        Curious about what tools I use for development and my work setup? Here’s a comprehensive
+        list of my essential software and hardware that power my daily workflow.
+      </p>
+    </header>
+    <section class="prose mt-10">
+      {
+        usesData
+          .sort((a, _) => (a.sectionTitle === 'Setup' ? -1 : 1))
+          .map((usesItem, _) => (
+            <div>
+              <h2
+                class={`h3 text-pretty text-primary-500 ${usesItem.sectionTitle === 'Development' ? 'mt-16' : ''}`}
+              >
+                {usesItem.sectionTitle}
+              </h2>
+              {usesItem.sectionTitle === 'Development' ? (
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {usesItem.items.map((item) =>
+                    typeof item === 'string' ? (
+                      <div>{item}</div>
+                    ) : (
+                      <div class="border-2 rounded border-base-700 p-4 bg-base-950 text-white">
+                        <h3 class="h4 text-primary-100 font-bold text-lg mb-2">{item.title}</h3>
+                        <ul class="list-disc list-inside">
+                          {item.items.map((subItem) => (
+                            <li>{subItem}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  )}
+                </div>
+              ) : (
+                <ul class="mt-4">
+                  {usesItem.items.map((item) =>
+                    typeof item === 'string' ? (
+                      <li>{item}</li>
+                    ) : (
+                      <li>
+                        <span class="font-bold">{item.title}</span>
+                        <ul class="ml-6 mt-2">
+                          {item.items.map((subItem) => (
+                            <li>{subItem}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    )
+                  )}
+                </ul>
+              )}
+            </div>
+          ))
+      }
+    </section>
+  </article>
 </Layout>

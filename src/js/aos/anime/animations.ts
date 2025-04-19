@@ -1,34 +1,30 @@
-import anime from "animejs/lib/anime.es.js";
-import { type AnimeOptions } from "../helpers/aosTypes";
+import anime from 'animejs/lib/anime.es.js';
+import { type AnimeOptions } from '../helpers/aosTypes';
 
 export const getAnimation = (
   element: HTMLElement,
   animationName: string,
-  defaults: AnimeOptions,
+  defaults: AnimeOptions
 ) => {
   const tempDelay = element.dataset.aosDelay;
-  const delay = tempDelay
-    ? parseFloat(tempDelay) * 1000
-    : defaults.delay * 1000;
+  const delay = tempDelay ? parseFloat(tempDelay) * 1000 : defaults.delay * 1000;
 
   const tempDistance = element.dataset.aosDistance;
   const distance = tempDistance ? parseFloat(tempDistance) : defaults.distance;
 
   const tempDuration = element.dataset.aosDuration;
-  const duration = tempDuration
-    ? parseFloat(tempDuration) * 1000
-    : defaults.duration * 1000;
+  const duration = tempDuration ? parseFloat(tempDuration) * 1000 : defaults.duration * 1000;
 
   const onStartFunction = () => {
-    element.classList.add("aos-animate");
+    element.classList.add('aos-animate');
   };
 
   let animation;
 
-  if (animationName.includes("fade")) {
+  if (animationName.includes('fade')) {
     // fade animations
     switch (animationName) {
-      case "fade-in":
+      case 'fade-in':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -39,7 +35,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-up":
+      case 'fade-up':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -51,7 +47,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-down":
+      case 'fade-down':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -63,7 +59,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-left":
+      case 'fade-left':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -75,7 +71,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-right":
+      case 'fade-right':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -87,7 +83,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-up-right":
+      case 'fade-up-right':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -100,7 +96,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-up-left":
+      case 'fade-up-left':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -113,7 +109,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-down-right":
+      case 'fade-down-right':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -126,7 +122,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "fade-down-left":
+      case 'fade-down-left':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -152,10 +148,10 @@ export const getAnimation = (
         });
         break;
     }
-  } else if (animationName.includes("zoom")) {
+  } else if (animationName.includes('zoom')) {
     // zoom animations
     switch (animationName) {
-      case "zoom-in":
+      case 'zoom-in':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -167,7 +163,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-in-up":
+      case 'zoom-in-up':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -180,7 +176,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-in-down":
+      case 'zoom-in-down':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -193,7 +189,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-in-left":
+      case 'zoom-in-left':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -206,7 +202,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-in-right":
+      case 'zoom-in-right':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -219,7 +215,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-out":
+      case 'zoom-out':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -231,7 +227,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-out-up":
+      case 'zoom-out-up':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -244,7 +240,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-out-down":
+      case 'zoom-out-down':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -257,7 +253,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-out-left":
+      case 'zoom-out-left':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -270,7 +266,7 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "zoom-out-right":
+      case 'zoom-out-right':
         animation = anime({
           targets: element,
           opacity: [0, 1],
@@ -297,13 +293,13 @@ export const getAnimation = (
         });
         break;
     }
-  } else if (animationName.includes("slide")) {
+  } else if (animationName.includes('slide')) {
     // slide animations
     switch (animationName) {
-      case "slide-up":
+      case 'slide-up':
         animation = anime({
           targets: element,
-          translateY: ["100%", 0],
+          translateY: ['100%', 0],
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -311,10 +307,10 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "slide-down":
+      case 'slide-down':
         animation = anime({
           targets: element,
-          translateY: ["-100%", 0],
+          translateY: ['-100%', 0],
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -322,10 +318,10 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "slide-left":
+      case 'slide-left':
         animation = anime({
           targets: element,
-          translateX: ["100%", 0],
+          translateX: ['100%', 0],
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -333,10 +329,10 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "slide-right":
+      case 'slide-right':
         animation = anime({
           targets: element,
-          translateX: ["-100%", 0],
+          translateX: ['-100%', 0],
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -348,7 +344,7 @@ export const getAnimation = (
         // default is slide-up
         animation = anime({
           targets: element,
-          translateY: ["100%", 0],
+          translateY: ['100%', 0],
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -357,14 +353,14 @@ export const getAnimation = (
         });
         break;
     }
-  } else if (animationName.includes("flip")) {
+  } else if (animationName.includes('flip')) {
     // flip animations
     switch (animationName) {
-      case "flip-up":
+      case 'flip-up':
         animation = anime({
           targets: element,
-          rotateX: ["100deg", 0],
-          perspective: "2500px",
+          rotateX: ['100deg', 0],
+          perspective: '2500px',
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -372,11 +368,11 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "flip-down":
+      case 'flip-down':
         animation = anime({
           targets: element,
-          rotateX: ["-100deg", 0],
-          perspective: "2500px",
+          rotateX: ['-100deg', 0],
+          perspective: '2500px',
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -384,11 +380,11 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "flip-left":
+      case 'flip-left':
         animation = anime({
           targets: element,
-          rotateY: ["-100deg", 0],
-          perspective: "2500px",
+          rotateY: ['-100deg', 0],
+          perspective: '2500px',
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -396,11 +392,11 @@ export const getAnimation = (
           autoplay: false,
         });
         break;
-      case "flip-right":
+      case 'flip-right':
         animation = anime({
           targets: element,
-          rotateY: ["100deg", 0],
-          perspective: "2500px",
+          rotateY: ['100deg', 0],
+          perspective: '2500px',
           duration: duration,
           delay: delay,
           easing: defaults.easing,
@@ -412,8 +408,8 @@ export const getAnimation = (
         // default is flip-up
         animation = anime({
           targets: element,
-          translateY: ["100%", 0],
-          perspective: "2500px",
+          translateY: ['100%', 0],
+          perspective: '2500px',
           duration: duration,
           delay: delay,
           easing: defaults.easing,

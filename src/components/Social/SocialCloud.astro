@@ -1,15 +1,14 @@
 ---
-import SocialIcon from "@components/Social/SocialIcon.astro";
-import siteData from "@config/siteData.json";
+import SocialIcon from '@components/Social/SocialIcon.astro';
+import siteData from '@config/siteData.json';
 ---
 
 <div class="flex flex-col items-center">
-    <div class="flex gap-2">
-        {
-            siteData.socialLinks.map((social) => (
-                    <SocialIcon href={social.link} social={social.platform} />
-            ))
-        }
-    </div>
+  <div class="flex gap-2">
+    {
+      siteData.socialLinks.map((social) => (
+        <SocialIcon href={social.link} social={social.platform} />
+      ))
+    }
+  </div>
 </div>
-

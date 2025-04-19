@@ -6,15 +6,15 @@ export interface AnimeOptions {
 }
 
 export type TriggerPlacement =
-  | "top-bottom"
-  | "center-bottom"
-  | "bottom-bottom"
-  | "top-center"
-  | "center-center"
-  | "bottom-center"
-  | "top-top"
-  | "bottom-top"
-  | "center-top";
+  | 'top-bottom'
+  | 'center-bottom'
+  | 'bottom-bottom'
+  | 'top-center'
+  | 'center-center'
+  | 'bottom-center'
+  | 'top-top'
+  | 'bottom-top'
+  | 'center-top';
 
 export interface AOSDefaultOptions extends AnimeOptions {
   offset: number;

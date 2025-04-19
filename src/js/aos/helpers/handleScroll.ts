@@ -1,4 +1,4 @@
-import { type AOSElement } from "./aosTypes";
+import { type AOSElement } from './aosTypes';
 
 /**
  * Adds multiple classes on node
@@ -47,7 +47,7 @@ const applyClasses = (el: any, top: number) => {
       el.animation.play();
     }
 
-    fireEvent("aos:out", node);
+    fireEvent('aos:out', node);
 
     if (el.options?.trigger) {
       fireEvent(`aos:in:${el.options.trigger}`, node);
@@ -67,7 +67,7 @@ const applyClasses = (el: any, top: number) => {
     }
     el.animation.play();
 
-    fireEvent("aos:in", node);
+    fireEvent('aos:in', node);
     if (el.options?.trigger) {
       fireEvent(`aos:in:${el.options.trigger}`, node);
     }

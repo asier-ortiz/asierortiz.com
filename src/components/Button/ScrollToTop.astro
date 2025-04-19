@@ -1,38 +1,38 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components';
 ---
 
 <button id="scrollToTop" class="scroll-to-top">
-    <span class="sr-only">Scroll to top</span>
-    <Icon
-            name="tdesign:arrow-up"
-            class="h-6 w-6 transition-[transform] group-hover:translate-x-1"
-            aria-hidden="true"
-    />
+  <span class="sr-only">Scroll to top</span>
+  <Icon
+    name="tdesign:arrow-up"
+    class="h-6 w-6 transition-[transform] group-hover:translate-x-1"
+    aria-hidden="true"
+  />
 </button>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const scrollToTopButton = document.getElementById('scrollToTop');
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollToTopButton = document.getElementById('scrollToTop');
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    scrollToTopButton.addEventListener('click', scrollToTop);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopButton.classList.add('visible');
+        scrollToTopButton.classList.remove('hiding');
+      } else {
+        if (scrollToTopButton.classList.contains('visible')) {
+          scrollToTopButton.classList.add('hiding');
+          setTimeout(() => {
+            scrollToTopButton.classList.remove('visible');
+          }, 100);
         }
-
-        scrollToTopButton.addEventListener('click', scrollToTop);
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollToTopButton.classList.add('visible');
-                scrollToTopButton.classList.remove('hiding');
-            } else {
-                if (scrollToTopButton.classList.contains('visible')) {
-                    scrollToTopButton.classList.add('hiding');
-                    setTimeout(() => {
-                        scrollToTopButton.classList.remove('visible');
-                    }, 100);
-                }
-            }
-        });
+      }
     });
+  });
 </script>

@@ -6,22 +6,22 @@ export interface navLinkItem {
 
 const navConfig = [
   {
-    text: "Background",
-    label: "background",
-    href: "/#background",
+    text: 'Background',
+    label: 'background',
+    href: '/#background',
   },
   {
-    text: "Projects",
-    label: "projects",
-    href: "/#projects",
+    text: 'Projects',
+    label: 'projects',
+    href: '/#projects',
   },
   {
-    text: "/ uses",
-    href: "/uses/",
+    text: '/ uses',
+    href: '/uses/',
   },
   {
-    text: "/ blog",
-    href: "/blog/",
+    text: '/ blog',
+    href: '/blog/',
   },
 ];
 

@@ -1,42 +1,56 @@
 ---
-import { Image } from "astro:assets";
-import Button from "@components/Button/Button.astro";
-import { type ProjectItem } from "@config/projectData.json";
+import { Image } from 'astro:assets';
+import Button from '@components/Button/Button.astro';
+import { type ProjectItem } from '@config/projectData.json';
 
 interface Props extends ProjectItem {
-    rest?: any;
+  rest?: any;
 }
 
-const { image, title, description, href, languages, type, buttonText, ...rest } = Astro.props as Props;
+const { image, title, description, href, languages, type, buttonText, ...rest } =
+  Astro.props as Props;
 ---
 
-<div  class="flex flex-col border-2 rounded border-base-700 p-4 project-container project-card" data-type={type} {...rest}>
+<div
+  class="flex flex-col border-2 rounded border-base-700 p-4 project-container project-card"
+  data-type={type}
+  {...rest}
+>
   <div class="mx-auto max-w-4xl image-container">
-    <Image class="project-image object-cover rounded" src={image} alt={title} loading="eager" height={700} />
+    <Image
+      class="project-image object-cover rounded"
+      src={image}
+      alt={title}
+      loading="eager"
+      height={700}
+    />
   </div>
   <div class="mt-4 flex flex-grow flex-col justify-between">
     <div>
       <h2 class="h3">{title}</h2>
       <div class="languages-container">
-        {languages.map((lang) => (
+        {
+          languages.map((lang) => (
             <div class="language" key={lang.language}>
-              <span class="language-bullet" style={{ backgroundColor: lang.color }}></span>
+              <span class="language-bullet" style={{ backgroundColor: lang.color }} />
               <span>{lang.language}</span>
             </div>
-        ))}
+          ))
+        }
       </div>
       <p class="description mt-4">{description}</p>
     </div>
     <div class="mt-6 flex">
       <Button
-          variant="ghost"
-          href={href}
-          arrow="right"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover-button"
+        variant="ghost"
+        href={href}
+        arrow="right"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover-button"
       >
-        {buttonText} <span class="sr-only">about {title}</span>
+        {buttonText}
+        <span class="sr-only">about {title}</span>
       </Button>
     </div>
   </div>
@@ -45,7 +59,7 @@ const { image, title, description, href, languages, type, buttonText, ...rest } 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.hover-button');
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       const image = button.closest('.project-container').querySelector('.project-image');
       if (button && image) {
         button.addEventListener('mouseover', () => {

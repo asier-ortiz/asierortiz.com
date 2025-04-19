@@ -1,14 +1,14 @@
 ---
-import { type SocialLinkProps } from "@config/siteData.json";
+import { type SocialLinkProps } from '@config/siteData.json';
 
 interface Props {
-  social: SocialLinkProps["platform"];
+  social: SocialLinkProps['platform'];
   href: string;
   text?: string;
   class?: string;
 }
 
-const { social, href, text = "", class: className } = Astro.props as Props;
+const { social, href, text = '', class: className } = Astro.props as Props;
 ---
 
 <a
@@ -20,7 +20,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
 >
   <p class="sr-only">{social}</p>
   {
-    social === "github" && (
+    social === 'github' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-github"
@@ -42,7 +42,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "twitter" && (
+    social === 'twitter' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-x"
@@ -65,7 +65,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "mastodon" && (
+    social === 'mastodon' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-mastodon"
@@ -88,7 +88,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "linkedin" && (
+    social === 'linkedin' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-linkedin"
@@ -114,7 +114,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "instagram" && (
+    social === 'instagram' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-instagram"
@@ -138,7 +138,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "threads" && (
+    social === 'threads' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-threads"
@@ -160,7 +160,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "facebook" && (
+    social === 'facebook' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-facebook"
@@ -182,7 +182,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "youtube" && (
+    social === 'youtube' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-youtube"
@@ -205,7 +205,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "twitch" && (
+    social === 'twitch' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-twitch"
@@ -229,7 +229,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "tiktok" && (
+    social === 'tiktok' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-tiktok"
@@ -251,7 +251,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "snapchat" && (
+    social === 'snapchat' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-snapchat"
@@ -273,7 +273,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "reddit" && (
+    social === 'reddit' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-reddit"
@@ -300,7 +300,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "pinterest" && (
+    social === 'pinterest' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-pinterest"
@@ -324,7 +324,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "medium" && (
+    social === 'medium' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-medium"
@@ -351,7 +351,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "dev" && (
+    social === 'dev' && (
       <svg
         width="24"
         height="24"
@@ -368,7 +368,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "dribbble" && (
+    social === 'dribbble' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-dribbble"
@@ -393,7 +393,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "behance" && (
+    social === 'behance' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-behance"
@@ -418,7 +418,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "behance" && (
+    social === 'behance' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-behance"
@@ -443,7 +443,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "codepen" && (
+    social === 'codepen' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-codepen"
@@ -470,7 +470,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "producthunt" && (
+    social === 'producthunt' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-producthunt"
@@ -493,7 +493,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "discord" && (
+    social === 'discord' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-discord"
@@ -518,7 +518,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "slack" && (
+    social === 'slack' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-slack"
@@ -543,7 +543,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "whatsapp" && (
+    social === 'whatsapp' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-whatsapp"
@@ -566,7 +566,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "telegram" && (
+    social === 'telegram' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-telegram"
@@ -588,7 +588,7 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-    social === "email" && (
+    social === 'email' && (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-mail"
@@ -611,25 +611,25 @@ const { social, href, text = "", class: className } = Astro.props as Props;
   }
 
   {
-      social === "kaggle" && (
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-brand-kaggle"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M4 4h4v16h-4z" />
-            <path d="M8 12l8 -8" />
-            <path d="M8 12l8 8" />
-          </svg>
-      )
+    social === 'kaggle' && (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-brand-kaggle"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 4h4v16h-4z" />
+        <path d="M8 12l8 -8" />
+        <path d="M8 12l8 8" />
+      </svg>
+    )
   }
 
   {text}
