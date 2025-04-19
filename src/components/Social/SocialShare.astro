@@ -4,14 +4,21 @@ import SocialIcon from '@components/Social/SocialIcon.astro';
 interface Props {
   url: string;
   title: string;
+  tags?: string[];
 }
 
-const { url, title } = Astro.props as Props;
+const { url, title, tags } = Astro.props as Props;
+
+const hashtags = tags && tags.length > 0
+  ? tags.map(tag => `#${tag.replace(/\s+/g, '')}`).join(' ')
+  : '';
+
+const twitterText = hashtags ? `${title} ${hashtags}` : title;
 
 const shareLinks = [
   {
     platform: 'twitter',
-    link: `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(title)}`,
+    link: `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(twitterText)}`,
   },
   {
     platform: 'linkedin',
@@ -23,7 +30,9 @@ const shareLinks = [
 <div class="flex items-center gap-4 mt-8">
   <span class="text-base-400 text-sm">Share:</span>
 
-  {shareLinks.map((share) => <SocialIcon href={share.link} social={share.platform} />)}
+  {shareLinks.map((share) => (
+    <SocialIcon href={share.link} social={share.platform} />
+  ))}
 
   <button
     onclick="navigator.clipboard.writeText(window.location.href)"

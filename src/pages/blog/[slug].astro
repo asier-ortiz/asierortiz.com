@@ -54,7 +54,7 @@ const readingDuration = getReadingTime(post.body);
 
     <div class="mb-16">
       <img src={post.data.image} alt={post.data.title} class="w-full rounded-lg shadow" />
-      <SocialShare url={Astro.url} title={post.data.title} class="mb-8" />
+      <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
 
     <section class="prose prose-lg mx-auto mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
