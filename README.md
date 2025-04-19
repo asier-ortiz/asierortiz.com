@@ -1,57 +1,90 @@
 # asierortiz.com
 
-This repository contains the source code for my personal portfolio website, [asierortiz.com](https://asierortiz.com/). The website is built using [Astro](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/).
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## About the Project
+This repository contains the source code for my personal portfolio and blog: [asierortiz.com](https://asierortiz.com/).
 
-My personal portfolio showcases my skills, projects, and experience as a full-stack developer. The website includes sections such as:
+---
 
-- **Hero Section**: An introductory section with a brief overview of who I am.
-- **Background**: Information about my background, including my skills and experience.
-- **Projects**: A showcase of my featured projects with descriptions and links.
+## ✨ About the Project
 
-The website is designed to be responsive and visually appealing, with smooth animations and transitions to enhance the user experience.
+My personal website showcases my work, projects, and technical blog.
 
-## Getting Started
+It features:
 
-To get started with the project, you can use the following commands:
+- **Hero Section**: Brief introduction and call to action.
+- **Background**: Overview of my experience, skills, and technologies that I use.
+- **Projects**: Selected portfolio projects with detailed descriptions and repository links.
+- **Blog**: A space for articles about web development, machine learning, and more.
+- **Contact**: Includes links to my email and social media profiles for easy connection.
 
-### Commands
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Builds your production site to `./dist/`         |
-| `npm run preview`         | Previews your build locally, before deploying    |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## ⚙️ Technologies Used
 
-## Deployment
+- [Astro](https://astro.build/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Netlify](https://www.netlify.com/) (Continuous Deployment is set up through GitHub integration)
 
-The site is deployed using [Netlify](https://www.netlify.com/), a platform I chose for its **simplicity, speed, and powerful features** tailored for modern web development.
+---
 
-## License
+## 🚀 Getting Started
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Clone and Run Locally:
 
-## Contact
+```bash
+git clone https://github.com/yourusername/asierortiz.com.git
+cd asierortiz.com
+npm install
+npm run dev
+```
 
-If you have any questions or suggestions, feel free to reach out to me at [asierortiz@outlook.es](mailto:asierortiz@outlook.es).
+### Available Commands
 
-## Screenshots
+| Command                    | Action                                              |
+|:---------------------------|:----------------------------------------------------|
+| `npm install`              | Install dependencies                                |
+| `npm run dev`              | Start local development server at `localhost:3000`  |
+| `npm run build`            | Build the production site into `./dist/`            |
+| `npm run preview`          | Preview the production build locally                |
+| `npm run format`           | Format code using Prettier                          |
+| `npm run astro ...`        | Run CLI commands like `astro add`, `astro check`    |
+| `npm run astro -- --help`  | Get help using the Astro CLI                        |
+
+---
+
+## 📷 Screenshots
 
 <table style="border: none; border-collapse: collapse;">
   <tr>
     <td align="center" style="border: none;">
-      <img src="./screenshots/screenshot-1.jpg" alt="Screenshot 1" height="300"/>
+      <img src="./screenshots/screenshot-1.jpg" alt="Screenshot 1" style="max-height: 300px; object-fit: contain;"/>
     </td>
     <td align="center" style="border: none;">
-      <img src="./screenshots/screenshot-2.jpg" alt="Screenshot 2" height="300"/>
+      <img src="./screenshots/screenshot-2.jpg" alt="Screenshot 2" style="max-height: 300px; object-fit: contain;"/>
+    </td>
+    <td align="center" style="border: none;">
+      <img src="./screenshots/screenshot-3.jpg" alt="Screenshot 3" style="max-height: 300px; object-fit: contain;"/>
     </td>
   </tr>
 </table>
 
 ---
 
-Thank you for visiting my portfolio! I hope you find it informative and engaging.
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+---
+
+## 📬 Contact
+
+If you have any questions, suggestions, or just want to say hello:
+
+- 📧 [asierortiz@outlook.es](mailto:asierortiz@outlook.es)
+
+---
+
+> Thank you for visiting my portfolio and blog! 🙌
