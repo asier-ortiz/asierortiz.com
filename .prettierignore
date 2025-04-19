@@ -1,0 +1,29 @@
+# Node
+node_modules
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build output
+dist
+build
+
+# Public assets
+public
+
+# Version control
+.git
+.github
+
+# Env files
+.env
+.env.*
+
+# Astro-specific
+.cache
+netlify.toml
+
+# Others
+.DS_Store
+.vscode
+.idea
