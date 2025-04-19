@@ -2,13 +2,13 @@
 title: "Mastering Astro 5: Build and Optimize Your Modern Blog"
 description: "A complete guide to building, optimizing, and deploying a professional blog with Astro 5, TailwindCSS, Markdown, SEO best practices, and more."
 pubDate: "2025-04-19"
-image: "/assets/blog/astro-banner.png"
-tags: ["astro", "static-site", "blog", "guide", "seo", "deployment"]
+image: "/assets/blog/astro.png"
+tags: ["astro"]
 author: "Asier Ortiz"  
 draft: false       
 ---
 
-[//]: # (# 🚀 Mastering Astro 5: Build and Optimize Your Modern Blog)
+[//]: # (# Mastering Astro 5: Build and Optimize Your Modern Blog)
 
 Astro is rapidly changing the way we build websites — offering unmatched speed, flexibility, and developer experience.  
 If you want to create a **professional, ultra-fast, scalable blog**, **you're in the right place**.

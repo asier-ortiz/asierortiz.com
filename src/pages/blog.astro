@@ -28,10 +28,17 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
     {
       allTags.length > 0 && (
         <div id="tag-filters" class="flex flex-wrap gap-2 mb-12">
+          <button
+            type="button"
+            class="filter-btn bg-base-800 hover:bg-primary-500 text-xs text-primary-400 hover:text-white font-medium py-1 px-3 rounded-full transition"
+            data-tag="all"
+          >
+            Show All
+          </button>
           {allTags.map((tag) => (
             <button
               type="button"
-              class="bg-base-800 hover:bg-primary-500 text-xs text-primary-400 hover:text-white font-medium py-1 px-3 rounded-full transition"
+              class="filter-btn bg-base-800 hover:bg-primary-500 text-xs text-primary-400 hover:text-white font-medium py-1 px-3 rounded-full transition"
               data-tag={tag}
             >
               #{tag}
@@ -101,18 +108,31 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
       }
     </div>
 
-    <!-- Posts filtering (client side only) -->
+    <!-- Posts filtering with tag highlight -->
     <script is:inline>
-      const tagButtons = document.querySelectorAll('#tag-filters button');
+      const tagButtons = document.querySelectorAll('.filter-btn');
       const posts = document.querySelectorAll('#posts-grid .post-card');
 
       tagButtons.forEach((button) => {
         button.addEventListener('click', () => {
           const selectedTag = button.dataset.tag;
 
+          // Highlight only selected button
+          tagButtons.forEach((btn) => {
+            if (btn === button) {
+              btn.classList.add('bg-primary-500', 'text-white');
+              btn.classList.remove('bg-base-800', 'text-primary-400');
+            } else {
+              btn.classList.remove('bg-primary-500', 'text-white');
+              btn.classList.add('bg-base-800', 'text-primary-400');
+            }
+          });
+
+          // Filter posts
           posts.forEach((post) => {
             const postTags = post.dataset.tags?.split(',') || [];
-            if (postTags.includes(selectedTag)) {
+
+            if (selectedTag === 'all' || postTags.includes(selectedTag)) {
               post.style.display = '';
             } else {
               post.style.display = 'none';
