@@ -1,48 +1,125 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import siteData from "../config/siteData.json";
+import siteData from '../config/siteData.json';
+import { getReadingTime } from '@/utils/readingTime';
 
-const posts = await getCollection('blog');
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])));
 ---
 
-<Layout title={`${siteData.author.name} - Blog`} description="Latest articles, insights, and tutorials.">
-    <section class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
-        <header class="text-left mb-12">
-            <h1 class="h1 text-pretty text-gradient pb-2">
-                Welcome to my Blog
-            </h1>
-            <p class="description mt-6 text-pretty">
-                Thoughts, tutorials, and personal projects. Stay updated with my latest writings about development, design, and more.
-            </p>
-        </header>
+<Layout
+  title={`${siteData.author.name} - Blog`}
+  description="Latest articles, insights, and tutorials."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
+    <header class="text-left mb-12">
+      <h1 class="h1 text-pretty text-gradient pb-2">Welcome to my Blog</h1>
+      <p class="description mt-6 text-pretty">
+        Thoughts, tutorials, and personal projects. Stay updated with my latest writings about
+        development, design, and more.
+      </p>
+    </header>
 
-        <div class="grid gap-10 grid-cols-1 md:grid-cols-2">
-            {posts.map((post) => (
-                    <a
-                            href={`/blog/${post.slug}/`}
-                            class="group block overflow-hidden rounded-2xl border border-base-700 bg-base-900 hover:border-primary-500 hover:shadow-xl hover:scale-[1.02] transform transition-all duration-300"
-                    >
-                        <div class="aspect-[16/9] overflow-hidden">
-                            <img
-                                    src={post.data.image}
-                                    alt={post.data.title}
-                                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            />
-                        </div>
-                        <div class="p-6">
-                            <h2 class="text-2xl font-semibold mb-2 group-hover:underline-ltr">{post.data.title}</h2>
-                            <p class="text-base-400 text-sm mb-4">
-                                {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                })}
-                            </p>
-                            <p class="text-base-300">{post.data.description}</p>
-                        </div>
-                    </a>
-            ))}
+    <!-- Tag Filter Buttons -->
+    {
+      allTags.length > 0 && (
+        <div id="tag-filters" class="flex flex-wrap gap-2 mb-12">
+          {allTags.map((tag) => (
+            <button
+              type="button"
+              class="bg-base-800 hover:bg-primary-500 text-xs text-primary-400 hover:text-white font-medium py-1 px-3 rounded-full transition"
+              data-tag={tag}
+            >
+              #{tag}
+            </button>
+          ))}
         </div>
-    </section>
+      )
+    }
+
+    <!-- Posts List -->
+    <div id="posts-grid" class="grid gap-10 grid-cols-1 md:grid-cols-2">
+      {
+        posts.map((post) => {
+          const readingDuration = getReadingTime(post.body);
+          return (
+            <a
+              href={`/blog/${post.slug}/`}
+              class="post-card group block overflow-hidden rounded-2xl border border-base-700 bg-base-900 hover:border-primary-500 hover:shadow-xl hover:scale-[1.02] transform transition-all duration-300"
+              data-tags={post.data.tags?.join(',')}
+            >
+              <div class="aspect-[16/9] overflow-hidden">
+                <img
+                  src={post.data.image}
+                  alt={`Cover image for ${post.data.title}`}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <div class="p-6">
+                <h2 class="text-2xl font-semibold mb-2 group-hover:underline-ltr">
+                  {post.data.title}
+                </h2>
+
+                <div class="flex flex-wrap items-center gap-2 text-base-400 text-sm mb-4">
+                  <span>
+                    {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </span>
+                  <span>·</span>
+                  <span>{readingDuration}</span>
+                  {post.data.author && (
+                    <>
+                      <span>·</span>
+                      <span>By {post.data.author}</span>
+                    </>
+                  )}
+                </div>
+
+                {post.data.tags && (
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {post.data.tags.map((tag) => (
+                      <span class="bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded-full">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <p class="text-base-300 line-clamp-3">{post.data.description}</p>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <!-- Posts filtering (client side only) -->
+    <script is:inline>
+      const tagButtons = document.querySelectorAll('#tag-filters button');
+      const posts = document.querySelectorAll('#posts-grid .post-card');
+
+      tagButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const selectedTag = button.dataset.tag;
+
+          posts.forEach((post) => {
+            const postTags = post.dataset.tags?.split(',') || [];
+            if (postTags.includes(selectedTag)) {
+              post.style.display = '';
+            } else {
+              post.style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
+  </section>
 </Layout>

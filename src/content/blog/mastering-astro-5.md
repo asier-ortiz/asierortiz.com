@@ -1,5 +1,5 @@
 ---
-title: "🚀Mastering Astro 5: Build and Optimize Your Modern Blog"
+title: "Mastering Astro 5: Build and Optimize Your Modern Blog"
 description: "A complete guide to building, optimizing, and deploying a professional blog with Astro 5, TailwindCSS, Markdown, SEO best practices, and more."
 pubDate: "2025-04-19"
 image: "/assets/blog/astro-banner.png"
@@ -628,12 +628,19 @@ Make your blog accessible to everyone:
 Before going live, double-check:
 
 ✅ SEO metadata (title, description, OpenGraph) is complete.  
+
 ✅ Sitemap is generated.  
+
 ✅ RSS feed is available.  
+
 ✅ Draft posts are hidden.  
+
 ✅ All links work properly.  
+
 ✅ Images are optimized.  
+
 ✅ Accessibility is respected.  
+
 ✅ Performance is tested (Lighthouse, PageSpeed Insights).
 
 ✅ Custom 404 page exists.
