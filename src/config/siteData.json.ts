@@ -24,7 +24,8 @@ export interface SocialLinkProps {
     | 'whatsapp'
     | 'telegram'
     | 'email'
-    | 'kaggle';
+    | 'kaggle'
+    | 'rss';
   link: string;
 }
 
@@ -82,6 +83,10 @@ const siteData: SiteDataProps = {
     {
       platform: 'email',
       link: 'mailto:asierortiz@outlook.es',
+    },
+    {
+      platform: 'rss',
+      link: '/rss.xml',
     },
   ],
 
