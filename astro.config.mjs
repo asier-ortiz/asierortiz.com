@@ -9,12 +9,13 @@ import remarkSlug from 'remark-slug';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://asierortiz.com',
-  trailingSlash: 'always',
-  integrations: [sitemap(), icon(), mdx(), tailwind(), sitemap(), compress()],
+  trailingSlash: 'ignore',
+  integrations: [sitemap(), icon(), mdx(), tailwind(), compress()],
   markdown: {
     remarkPlugins: [remarkSlug],
   },
   server: {
     port: 3_000,
   },
+  pageExtensions: ['astro', 'md', 'mdx', 'ts'],
 });

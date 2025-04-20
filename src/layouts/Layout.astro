@@ -20,7 +20,7 @@ const defaultImage = siteData.defaultImage.src;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={siteData.language}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,6 +32,11 @@ const defaultImage = siteData.defaultImage.src;
     <meta name="description" content={description} />
     <meta name="theme-color" content="var(--theme-color)" />
     <link rel="canonical" href={pageUrl} />
+
+    <!-- RSS / JSON Feed alternate links -->
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+    <link rel="alternate" type="application/feed+json" title="JSON Feed" href="/feed.json" />
+
     <title>{title}</title>
 
     <!-- Open Graph / Facebook -->

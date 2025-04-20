@@ -44,6 +44,11 @@ export interface SiteDataProps {
     src: string;
     alt: string;
   };
+  rss: {
+    title: string;
+    description: string;
+  };
+  language: string;
 }
 
 const siteData: SiteDataProps = {
@@ -90,6 +95,12 @@ const siteData: SiteDataProps = {
     src: '/images/default-og-image.png', // Default Image for social networks
     alt: 'Default social image for Asier Ortiz portfolio & blog.',
   },
+
+  rss: {
+    title: 'Asier Ortiz - Blog',
+    description: 'Latest posts about AI, Machine Learning and Web Development',
+  },
+  language: 'en-us',
 };
 
 export default siteData;
