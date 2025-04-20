@@ -10,7 +10,17 @@ import remarkSlug from 'remark-slug';
 export default defineConfig({
   site: 'https://asierortiz.com',
   trailingSlash: 'ignore',
-  integrations: [sitemap(), icon(), mdx(), tailwind(), compress()],
+  integrations: [
+    sitemap({
+      changefreq: 'weekly',
+      lastmod: true,
+      sitemap: '/sitemap-index.xml',
+    }),
+    icon(),
+    mdx(),
+    tailwind(),
+    compress(),
+  ],
   markdown: {
     remarkPlugins: [remarkSlug],
   },
