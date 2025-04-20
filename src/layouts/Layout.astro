@@ -80,6 +80,7 @@ const defaultImage = siteData.defaultImage.src;
     </div>
     <ScrollToTop />
 
+    <!-- Initialize AOS animations if enabled in site config -->
     <script>
       import siteData from '@config/siteData.json';
       import AOS from '@js/aos/aos';
@@ -89,5 +90,9 @@ const defaultImage = siteData.defaultImage.src;
         document.addEventListener('astro:after-swap', AOS.refreshHard);
       }
     </script>
+
+    <!-- Loads the script to add copy buttons to code blocks -->
+    <script src="/src/scripts/copy-code.js" type="module" defer is:inline></script>
+
   </body>
 </html>
