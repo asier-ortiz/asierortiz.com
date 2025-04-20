@@ -85,14 +85,14 @@ const defaultImage = siteData.defaultImage.src;
       import siteData from '@config/siteData.json';
       import AOS from '@js/aos/aos';
 
-      if (siteData.useAnimations === true) {
+      if (siteData.useAnimations === true && typeof window !== 'undefined') {
         AOS.init({ once: true, duration: 0.75, distance: 15 });
         document.addEventListener('astro:after-swap', AOS.refreshHard);
       }
     </script>
 
-    <!-- Loads the script to add copy buttons to code blocks -->
-    <script src="/scripts/copy-code.js" type="module" defer is:inline></script>
+    <!-- Load Copy Code Script dynamically -->
+    <script src={import.meta.env.DEV ? '/src/scripts/copy-code.js' : '/assets/scripts/copy-code.js'} type="module" defer is:inline></script>
 
   </body>
 </html>

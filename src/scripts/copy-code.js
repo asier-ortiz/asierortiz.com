@@ -1,7 +1,9 @@
 function addCopyButtonsToCodeBlocks() {
   const codeBlocks = document.querySelectorAll('pre');
 
-  if (!codeBlocks.length) return;
+  if (!codeBlocks.length) {
+    return;
+  }
 
   codeBlocks.forEach((pre) => {
     const wrapper = document.createElement('div');
@@ -24,21 +26,24 @@ function addCopyButtonsToCodeBlocks() {
 
     button.addEventListener('click', async () => {
       try {
-        await navigator.clipboard.writeText(pre.innerText);
+        const codeElement = pre.querySelector('code');
+        const textToCopy = codeElement ? codeElement.innerText : pre.innerText;
+        await navigator.clipboard.writeText(textToCopy);
+
         button.innerText = '✅';
         tooltip.classList.remove('copy-tooltip-hidden');
         tooltip.classList.add('copy-tooltip-visible');
+
         setTimeout(() => {
           button.innerHTML = '📋';
           tooltip.classList.remove('copy-tooltip-visible');
           tooltip.classList.add('copy-tooltip-hidden');
-        }, 2_000);
+        }, 2000);
       } catch (err) {
         console.error('Failed to copy code:', err);
       }
     });
 
-    // Remove tooltip when mouse leaves the code block
     wrapper.addEventListener('mouseleave', () => {
       tooltip.classList.remove('copy-tooltip-visible');
       tooltip.classList.add('copy-tooltip-hidden');
@@ -47,4 +52,9 @@ function addCopyButtonsToCodeBlocks() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', addCopyButtonsToCodeBlocks);
+// Esperar a que el DOM esté realmente cargado antes de ejecutar
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', addCopyButtonsToCodeBlocks);
+} else {
+  addCopyButtonsToCodeBlocks();
+}
