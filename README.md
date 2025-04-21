@@ -32,6 +32,16 @@ It features:
 
 ---
 
+## 🔄 CI/CD Workflows
+
+This project uses GitHub Actions to ensure high quality before deployment:
+
+- **Validate RSS Feed**: Automatically checks that the generated RSS feed (`/feed.xml`) is valid.
+- **Check Broken Links**: Scans the site after each build to ensure there are no broken links.
+- **Continuous Deployment**: After successful validation, the site is automatically deployed to Netlify.
+
+---
+
 ## 🚀 Getting Started
 
 Clone and Run Locally:
