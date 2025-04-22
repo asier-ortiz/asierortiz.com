@@ -10,16 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Configure Git user and remote to use GH_TOKEN
+      - name: Set global Git identity
         run: |
           git config --global user.name "semantic-release-bot"
           git config --global user.email "semantic-release@github.com"
-          git remote set-url origin https://${GH_TOKEN}@github.com/${{ github.repository }}.git
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Set remote URL to use GH_TOKEN
+        run: git remote set-url origin https://${GH_TOKEN}@github.com/${{ github.repository }}.git
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
