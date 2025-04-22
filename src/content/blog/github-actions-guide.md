@@ -18,18 +18,17 @@ This guide is designed for developers new to Continuous Integration and Continuo
 
 ## 📋 Table of Contents
 
-- [What are GitHub Actions?](#what-are-github-actions)
-- [Core Concepts](#core-concepts)
-- [Setting Up Your First Workflow](#setting-up-your-first-workflow)
-- [Common Use Cases](#common-use-cases)
-- [Best Practices](#best-practices)
-- [Practical Examples](#practical-examples)
-  - [Example 1: Continuous Integration for Node.js](#example-1-continuous-integration-for-nodejs)
-  - [Example 2: Continuous Deployment to GitHub Pages](#example-2-continuous-deployment-to-github-pages)
-  - [Example 3: Scheduled Tasks](#example-3-scheduled-tasks)
-  - [Example 4: Publishing to NPM](#example-4-publishing-to-npm)
-  - [Example 5: Slack Notifications](#example-5-slack-notifications)
-- [Next Steps](#next-steps)
+<div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
+<ul class="flex flex-col gap-2">
+  <li><a href="#what-are-github-actions" class="text-base-300 hover:text-primary-400 transition-colors duration-300">What are GitHub Actions?</a></li>
+  <li><a href="#core-concepts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Core Concepts</a></li>
+  <li><a href="#setting-up-your-first-workflow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Setting Up Your First Workflow</a></li>
+  <li><a href="#common-use-cases" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Common Use Cases</a></li>
+  <li><a href="#best-practices" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Best Practices</a></li>
+  <li><a href="#practical-examples" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Practical Examples</a></li>
+  <li><a href="#next-steps" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Next Steps</a></li>
+</ul>
+</div>
 
 ---
 
