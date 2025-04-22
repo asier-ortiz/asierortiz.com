@@ -65,7 +65,7 @@ const usesData: usesItem[] = [
       },
       {
         title: 'Learning',
-        items: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'Redis'],
+        items: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'Redis', 'AWS'],
       },
     ],
   },
