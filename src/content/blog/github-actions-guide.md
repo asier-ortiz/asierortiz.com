@@ -8,7 +8,7 @@ author: "Asier Ortiz"
 draft: false
 ---
 
-# Getting Started with GitHub Actions: A Comprehensive Guide for Beginners
+[//]: # (# Getting Started with GitHub Actions: A Comprehensive Guide for Beginners)
 
 GitHub Actions is a powerful feature that enables you to automate workflows directly within your GitHub repository. Whether you're looking to run tests, build your project, validate links, or deploy your application, GitHub Actions can streamline these processes.
 
