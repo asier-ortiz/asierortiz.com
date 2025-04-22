@@ -2,6 +2,8 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![semantic-release](https://img.shields.io/badge/semantic--release-🚀-green?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![Release Workflow](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/release.yml/badge.svg)](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/release.yml)
 [![Validate RSS Feed](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/validate-feed.yml/badge.svg)](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/validate-feed.yml)
 [![Broken Links Check](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/check-links.yml/badge.svg)](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/check-links.yml)
 
@@ -34,11 +36,12 @@ It features:
 
 ## 🔄 CI/CD Workflows
 
-This project uses GitHub Actions to ensure high quality before deployment:
+This project uses GitHub Actions to ensure code quality and automate deployment:
 
-- **Validate RSS Feed**: Automatically checks that the generated RSS feed (`/feed.xml`) is valid.
-- **Check Broken Links**: Scans the site after each build to ensure there are no broken links.
-- **Continuous Deployment**: After successful validation, the site is automatically deployed to Netlify.
+- **Semantic Release**: Automatically determines the next version, updates the changelog, tags the release, and publishes it to GitHub based on commit messages.
+- **Validate RSS Feed**: Checks that the generated RSS feed (`/feed.xml`) is valid after each push.
+- **Check Broken Links**: Scans the site for broken links after each build to ensure reliability.
+- **Continuous Deployment**: If all validations pass, the site is automatically deployed to Netlify.
 
 ---
 
