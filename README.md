@@ -28,6 +28,7 @@ It features:
 ## ⚙️ Technologies Used
 
 - [Astro](https://astro.build/)
+- [Vue 3](https://vuejs.org/) (for interactive islands)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Netlify](https://www.netlify.com/) (Continuous Deployment is set up through GitHub integration)
