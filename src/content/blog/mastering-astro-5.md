@@ -2,7 +2,7 @@
 title: "Mastering Astro 5: Build and Optimize Your Modern Blog"
 description: "A complete guide to building, optimizing, and deploying a professional blog with Astro 5, TailwindCSS, Markdown, SEO best practices, and more."
 pubDate: "2025-04-19"
-image: "/assets/blog/astro.png"
+image: "/assets/blog/astro.webp"
 tags: ["astro"]
 author: "Asier Ortiz"  
 draft: false       

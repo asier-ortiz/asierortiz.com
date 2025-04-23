@@ -2,7 +2,7 @@
 title: "Getting Started with GitHub Actions: A Comprehensive Guide for Beginners"
 description: "Learn how to automate tasks with GitHub Actions. This guide covers the basics, offers tips for beginners, and walks you through setting up your first CI/CD workflows."
 pubDate: "2025-04-21"
-image: "/assets/blog/github-actions.png"
+image: "/assets/blog/github-actions.webp"
 tags: ["github", "ci/cd", "automation"]
 author: "Asier Ortiz"
 draft: false

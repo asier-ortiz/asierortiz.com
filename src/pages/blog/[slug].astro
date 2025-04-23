@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Button from '@/components/Button/Button.astro';
 import SocialShare from '@/components/Social/SocialShare.astro';
+import PostImage from '@/components/Media/PostImage.astro';
 import siteData from '@/config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
 
@@ -53,7 +54,11 @@ const readingDuration = getReadingTime(post.body);
     </header>
 
     <div class="mb-16">
-      <img src={post.data.image} alt={post.data.title} class="w-full rounded-lg shadow" />
+      <PostImage
+        src={post.data.image}
+        alt={post.data.title}
+        className="rounded-lg shadow aspect-[16/9]"
+      />
       <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
 

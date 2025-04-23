@@ -1,0 +1,40 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  className?: string;
+}
+const { src, alt, className = '' } = Astro.props;
+---
+
+<div class={`relative aspect-[16/9] w-full overflow-hidden rounded-t-2xl skeleton ${className}`}>
+  <img
+    src={src}
+    alt={alt}
+    class="absolute inset-0 w-full h-full object-cover fade-in group-hover:scale-105"
+    style="transition: transform 0.3s ease-in-out;"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const containers = document.querySelectorAll('.skeleton');
+
+    containers.forEach((container) => {
+      const img = container.querySelector('img.fade-in');
+      if (!img) return;
+
+      if (img.complete) {
+        img.classList.add('loaded');
+        container.classList.remove('skeleton');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+          container.classList.remove('skeleton');
+        });
+      }
+    });
+  });
+</script>

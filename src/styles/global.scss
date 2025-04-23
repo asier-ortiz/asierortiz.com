@@ -77,6 +77,19 @@
     @apply opacity-0;
   }
 
+  .skeleton {
+    @apply bg-base-800 animate-pulse;
+  }
+
+  img.fade-in {
+    @apply opacity-0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  img.fade-in.loaded {
+    @apply opacity-100;
+  }
+
   p {
     @apply md:text-base lg:text-lg;
   }
