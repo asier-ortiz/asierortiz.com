@@ -53,6 +53,12 @@ const readingDuration = getReadingTime(post.body);
       </div>
     </header>
 
+    <div class="flex justify-start mt-6 mb-8">
+      <Button href="/blog/" variant="post-ghost" arrow="left" class="hover-button">
+        Back to all posts
+      </Button>
+    </div>
+
     <div class="mb-16">
       <PostImage
         src={post.data.image}
