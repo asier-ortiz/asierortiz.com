@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.2.0...v1.3.0) (2025-04-23)
+
+### Features
+
+* **post-image:** enforce 3:2 aspect ratio on post and listing images ([73235dd](https://github.com/asier-ortiz/asierortiz.com/commit/73235ddcc6e897b1fbb4ed87619aa4810e8cbb7c))
+
 ## [1.2.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.1.0...v1.2.0) (2025-04-22)
 
 ### Features
