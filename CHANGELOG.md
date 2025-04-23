@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.5.0...v1.6.0) (2025-04-23)
+
+### Features
+
+* **media:** add medium-zoom support with Vue island for zoomable images ([aba14d7](https://github.com/asier-ortiz/asierortiz.com/commit/aba14d780850a2f2530b8f8ff9f98e4e2360ac91))
+
 ## [1.5.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.4.0...v1.5.0) (2025-04-23)
 
 ### Features
