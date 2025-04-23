@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.3.0...v1.4.0) (2025-04-23)
+
+### Features
+
+* **blog:** add 'Back to all posts' button at the top of the article page ([8bfb36e](https://github.com/asier-ortiz/asierortiz.com/commit/8bfb36e8ec4381b83e928364092e0230fa4dfa04))
+
 ## [1.3.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.2.0...v1.3.0) (2025-04-23)
 
 ### Features
