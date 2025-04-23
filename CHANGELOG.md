@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.4.0...v1.5.0) (2025-04-23)
+
+### Features
+
+* **social-share:** add Facebook sharing option ([94c9dbe](https://github.com/asier-ortiz/asierortiz.com/commit/94c9dbec35d2d29da1d3b83fc1116b4185a2d826))
+
 ## [1.4.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.3.0...v1.4.0) (2025-04-23)
 
 ### Features
