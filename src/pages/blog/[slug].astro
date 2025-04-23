@@ -6,6 +6,7 @@ import SocialShare from '@/components/Social/SocialShare.astro';
 import PostImage from '@/components/Media/PostImage.astro';
 import siteData from '@/config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
+import ZoomImages from '@/components/Media/ZoomImages.vue';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -71,6 +72,9 @@ const readingDuration = getReadingTime(post.body);
     <section class="prose prose-lg mx-auto mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
       <Content />
     </section>
+
+    <!-- Vue Island that applies medium-zoom only to images inside the Markdown content -->
+    <ZoomImages client:load />
 
     <div class="flex justify-start mt-16">
       <Button href="/blog/" variant="post-ghost" arrow="left" class="hover-button">

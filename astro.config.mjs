@@ -1,16 +1,16 @@
 import { defineConfig } from 'astro/config';
+import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
-import remarkSlug from 'remark-slug';
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://asierortiz.com',
   trailingSlash: 'ignore',
   integrations: [
+    vue(),
     sitemap({
       changefreq: 'weekly',
       lastmod: true,
@@ -21,9 +21,6 @@ export default defineConfig({
     tailwind(),
     compress(),
   ],
-  markdown: {
-    remarkPlugins: [remarkSlug],
-  },
   server: {
     port: 3_000,
   },

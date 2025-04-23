@@ -85,7 +85,11 @@ interface — no local setup required.
 2. Click the **Actions** tab in the top menu.
 
 3. GitHub will suggest templates based on your project.
-   ![GitHub Actions tab showing template suggestions](/assets/blog/github-actions-screenshot-1.webp)
+   <img
+   src="/assets/blog/github-actions-screenshot-1.webp"
+   alt="GitHub Actions tab showing template suggestions"
+   data-zoomable
+   />
 
 4. Choose a template or click **"set up a workflow yourself"** to start from scratch.
 
@@ -106,14 +110,22 @@ interface — no local setup required.
            run: echo "👋 Hello from your first GitHub Action!"
    ```
 
-   ![YAML editor with hello-world workflow example](/assets/blog/github-actions-screenshot-2.webp)
+   <img
+   src="/assets/blog/github-actions-screenshot-2.webp"
+   alt="YAML editor with hello-world workflow example"
+   data-zoomable
+   />
 
 5. Click **Commit changes** to save and activate the workflow.
 
 - The workflow will run automatically after each `git push`.
 - You can view its execution in the **Actions** tab, where each step is logged in real-time.
 - If something fails, GitHub shows exactly where and why.
-  ![GitHub Actions run result showing successful output](/assets/blog/github-actions-screenshot-3.webp)
+  <img
+  src="/assets/blog/github-actions-screenshot-3.webp"
+  alt="GitHub Actions run result showing successful output"
+  data-zoomable
+  />
 
 > 💡 Once you're comfortable, you can define more complex workflows or store them in your repo directly.
 
