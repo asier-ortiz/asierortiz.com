@@ -57,7 +57,7 @@ const readingDuration = getReadingTime(post.body);
       <PostImage
         src={post.data.image}
         alt={post.data.title}
-        className="rounded-lg shadow aspect-[16/9]"
+        className="rounded-lg shadow"
       />
       <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
