@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.6.0...v1.7.0) (2025-04-25)
+
+### Features
+
+* **nav:** highlight logo on scroll and refine active link detection ([e56ecda](https://github.com/asier-ortiz/asierortiz.com/commit/e56ecda57f1ce2973d61c11a2a9996cd84cb3f13))
+
 ## [1.6.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.5.0...v1.6.0) (2025-04-23)
 
 ### Features
