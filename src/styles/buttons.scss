@@ -50,8 +50,8 @@
 .scroll-to-top {
   @apply fixed bottom-12 right-6 w-12 h-12 bg-base-800 text-base-300 border-2 border-primary-600 rounded-full cursor-pointer;
   @apply flex items-center justify-center;
-  @apply transition-opacity duration-300 opacity-0 pointer-events-none;
-  @apply transition-transform duration-300 ease-in-out transform translate-x-full;
+  @apply transition-all duration-300 opacity-0 pointer-events-none;
+  @apply transform translate-x-full;
 
   &.visible {
     @apply opacity-100 pointer-events-auto translate-x-0;
@@ -63,6 +63,15 @@
 
   &:hover {
     @apply transform scale-110 bg-primary-500 text-base-800;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    @apply bg-transparent text-base-300 transition-none;
+
+    &:hover,
+    &:active {
+      @apply bg-transparent text-base-300 transform-none;
+    }
   }
 
   @screen lg {
