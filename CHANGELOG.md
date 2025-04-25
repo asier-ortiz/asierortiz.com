@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.8.0...v1.9.0) (2025-04-25)
+
+### Features
+
+* **hero:** implement animated particles background with performance improvements ([4c75048](https://github.com/asier-ortiz/asierortiz.com/commit/4c750483c6d9a17b15c4eb66b1d545cb09ee1590))
+
 ## [1.8.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.7.3...v1.8.0) (2025-04-25)
 
 ### Features
