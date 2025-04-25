@@ -16,8 +16,10 @@ import { Icon } from 'astro-icon/components';
     const scrollToTopButton = document.getElementById('scrollToTop');
 
     function scrollToTop() {
-      scrollToTopButton.blur();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToTopButton.classList.remove('scroll-to-top');
+      void scrollToTopButton.offsetWidth;
+      scrollToTopButton.classList.add('scroll-to-top');
     }
 
     scrollToTopButton.addEventListener('click', scrollToTop);
