@@ -145,7 +145,7 @@ import navData from '@config/navData.json';
 
     let index = sections.length;
 
-    while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+    while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
 
     navLinks.forEach((link) => link.classList.remove('active-navlink'));
     if (sections[index]) {

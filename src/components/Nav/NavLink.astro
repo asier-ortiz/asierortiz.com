@@ -34,34 +34,9 @@ const sectionId = href.startsWith('/#') ? href.slice(2) : null;
   .navlink__underline-ltr {
     @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300;
   }
+
   .navlink__underline-ltr:hover,
   .active-navlink {
     @apply bg-[length:100%_2px];
   }
 </style>
-
-<script>
-  if (typeof window !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('a[data-section] span');
-
-      const highlightNavLink = () => {
-        let index = sections.length;
-
-        while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
-
-        navLinks.forEach((link) => link.classList.remove('active-navlink'));
-        if (sections[index]) {
-          const activeSection = sections[index].id;
-          document
-            .querySelectorAll(`a[data-section="${activeSection}"] span`)
-            .forEach((link) => link.classList.add('active-navlink'));
-        }
-      };
-
-      highlightNavLink();
-      window.addEventListener('scroll', highlightNavLink);
-    });
-  }
-</script>

@@ -39,3 +39,29 @@ import siteData from '@config/siteData.json.ts';
     </div>
   </div>
 </div>
+
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    const highlightNavLink = () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('[data-section] span');
+
+      let index = sections.length;
+      while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
+
+      navLinks.forEach((link) => link.classList.remove('active-navlink'));
+
+      if (sections[index]) {
+        const activeSection = sections[index].id;
+        document
+          .querySelectorAll(`[data-section="${activeSection}"] span`)
+          .forEach((link) => link.classList.add('active-navlink'));
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', highlightNavLink);
+    window.addEventListener('load', highlightNavLink);
+    window.addEventListener('scroll', highlightNavLink);
+    window.addEventListener('astro:after-swap', highlightNavLink);
+  }
+</script>

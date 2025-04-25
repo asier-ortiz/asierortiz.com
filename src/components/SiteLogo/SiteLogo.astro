@@ -2,7 +2,12 @@
 import siteData from '@config/siteData.json';
 ---
 
-<a class="primary-focus group/navlink text-xl" href="/">
+<a
+  class="primary-focus group/navlink text-xl"
+  href="/"
+  data-section="hero"
+  onclick="if (location.pathname === '/' && location.hash === '#hero') { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }"
+>
   <span class="navlink__underline-ltr inline">
     {siteData.author.name}
   </span>
@@ -11,5 +16,9 @@ import siteData from '@config/siteData.json';
 <style lang="scss">
   .navlink__underline-ltr {
     @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover/navlink:bg-[length:100%_2px];
+  }
+
+  .active-navlink {
+    @apply bg-[length:100%_2px];
   }
 </style>
