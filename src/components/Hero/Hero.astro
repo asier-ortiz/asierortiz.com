@@ -2,9 +2,12 @@
 import { Image } from 'astro:assets';
 import heroImage from '@assets/images/asier-ortiz.webp';
 import siteData from '@config/siteData.json';
+import Particles from '@components/Particles/Particles.vue';
 ---
 
 <section id="hero" class="relative flex w-full" data-aos="fade-up">
+  <Particles client:only="vue" />
+
   <div class="container grid items-center gap-10 pt-24 md:pt-36 lg:pt-44 md:grid-cols-3 md:gap-20">
     <div class="mx-auto max-w-lg md:col-span-2 md:ml-0 md:max-w-full">
       <h1 class="h1">Hi, I'm <span class="text-gradient">{siteData.author.name}</span></h1>
@@ -20,7 +23,7 @@ import siteData from '@config/siteData.json';
       </p>
     </div>
     <div class="mx-auto max-w-sm md:col-span-1 md:max-w-full">
-      <div class="aspect-square overflow-hidden rounded-full animate-glow">
+      <div class="aspect-square overflow-hidden rounded-full animate-glow relative z-10">
         <Image
           src={heroImage}
           class="w-full object-cover rounded-full"
