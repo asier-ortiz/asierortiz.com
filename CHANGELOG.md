@@ -1,3 +1,9 @@
+## [1.7.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.7.1...v1.7.2) (2025-04-25)
+
+### Bug Fixes
+
+* **ui:** force reset hover state on mobile after clicking scroll-to-top button ([3f0f64a](https://github.com/asier-ortiz/asierortiz.com/commit/3f0f64a09efa8cde3662af169da8797b8412e25e))
+
 ## [1.7.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.7.0...v1.7.1) (2025-04-25)
 
 ### Bug Fixes
