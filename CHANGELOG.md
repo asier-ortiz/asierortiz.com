@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.7.3...v1.8.0) (2025-04-25)
+
+### Features
+
+* **ui:** make scroll-to-top button background transparent on mobile to improve readability ([ca47c61](https://github.com/asier-ortiz/asierortiz.com/commit/ca47c61f015f886d2b3f889f124bfee624c717de))
+
 ## [1.7.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.7.2...v1.7.3) (2025-04-25)
 
 ### Bug Fixes
