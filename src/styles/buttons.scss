@@ -61,8 +61,21 @@
     @apply translate-x-full;
   }
 
-  &:hover {
-    @apply transform scale-110 bg-primary-500 text-base-800;
+  @media (min-width: 1024px) {
+    &:hover {
+      @apply transform scale-110 bg-primary-500 text-base-800;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    &:hover,
+    &:active {
+      @apply transform-none bg-base-800 text-base-300;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: none;
   }
 
   @media (hover: none) and (pointer: coarse) {
@@ -77,15 +90,12 @@
   @screen lg {
     @apply bottom-16 right-8;
   }
-
   @screen md {
     @apply bottom-12 right-6;
   }
-
   @screen sm {
     @apply bottom-10 right-4;
   }
-
   @screen xs {
     @apply bottom-8 right-2;
   }

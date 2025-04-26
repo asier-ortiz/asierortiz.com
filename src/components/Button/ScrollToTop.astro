@@ -11,7 +11,7 @@ import { Icon } from 'astro-icon/components';
   />
 </button>
 
-<script>
+<script is:client="load">
   document.addEventListener('DOMContentLoaded', () => {
     const scrollToTopButton = document.getElementById('scrollToTop');
 
