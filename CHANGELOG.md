@@ -1,3 +1,9 @@
+## [1.12.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.11.1...v1.12.0) (2025-04-26)
+
+### Features
+
+* **share:** transform hashtags from tags to CamelCase automatically ([7ad5964](https://github.com/asier-ortiz/asierortiz.com/commit/7ad59644dbfd74e272e650f44eb8e9ea76d1af80))
+
 ## [1.11.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.11.0...v1.11.1) (2025-04-26)
 
 ### Bug Fixes
