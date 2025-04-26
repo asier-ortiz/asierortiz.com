@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.9.0...v1.10.0) (2025-04-26)
+
+### Features
+
+* **particles:** extend effect to full page on index and optimize dynamic loading ([2396ad1](https://github.com/asier-ortiz/asierortiz.com/commit/2396ad18a73d2323c131ce86d3eb4623bd93a1a9))
+
 ## [1.9.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.8.0...v1.9.0) (2025-04-25)
 
 ### Features
