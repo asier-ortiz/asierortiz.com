@@ -1,3 +1,9 @@
+## [1.13.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.12.0...v1.13.0) (2025-04-26)
+
+### Features
+
+* **blog:** publish Navigating the Chaos post and add header image ([33d0e41](https://github.com/asier-ortiz/asierortiz.com/commit/33d0e419e6116f5199213a2f9d931838f83dfa8b))
+
 ## [1.12.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.11.1...v1.12.0) (2025-04-26)
 
 ### Features
