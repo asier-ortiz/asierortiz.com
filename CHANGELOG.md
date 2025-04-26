@@ -1,3 +1,9 @@
+## [1.11.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.10.0...v1.11.0) (2025-04-26)
+
+### Features
+
+* **particles:** extend particle effect to uses, 404, and blog pages for visual consistency ([66febb4](https://github.com/asier-ortiz/asierortiz.com/commit/66febb4954f46f4a392a189b7ab19730be7110c9))
+
 ## [1.10.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.9.0...v1.10.0) (2025-04-26)
 
 ### Features
