@@ -1,3 +1,9 @@
+## [1.13.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.0...v1.13.1) (2025-04-26)
+
+### Bug Fixes
+
+* **blog:** update closing line in Navigating the Chaos post ([d418028](https://github.com/asier-ortiz/asierortiz.com/commit/d418028ddd7a915cd9bc7a9547adabb3febb10e6))
+
 ## [1.13.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.12.0...v1.13.0) (2025-04-26)
 
 ### Features
