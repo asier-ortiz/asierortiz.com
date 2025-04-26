@@ -164,7 +164,9 @@ The tech world will continue moving fast, often in chaotic and overwhelming ways
 
 You don't have to be a superhero. You just have to be **good at what matters**, and resilient enough to build your own path.
 
-Trust in your journey. Trust in your growth. Trust that the skills you are building today will carry you further than you think.
+I'll be honest — there was a moment when I seriously thought about giving up. I felt lost, overwhelmed, and convinced I'd never be good enough. But little by little, I realized that progress isn't loud or flashy. It's quiet, steady, and often invisible — until one day, you look back and see how far you've come.
+
+Trust in your journey. Trust in your growth. Trust that the skills you are building today will carry you further than you can imagine.
 
 > 💪 You are more prepared than you think. Keep going.
 
