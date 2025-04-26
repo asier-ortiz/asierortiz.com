@@ -1,23 +1,25 @@
 <template>
-  <div id="hero-particles" class="absolute inset-0"></div>
+  <div id="page-particles" class="fixed inset-0 -z-10"></div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, onBeforeUnmount } from 'vue';
 import { tsParticles } from 'tsparticles-engine';
 import { loadStarsPreset } from 'tsparticles-preset-stars';
 
-onMounted(async () => {
+let container = null;
+
+async function initParticles() {
   await loadStarsPreset(tsParticles);
 
-  const container = await tsParticles.load('hero-particles', {
+  container = await tsParticles.load('page-particles', {
     preset: 'stars',
     fullScreen: { enable: false },
     background: { color: 'transparent' },
     style: {
-      position: 'absolute',
+      position: 'fixed',
       inset: '0',
-      zIndex: 0,
+      zIndex: -10,
     },
     particles: {
       color: {
@@ -52,23 +54,59 @@ onMounted(async () => {
 
   document.addEventListener('visibilitychange', () => {
     if (!container) return;
-
-    if (document.hidden) {
-      container.pause();
-    } else {
-      container.play();
-    }
+    if (document.hidden) container.pause();
+    else container.play();
   });
+}
+
+async function destroyParticles() {
+  if (container) {
+    await container.destroy();
+    container = null;
+  }
+}
+
+let resizeHandler;
+
+onMounted(() => {
+  const checkScreenAndManageParticles = async () => {
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+    if (isDesktop && !container) {
+      await initParticles();
+    } else if (!isDesktop && container) {
+      await destroyParticles();
+    }
+  };
+
+  checkScreenAndManageParticles();
+
+  resizeHandler = () => checkScreenAndManageParticles();
+  window.addEventListener('resize', resizeHandler);
+});
+
+onBeforeUnmount(() => {
+  if (resizeHandler) {
+    window.removeEventListener('resize', resizeHandler);
+  }
+  destroyParticles();
 });
 </script>
 
-<style scoped>
-#hero-particles,
-#hero-particles canvas {
-  z-index: 0 !important;
-  background: transparent !important;
-  position: absolute;
+<style scoped lang="scss">
+#page-particles,
+#page-particles canvas {
+  position: fixed;
   inset: 0;
+  background: transparent !important;
+  z-index: -10 !important;
   pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  #page-particles,
+  #page-particles canvas {
+    display: none;
+  }
 }
 </style>
