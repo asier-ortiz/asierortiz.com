@@ -2,10 +2,10 @@
 title: "Navigating the Chaos: Surviving and Thriving in a Rapidly Changing Tech Industry"
 description: "Explore the real challenges of building a career in software development today. This article discusses the overwhelming pace of change, the rise of hyper-specialization, and offers practical strategies for surviving and thriving in tech."
 pubDate: "2025-04-26"
-image: "/assets/blog/navigating-tech.webp"
+image: "/assets/blog/navigating-the-chaos.webp"
 tags: ["career", "software-development", "tech-industry"]
 author: "Asier Ortiz"
-draft: true
+draft: false
 ---
 
 # Navigating the Chaos: Surviving and Thriving in a Rapidly Changing Tech Industry
@@ -166,7 +166,7 @@ You don't have to be a superhero. You just have to be **good at what matters**, 
 
 Trust in your journey. Trust in your growth. Trust that the skills you are building today will carry you further than you think.
 
-> ✨ You are more prepared than you think. Keep going.
+> 💪 You are more prepared than you think. Keep going.
 
 ---
 
