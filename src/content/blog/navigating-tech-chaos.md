@@ -170,4 +170,4 @@ Trust in your journey. Trust in your growth. Trust that the skills you are build
 
 ---
 
-**Thanks for reading! Feel free to share your thoughts or experiences in the comments or reach out if you'd like to connect.**
+**Thank you for reading. You’re welcome to connect or share your feedback on social platforms.**
