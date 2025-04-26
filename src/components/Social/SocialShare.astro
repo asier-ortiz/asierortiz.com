@@ -1,5 +1,6 @@
 ---
 import SocialIcon from '@components/Social/SocialIcon.astro';
+import { generateSocialTags } from '@utils/transformTags';
 
 interface Props {
   url: string;
@@ -10,7 +11,7 @@ interface Props {
 const { url, title, tags } = Astro.props as Props;
 
 const hashtags = tags && tags.length > 0
-  ? tags.map(tag => `#${tag.replace(/\s+/g, '')}`).join(' ')
+  ? generateSocialTags(tags).map(tag => `#${tag}`).join(' ')
   : '';
 
 const twitterText = hashtags ? `${title} ${hashtags}` : title;
