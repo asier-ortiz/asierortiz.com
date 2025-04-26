@@ -1,5 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import Particles from '@components/Particles/Particles.vue';
 import siteData from '@config/siteData.json';
 import usesData from '@config/usesData.json';
 ---
@@ -8,6 +9,7 @@ import usesData from '@config/usesData.json';
   title={`${siteData.author.name} - Tools & Setup`}
   description={`Discover the tools & setup used by ${siteData.author.name}`}
 >
+  <Particles client:only="vue" />
   <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
     <header>
       <h1 class="h1 text-pretty text-gradient lg:pb-2">My Essential Tools and Setup</h1>

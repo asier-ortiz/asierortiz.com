@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
+import Particles from '@components/Particles/Particles.vue';
 import PostImage from '@/components/Media/PostImage.astro';
-import siteData from '../config/siteData.json';
+import siteData from '@config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
 
 const posts = (await getCollection('blog'))
@@ -16,6 +17,8 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
   title={`${siteData.author.name} - Blog`}
   description="Latest articles, insights, and tutorials."
 >
+  <Particles client:only="vue" />
+
   <section class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
     <header class="text-left mb-12">
       <h1 class="h1 text-pretty text-gradient pb-2">Welcome to my Blog</h1>
