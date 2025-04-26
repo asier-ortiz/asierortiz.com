@@ -1,3 +1,9 @@
+## [1.11.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.11.0...v1.11.1) (2025-04-26)
+
+### Bug Fixes
+
+* **projects:** ensure stable section height when no projects match the filter ([0e7fd2c](https://github.com/asier-ortiz/asierortiz.com/commit/0e7fd2c9409af1e1e5c276d1aa52c5bb06e3fab6))
+
 ## [1.11.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.10.0...v1.11.0) (2025-04-26)
 
 ### Features
