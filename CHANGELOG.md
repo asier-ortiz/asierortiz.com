@@ -1,3 +1,9 @@
+## [1.13.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.1...v1.13.2) (2025-04-27)
+
+### Bug Fixes
+
+* **scroll-to-top:** only show button on tablets and desktops, clean mobile styles ([57bbec9](https://github.com/asier-ortiz/asierortiz.com/commit/57bbec9286e3022a790d18d13431caa1665d82e1))
+
 ## [1.13.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.0...v1.13.1) (2025-04-26)
 
 ### Bug Fixes
