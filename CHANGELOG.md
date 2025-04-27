@@ -1,3 +1,9 @@
+## [1.14.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.14.0...v1.14.1) (2025-04-27)
+
+### Bug Fixes
+
+* **nav:** prevent TypeError when no sections are found in highlightNavLink ([ee1603e](https://github.com/asier-ortiz/asierortiz.com/commit/ee1603e81e329eed795e121b9ee8f735af80b613))
+
 ## [1.14.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.3...v1.14.0) (2025-04-27)
 
 ### Features
