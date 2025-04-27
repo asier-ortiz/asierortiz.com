@@ -1,3 +1,9 @@
+## [1.13.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.2...v1.13.3) (2025-04-27)
+
+### Bug Fixes
+
+* **ui:** limit scroll-to-top hover to xl screens and enhance button smoothness ([0afefba](https://github.com/asier-ortiz/asierortiz.com/commit/0afefba84626add54aa7b8f268fa4e357dfcfee0))
+
 ## [1.13.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.1...v1.13.2) (2025-04-27)
 
 ### Bug Fixes
