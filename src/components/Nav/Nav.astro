@@ -46,6 +46,8 @@ import siteData from '@config/siteData.json.ts';
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('[data-section] span');
 
+      if (!sections.length) return;
+
       let index = sections.length;
       while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
 

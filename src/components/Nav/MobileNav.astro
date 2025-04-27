@@ -143,6 +143,8 @@ import navData from '@config/navData.json';
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('a[data-section] span');
 
+    if (!sections.length) return;
+
     let index = sections.length;
 
     while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
