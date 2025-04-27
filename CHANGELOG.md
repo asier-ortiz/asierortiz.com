@@ -1,3 +1,9 @@
+## [1.14.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.3...v1.14.0) (2025-04-27)
+
+### Features
+
+* **blog:** update blog header for a more personalized and professional introduction ([a3761d0](https://github.com/asier-ortiz/asierortiz.com/commit/a3761d0afd88b648b4033f644ddfe299a741c4fd))
+
 ## [1.13.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.13.2...v1.13.3) (2025-04-27)
 
 ### Bug Fixes
