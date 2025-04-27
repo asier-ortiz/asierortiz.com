@@ -50,8 +50,8 @@
 .scroll-to-top {
   @apply fixed bottom-12 right-6 w-12 h-12 bg-base-800 text-base-300 border-2 border-primary-600 rounded-full cursor-pointer;
   @apply flex items-center justify-center;
-  @apply transition-all duration-300 opacity-0 pointer-events-none;
-  @apply transform translate-x-full;
+  @apply transition-all duration-500 ease-in-out opacity-0 pointer-events-none transform translate-x-full;
+  @apply shadow-md;
 
   &.visible {
     @apply opacity-100 pointer-events-auto translate-x-0;
@@ -61,26 +61,23 @@
     @apply translate-x-full;
   }
 
-  @media (min-width: 1024px) {
-    &:hover {
-      @apply transform scale-110 bg-primary-500 text-base-800;
-    }
+  @media (max-width: 639px) {
+    display: none;
   }
 
-  @media (max-width: 767px) {
-    display: none;
+  @screen md {
+    @apply bottom-12 right-6;
   }
 
   @screen lg {
     @apply bottom-16 right-8;
   }
-  @screen md {
-    @apply bottom-12 right-6;
-  }
-  @screen sm {
-    @apply bottom-10 right-4;
-  }
-  @screen xs {
-    @apply bottom-8 right-2;
+
+  @screen xl {
+    @apply bottom-20 right-10;
+
+    &:hover {
+      @apply transform scale-110 bg-primary-500 text-base-800 shadow-lg;
+    }
   }
 }
