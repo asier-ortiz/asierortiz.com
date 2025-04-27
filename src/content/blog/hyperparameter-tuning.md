@@ -5,7 +5,7 @@ pubDate: "2025-04-19"
 image: "/assets/blog/hyperparameter-tuning.webp"
 tags: ["machine-learning", "scikit-learn"]
 author: "Asier Ortiz"
-draft: false
+draft: true
 ---
 
 [//]: # (# Mastering Hyperparameter Tuning: Boost Your Machine Learning Models)
