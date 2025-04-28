@@ -1,3 +1,9 @@
+## [1.15.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.15.0...v1.15.1) (2025-04-28)
+
+### Bug Fixes
+
+* **blog:** remove duplicate rendering of Navigating the Chaos title ([bee658d](https://github.com/asier-ortiz/asierortiz.com/commit/bee658d98efb5af99b7fe81f759f398a1ff7e514))
+
 ## [1.15.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.14.1...v1.15.0) (2025-04-28)
 
 ### Features
