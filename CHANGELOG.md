@@ -1,3 +1,9 @@
+## [1.17.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.16.0...v1.17.0) (2025-04-28)
+
+### Features
+
+* **blog-tags:** allow multi-line wrapping and hide scrollbar for cleaner layout ([407dc36](https://github.com/asier-ortiz/asierortiz.com/commit/407dc367b85fb54ea8b0ab9186d067f95be6c001))
+
 ## [1.16.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.15.1...v1.16.0) (2025-04-28)
 
 ### Features
