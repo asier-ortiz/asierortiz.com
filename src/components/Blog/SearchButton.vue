@@ -67,12 +67,6 @@ const hasPosts = computed(() => props.posts.length > 0);
         ({{ isMac ? 'Cmd + K' : 'Ctrl + K' }})
       </span>
 
-      <!-- Tooltip displayed on mobile when hovering the button -->
-      <div
-        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-base-700 text-white text-[0.65rem] font-medium px-2 py-1 rounded-md shadow-md opacity-0 group-hover:opacity-90 transition-opacity duration-300 delay-150 pointer-events-none whitespace-nowrap text-center max-w-xs break-words block sm:hidden"
-      >
-        {{ isMac ? 'Cmd + K' : 'Ctrl + K' }}
-      </div>
     </button>
 
     <SearchModal v-if="isOpen" :posts="posts" @close="closeModal" />
