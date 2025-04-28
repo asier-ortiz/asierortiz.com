@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.14.1...v1.15.0) (2025-04-28)
+
+### Features
+
+* **blog:** add searchable posts modal with keyboard navigation and shortcut ([b0b79e9](https://github.com/asier-ortiz/asierortiz.com/commit/b0b79e99bf785011be002e0853a677b26bba52f0))
+
 ## [1.14.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.14.0...v1.14.1) (2025-04-27)
 
 ### Bug Fixes
