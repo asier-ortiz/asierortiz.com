@@ -138,23 +138,23 @@ watch(selectedIndex, (newIndex) => {
         <p v-else-if="filteredPosts.length === 0" class="text-center text-base-400 text-sm">
           No results found.
         </p>
-        <div v-else>
+        <template v-else>
           <a
             v-for="(post, index) in filteredPosts"
             :key="post.url"
             :href="post.url"
             :data-selected="selectedIndex !== -1 && index === selectedIndex ? 'true' : 'false'"
             :class="[
-              'block p-3 bg-base-800 rounded-lg transition-colors duration-200',
+              'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out',
               {
                 'bg-primary-500 text-white': selectedIndex !== -1 && index === selectedIndex,
-                'hover:bg-primary-500': !(selectedIndex !== -1 && index === selectedIndex)
+                'hover:bg-primary-500 hover:text-white': !(selectedIndex !== -1 && index === selectedIndex)
               }
             ]"
           >
             {{ post.title }}
           </a>
-        </div>
+        </template>
       </div>
     </div>
   </div>
