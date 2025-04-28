@@ -23,7 +23,7 @@ async function initParticles() {
     },
     particles: {
       color: {
-        value: ["#ffffff", "#93c5fd", "#d1d5db", "#fef9c3"],
+        value: ['#ffffff', '#93c5fd', '#d1d5db', '#fef9c3'],
       },
       number: {
         value: 30,
@@ -34,10 +34,10 @@ async function initParticles() {
       move: {
         enable: true,
         speed: 0.5,
-        direction: "top",
+        direction: 'top',
         straight: false,
         outModes: {
-          default: "out",
+          default: 'out',
         },
       },
       opacity: {

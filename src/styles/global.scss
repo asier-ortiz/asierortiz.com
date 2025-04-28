@@ -120,6 +120,7 @@
 
 @layer utilities {
   @import 'aos';
+  @import 'animations';
 
   .group:hover .underline-ltr {
     background-size: 100% 2px;

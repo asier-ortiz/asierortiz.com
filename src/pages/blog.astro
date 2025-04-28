@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Particles from '@components/Particles/Particles.vue';
 import PostImage from '@/components/Media/PostImage.astro';
+import SearchButton from '@components/Blog/SearchButton.vue';
 import siteData from '@config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
 
@@ -27,10 +28,21 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
       </p>
     </header>
 
-    <!-- Tag Filter Buttons -->
+    <!-- Search Button & Tag Filter Buttons -->
     {
       allTags.length > 0 && (
-        <div id="tag-filters" class="flex flex-wrap gap-2 mb-12">
+        <div id="tag-filters" class="flex flex-wrap gap-2 mb-12 items-center">
+
+          <SearchButton
+            client:only="vue"
+            posts={
+              posts.map((post) => ({
+                title: post.data.title,
+                url: `/blog/${post.slug}/`
+              }))
+            }
+          />
+
           <button
             type="button"
             class="filter-btn bg-base-800 hover:bg-primary-500 text-xs text-primary-400 hover:text-white font-medium py-1 px-3 rounded-full transition"
@@ -38,6 +50,7 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
           >
             Show All
           </button>
+
           {allTags.map((tag) => (
             <button
               type="button"
