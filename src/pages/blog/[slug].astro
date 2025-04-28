@@ -31,7 +31,10 @@ const readingDuration = getReadingTime(post.body);
   <article class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
     <header class="text-left mb-12">
       <h1 class="h1 text-pretty text-gradient pb-2">{post.data.title}</h1>
-      <div class="flex flex-wrap items-center gap-2 text-base-400 text-sm mt-4">
+
+      {post.data.description && <p class="mt-4 text-base text-base-400">{post.data.description}</p>}
+
+      <div class="flex flex-wrap items-center gap-2 text-base-500 text-xs mt-6">
         <span>
           {
             new Date(post.data.pubDate).toLocaleDateString('en-US', {
@@ -61,11 +64,7 @@ const readingDuration = getReadingTime(post.body);
     </div>
 
     <div class="mb-16">
-      <PostImage
-        src={post.data.image}
-        alt={post.data.title}
-        className="rounded-lg shadow"
-      />
+      <PostImage src={post.data.image} alt={post.data.title} className="rounded-lg shadow" />
       <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
 
