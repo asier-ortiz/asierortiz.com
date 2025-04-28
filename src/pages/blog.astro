@@ -31,9 +31,9 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
     <!-- Search Button & Tag Filter Buttons -->
     {
       allTags.length > 0 && (
-        <div id="tag-filters" class="flex flex-wrap gap-2 mb-12 items-center">
+        <div id="tag-filters" class="flex flex-wrap gap-2 mb-12 items-center max-h-[6rem] overflow-y-auto hide-scrollbar">
 
-          <SearchButton
+        <SearchButton
             client:only="vue"
             posts={
               posts.map((post) => ({
