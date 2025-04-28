@@ -8,8 +8,6 @@ author: "Asier Ortiz"
 draft: false
 ---
 
-# Navigating the Chaos: Surviving and Thriving in a Rapidly Changing Tech Industry
-
 The world of software development is evolving at an overwhelming pace. New frameworks, languages, tools, and paradigms emerge faster than most professionals can keep up with. In a sector that demands you to be a fullstack expert, cloud architect, data scientist, DevOps engineer, and AI specialist all at once, it's easy to feel lost and inadequate.
 
 This article is not a tutorial. It's a reflection, a survival guide, and a realistic roadmap for developers who are passionate about technology but feel crushed by the ever-growing demands of the industry.
