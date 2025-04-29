@@ -24,6 +24,13 @@
     @apply bg-secondary-400;
     color: #000000;
   }
+
+  mark {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: inherit;
+    padding: 0 0.15em;
+    border-radius: 0.25rem;
+  }
 }
 
 @layer components {
@@ -124,6 +131,16 @@
     color: #000000;
     -webkit-background-clip: initial;
     background-clip: initial;
+  }
+
+  [data-selected="true"] mark {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: inherit;
+  }
+
+  [data-selected="true"] p {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.2s ease-in-out;
   }
 }
 

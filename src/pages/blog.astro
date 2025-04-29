@@ -37,7 +37,8 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])
             client:only="vue"
             posts={
               posts.map((post) => ({
-                title: post.data.title,
+                title: post.data.title  || '',
+                description: post.data.description || '',
                 url: `/blog/${post.slug}/`
               }))
             }
