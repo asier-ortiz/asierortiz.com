@@ -1,3 +1,9 @@
+## [1.18.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.17.0...v1.18.0) (2025-04-29)
+
+### Features
+
+* **search-modal:** add Fuse.js search, highlight matches, and smooth fade-out animation ([161993d](https://github.com/asier-ortiz/asierortiz.com/commit/161993d6811cc02a761e55a56fdb723b823017e7))
+
 ## [1.17.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.16.0...v1.17.0) (2025-04-28)
 
 ### Features
