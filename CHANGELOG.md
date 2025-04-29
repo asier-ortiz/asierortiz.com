@@ -1,3 +1,9 @@
+## [1.19.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.18.0...v1.19.0) (2025-04-29)
+
+### Features
+
+* **ui:** improve SearchModal input focus animation and layout behavior ([2bc4008](https://github.com/asier-ortiz/asierortiz.com/commit/2bc4008cba00125646b5099d9a3c3533bbc6bc98))
+
 ## [1.18.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.17.0...v1.18.0) (2025-04-29)
 
 ### Features
