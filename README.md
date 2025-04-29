@@ -30,6 +30,7 @@ It features:
 
 - [Astro](https://astro.build/)
 - [Vue 3](https://vuejs.org/) (for interactive islands)
+- [Fuse.js](https://fusejs.io/) (for full-text fuzzy search within the blog)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Netlify](https://www.netlify.com/) (Continuous Deployment is set up through GitHub integration)
