@@ -1,3 +1,9 @@
+## [1.20.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.19.1...v1.20.0) (2025-04-30)
+
+### Features
+
+* add scroll lock composable to prevent body scroll and touchmove on modal open ([516c476](https://github.com/asier-ortiz/asierortiz.com/commit/516c4766ef590b20bc341d47206c36544860d706))
+
 ## [1.19.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.19.0...v1.19.1) (2025-04-30)
 
 ### Bug Fixes
