@@ -216,8 +216,8 @@ const highlightMatch = (post, field) => {
             :class="[
             'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out',
             {
-              'bg-primary-500 text-white': selectedIndex !== -1 && index === selectedIndex,
-              'hover:bg-primary-500 hover:text-white': !(
+              'bg-primary-600 text-white': selectedIndex !== -1 && index === selectedIndex,
+              'hover:bg-primary-700 hover:text-white': !(
                 selectedIndex !== -1 && index === selectedIndex
               ),
             },
