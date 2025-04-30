@@ -1,3 +1,9 @@
+## [1.21.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.20.0...v1.21.0) (2025-04-30)
+
+### Features
+
+* apply consistent date formatting with relative fallback across blog ([2e8e62a](https://github.com/asier-ortiz/asierortiz.com/commit/2e8e62a932a5a02c9fe1f24420b73fc3aa1dcfda))
+
 ## [1.20.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.19.1...v1.20.0) (2025-04-30)
 
 ### Features
