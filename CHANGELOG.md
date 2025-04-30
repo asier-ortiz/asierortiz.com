@@ -1,3 +1,9 @@
+## [1.19.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.19.0...v1.19.1) (2025-04-30)
+
+### Bug Fixes
+
+* **ui:** adjust search icon viewBox to improve visual centering ([5f5ce8b](https://github.com/asier-ortiz/asierortiz.com/commit/5f5ce8b1aa0917ff482ebf7f1d89a2494d41504e))
+
 ## [1.19.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.18.0...v1.19.0) (2025-04-29)
 
 ### Features
