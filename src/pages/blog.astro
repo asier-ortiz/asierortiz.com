@@ -6,6 +6,7 @@ import PostImage from '@/components/Media/PostImage.astro';
 import SearchButton from '@components/Blog/SearchButton.vue';
 import siteData from '@config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
+import { formatDate } from '@/utils/formatDate';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -35,15 +36,17 @@ const allTags = Array
       allTags.length > 0 && (
         <div id="tag-filters" class="flex flex-wrap gap-2 mb-12 items-center max-h-[6rem] overflow-y-auto hide-scrollbar">
 
-        <SearchButton
+          <SearchButton
             client:only="vue"
             posts={
               posts.map((post) => ({
-                title: post.data.title  || '',
+                title: post.data.title || '',
                 description: post.data.description || '',
-                url: `/blog/${post.slug}/`
+                url: `/blog/${post.slug}/`,
+                pubDate: post.data.pubDate,
               }))
             }
+            language={siteData.language}
           />
 
           <button
@@ -90,11 +93,7 @@ const allTags = Array
 
                 <div class="flex flex-wrap items-center gap-2 text-base-400 text-sm mb-4">
                   <span>
-                    {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                    {formatDate(post.data.pubDate, siteData.language, { relative: true, relativeLimitDays: 7 })}
                   </span>
                   <span>·</span>
                   <span>{readingDuration}</span>

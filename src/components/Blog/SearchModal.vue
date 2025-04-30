@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import Search from '@components/Icons/Search.vue';
+import { formatDate } from '@utils/formatDate';
 import { useScrollLock } from '@composables/useScrollLock';
 import Fuse from 'fuse.js';
 
@@ -8,6 +9,10 @@ const props = defineProps({
   posts: {
     type: Array,
     required: true,
+  },
+  language: {
+    type: String,
+    default: 'en-US',
   },
 });
 
@@ -28,6 +33,7 @@ onMounted(() => {
     title: post.title || 'Untitled Post',
     description: post.description || '',
     url: post.url || '#',
+    pubDate: post.pubDate || null,
   }));
 
   fuse.value = new Fuse(normalizedPosts.value, {
@@ -229,6 +235,9 @@ const highlightMatch = (post, field) => {
             <div>
               <strong v-html="highlightMatch(post, 'title')"></strong>
               <p class="text-base-400 text-sm mt-1" v-html="highlightMatch(post, 'description')"></p>
+              <p v-if="post.pubDate" class="text-base-500 text-xs mt-1">
+                {{ formatDate(post.pubDate, props.language) }}
+              </p>
             </div>
           </a>
         </template>

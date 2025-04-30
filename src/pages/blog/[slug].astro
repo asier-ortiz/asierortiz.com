@@ -7,6 +7,7 @@ import PostImage from '@/components/Media/PostImage.astro';
 import siteData from '@/config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
 import ZoomImages from '@/components/Media/ZoomImages.vue';
+import { formatDate } from '@/utils/formatDate';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -35,14 +36,8 @@ const readingDuration = getReadingTime(post.body);
       {post.data.description && <p class="mt-4 text-base text-base-400">{post.data.description}</p>}
 
       <div class="flex flex-wrap items-center gap-2 text-base-500 text-xs mt-6">
-        <span>
-          {
-            new Date(post.data.pubDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })
-          }
+        <span title={formatDate(post.data.pubDate, siteData.language)}>
+          {formatDate(post.data.pubDate, siteData.language, { relative: true, relativeLimitDays: 7 })}
         </span>
         <span>·</span>
         <span>{readingDuration}</span>

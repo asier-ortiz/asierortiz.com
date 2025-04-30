@@ -3,11 +3,11 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import SearchModal from '@components/Blog/SearchModal.vue';
 import Search from '@components/Icons/Search.vue';
 
-
 const props = defineProps({
-  posts: {
-    type: Array,
-    required: true
+  posts: Array,
+  language: {
+    type: String,
+    default: 'en-US'
   }
 });
 
@@ -69,6 +69,6 @@ const hasPosts = computed(() => props.posts.length > 0);
 
     </button>
 
-    <SearchModal v-if="isOpen" :posts="posts" @close="closeModal" />
+    <SearchModal v-if="isOpen" :posts="posts" :language="language" @close="closeModal" />
   </div>
 </template>
