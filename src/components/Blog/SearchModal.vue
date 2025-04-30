@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import Search from '@components/Icons/Search.vue';
+import { useScrollLock } from '@composables/useScrollLock';
 import Fuse from 'fuse.js';
 
 const props = defineProps({
@@ -19,6 +20,8 @@ const fuse = ref(null);
 const normalizedPosts = ref([]);
 
 const searchInput = ref(null);
+
+useScrollLock();
 
 onMounted(() => {
   normalizedPosts.value = props.posts.map((post) => ({
