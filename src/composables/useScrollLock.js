@@ -3,7 +3,15 @@ import { onMounted, onBeforeUnmount } from 'vue';
 // Ref. https://vuejs.org/guide/reusability/composables
 
 export function useScrollLock(lock = true) {
-  const preventTouch = (e) => e.preventDefault();
+  const preventTouch = (e) => {
+    const path = e.composedPath?.() || [];
+    const isInsideScrollable = path.some((el) =>
+      el instanceof HTMLElement && el.id === 'results-container'
+    );
+    if (!isInsideScrollable) {
+      e.preventDefault();
+    }
+  };
 
   onMounted(() => {
     if (lock) {
