@@ -1,3 +1,9 @@
+## [1.21.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.0...v1.21.1) (2025-05-01)
+
+### Bug Fixes
+
+* **scroll:** allow vertical scrolling inside modal on mobile devices ([d693936](https://github.com/asier-ortiz/asierortiz.com/commit/d693936b4903cc0d9e5bd36f54c9df8cdb8dc485))
+
 ## [1.21.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.20.0...v1.21.0) (2025-04-30)
 
 ### Features
