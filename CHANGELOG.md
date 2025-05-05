@@ -1,3 +1,9 @@
+## [1.21.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.1...v1.21.2) (2025-05-05)
+
+### Bug Fixes
+
+* **github actions post:** correct typo in diagram image ([b5ef87a](https://github.com/asier-ortiz/asierortiz.com/commit/b5ef87ac585dc59bacda80108f3b4eca2c4d48ef))
+
 ## [1.21.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.0...v1.21.1) (2025-05-01)
 
 ### Bug Fixes
