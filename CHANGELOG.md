@@ -1,3 +1,9 @@
+## [1.21.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.2...v1.21.3) (2025-05-11)
+
+### Bug Fixes
+
+* **ui:** prevent layout shift on modal open using scrollbar-gutter ([3f12236](https://github.com/asier-ortiz/asierortiz.com/commit/3f12236c19603d5dd152eacefbf0705908e36cbb))
+
 ## [1.21.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.1...v1.21.2) (2025-05-05)
 
 ### Bug Fixes
