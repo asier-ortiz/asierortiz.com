@@ -55,7 +55,7 @@ const hasPosts = computed(() => props.posts.length > 0);
     <button
       type="button"
       @click="openModal"
-      class="filter-btn bg-primary-500 hover:bg-primary-400 text-xs text-white font-medium py-1 px-3 rounded-full transition flex items-center gap-2 relative"
+      class="filter-btn bg-primary-500 hover:bg-primary-400 text-xs text-black font-medium py-1 px-3 rounded-full transition flex items-center gap-2 relative"
       aria-label="Search Articles"
     >
       <Search class="h-4 w-4" />
