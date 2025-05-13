@@ -8,6 +8,7 @@ import siteData from '@/config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
 import ZoomImages from '@/components/Media/ZoomImages.vue';
 import { formatDate } from '@/utils/formatDate';
+import ReadingProgress from '@/components/Blog/ReadingProgress.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -30,6 +31,8 @@ const readingDuration = getReadingTime(post.body);
   isPost={true}
 >
   <article class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
+    <ReadingProgress />
+
     <header class="text-left mb-12">
       <h1 class="h1 text-pretty text-gradient pb-2">{post.data.title}</h1>
 

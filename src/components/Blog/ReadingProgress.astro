@@ -1,0 +1,29 @@
+---
+---
+
+<div id="reading-progress" class="fixed left-0 z-30 h-[2px] w-0 bg-gradient-to-r from-primary-600 to-primary-600 transition-[width] duration-150"></div>
+
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    const progressBar = document.getElementById('reading-progress');
+    const nav = document.getElementById('nav__container');
+
+    const updateReadingProgress = () => {
+      const article = document.querySelector('article');
+      if (!progressBar || !article || !nav) return;
+
+      const navBottom = nav.offsetTop + nav.offsetHeight;
+      progressBar.style.top = `${navBottom}px`;
+
+      const totalHeight = article.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY - article.offsetTop;
+      const percentage = Math.max(0, Math.min((scrolled / totalHeight) * 100, 100));
+      progressBar.style.width = `${percentage}%`;
+    };
+
+    window.addEventListener('scroll', updateReadingProgress);
+    window.addEventListener('resize', updateReadingProgress);
+    window.addEventListener('load', updateReadingProgress);
+    window.addEventListener('astro:after-swap', updateReadingProgress);
+  }
+</script>
