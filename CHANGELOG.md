@@ -1,3 +1,9 @@
+## [1.22.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.3...v1.22.0) (2025-05-13)
+
+### Features
+
+* **blog:** add dynamic reading progress bar below navbar with scroll direction detection ([36bc15b](https://github.com/asier-ortiz/asierortiz.com/commit/36bc15b96a5754d065a8072d913edea550840390))
+
 ## [1.21.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.2...v1.21.3) (2025-05-11)
 
 ### Bug Fixes
