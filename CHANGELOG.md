@@ -1,3 +1,9 @@
+## [1.23.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.22.0...v1.23.0) (2025-05-17)
+
+### Features
+
+* **SearchButton.vue:** improve keyboard shortcut display and accessibility ([073e578](https://github.com/asier-ortiz/asierortiz.com/commit/073e578c9a0977256f50859a8f9117f5dfeb4c38))
+
 ## [1.22.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.21.3...v1.22.0) (2025-05-13)
 
 ### Features
