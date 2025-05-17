@@ -82,7 +82,7 @@ const siteData: SiteDataProps = {
     },
     {
       platform: 'email',
-      link: 'mailto:asierortiz@outlook.es',
+      link: 'mailto:hello@asierortiz.com',
     },
     {
       platform: 'rss',
@@ -92,7 +92,7 @@ const siteData: SiteDataProps = {
 
   author: {
     name: 'Asier Ortiz',
-    email: 'asierortiz@outlook.es',
+    email: 'hello@asierortiz.com',
     twitter: 'asierortiz',
   },
 
