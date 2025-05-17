@@ -7,8 +7,8 @@ const props = defineProps({
   posts: Array,
   language: {
     type: String,
-    default: 'en-US'
-  }
+    default: 'en-US',
+  },
 });
 
 const isOpen = ref(false);
@@ -56,15 +56,25 @@ const hasPosts = computed(() => props.posts.length > 0);
       type="button"
       @click="openModal"
       class="filter-btn bg-primary-500 hover:bg-primary-400 text-xs text-black font-medium py-1 px-3 rounded-full transition flex items-center gap-2 relative"
-      aria-label="Search Articles"
+      :aria-label="`Search Articles (${isMac ? 'Command + K' : 'Control + K'})`"
     >
       <Search class="h-4 w-4" />
 
       <span class="hidden sm:inline">Search</span>
 
-      <!-- Keyboard shortcut displayed next to "Search" on desktop -->
-      <span class="hidden sm:inline opacity-70 text-[0.65rem]">
-        ({{ isMac ? 'Cmd + K' : 'Ctrl + K' }})
+      <span class="hidden sm:flex items-center gap-1 opacity-70 text-[0.65rem]">
+        <span
+          class="px-1.5 py-0.5 bg-zinc-700 border border-white/30 rounded text-xs font-mono leading-none text-white"
+          aria-hidden="true"
+        >
+          {{ isMac ? '⌘' : 'Ctrl' }}
+        </span>
+        <span
+          class="px-1.5 py-0.5 bg-zinc-700 border border-white/30 rounded text-xs font-mono leading-none text-white"
+          aria-hidden="true"
+        >
+          K
+        </span>
       </span>
 
     </button>
