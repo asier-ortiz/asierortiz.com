@@ -101,7 +101,7 @@ This project is licensed under the [MIT License](./LICENSE).
 
 If you have any questions, suggestions, or just want to say hello:
 
-- 📧 [asierortiz@outlook.es](mailto:asierortiz@outlook.es)
+- 📧 [hello@asierortiz.com](mailto:hello@asierortiz.com)
 
 ---
 
