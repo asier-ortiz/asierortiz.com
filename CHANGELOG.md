@@ -1,3 +1,9 @@
+## [1.24.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.23.0...v1.24.0) (2025-05-18)
+
+### Features
+
+* **blog:** publish hyperparameter tuning post for RSS test ([7121649](https://github.com/asier-ortiz/asierortiz.com/commit/7121649b7a1facebe5b683bd4df9608ffb8e4313))
+
 ## [1.23.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.22.0...v1.23.0) (2025-05-17)
 
 ### Features
