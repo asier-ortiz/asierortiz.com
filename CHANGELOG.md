@@ -1,3 +1,9 @@
+## [1.24.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.24.0...v1.24.1) (2025-05-18)
+
+### Reverts
+
+* Revert "feat(blog): publish hyperparameter tuning post for RSS test" ([62eb123](https://github.com/asier-ortiz/asierortiz.com/commit/62eb123cbc12c468a04a0a40ed32ae7846a054a6))
+
 ## [1.24.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.23.0...v1.24.0) (2025-05-18)
 
 ### Features
