@@ -1,3 +1,9 @@
+## [1.25.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.24.1...v1.25.0) (2025-05-19)
+
+### Features
+
+* **newsletter:** integrate subscribe button with pending external setup ([79046ef](https://github.com/asier-ortiz/asierortiz.com/commit/79046efd38416fca2418431935a403bceaacff47))
+
 ## [1.24.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.24.0...v1.24.1) (2025-05-18)
 
 ### Reverts
