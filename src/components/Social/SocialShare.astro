@@ -15,6 +15,7 @@ const hashtags = tags && tags.length > 0
   : '';
 
 const twitterText = hashtags ? `${title} ${hashtags}` : title;
+const threadsText = `${title}\n\n${url}`;
 
 const shareLinks = [
   {
@@ -28,6 +29,10 @@ const shareLinks = [
   {
     platform: 'facebook',
     link: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+  },
+  {
+    platform: 'threads',
+    link: `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`,
   },
 ];
 ---
