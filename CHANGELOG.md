@@ -1,3 +1,9 @@
+## [1.25.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.25.0...v1.25.1) (2025-05-19)
+
+### Bug Fixes
+
+* **newsletter:** remove extra margin from subscribe button to improve text flow ([c841f2d](https://github.com/asier-ortiz/asierortiz.com/commit/c841f2d6dd56ae5397e3de84a37c89f95419486b))
+
 ## [1.25.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.24.1...v1.25.0) (2025-05-19)
 
 ### Features
