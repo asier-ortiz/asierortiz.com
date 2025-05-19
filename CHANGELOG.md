@@ -1,3 +1,9 @@
+## [1.26.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.25.1...v1.26.0) (2025-05-19)
+
+### Features
+
+* **social-share:** add Threads share link ([e987941](https://github.com/asier-ortiz/asierortiz.com/commit/e987941eca68b4b9ae5f813751ce698d83bd98ea))
+
 ## [1.25.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.25.0...v1.25.1) (2025-05-19)
 
 ### Bug Fixes
