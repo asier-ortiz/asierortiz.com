@@ -42,6 +42,12 @@
   @apply hover:text-primary-300 hover:border-primary-600;
 }
 
+.button--link {
+  @apply text-primary-300 hover:text-primary-200 underline decoration-dashed underline-offset-4 decoration-1;
+  @apply font-medium bg-transparent border-none p-0 transition-colors duration-200;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-900;
+}
+
 .button--active {
   @apply bg-primary-500 text-white;
   @apply border-primary-500;

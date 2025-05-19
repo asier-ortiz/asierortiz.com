@@ -7,6 +7,7 @@ import SearchButton from '@components/Blog/SearchButton.vue';
 import siteData from '@config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
 import { formatDate } from '@/utils/formatDate';
+import Button from '@/components/Button/Button.astro';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -28,6 +29,17 @@ const allTags = Array
       <h1 class="h1 text-pretty text-gradient pb-2">Exploring Full Stack Development, AI, and Beyond</h1>
       <p class="description mt-6 text-pretty">
         Thoughts, tutorials, and projects on web development, machine learning, and tech industry trends.
+        <Button
+          variant="link"
+          href={siteData.newsletter.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={siteData.newsletter.label}
+          class="ml-1 inline"
+        >
+          Subscribe now
+        </Button>
+        to receive new content directly in your inbox.
       </p>
     </header>
 

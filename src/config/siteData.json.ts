@@ -49,6 +49,10 @@ export interface SiteDataProps {
     title: string;
     description: string;
   };
+  newsletter: {
+    url: string;
+    label?: string;
+  };
   language: string;
 }
 
@@ -105,6 +109,12 @@ const siteData: SiteDataProps = {
     title: 'Asier Ortiz - Blog',
     description: 'Latest posts about AI, Machine Learning and Web Development',
   },
+
+  newsletter: {
+    url: '',
+    label: 'Subscribe to Asier Ortiz’s newsletter',
+  },
+
   language: 'en-us',
 };
 
