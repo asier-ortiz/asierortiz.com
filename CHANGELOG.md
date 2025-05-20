@@ -1,3 +1,9 @@
+## [1.29.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.29.0...v1.29.1) (2025-05-20)
+
+### Bug Fixes
+
+* **MobileNav.astro:** use mailto link for contact button in mobile nav ([20b1927](https://github.com/asier-ortiz/asierortiz.com/commit/20b19278e3167debebf5a7e4f62e07569917b776))
+
 ## [1.29.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.3...v1.29.0) (2025-05-20)
 
 ### Features
