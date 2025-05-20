@@ -21,7 +21,7 @@ It features:
 - **Background**: Overview of my experience, skills, and technologies that I use.
 - **Projects**: Selected portfolio projects with detailed descriptions and repository links.
 - **Blog**: A space for articles about web development, machine learning, and more.
-- **Newsletter Subscription** *(Work in Progress)*: A feature to allow visitors to subscribe easily via Netlify Forms, with future integration to external email marketing services.
+- **Newsletter Subscription**: Visitors can subscribe via [Buttondown](https://buttondown.com/asierortiz/).
 - **Contact**: Includes links to my email and social media profiles for easy connection.
 
 ---
