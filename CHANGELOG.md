@@ -1,3 +1,9 @@
+## [1.27.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.27.0...v1.27.1) (2025-05-20)
+
+### Bug Fixes
+
+* **rss:** add missing XML namespaces for media and content modules ([ee84b6c](https://github.com/asier-ortiz/asierortiz.com/commit/ee84b6c5cb725c74fc76551754605d3634a73a4e))
+
 ## [1.27.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.26.0...v1.27.0) (2025-05-20)
 
 ### Features
