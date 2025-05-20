@@ -1,3 +1,9 @@
+## [1.28.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.2...v1.28.3) (2025-05-20)
+
+### Bug Fixes
+
+* **rss:** temporarily change post slug to force Buttondown to re-detect feed update ([f2a2231](https://github.com/asier-ortiz/asierortiz.com/commit/f2a2231c903cd15d9ebcfadbce1989bcd3a04f71))
+
 ## [1.28.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.1...v1.28.2) (2025-05-20)
 
 ### Bug Fixes
