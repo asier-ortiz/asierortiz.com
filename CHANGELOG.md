@@ -1,3 +1,9 @@
+## [1.28.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.0...v1.28.1) (2025-05-20)
+
+### Bug Fixes
+
+* **feed:** normalize site URLs to prevent double slashes in RSS and JSON feeds ([98bbab2](https://github.com/asier-ortiz/asierortiz.com/commit/98bbab208eb5abb7805d34fb576eea321b234d20))
+
 ## [1.28.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.27.1...v1.28.0) (2025-05-20)
 
 ### Features
