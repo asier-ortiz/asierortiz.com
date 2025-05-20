@@ -1,3 +1,9 @@
+## [1.28.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.27.1...v1.28.0) (2025-05-20)
+
+### Features
+
+* **rss:** include channel and item images with media and content support ([c4bd04b](https://github.com/asier-ortiz/asierortiz.com/commit/c4bd04b26cf4c249998a743ea9649cb272768725))
+
 ## [1.27.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.27.0...v1.27.1) (2025-05-20)
 
 ### Bug Fixes
