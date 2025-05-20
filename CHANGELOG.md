@@ -1,3 +1,9 @@
+## [1.29.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.3...v1.29.0) (2025-05-20)
+
+### Features
+
+* **config:** enable functional newsletter link by setting Buttondown URL ([77c1a39](https://github.com/asier-ortiz/asierortiz.com/commit/77c1a395e36aaf82eb12858f5f5823573674f48c))
+
 ## [1.28.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.2...v1.28.3) (2025-05-20)
 
 ### Bug Fixes
