@@ -10,7 +10,8 @@ export async function GET(context) {
     description: siteData.rss.description,
     site: context.site,
     xmlns: {
-      media: "https://search.yahoo.com/mrss/",
+      media: "http://search.yahoo.com/mrss/",
+      content: "http://purl.org/rss/1.0/modules/content/",
     },
     customData: `
       <language>${siteData.language}</language>
