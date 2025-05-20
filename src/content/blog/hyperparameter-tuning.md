@@ -1,7 +1,7 @@
 ---
 title: "Mastering Hyperparameter Tuning: Boost Your Machine Learning Models"
 description: "A complete guide to hyperparameter optimization for classical models like SVMs, Random Forests, and Gradient Boosting. Learn Grid Search, Random Search, Bayesian Optimization, and practical tips."
-pubDate: "2025-05-21"
+pubDate: "2025-05-22"
 image: "/assets/blog/hyperparameter-tuning.webp"
 tags: ["machine-learning", "scikit-learn"]
 author: "Asier Ortiz"
