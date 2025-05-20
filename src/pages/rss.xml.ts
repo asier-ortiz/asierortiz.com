@@ -16,6 +16,11 @@ export async function GET(context) {
     customData: `
       <language>${siteData.language}</language>
       <copyright>© ${new Date().getFullYear()} ${siteData.author.name}</copyright>
+      <image>
+        <url>${context.site}${siteData.defaultImage.src}</url>
+        <title>${siteData.title}</title>
+        <link>${context.site}</link>
+      </image>
     `,
     items: posts
       .filter((post) => !post.data.draft)
@@ -28,6 +33,7 @@ export async function GET(context) {
         customData: `
           ${post.data.tags?.map((tag: string) => `<category>${tag}</category>`).join('\n') || ''}
           <media:content url="${context.site}${post.data.image}" medium="image" />
+          <image>${context.site}${post.data.image}</image>
           <content:encoded><![CDATA[
             <img src="${context.site}${post.data.image}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
             <p>${post.data.description}</p>
