@@ -1,3 +1,9 @@
+## [1.27.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.26.0...v1.27.0) (2025-05-20)
+
+### Features
+
+* **rss:** improve compatibility and enrich metadata in RSS and JSON feeds ([b1922c7](https://github.com/asier-ortiz/asierortiz.com/commit/b1922c792d8d070de80cd2dc7f39cde71e4035e6))
+
 ## [1.26.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.25.1...v1.26.0) (2025-05-19)
 
 ### Features
