@@ -111,7 +111,7 @@ const siteData: SiteDataProps = {
   },
 
   newsletter: {
-    url: '',
+    url: 'https://buttondown.com/asierortiz',
     label: 'Subscribe to Asier Ortiz’s newsletter',
   },
 
