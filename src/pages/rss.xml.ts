@@ -4,7 +4,6 @@ import siteData from '@/config/siteData.json';
 
 export async function GET(context) {
   const posts = await getCollection('blog');
-  const siteUrl = context.site.replace(/\/$/, '');
 
   return rss({
     title: siteData.rss.title,
@@ -18,9 +17,9 @@ export async function GET(context) {
       <language>${siteData.language}</language>
       <copyright>© ${new Date().getFullYear()} ${siteData.author.name}</copyright>
       <image>
-        <url>${siteUrl}${siteData.defaultImage.src}</url>
+        <url>${context.site}${siteData.defaultImage.src}</url>
         <title>${siteData.title}</title>
-        <link>${siteUrl}</link>
+        <link>${context.site}</link>
       </image>
     `,
     items: posts
@@ -33,12 +32,12 @@ export async function GET(context) {
         author: `${siteData.author.name} <${siteData.author.email}>`,
         customData: `
           ${post.data.tags?.map((tag: string) => `<category>${tag}</category>`).join('\n') || ''}
-          <media:content url="${siteUrl}${post.data.image}" medium="image" />
-          <image>${siteUrl}${post.data.image}</image>
+          <media:content url="${context.site}${post.data.image}" medium="image" />
+          <image>${context.site}${post.data.image}</image>
           <content:encoded><![CDATA[
-            <img src="${siteUrl}${post.data.image}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
+            <img src="${context.site}${post.data.image}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
             <p>${post.data.description}</p>
-            <p><a href="${siteUrl}/blog/${post.slug}">→ Read the full post</a></p>
+            <p><a href="${context.site}/blog/${post.slug}">→ Read the full post</a></p>
           ]]></content:encoded>
         `,
       })),
