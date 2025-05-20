@@ -17,10 +17,20 @@ export async function GET(context) {
         id: `${context.site}/blog/${post.slug}`,
         url: `${context.site}/blog/${post.slug}`,
         title: post.data.title,
+        content_html: `
+          <img src="${context.site}${post.data.image}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
+          <p>${post.data.description}</p>
+          <p><a href="${context.site}/blog/${post.slug}">→ Read the full post</a></p>
+        `,
         content_text: post.data.description,
+        summary: post.data.description,
         date_published: new Date(post.data.pubDate).toISOString(),
         tags: post.data.tags ?? [],
         image: `${context.site}${post.data.image}`,
+        author: {
+          name: siteData.author.name,
+          url: `${context.site}`,
+        },
       })),
   };
 

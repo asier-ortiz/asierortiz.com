@@ -23,9 +23,15 @@ export async function GET(context) {
         description: post.data.description,
         link: `/blog/${post.slug}`,
         pubDate: post.data.pubDate,
+        author: `${siteData.author.name} <${siteData.author.email}>`,
         customData: `
           ${post.data.tags?.map((tag: string) => `<category>${tag}</category>`).join('\n') || ''}
           <media:content url="${context.site}${post.data.image}" medium="image" />
+          <content:encoded><![CDATA[
+            <img src="${context.site}${post.data.image}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
+            <p>${post.data.description}</p>
+            <p><a href="${context.site}/blog/${post.slug}">→ Read the full post</a></p>
+          ]]></content:encoded>
         `,
       })),
   });
