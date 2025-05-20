@@ -1,3 +1,9 @@
+## [1.28.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.1...v1.28.2) (2025-05-20)
+
+### Bug Fixes
+
+* **rss:** remove trailing slash normalization to restore test compatibility ([0ca82c9](https://github.com/asier-ortiz/asierortiz.com/commit/0ca82c97ce8f0aca3c8448d330fb55b09d520935))
+
 ## [1.28.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.28.0...v1.28.1) (2025-05-20)
 
 ### Bug Fixes
