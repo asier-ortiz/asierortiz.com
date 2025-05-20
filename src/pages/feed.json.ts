@@ -11,6 +11,7 @@ export async function GET(context) {
     feed_url: `${context.site}/feed.json`,
     description: siteData.rss.description,
     language: siteData.language,
+    favicon: `${context.site}/favicon.ico`,
     items: posts
       .filter((post) => !post.data.draft)
       .map((post) => ({
@@ -22,14 +23,13 @@ export async function GET(context) {
           <p>${post.data.description}</p>
           <p><a href="${context.site}/blog/${post.slug}">→ Read the full post</a></p>
         `,
-        content_text: post.data.description,
         summary: post.data.description,
         date_published: new Date(post.data.pubDate).toISOString(),
         tags: post.data.tags ?? [],
         image: `${context.site}${post.data.image}`,
         author: {
           name: siteData.author.name,
-          url: `${context.site}`,
+          url: `mailto:${siteData.author.email}`,
         },
       })),
   };
