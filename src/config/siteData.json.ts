@@ -39,7 +39,6 @@ export interface SiteDataProps {
   author: {
     name: string;
     email: string;
-    twitter: string;
   };
   defaultImage: {
     src: string;
@@ -69,20 +68,8 @@ const siteData: SiteDataProps = {
       link: 'https://github.com/asier-ortiz',
     },
     {
-      platform: 'kaggle',
-      link: 'https://www.kaggle.com/asierortiz',
-    },
-    {
       platform: 'linkedin',
       link: 'https://www.linkedin.com/in/asier-ortiz',
-    },
-    {
-      platform: 'twitter',
-      link: 'https://x.com/asierortiz_',
-    },
-    {
-      platform: 'instagram',
-      link: 'https://www.instagram.com/asierortizgarcia',
     },
     {
       platform: 'email',
@@ -97,7 +84,6 @@ const siteData: SiteDataProps = {
   author: {
     name: 'Asier Ortiz',
     email: 'hello@asierortiz.com',
-    twitter: 'asierortiz',
   },
 
   defaultImage: {
