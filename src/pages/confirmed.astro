@@ -1,0 +1,24 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Particles from '@components/Particles/Particles.vue';
+import Button from '@components/Button/Button.astro';
+import siteData from '@config/siteData.json';
+---
+
+<Layout title={`${siteData.author.name} – Subscription Confirmed`} description="Thanks for confirming your subscription.">
+  <Particles client:only="vue" />
+  <section class="container pt-24 md:pt-36 lg:pt-44">
+    <div class="w-full py-20 text-center md:py-32">
+      <div class="mx-auto max-w-xl px-4 text-center">
+        <h1 class="h1 text-gradient">You're in!</h1>
+        <p class="description mt-4">
+          Thanks for confirming your subscription to <strong>{siteData.author.name}</strong>’s blog.
+          From now on, you’ll receive occasional updates with insights, tutorials, and projects — always worth your time.
+        </p>
+        <div class="mt-8 flex justify-center flex-wrap gap-4">
+          <Button variant="ghost" href="/blog">Explore the blog</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
