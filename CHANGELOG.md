@@ -1,3 +1,9 @@
+## [1.30.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.29.1...v1.30.0) (2025-05-21)
+
+### Features
+
+* **pages:** add public confirmation page for Buttondown redirect (/confirmed) ([dbec885](https://github.com/asier-ortiz/asierortiz.com/commit/dbec8856c5b51e6f5cd317a411929f0494418d77))
+
 ## [1.29.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.29.0...v1.29.1) (2025-05-20)
 
 ### Bug Fixes
