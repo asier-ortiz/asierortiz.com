@@ -13,9 +13,9 @@ import Academic from '@components/Icons/Academic.astro';
       </h2>
       <ol class="mt-10 ml-4">
         {
-          backgroundData.map((backgroundItem) => (
+          backgroundData.map((backgroundItem, index) => (
             <li>
-              <BackgroundItem {...backgroundItem} />
+              <BackgroundItem {...backgroundItem} initialOpen={index === 0} />
             </li>
           ))
         }
