@@ -1,3 +1,9 @@
+## [1.31.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.30.0...v1.31.0) (2025-05-22)
+
+### Features
+
+* **background:** add toggleable description with accessible 'Show more' button ([f84d9be](https://github.com/asier-ortiz/asierortiz.com/commit/f84d9bef0dcb18721c359ed7678f7dadafd6cd02))
+
 ## [1.30.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.29.1...v1.30.0) (2025-05-21)
 
 ### Features
