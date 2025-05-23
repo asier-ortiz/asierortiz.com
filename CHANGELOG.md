@@ -1,3 +1,9 @@
+## [1.33.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.32.0...v1.33.0) (2025-05-23)
+
+### Features
+
+* **layout:** restore scroll position on back navigation using astro:transition ([126363c](https://github.com/asier-ortiz/asierortiz.com/commit/126363c9ee10f52e324366c67e9dd3f7ca9bcadb))
+
 ## [1.32.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.31.0...v1.32.0) (2025-05-23)
 
 ### Features
