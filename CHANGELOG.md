@@ -1,3 +1,9 @@
+## [1.32.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.31.0...v1.32.0) (2025-05-23)
+
+### Features
+
+* **project-card:** add fade-in to images and unify hover/fade script ([db1e982](https://github.com/asier-ortiz/asierortiz.com/commit/db1e982632e194a9d075c6c647267a0c727a68ce))
+
 ## [1.31.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.30.0...v1.31.0) (2025-05-22)
 
 ### Features
