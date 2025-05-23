@@ -96,6 +96,37 @@ const defaultImage = siteData.defaultImage.src;
       }
     </script>
 
+    <!-- Preserves scroll position on back navigation for desktop users -->
+    <script type="astro/transition" is:inline>
+      export default {
+        name: 'scroll-restoration',
+
+        beforeLeave() {
+          if (window.innerWidth < 768) return;
+          try {
+            sessionStorage.setItem('scrollY', window.scrollY.toString());
+          } catch (err) {
+            console.warn('Scroll position not saved:', err);
+          }
+        },
+
+        afterEnter() {
+          if (window.innerWidth < 768) return;
+          try {
+            const scrollY = sessionStorage.getItem('scrollY');
+            if (scrollY !== null) {
+              requestAnimationFrame(() => {
+                window.scrollTo(0, parseInt(scrollY, 10));
+                sessionStorage.removeItem('scrollY');
+              });
+            }
+          } catch (err) {
+            console.warn('Scroll position not restored:', err);
+          }
+        }
+      };
+    </script>
+
     <!-- Load Copy Code Script dynamically -->
     <script src={import.meta.env.DEV ? '/src/scripts/copy-code.js' : '/assets/scripts/copy-code.js'} type="module" defer is:inline></script>
 
