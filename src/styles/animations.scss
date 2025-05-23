@@ -41,3 +41,40 @@
 .animate-input-focus {
   animation: inputFocusPulse 0.2s ease-in-out;
 }
+
+@keyframes glow {
+  0% {
+    box-shadow:
+      0 0 2px var(--color-primary-600),
+      0 0 4px var(--color-primary-600),
+      0 0 6px var(--color-primary-600),
+      0 0 8px var(--color-primary-600);
+  }
+  50% {
+    box-shadow:
+      0 0 4px var(--color-primary-600),
+      0 0 8px var(--color-primary-600),
+      0 0 12px var(--color-primary-600),
+      0 0 16px var(--color-primary-600);
+  }
+  100% {
+    box-shadow:
+      0 0 2px var(--color-primary-600),
+      0 0 4px var(--color-primary-600),
+      0 0 6px var(--color-primary-600),
+      0 0 8px var(--color-primary-600);
+  }
+}
+
+.animate-glow {
+  animation: glow 4s infinite;
+}
+
+img.fade-in {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+img.fade-in.loaded {
+  opacity: 1;
+}

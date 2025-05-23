@@ -23,7 +23,7 @@ import siteData from '@config/siteData.json';
       <div class="aspect-square overflow-hidden rounded-full animate-glow relative z-10">
         <Image
           src={heroImage}
-          class="w-full object-cover rounded-full"
+          class="w-full object-cover rounded-full fade-in"
           alt="asier ortiz profile"
           loading="eager"
           width={600}
@@ -35,33 +35,6 @@ import siteData from '@config/siteData.json';
 </section>
 
 <style lang="scss">
-  @keyframes glow {
-    0% {
-      box-shadow:
-        0 0 2px var(--color-primary-600),
-        0 0 4px var(--color-primary-600),
-        0 0 6px var(--color-primary-600),
-        0 0 8px var(--color-primary-600);
-    }
-    50% {
-      box-shadow:
-        0 0 4px var(--color-primary-600),
-        0 0 8px var(--color-primary-600),
-        0 0 12px var(--color-primary-600),
-        0 0 16px var(--color-primary-600);
-    }
-    100% {
-      box-shadow:
-        0 0 2px var(--color-primary-600),
-        0 0 4px var(--color-primary-600),
-        0 0 6px var(--color-primary-600),
-        0 0 8px var(--color-primary-600);
-    }
-  }
-
-  .animate-glow {
-    animation: glow 4s infinite;
-  }
 
   /* Large desktops and monitors */
   @media (min-width: 1200px) {
@@ -98,3 +71,18 @@ import siteData from '@config/siteData.json';
     }
   }
 </style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const img = document.querySelector('img.fade-in');
+    if (!img) return;
+
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+      });
+    }
+  });
+</script>
