@@ -18,7 +18,7 @@ const { image, title, description, href, languages, type, buttonText, ...rest } 
 >
   <div class="mx-auto max-w-4xl image-container">
     <Image
-      class="project-image object-cover rounded"
+      class="project-image object-cover rounded fade-in"
       src={image}
       alt={title}
       loading="eager"
@@ -56,23 +56,6 @@ const { image, title, description, href, languages, type, buttonText, ...rest } 
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.hover-button');
-    buttons.forEach((button) => {
-      const image = button.closest('.project-container').querySelector('.project-image');
-      if (button && image) {
-        button.addEventListener('mouseover', () => {
-          image.classList.add('zoom');
-        });
-        button.addEventListener('mouseout', () => {
-          image.classList.remove('zoom');
-        });
-      }
-    });
-  });
-</script>
-
 <style lang="scss">
   .language {
     display: flex;
@@ -106,3 +89,34 @@ const { image, title, description, href, languages, type, buttonText, ...rest } 
     transform: scale(1.02);
   }
 </style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Zoom effect on hover
+    const buttons = document.querySelectorAll('.hover-button');
+    buttons.forEach((button) => {
+      const image = button.closest('.project-container')?.querySelector('.project-image');
+      if (button && image) {
+        button.addEventListener('mouseover', () => {
+          image.classList.add('zoom');
+        });
+        button.addEventListener('mouseout', () => {
+          image.classList.remove('zoom');
+        });
+      }
+    });
+
+    // Fade-in effect once image is loaded
+    const images = document.querySelectorAll('img.fade-in');
+    images.forEach((img) => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+      }
+    });
+  });
+</script>
