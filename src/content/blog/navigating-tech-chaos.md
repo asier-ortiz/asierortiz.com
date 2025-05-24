@@ -20,20 +20,20 @@ Let's dive in.
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
 <ul class="flex flex-col gap-2">
-  <li><a href="#the-illusion-of-endless-learning" class="text-base-300 hover:text-primary-400 transition-colors duration-300">The Illusion of Endless Learning</a></li>
-  <li><a href="#the-rise-of-hyper-specialization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">The Rise of Hyper-Specialization</a></li>
-  <li><a href="#competing-in-a-global-market" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Competing in a Global Market</a></li>
-  <li><a href="#how-the-tech-industry-has-evolved-in-the-last-decade" class="text-base-300 hover:text-primary-400 transition-colors duration-300">How the Tech Industry Has Evolved in the Last Decade</a></li>
-  <li><a href="#the-role-of-ai-in-software-development" class="text-base-300 hover:text-primary-400 transition-colors duration-300">The Role of AI in Software Development</a></li>
-  <li><a href="#industry-expectations-vs-reality" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Industry Expectations vs. Reality</a></li>
-  <li><a href="#how-to-survive-and-grow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">How to Survive and Grow</a></li>
-  <li><a href="#final-thoughts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Final Thoughts</a></li>
+  <li><a href="#1-the-illusion-of-endless-learning" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. The Illusion of Endless Learning</a></li>
+  <li><a href="#2-the-rise-of-hyper-specialization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. The Rise of Hyper-Specialization</a></li>
+  <li><a href="#3-competing-in-a-global-market" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Competing in a Global Market</a></li>
+  <li><a href="#4-how-the-tech-industry-has-evolved-in-the-last-decade" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. How the Tech Industry Has Evolved in the Last Decade</a></li>
+  <li><a href="#5-the-role-of-ai-in-software-development" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. The Role of AI in Software Development</a></li>
+  <li><a href="#6-industry-expectations-vs-reality" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Industry Expectations vs. Reality</a></li>
+  <li><a href="#7-how-to-survive-and-grow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. How to Survive and Grow</a></li>
+  <li><a href="#8-final-thoughts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Final Thoughts</a></li>
 </ul>
 </div>
 
 ---
 
-## The Illusion of Endless Learning
+## 1. The Illusion of Endless Learning
 
 In software development, learning never truly stops. This is both exhilarating and exhausting.
 
@@ -47,7 +47,7 @@ The developers who thrive are not those who memorize every syntax change, but th
 
 ---
 
-## The Rise of Hyper-Specialization
+## 2. The Rise of Hyper-Specialization
 
 Today, job offers often read like a wish list for a tech superhero:
 
@@ -67,7 +67,7 @@ True value lies in being competent and adaptable, not in trying to be an expert 
 
 ---
 
-## Competing in a Global Market
+## 3. Competing in a Global Market
 
 Remote work has opened incredible opportunities. But it has also increased competition.
 
@@ -81,7 +81,7 @@ Networking, personal branding, and having a visible portfolio are now as importa
 
 ---
 
-## How the Tech Industry Has Evolved in the Last Decade
+## 4. How the Tech Industry Has Evolved in the Last Decade
 
 The tech industry has undergone massive transformations over the past ten years, reshaping the way developers build, learn, and grow.
 
@@ -97,7 +97,7 @@ For those who entered the field with a focus on traditional backend development 
 
 ---
 
-## The Role of AI in Software Development
+## 5. The Role of AI in Software Development
 
 Artificial Intelligence has dramatically accelerated the speed at which developers can work. Tools like code generators, automated testing, intelligent code review, and AI-driven documentation have made many tasks faster and more accessible.
 
@@ -113,7 +113,7 @@ Those who understand AI-driven workflows and can integrate them smartly into pro
 
 ---
 
-## Industry Expectations vs. Reality
+## 6. Industry Expectations vs. Reality
 
 Many companies, especially in the startup and consulting world, have unrealistic expectations when hiring developers.
 
@@ -127,36 +127,36 @@ Instead of trying to match impossible job descriptions, align yourself with team
 
 ---
 
-## How to Survive and Grow
+## 7. How to Survive and Grow
 
 Here are practical strategies to thrive without burning out:
 
-### 1. Choose Your Battles
+### Choose Your Battles
 Focus on a small set of technologies and master them. It's better to be excellent in Laravel, Vue.js, and API design than mediocre across 10 different stacks.
 
-### 2. Build Visible Projects
+### Build Visible Projects
 Create tangible, public projects. A well-executed portfolio can outweigh a CV filled with buzzwords.
 
 Use your GitHub, personal website, and even small open-source contributions to show what you know.
 
-### 3. Position Yourself Clearly
+### Position Yourself Clearly
 Define your professional identity. Are you a Backend Developer specialized in Laravel and Symfony? A Frontend Expert in Vue? An AI enthusiast building Python microservices? Be clear.
 
 When someone visits your LinkedIn or website, they should instantly understand what you offer.
 
-### 4. Play the Long Game
+### Play the Long Game
 Short-term hype fades. Solid fundamentals and real-world experience endure. Don't feel pressured to chase every new tool or trend.
 
 Growing slowly but steadily in your domain will outlast many who try to jump on every bandwagon.
 
-### 5. Protect Your Passion
+### Protect Your Passion
 Stay connected to why you started programming in the first place. Protect your curiosity and love for building things from the noise and anxiety of the market.
 
 Spend time on personal projects. Build things you genuinely enjoy. Your passion will keep you learning without burning out.
 
 ---
 
-## Final Thoughts
+## 8. Final Thoughts
 
 The tech world will continue moving fast, often in chaotic and overwhelming ways. You can't control the pace of change, but you **can** control your focus, your learning strategy, and your professional narrative.
 
