@@ -9,6 +9,7 @@ import { getReadingTime } from '@/utils/readingTime';
 import ZoomImages from '@/components/Media/ZoomImages.vue';
 import { formatDate } from '@/utils/formatDate';
 import ReadingProgress from '@/components/Blog/ReadingProgress.astro';
+import ScrollSpyToc from '@/components/Blog/ScrollSpyToc.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings = [] } = await post.render();
 const readingDuration = getReadingTime(post.body);
 ---
 
@@ -30,6 +31,16 @@ const readingDuration = getReadingTime(post.body);
   image={post.data.image}
   isPost={true}
 >
+
+  <ScrollSpyToc
+    sections={
+      headings?.filter(h => h.depth === 2).map(h => ({
+        id: h.slug,
+        title: h.text,
+      })) ?? []
+    }
+  />
+
   <article class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
     <ReadingProgress />
 

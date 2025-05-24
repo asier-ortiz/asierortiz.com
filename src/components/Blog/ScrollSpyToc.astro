@@ -1,0 +1,120 @@
+---
+interface Section {
+  id: string;
+  title: string;
+}
+
+const { sections } = Astro.props as { sections: Section[] };
+---
+
+<aside class="fixed left-4 top-1/2 -translate-y-1/2 z-[50] hidden lg:block">
+  <div id="toc-wrapper" class="relative">
+
+    <!-- Compact mode -->
+    <button
+      id="toc-toggle"
+      aria-expanded="false"
+      class="flex flex-col gap-2 items-center p-2 bg-base-900 border border-base-700 rounded-md shadow hover:shadow-primary-500/30 transition-shadow duration-300"
+    >
+      {sections.map(({ id }) => (
+        <span
+          key={id}
+          class="scrollspy-bullet h-0.5 w-4 rounded-sm bg-base-700 transition-all duration-300"
+          data-target={id}
+        ></span>
+      ))}
+    </button>
+
+    <!-- Expanded mode -->
+    <div
+      id="toc-panel"
+      class="absolute left-10 top-1/2 -translate-y-1/2 max-h-[75vh] overflow-y-auto bg-base-900 border border-base-700 rounded-xl p-4 shadow-2xl w-60 opacity-0 pointer-events-none scale-95 transition-all duration-300"
+      aria-hidden="true"
+    >
+      <h2 class="mb-4 text-xs font-bold tracking-wide uppercase text-base-400">Contents</h2>
+      <nav id="scrollspy-nav" class="flex flex-col gap-3">
+        {sections.map(({ id, title }) => (
+          <a
+            href={`#${id}`}
+            class="scrollspy-link group text-sm text-base-400 hover:text-primary-400 transition-colors"
+            data-target={id}
+          >
+            {title}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</aside>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const compactBullets = document.querySelectorAll('#toc-toggle .scrollspy-bullet');
+    const expandedLinks = document.querySelectorAll('#scrollspy-nav .scrollspy-link');
+    const targets = Array.from(compactBullets).map(el => document.getElementById(el.dataset.target));
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocPanel = document.getElementById('toc-panel');
+
+    function updateHighlight() {
+      const scroll = window.scrollY + window.innerHeight / 3;
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      targets.forEach((el, i) => {
+        const isLast = i === targets.length - 1;
+        const isBottom = scrollBottom >= docHeight - 5;
+
+        const top = el?.offsetTop ?? 0;
+        const next = targets[i + 1]?.offsetTop ?? Infinity;
+        const isActive = (scroll >= top && scroll < next) || (isLast && isBottom);
+
+        const bullet = compactBullets[i];
+        const link = expandedLinks[i];
+
+        if (bullet) {
+          bullet.classList.toggle('bg-primary-400', isActive);
+          bullet.classList.toggle('bg-base-700', !isActive);
+        }
+
+        if (link) {
+          link.classList.toggle('text-primary-300', isActive);
+          link.classList.toggle('text-base-400', !isActive);
+        }
+      });
+    }
+
+    document.addEventListener('scroll', updateHighlight);
+    updateHighlight();
+
+    tocToggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const expanded = tocPanel.getAttribute('aria-hidden') === 'false';
+      tocPanel.setAttribute('aria-hidden', expanded ? 'true' : 'false');
+      tocPanel.classList.toggle('opacity-0', expanded);
+      tocPanel.classList.toggle('pointer-events-none', expanded);
+      tocPanel.classList.toggle('scale-100', !expanded);
+      tocPanel.classList.toggle('scale-95', expanded);
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!(target instanceof HTMLElement)) return;
+
+      if (!tocPanel.contains(target) && !tocToggle.contains(target)) {
+        tocPanel.setAttribute('aria-hidden', 'true');
+        tocPanel.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        tocPanel.classList.remove('scale-100');
+      }
+    });
+  });
+</script>

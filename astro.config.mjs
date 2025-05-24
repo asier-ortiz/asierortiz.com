@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
+import remarkExtractHeadings from './src/utils/remarkHeadings.ts';
 
 export default defineConfig({
   site: 'https://asierortiz.com',
@@ -21,6 +22,9 @@ export default defineConfig({
     tailwind(),
     compress(),
   ],
+  markdown: {
+    remarkPlugins: [remarkExtractHeadings],
+  },
   server: {
     port: 3_000,
   },

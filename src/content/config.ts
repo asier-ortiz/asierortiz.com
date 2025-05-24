@@ -20,6 +20,14 @@ const blogCollection = defineCollection({
       .array(z.string())
       .nonempty({ message: 'Tags must contain at least one tag.' })
       .optional(),
+
+    headings: z.array(
+      z.object({
+        depth: z.number(),
+        slug: z.string(),
+        text: z.string(),
+      })
+    ).optional(),
   }),
 });
 
