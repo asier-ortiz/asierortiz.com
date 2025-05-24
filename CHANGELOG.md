@@ -1,3 +1,9 @@
+## [1.34.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.33.0...v1.34.0) (2025-05-24)
+
+### Features
+
+* **blog:** add scrollspy TOC with heading extraction plugin ([2291704](https://github.com/asier-ortiz/asierortiz.com/commit/2291704fee1e08b8735170df0a44ab291acb761f))
+
 ## [1.33.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.32.0...v1.33.0) (2025-05-23)
 
 ### Features
