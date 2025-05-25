@@ -8,8 +8,6 @@ author: "Asier Ortiz"
 draft: true
 ---
 
-[//]: # (# Mastering Hyperparameter Tuning: Boost Your Machine Learning Models)
-
 Hyperparameter tuning is a critical, yet often overlooked, step in building high-performing machine learning models.
 This guide covers:
 
@@ -28,19 +26,19 @@ This guide covers:
 ## 📋 Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
-<ul class="flex flex-col gap-2">
-<li><a href="#why-hyperparameter-tuning-matters" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Why Hyperparameter Tuning Matters</a></li>
-<li><a href="#types-of-hyperparameters" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Types of Hyperparameters</a></li>
-<li><a href="#1-grid-search" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. Grid Search</a></li>
-<li><a href="#2-random-search" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Random Search</a></li>
-<li><a href="#3-bayesian-optimization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Bayesian Optimization</a></li>
-<li><a href="#4-tuning-classical-models" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. Tuning Classical Models</a></li>
-<li><a href="#5-practical-tips" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. Practical Tips and Best Practices</a></li>
-<li><a href="#6-visualizing-hyperparameter-search" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Visualizing Hyperparameter Search</a></li>
-<li><a href="#7-advanced-tuning-strategies" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. Advanced Tuning Strategies</a></li>
-<li><a href="#8-common-pitfalls-to-avoid" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Common Pitfalls to Avoid</a></li>
-<li><a href="#9-final-checklist-before-deployment" class="text-base-300 hover:text-primary-400 transition-colors duration-300">9. Final Checklist Before Deployment</a></li>
-</ul>
+  <ul class="flex flex-col gap-2">
+    <li><a href="#why-hyperparameter-tuning-matters" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Why Hyperparameter Tuning Matters</a></li>
+    <li><a href="#types-of-hyperparameters" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Types of Hyperparameters</a></li>
+    <li><a href="#1-grid-search" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. Grid Search</a></li>
+    <li><a href="#2-random-search" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Random Search</a></li>
+    <li><a href="#3-bayesian-optimization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Bayesian Optimization</a></li>
+    <li><a href="#4-tuning-classical-models" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. Tuning Classical Models</a></li>
+    <li><a href="#5-practical-tips" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. Practical Tips and Best Practices</a></li>
+    <li><a href="#6-visualizing-hyperparameter-search" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Visualizing Hyperparameter Search</a></li>
+    <li><a href="#7-advanced-tuning-strategies" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. Advanced Tuning Strategies</a></li>
+    <li><a href="#8-common-pitfalls-to-avoid" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Common Pitfalls to Avoid</a></li>
+    <li><a href="#9-final-checklist-before-deployment" class="text-base-300 hover:text-primary-400 transition-colors duration-300">9. Final Checklist Before Deployment</a></li>
+  </ul>
 </div>
 
 ---

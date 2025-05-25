@@ -8,8 +8,6 @@ author: "Asier Ortiz"
 draft: false       
 ---
 
-[//]: # (# Mastering Astro 5: Build and Optimize Your Modern Blog)
-
 Astro is rapidly changing the way we build websites — offering unmatched speed, flexibility, and developer experience.  
 If you want to create a **professional, ultra-fast, scalable blog**, **you're in the right place**.
 
@@ -30,27 +28,27 @@ In this complete step-by-step guide, you’ll learn how to:
 ## 📋 Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
-<ul class="flex flex-col gap-2">
-<li><a href="#why-choose-astro" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Why Choose Astro?</a></li>
-<li><a href="#1-installing-astro-5" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. Installing Astro 5</a></li>
-<li><a href="#2-recommended-project-structure" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Recommended Project Structure</a></li>
-<li><a href="#3-setting-up-tailwindcss-in-astro" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Setting Up TailwindCSS in Astro</a></li>
-<li><a href="#4-organizing-content-with-collections" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. Organizing Content with Collections</a></li>
-<li><a href="#5-creating-dynamic-blog-pages" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. Creating Dynamic Blog Pages</a></li>
-<li><a href="#6-enhancing-user-experience-with-animations" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Enhancing User Experience with Animations</a></li>
-<li><a href="#7-seo-and-metadata-optimization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. SEO and Metadata Optimization</a></li>
-<li><a href="#8-generating-slugs-and-reading-time" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Generating Slugs and Reading Time</a></li>
-<li><a href="#9-image-and-assets-optimization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">9. Image and Assets Optimization</a></li>
-<li><a href="#10-creating-an-rss-feed-and-sitemap" class="text-base-300 hover:text-primary-400 transition-colors duration-300">10. Creating an RSS Feed and Sitemap</a></li>
-<li><a href="#11-building-and-deploying-your-blog" class="text-base-300 hover:text-primary-400 transition-colors duration-300">11. Building and Deploying Your Blog</a></li>
-<li><a href="#12-top-plugins-to-supercharge-astro" class="text-base-300 hover:text-primary-400 transition-colors duration-300">12. Top Plugins to Supercharge Astro</a></li>
-<li><a href="#13-advanced-astroconfigmjs-setup" class="text-base-300 hover:text-primary-400 transition-colors duration-300">13. Advanced astro.config.mjs Setup</a></li>
-<li><a href="#14-creating-a-blog-list-page" class="text-base-300 hover:text-primary-400 transition-colors duration-300">14. Creating a Blog List Page</a></li>
-<li><a href="#15-creating-a-custom-404-page" class="text-base-300 hover:text-primary-400 transition-colors duration-300">15. Creating a Custom 404 Page</a></li>
-<li><a href="#16-protecting-drafts-and-unpublished-posts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">16. Protecting Drafts and Unpublished Posts</a></li>
-<li><a href="#17-accessibility-best-practices-a11y" class="text-base-300 hover:text-primary-400 transition-colors duration-300">17. Accessibility Best Practices (a11y)</a></li>
-<li><a href="#18-final-publishing-checklist" class="text-base-300 hover:text-primary-400 transition-colors duration-300">18. Final Publishing Checklist</a></li>
-</ul>
+  <ul class="flex flex-col gap-2">
+    <li><a href="#why-choose-astro" class="text-base-300 hover:text-primary-400 transition-colors duration-300">Why Choose Astro?</a></li>
+    <li><a href="#1-installing-astro-5" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. Installing Astro 5</a></li>
+    <li><a href="#2-recommended-project-structure" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Recommended Project Structure</a></li>
+    <li><a href="#3-setting-up-tailwindcss-in-astro" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Setting Up TailwindCSS in Astro</a></li>
+    <li><a href="#4-organizing-content-with-collections" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. Organizing Content with Collections</a></li>
+    <li><a href="#5-creating-dynamic-blog-pages" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. Creating Dynamic Blog Pages</a></li>
+    <li><a href="#6-enhancing-user-experience-with-animations" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Enhancing User Experience with Animations</a></li>
+    <li><a href="#7-seo-and-metadata-optimization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. SEO and Metadata Optimization</a></li>
+    <li><a href="#8-generating-slugs-and-reading-time" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Generating Slugs and Reading Time</a></li>
+    <li><a href="#9-image-and-assets-optimization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">9. Image and Assets Optimization</a></li>
+    <li><a href="#10-creating-an-rss-feed-and-sitemap" class="text-base-300 hover:text-primary-400 transition-colors duration-300">10. Creating an RSS Feed and Sitemap</a></li>
+    <li><a href="#11-building-and-deploying-your-blog" class="text-base-300 hover:text-primary-400 transition-colors duration-300">11. Building and Deploying Your Blog</a></li>
+    <li><a href="#12-top-plugins-to-supercharge-astro" class="text-base-300 hover:text-primary-400 transition-colors duration-300">12. Top Plugins to Supercharge Astro</a></li>
+    <li><a href="#13-advanced-astroconfigmjs-setup" class="text-base-300 hover:text-primary-400 transition-colors duration-300">13. Advanced astro.config.mjs Setup</a></li>
+    <li><a href="#14-creating-a-blog-list-page" class="text-base-300 hover:text-primary-400 transition-colors duration-300">14. Creating a Blog List Page</a></li>
+    <li><a href="#15-creating-a-custom-404-page" class="text-base-300 hover:text-primary-400 transition-colors duration-300">15. Creating a Custom 404 Page</a></li>
+    <li><a href="#16-protecting-drafts-and-unpublished-posts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">16. Protecting Drafts and Unpublished Posts</a></li>
+    <li><a href="#17-accessibility-best-practices-a11y" class="text-base-300 hover:text-primary-400 transition-colors duration-300">17. Accessibility Best Practices (a11y)</a></li>
+    <li><a href="#18-final-publishing-checklist" class="text-base-300 hover:text-primary-400 transition-colors duration-300">18. Final Publishing Checklist</a></li>
+  </ul>
 </div>
 
 ---

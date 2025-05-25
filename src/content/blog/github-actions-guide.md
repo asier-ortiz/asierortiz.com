@@ -22,18 +22,18 @@ through creating your first workflow, and explore best practices and real-world 
 ## 📋 Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
-<ul class="flex flex-col gap-2">
-  <li><a href="#what-are-github-actions" class="text-base-300 hover:text-primary-400 transition-colors duration-300">What are GitHub Actions?</a></li>
-  <li><a href="#1-core-concepts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. Core Concepts</a></li>
-  <li><a href="#2-common-use-cases" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Common Use Cases</a></li>
-  <li><a href="#3-creating-your-first-workflow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Creating Your First Workflow</a></li>
-  <li><a href="#4-practical-examples" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. Practical Examples</a></li>
-  <li><a href="#5-using-secrets-in-workflows" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. Using Secrets in Workflows</a></li>
-  <li><a href="#6-advanced-workflows" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Advanced Workflows</a></li>
-  <li><a href="#7-best-practices" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. Best Practices</a></li>
-  <li><a href="#8-next-steps" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Next Steps</a></li>
-  <li><a href="#9-glossary" class="text-base-300 hover:text-primary-400 transition-colors duration-300">9. Glossary</a></li>
-</ul>
+  <ul class="flex flex-col gap-2">
+    <li><a href="#what-are-github-actions" class="text-base-300 hover:text-primary-400 transition-colors duration-300">What are GitHub Actions?</a></li>
+    <li><a href="#1-core-concepts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. Core Concepts</a></li>
+    <li><a href="#2-common-use-cases" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Common Use Cases</a></li>
+    <li><a href="#3-creating-your-first-workflow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Creating Your First Workflow</a></li>
+    <li><a href="#4-practical-examples" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. Practical Examples</a></li>
+    <li><a href="#5-using-secrets-in-workflows" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. Using Secrets in Workflows</a></li>
+    <li><a href="#6-advanced-workflows" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Advanced Workflows</a></li>
+    <li><a href="#7-best-practices" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. Best Practices</a></li>
+    <li><a href="#8-next-steps" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Next Steps</a></li>
+    <li><a href="#9-glossary" class="text-base-300 hover:text-primary-400 transition-colors duration-300">9. Glossary</a></li>
+  </ul>
 </div>
 
 ---

@@ -19,16 +19,16 @@ Let's dive in.
 ## 📋 Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
-<ul class="flex flex-col gap-2">
-  <li><a href="#1-the-illusion-of-endless-learning" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. The Illusion of Endless Learning</a></li>
-  <li><a href="#2-the-rise-of-hyper-specialization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. The Rise of Hyper-Specialization</a></li>
-  <li><a href="#3-competing-in-a-global-market" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Competing in a Global Market</a></li>
-  <li><a href="#4-how-the-tech-industry-has-evolved-in-the-last-decade" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. How the Tech Industry Has Evolved in the Last Decade</a></li>
-  <li><a href="#5-the-role-of-ai-in-software-development" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. The Role of AI in Software Development</a></li>
-  <li><a href="#6-industry-expectations-vs-reality" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Industry Expectations vs. Reality</a></li>
-  <li><a href="#7-how-to-survive-and-grow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. How to Survive and Grow</a></li>
-  <li><a href="#8-final-thoughts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Final Thoughts</a></li>
-</ul>
+  <ul class="flex flex-col gap-2">
+    <li><a href="#1-the-illusion-of-endless-learning" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. The Illusion of Endless Learning</a></li>
+    <li><a href="#2-the-rise-of-hyper-specialization" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. The Rise of Hyper-Specialization</a></li>
+    <li><a href="#3-competing-in-a-global-market" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Competing in a Global Market</a></li>
+    <li><a href="#4-how-the-tech-industry-has-evolved-in-the-last-decade" class="text-base-300 hover:text-primary-400 transition-colors duration-300">4. How the Tech Industry Has Evolved in the Last Decade</a></li>
+    <li><a href="#5-the-role-of-ai-in-software-development" class="text-base-300 hover:text-primary-400 transition-colors duration-300">5. The Role of AI in Software Development</a></li>
+    <li><a href="#6-industry-expectations-vs-reality" class="text-base-300 hover:text-primary-400 transition-colors duration-300">6. Industry Expectations vs. Reality</a></li>
+    <li><a href="#7-how-to-survive-and-grow" class="text-base-300 hover:text-primary-400 transition-colors duration-300">7. How to Survive and Grow</a></li>
+    <li><a href="#8-final-thoughts" class="text-base-300 hover:text-primary-400 transition-colors duration-300">8. Final Thoughts</a></li>
+  </ul>
 </div>
 
 ---
