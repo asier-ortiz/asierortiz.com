@@ -1,3 +1,9 @@
+## [1.34.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.34.1...v1.34.2) (2025-05-25)
+
+### Bug Fixes
+
+* **blog:** restore filter functionality by re-adding filter-btn class to tag buttons ([555c27e](https://github.com/asier-ortiz/asierortiz.com/commit/555c27e600dae747644592a5c04d92848b90aec2))
+
 ## [1.34.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.34.0...v1.34.1) (2025-05-25)
 
 ### Bug Fixes
