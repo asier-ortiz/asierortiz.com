@@ -1,3 +1,9 @@
+## [1.34.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.34.0...v1.34.1) (2025-05-25)
+
+### Bug Fixes
+
+* **blog:** prevent focus ring clipping by adding vertical padding to tag filters ([e5c3f14](https://github.com/asier-ortiz/asierortiz.com/commit/e5c3f148b5c3268a6d51b4420c8aa60742e8c128))
+
 ## [1.34.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.33.0...v1.34.0) (2025-05-24)
 
 ### Features
