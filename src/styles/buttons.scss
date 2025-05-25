@@ -58,6 +58,10 @@
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-0;
 }
 
+.button--chip-active {
+  @apply bg-primary-500 text-white;
+}
+
 .scroll-to-top {
   @apply fixed bottom-12 right-6 w-12 h-12 bg-base-800 text-base-300 border-2 border-primary-600 rounded-full cursor-pointer;
   @apply flex items-center justify-center;

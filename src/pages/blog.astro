@@ -146,24 +146,15 @@ const allTags = Array
 
           // Highlight only selected button
           tagButtons.forEach((btn) => {
-            if (btn === button) {
-              btn.classList.add('bg-primary-500', 'text-white');
-              btn.classList.remove('bg-base-800', 'text-primary-400');
-            } else {
-              btn.classList.remove('bg-primary-500', 'text-white');
-              btn.classList.add('bg-base-800', 'text-primary-400');
-            }
+            btn.classList.remove('button--chip-active');
           });
+
+          button.classList.add('button--chip-active');
 
           // Filter posts
           posts.forEach((post) => {
             const postTags = post.dataset.tags?.split(',') || [];
-
-            if (selectedTag === 'all' || postTags.includes(selectedTag)) {
-              post.style.display = '';
-            } else {
-              post.style.display = 'none';
-            }
+            post.style.display = selectedTag === 'all' || postTags.includes(selectedTag) ? '' : 'none';
           });
         });
       });
