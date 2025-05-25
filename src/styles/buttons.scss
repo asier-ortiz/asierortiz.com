@@ -53,6 +53,11 @@
   @apply border-primary-500;
 }
 
+.button--chip {
+  @apply px-3 py-1 text-xs rounded-full bg-base-800 text-primary-400 hover:bg-primary-500 hover:text-white;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-0;
+}
+
 .scroll-to-top {
   @apply fixed bottom-12 right-6 w-12 h-12 bg-base-800 text-base-300 border-2 border-primary-600 rounded-full cursor-pointer;
   @apply flex items-center justify-center;
