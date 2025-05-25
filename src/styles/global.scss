@@ -32,6 +32,13 @@
     padding: 0 0.15em;
     border-radius: 0.25rem;
   }
+
+  img {
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    -webkit-touch-callout: none;
+  }
 }
 
 @layer components {
