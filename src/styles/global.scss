@@ -157,6 +157,11 @@
   .search-input:focus-within {
     @apply animate-input-focus;
   }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-base-950 transition duration-150;
+    border-radius: inherit;
+  }
 }
 
 @layer utilities {
