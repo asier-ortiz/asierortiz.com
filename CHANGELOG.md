@@ -1,3 +1,9 @@
+## [1.35.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.34.2...v1.35.0) (2025-05-25)
+
+### Features
+
+* **hero:** block context menu and selection on profile image ([551a5b3](https://github.com/asier-ortiz/asierortiz.com/commit/551a5b39ef44aefaba541e1e175895d412d69610))
+
 ## [1.34.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.34.1...v1.34.2) (2025-05-25)
 
 ### Bug Fixes
