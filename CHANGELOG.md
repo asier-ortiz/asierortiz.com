@@ -1,3 +1,9 @@
+## [1.36.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.35.0...v1.36.0) (2025-05-26)
+
+### Features
+
+* **siteData:** add Kaggle profile link to social platforms ([1b62f0d](https://github.com/asier-ortiz/asierortiz.com/commit/1b62f0df8d348c03bc9c99530adb2fb37c2cd918))
+
 ## [1.35.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.34.2...v1.35.0) (2025-05-25)
 
 ### Features
