@@ -68,6 +68,10 @@ const siteData: SiteDataProps = {
       link: 'https://github.com/asier-ortiz',
     },
     {
+      platform: 'kaggle',
+      link: 'https://www.kaggle.com/asierortiz',
+    },
+    {
       platform: 'linkedin',
       link: 'https://www.linkedin.com/in/asier-ortiz',
     },
