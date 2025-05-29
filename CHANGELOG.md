@@ -1,3 +1,9 @@
+## [1.36.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.36.0...v1.36.1) (2025-05-29)
+
+### Bug Fixes
+
+* **blog:** exclude manual Table of Contents heading from ScrollSpyToc ([059b32c](https://github.com/asier-ortiz/asierortiz.com/commit/059b32c305225921aebc3924302e5862c05e1e27))
+
 ## [1.36.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.35.0...v1.36.0) (2025-05-26)
 
 ### Features
