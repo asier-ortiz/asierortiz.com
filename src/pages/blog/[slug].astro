@@ -22,6 +22,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings = [] } = await post.render();
 const readingDuration = getReadingTime(post.body);
+const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
 ---
 
 <Layout
@@ -34,7 +35,9 @@ const readingDuration = getReadingTime(post.body);
 
   <ScrollSpyToc
     sections={
-      headings?.filter(h => h.depth === 2).map(h => ({
+      headings?.filter(h =>
+        h.depth === 2 && !EXCLUDED_HEADINGS_REGEX.test(h.text.trim())
+      ).map(h => ({
         id: h.slug,
         title: h.text,
       })) ?? []
