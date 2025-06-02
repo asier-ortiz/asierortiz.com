@@ -14,7 +14,7 @@ const { sections } = Astro.props as { sections: Section[] };
     <button
       id="toc-toggle"
       aria-expanded="false"
-      class="flex flex-col gap-2 items-center p-2 bg-base-900 border border-base-700 rounded-md shadow hover:shadow-primary-500/30 transition-shadow duration-300"
+      class="flex flex-col gap-2 items-center p-2 bg-base-900 border border-base-700 rounded-md shadow hover:ring-2 hover:ring-primary-400 hover:ring-opacity-50 hover:shadow-lg hover:shadow-primary-400/50 transition-all duration-300"
     >
       {sections.map(({ id }) => (
         <span
