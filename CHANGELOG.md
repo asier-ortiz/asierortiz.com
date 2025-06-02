@@ -1,3 +1,9 @@
+## [1.37.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.36.1...v1.37.0) (2025-06-02)
+
+### Features
+
+* **ui:** enhance ScrollSpyToc hover effect with subtle neon-style ring ([1558c3b](https://github.com/asier-ortiz/asierortiz.com/commit/1558c3b449da37f391a1a358fa7b4f0f36923ac4))
+
 ## [1.36.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.36.0...v1.36.1) (2025-05-29)
 
 ### Bug Fixes
