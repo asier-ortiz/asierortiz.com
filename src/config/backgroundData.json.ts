@@ -19,7 +19,7 @@ const academicData: academicItem[] = [
   {
     date: '2023',
     title: 'Higher Technician in Web Application Development',
-    center: 'BirtLH',
+    center: 'UNIR - International University of La Rioja',
     description:
       'This degree focuses on the creation and maintenance of web applications and services, ' +
       'covering both frontend and backend. I learned web programming languages, interface design, ' +
