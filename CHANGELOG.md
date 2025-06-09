@@ -1,3 +1,9 @@
+## [1.37.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.37.0...v1.37.1) (2025-06-09)
+
+### Bug Fixes
+
+* **data:** correct education detail in backgroundData.json.ts ([99f5ba3](https://github.com/asier-ortiz/asierortiz.com/commit/99f5ba35ca847933c2331675b69e2a8865602ab3))
+
 ## [1.37.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.36.1...v1.37.0) (2025-06-02)
 
 ### Features
