@@ -26,7 +26,7 @@ const usesData: usesItem[] = [
       },
       {
         title: 'Styling',
-        items: ['CSS3', 'Bootstrap 5', 'TailwindCSS'],
+        items: ['CSS3', 'Bootstrap 5', 'Tailwind CSS 3'],
       },
       {
         title: 'Database',
@@ -57,7 +57,7 @@ const usesData: usesItem[] = [
       },
       {
         title: 'Services & Tools',
-        items: ['Docker', 'Git', 'GitHub', 'GitKraken', 'Postman', 'ChatGPT'],
+        items: ['Docker', 'Git', 'GitHub', 'GitKraken', 'Postman', 'Claude'],
       },
       {
         title: 'Applications',
