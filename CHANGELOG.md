@@ -1,3 +1,9 @@
+## [1.38.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.37.1...v1.38.0) (2026-02-01)
+
+### Features
+
+* **blog:** add offline-first Android field operations post ([e7b8fb8](https://github.com/asier-ortiz/asierortiz.com/commit/e7b8fb86251e34564fe110a8040d16c0d144ee57))
+
 ## [1.37.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.37.0...v1.37.1) (2025-06-09)
 
 ### Bug Fixes
