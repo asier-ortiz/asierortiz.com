@@ -1,3 +1,9 @@
+## [1.39.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.38.2...v1.39.0) (2026-03-07)
+
+### Features
+
+* **projects:** add Field Ops Tracker to project showcase ([11a3f06](https://github.com/asier-ortiz/asierortiz.com/commit/11a3f061cf8d3d850c64587bafc07a808d54df41))
+
 ## [1.38.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.38.1...v1.38.2) (2026-03-07)
 
 ### Bug Fixes
