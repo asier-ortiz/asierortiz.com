@@ -1,3 +1,10 @@
+## [1.42.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.0...v1.42.1) (2026-03-07)
+
+### Bug Fixes
+
+* **blog:** add missing emoji to table of contents heading ([7a2235a](https://github.com/asier-ortiz/asierortiz.com/commit/7a2235a1805ae58251f35867a86275d64d6aa6ef))
+* **hero:** prevent shooting stars from overlapping profile photo ([9b23608](https://github.com/asier-ortiz/asierortiz.com/commit/9b236089e6d01d58581444469a213c29bbeb632f))
+
 ## [1.42.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.41.2...v1.42.0) (2026-03-07)
 
 ### Features
