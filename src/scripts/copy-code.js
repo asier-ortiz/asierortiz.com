@@ -1,3 +1,6 @@
+const COPY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+const CHECK_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
 function addCopyButtonsToCodeBlocks() {
   const codeBlocks = document.querySelectorAll('pre');
 
@@ -16,7 +19,7 @@ function addCopyButtonsToCodeBlocks() {
     button.setAttribute('type', 'button');
     button.setAttribute('aria-label', 'Copy code to clipboard');
     button.className = 'copy-code-button opacity-0 group-hover:opacity-100 transition-opacity';
-    button.innerHTML = '📋';
+    button.innerHTML = COPY_ICON;
     wrapper.appendChild(button);
 
     const tooltip = document.createElement('div');
@@ -30,12 +33,12 @@ function addCopyButtonsToCodeBlocks() {
         const textToCopy = codeElement ? codeElement.innerText : pre.innerText;
         await navigator.clipboard.writeText(textToCopy);
 
-        button.innerText = '✅';
+        button.innerHTML = CHECK_ICON;
         tooltip.classList.remove('copy-tooltip-hidden');
         tooltip.classList.add('copy-tooltip-visible');
 
         setTimeout(() => {
-          button.innerHTML = '📋';
+          button.innerHTML = COPY_ICON;
           tooltip.classList.remove('copy-tooltip-visible');
           tooltip.classList.add('copy-tooltip-hidden');
         }, 2000);
@@ -47,12 +50,11 @@ function addCopyButtonsToCodeBlocks() {
     wrapper.addEventListener('mouseleave', () => {
       tooltip.classList.remove('copy-tooltip-visible');
       tooltip.classList.add('copy-tooltip-hidden');
-      button.innerHTML = '📋';
+      button.innerHTML = COPY_ICON;
     });
   });
 }
 
-// Esperar a que el DOM esté realmente cargado antes de ejecutar
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', addCopyButtonsToCodeBlocks);
 } else {
