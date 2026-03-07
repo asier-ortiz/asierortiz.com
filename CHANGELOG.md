@@ -1,3 +1,9 @@
+## [1.39.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.39.0...v1.39.1) (2026-03-07)
+
+### Bug Fixes
+
+* **data:** correct education titles terminology ([dad54cd](https://github.com/asier-ortiz/asierortiz.com/commit/dad54cd09bff204a8f426d46e4bae21b199cee38))
+
 ## [1.39.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.38.2...v1.39.0) (2026-03-07)
 
 ### Features
