@@ -85,7 +85,7 @@ const defaultImage = siteData.defaultImage.src;
       <Footer />
     </div>
     <ScrollToTop />
-    <ShootingStar />
+    {!isPost && <ShootingStar />}
 
     <!-- Initialize AOS animations if enabled in site config -->
     <script>
