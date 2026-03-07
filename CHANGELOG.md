@@ -1,3 +1,9 @@
+## [1.43.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.4...v1.43.0) (2026-03-07)
+
+### Features
+
+* **seo:** add JSON-LD structured data for Person, WebSite and BlogPosting ([edf9ebc](https://github.com/asier-ortiz/asierortiz.com/commit/edf9ebcdb444536e8391028ba0bb720eb491ad55))
+
 ## [1.42.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.3...v1.42.4) (2026-03-07)
 
 ### Bug Fixes
