@@ -1,3 +1,9 @@
+## [1.39.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.39.1...v1.39.2) (2026-03-07)
+
+### Bug Fixes
+
+* **projects:** replace Field Ops Tracker showcase image ([04f46bf](https://github.com/asier-ortiz/asierortiz.com/commit/04f46bf368771ef492ec4be0adbfb0fbeb74a5de))
+
 ## [1.39.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.39.0...v1.39.1) (2026-03-07)
 
 ### Bug Fixes
