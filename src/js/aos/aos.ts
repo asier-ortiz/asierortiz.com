@@ -86,7 +86,6 @@ const initializeScroll = function initializeScroll() {
  */
 const refresh = function refresh(initialize = false) {
   // Allow refresh only when it was first initialized on startEvent
-  // console.log("refresh");
   if (initialize) initialized = true;
   if (initialized) initializeScroll();
 };
@@ -112,7 +111,6 @@ const recalculatePositions = function recalculate() {
  * create array with new elements and trigger refresh
  */
 const refreshHard = function refreshHard() {
-  // console.log("refresh hard");
   aosElements = elements();
 
   if (isDisabled(options.disable)) {
