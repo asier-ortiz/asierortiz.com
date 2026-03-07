@@ -1,3 +1,9 @@
+## [1.42.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.2...v1.42.3) (2026-03-07)
+
+### Bug Fixes
+
+* **layout:** remove unnecessary console.warn from scroll restoratio ([1f63391](https://github.com/asier-ortiz/asierortiz.com/commit/1f63391a3b7dbdf3a9c36c0f825880a747700b34))
+
 ## [1.42.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.1...v1.42.2) (2026-03-07)
 
 ### Bug Fixes
