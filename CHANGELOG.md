@@ -1,3 +1,9 @@
+## [1.42.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.3...v1.42.4) (2026-03-07)
+
+### Bug Fixes
+
+* remove unnecessary console.warn and add copy link icon to share button ([c0a8698](https://github.com/asier-ortiz/asierortiz.com/commit/c0a869843f2b779b78bb2a2ff06432941ff10391))
+
 ## [1.42.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.2...v1.42.3) (2026-03-07)
 
 ### Bug Fixes
