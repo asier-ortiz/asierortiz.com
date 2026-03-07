@@ -1,3 +1,9 @@
+## [1.40.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.39.2...v1.40.0) (2026-03-07)
+
+### Features
+
+* **nav:** add glassmorphism effect to navigation bar ([eb30fbe](https://github.com/asier-ortiz/asierortiz.com/commit/eb30fbe44d505d1cb264df12469d55d4a66d43be))
+
 ## [1.39.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.39.1...v1.39.2) (2026-03-07)
 
 ### Bug Fixes
