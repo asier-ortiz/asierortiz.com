@@ -1,3 +1,9 @@
+## [1.38.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.38.0...v1.38.1) (2026-03-07)
+
+### Bug Fixes
+
+* **projects:** wrap heading text in span to fix mobile flex layout ([4d1a7a2](https://github.com/asier-ortiz/asierortiz.com/commit/4d1a7a210aef8b3431ec8335f4a862fa30bad661))
+
 ## [1.38.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.37.1...v1.38.0) (2026-02-01)
 
 ### Features
