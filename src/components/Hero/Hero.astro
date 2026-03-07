@@ -19,22 +19,56 @@ import siteData from '@config/siteData.json';
       </p>
     </div>
     <div class="mx-auto max-w-sm md:col-span-1 md:max-w-full">
-      <div class="aspect-square overflow-hidden rounded-full animate-glow relative z-10">
-        <Image
-          src={heroImage}
-          class="w-full object-cover rounded-full fade-in"
-          alt="asier ortiz profile"
-          loading="eager"
-          width={600}
-          densities={[1.5, 2]}
-          oncontextmenu="return false"
-        />
+      <div class="eclipse-wrapper aspect-square relative z-[25]">
+        <div class="eclipse-ring"></div>
+        <div class="overflow-hidden rounded-full">
+          <Image
+            src={heroImage}
+            class="w-full object-cover rounded-full fade-in"
+            alt="asier ortiz profile"
+            loading="eager"
+            width={600}
+            densities={[1.5, 2]}
+            oncontextmenu="return false"
+          />
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style lang="scss">
+
+  .eclipse-wrapper {
+    position: relative;
+    border-radius: 50%;
+  }
+
+  .eclipse-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow:
+      0 0 15px 3px rgba(101, 163, 13, 0.15),
+      0 0 35px 8px rgba(101, 163, 13, 0.08),
+      0 0 60px 15px rgba(101, 163, 13, 0.04);
+    animation: corona-breathe 5s ease-in-out infinite;
+  }
+
+  @keyframes corona-breathe {
+    0%, 100% {
+      box-shadow:
+        0 0 15px 3px rgba(101, 163, 13, 0.15),
+        0 0 35px 8px rgba(101, 163, 13, 0.08),
+        0 0 60px 15px rgba(101, 163, 13, 0.04);
+    }
+    50% {
+      box-shadow:
+        0 0 20px 5px rgba(101, 163, 13, 0.22),
+        0 0 45px 12px rgba(101, 163, 13, 0.12),
+        0 0 70px 20px rgba(101, 163, 13, 0.06);
+    }
+  }
 
   /* Large desktops and monitors */
   @media (min-width: 1200px) {

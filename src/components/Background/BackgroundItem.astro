@@ -3,10 +3,11 @@ import ToggleDescription from '@components/Background/ToggleDescription.vue';
 const { title, center, description, date, initialOpen } = Astro.props;
 ---
 
-<div class="relative pb-12 pl-6 border-l-4 border-gray-700">
+<div class="timeline-item relative pb-12 pl-6 border-l-4 border-gray-700">
   <div
-    class="bullet absolute -left-4 top-0 w-7 h-7 bg-primary-400 rounded-full border-4 border-primary-900"
+    class="bullet absolute -left-4 top-0 w-7 h-7 bg-primary-400 rounded-full border-4 border-primary-900 flex items-center justify-center"
   >
+    <div class="w-2 h-2 bg-primary-800 rounded-full"></div>
   </div>
   <div class="relative md:pb-0 md:col-span-2">
     <h3 class="text-xl font-bold text-primary-500">{title}</h3>
@@ -18,7 +19,15 @@ const { title, center, description, date, initialOpen } = Astro.props;
   </div>
 </div>
 
-<style lang="scss">
+<style lang="scss" is:global>
+  .is-first .timeline-item {
+    border-image: linear-gradient(to bottom, transparent 14px, #374151 14px) 1;
+  }
+
+  .is-last .timeline-item {
+    border-image: linear-gradient(to bottom, #374151 14px, transparent 14px) 1;
+  }
+
   .bullet {
     animation: scaleAnimation 2s infinite ease-in-out;
   }
