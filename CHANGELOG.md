@@ -1,3 +1,9 @@
+## [1.42.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.41.2...v1.42.0) (2026-03-07)
+
+### Features
+
+* **ui:** add corona breathing effect to hero photo and improve timeline styling ([2a7389c](https://github.com/asier-ortiz/asierortiz.com/commit/2a7389c4b151ca36aecfe19b8fa690ae3d268620))
+
 ## [1.41.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.41.1...v1.41.2) (2026-03-07)
 
 ### Bug Fixes
