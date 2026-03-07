@@ -1,3 +1,9 @@
+## [1.38.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.38.1...v1.38.2) (2026-03-07)
+
+### Bug Fixes
+
+* **blog:** compute relative dates client-side instead of at build time ([8eb6538](https://github.com/asier-ortiz/asierortiz.com/commit/8eb6538cd7fe0abe3d94aae13beef850bca8d6cd))
+
 ## [1.38.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.38.0...v1.38.1) (2026-03-07)
 
 ### Bug Fixes
