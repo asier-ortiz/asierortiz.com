@@ -1,3 +1,9 @@
+## [1.41.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.41.1...v1.41.2) (2026-03-07)
+
+### Bug Fixes
+
+* **assets:** increase project showcase images quality ([58591a5](https://github.com/asier-ortiz/asierortiz.com/commit/58591a503e4c76fbaa2d248f43ace85d81c56ae0))
+
 ## [1.41.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.41.0...v1.41.1) (2026-03-07)
 
 ### Bug Fixes
