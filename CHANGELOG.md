@@ -1,3 +1,10 @@
+## [1.42.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.1...v1.42.2) (2026-03-07)
+
+### Bug Fixes
+
+* **nav:** remove unnecessary null check in mobile nav data mapping ([44326b9](https://github.com/asier-ortiz/asierortiz.com/commit/44326b983c2a708927587cd80ae84f729258e351))
+* typo in mobile nav, unused import, wrong color class, and debug comments ([6f3f590](https://github.com/asier-ortiz/asierortiz.com/commit/6f3f590c7a2d6c7ff2fad997713dcda6cb23042f))
+
 ## [1.42.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.0...v1.42.1) (2026-03-07)
 
 ### Bug Fixes
