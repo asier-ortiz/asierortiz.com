@@ -18,7 +18,7 @@ const academicData: academicItem[] = [
   },
   {
     date: '2023',
-    title: 'Higher Technician in Web Application Development',
+    title: 'Higher Vocational Diploma in Web Application Development',
     center: 'UNIR - International University of La Rioja',
     description:
       'This degree focuses on the creation and maintenance of web applications and services, ' +
@@ -28,7 +28,7 @@ const academicData: academicItem[] = [
   },
   {
     date: '2021',
-    title: 'Higher Technician in Cross-Platform Application Development',
+    title: 'Higher Vocational Diploma in Cross-Platform Application Development',
     center: 'Egibide',
     description:
       'In this degree, I studied techniques and tools to create applications that work on different ' +
