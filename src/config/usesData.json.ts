@@ -14,34 +14,36 @@ const usesData: usesItem[] = [
     items: [
       {
         title: 'Languages',
-        items: ['PHP', 'JavaScript', 'TypeScript', 'Java', 'Python'],
+        items: ['Python', 'Java', 'Kotlin', 'JavaScript', 'TypeScript', 'PHP'],
       },
       {
         title: 'Frontend',
-        items: ['Vue 2, 3', 'Angular 14, 15', 'Astro 5'],
+        items: ['Vue', 'Angular', 'Astro'],
       },
       {
         title: 'Backend',
-        items: ['Laravel 9, 10', 'Symfony 6', 'Django 4'],
+        items: ['Node.js', 'Laravel', 'Symfony'],
+      },
+      {
+        title: 'Mobile',
+        items: ['Android', 'Ionic'],
       },
       {
         title: 'Styling',
-        items: ['CSS3', 'Bootstrap 5', 'Tailwind CSS 3'],
+        items: ['CSS3', 'Bootstrap', 'Tailwind CSS'],
       },
       {
         title: 'Database',
-        items: ['MySQL', 'Oracle'],
+        items: ['PostgreSQL', 'MySQL', 'Oracle'],
       },
       {
         title: 'IDE',
         items: [
-          'Cursor',
           'WebStorm',
           'PhpStorm',
           'PyCharm',
           'IntelliJ IDEA',
           'Android Studio',
-          'Xcode',
         ],
       },
       {
@@ -50,22 +52,25 @@ const usesData: usesItem[] = [
           'iTerm2',
           'OhMyZsh',
           'Powerlevel10k',
+          'Homebrew',
+          'fzf',
+          'bat',
+          'eza',
+          'tldr',
+          'zoxide',
+          'lazygit',
           'zsh-autosuggestions',
           'zsh-completions',
           'zsh-fast-syntax-highlighting',
         ],
       },
       {
-        title: 'Services & Tools',
+        title: 'DevOps & Tools',
         items: ['Docker', 'Git', 'GitHub', 'GitKraken', 'Postman', 'Claude'],
       },
       {
-        title: 'Applications',
-        items: ['Mozilla Firefox', 'Tidal Music', 'Discord'],
-      },
-      {
-        title: 'Learning',
-        items: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'Redis', 'AWS'],
+        title: 'ML & AI',
+        items: ['TensorFlow', 'PyTorch', 'scikit-learn', 'Redis', 'AWS', 'Qdrant', 'Firebase'],
       },
     ],
   },
