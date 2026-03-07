@@ -9,6 +9,7 @@ import Trivial from '@images/projects/trivial.webp';
 import ArabaMarket from '@images/projects/araba-market.webp';
 import Arkanoid from '@images/projects/arkanoid.webp';
 import Portfolio from '@images/projects/portfolio.webp';
+import FieldOpsTracker from '@images/projects/field-ops-tracker.webp';
 
 export interface ProjectItem {
   image: ImageMetadata;
@@ -131,6 +132,26 @@ export const projectData: ProjectItem[] = [
     ],
     type: 'web development',
     buttonText: 'Visit Website',
+  },
+  {
+    image: FieldOpsTracker,
+    title: 'Field Ops Tracker',
+    description: `An offline-first Android app for field operations teams working on roads and highways.
+    Features real-time GPS tracking, offline spatial queries with GeoPackage, voice commands for hands-free operation,
+    and automatic sync with PostgreSQL when connectivity is restored.
+    `,
+    href: new URL('https://asierortiz.com/blog/building-offline-first-android-field-ops/'),
+    languages: [
+      { language: 'Kotlin', color: '#A97BFF' },
+      { language: 'Jetpack Compose', color: '#4285F4' },
+      { language: 'Room', color: '#003B57' },
+      { language: 'GeoPackage', color: '#2E7D32' },
+      { language: 'MapLibre', color: '#396CB2' },
+      { language: 'PostgreSQL', color: '#336791' },
+      { language: 'VOSK', color: '#FF6F00' },
+    ],
+    type: 'mobile development',
+    buttonText: 'Read Blog Post',
   },
   {
     image: RunningTracker,
