@@ -1,0 +1,79 @@
+---
+---
+
+<div id="shooting-stars-container" class="fixed inset-0 z-20 pointer-events-none overflow-hidden hidden md:block"></div>
+
+<style is:global>
+  .shooting-star {
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+    border-radius: 999px;
+    opacity: 0;
+    animation: shoot 0.8s ease-out forwards;
+  }
+
+  .shooting-star::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
+  }
+
+  @keyframes shoot {
+    0% {
+      opacity: 1;
+      transform: rotate(var(--angle)) translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: rotate(var(--angle)) translateX(300px);
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function createShootingStar() {
+      var container = document.getElementById('shooting-stars-container');
+      if (!container || window.innerWidth < 768) return;
+
+      var star = document.createElement('div');
+      star.className = 'shooting-star';
+      var angle = -(25 + Math.random() * 20);
+      star.style.setProperty('--angle', angle + 'deg');
+      star.style.top = Math.random() * 50 + '%';
+      star.style.left = Math.random() * 70 + '%';
+
+      container.appendChild(star);
+
+      star.addEventListener('animationend', function () {
+        star.remove();
+      });
+    }
+
+    function scheduleNext() {
+      var delay = 8000 + Math.random() * 7000;
+      setTimeout(function () {
+        createShootingStar();
+        scheduleNext();
+      }, delay);
+    }
+
+    if (typeof window !== 'undefined') {
+      document.addEventListener('DOMContentLoaded', function () {
+        scheduleNext();
+      });
+      document.addEventListener('astro:after-swap', function () {
+        scheduleNext();
+      });
+    }
+  })();
+</script>

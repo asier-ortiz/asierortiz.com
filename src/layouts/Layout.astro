@@ -3,6 +3,7 @@ import '@/styles/global.scss';
 import Nav from '@components/Nav/Nav.astro';
 import Footer from '@components/Footer/Footer.astro';
 import ScrollToTop from '@components/Button/ScrollToTop.astro';
+import ShootingStar from '@components/Particles/ShootingStar.astro';
 import type { ImageMetadata } from 'astro';
 import siteData from '@config/siteData.json';
 
@@ -84,6 +85,7 @@ const defaultImage = siteData.defaultImage.src;
       <Footer />
     </div>
     <ScrollToTop />
+    <ShootingStar />
 
     <!-- Initialize AOS animations if enabled in site config -->
     <script>
