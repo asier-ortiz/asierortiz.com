@@ -63,6 +63,53 @@ const defaultImage = siteData.defaultImage.src;
       )
     }
 
+    <!-- JSON-LD Structured Data -->
+    {
+      !isPost ? (
+        <script type="application/ld+json" set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              name: siteData.name,
+              url: Astro.site,
+              description: siteData.description,
+            },
+            {
+              '@type': 'Person',
+              name: siteData.author.name,
+              url: Astro.site,
+              email: siteData.author.email,
+              sameAs: siteData.socialLinks
+                .filter((l) => l.platform !== 'email' && l.platform !== 'rss')
+                .map((l) => l.link),
+              jobTitle: 'AI/ML & Software Developer',
+            },
+          ],
+        })} />
+      ) : (
+        <script type="application/ld+json" set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: title,
+          description: description,
+          url: pageUrl,
+          image: `${Astro.site}${image ?? defaultImage}`,
+          datePublished: pubDate,
+          author: {
+            '@type': 'Person',
+            name: siteData.author.name,
+            url: Astro.site,
+          },
+          publisher: {
+            '@type': 'Person',
+            name: siteData.author.name,
+            url: Astro.site,
+          },
+        })} />
+      )
+    }
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
