@@ -1,3 +1,9 @@
+## [1.41.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.40.0...v1.41.0) (2026-03-07)
+
+### Features
+
+* **ui:** add shooting star animation effect ([5e9cfdb](https://github.com/asier-ortiz/asierortiz.com/commit/5e9cfdb978ddfd4a67f8201a5792402e4165eed0))
+
 ## [1.40.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.39.2...v1.40.0) (2026-03-07)
 
 ### Features
