@@ -1,3 +1,9 @@
+## [1.41.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.41.0...v1.41.1) (2026-03-07)
+
+### Bug Fixes
+
+* **ui:** hide shooting stars on blog post pages ([b7cfae7](https://github.com/asier-ortiz/asierortiz.com/commit/b7cfae77d2608633ea625649cc372fbed5eac225))
+
 ## [1.41.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.40.0...v1.41.0) (2026-03-07)
 
 ### Features
