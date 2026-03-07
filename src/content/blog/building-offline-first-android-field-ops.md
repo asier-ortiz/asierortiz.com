@@ -18,7 +18,7 @@ Let's break down how it all came together.
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
   <ul class="flex flex-col gap-2">
