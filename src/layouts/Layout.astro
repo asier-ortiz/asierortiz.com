@@ -106,9 +106,7 @@ const defaultImage = siteData.defaultImage.src;
           if (window.innerWidth < 768) return;
           try {
             sessionStorage.setItem('scrollY', window.scrollY.toString());
-          } catch (err) {
-            console.warn('Scroll position not saved:', err);
-          }
+          } catch {}
         },
 
         afterEnter() {
@@ -121,9 +119,7 @@ const defaultImage = siteData.defaultImage.src;
                 sessionStorage.removeItem('scrollY');
               });
             }
-          } catch (err) {
-            console.warn('Scroll position not restored:', err);
-          }
+          } catch {}
         }
       };
     </script>
