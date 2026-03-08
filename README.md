@@ -78,13 +78,10 @@ npm run dev
 <table style="border: none; border-collapse: collapse;">
   <tr>
     <td align="center" style="border: none;">
-      <img src="./screenshots/screenshot-1.jpg" alt="Screenshot 1" style="max-height: 300px; object-fit: contain;"/>
+      <img src="./screenshots/home.png" alt="Home" style="max-height: 300px; object-fit: contain;"/>
     </td>
     <td align="center" style="border: none;">
-      <img src="./screenshots/screenshot-2.jpg" alt="Screenshot 2" style="max-height: 300px; object-fit: contain;"/>
-    </td>
-    <td align="center" style="border: none;">
-      <img src="./screenshots/screenshot-3.jpg" alt="Screenshot 3" style="max-height: 300px; object-fit: contain;"/>
+      <img src="./screenshots/blog.png" alt="Blog" style="max-height: 300px; object-fit: contain;"/>
     </td>
   </tr>
 </table>
