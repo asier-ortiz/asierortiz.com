@@ -57,7 +57,7 @@ export interface SiteDataProps {
 
 const siteData: SiteDataProps = {
   name: 'Asier Ortiz',
-  title: 'Asier Ortiz - AI/ML & Software Developer',
+  title: 'Asier Ortiz - Software Developer',
   description: 'Asier Ortiz portfolio & blog',
   useViewTransitions: true,
   useAnimations: true,
