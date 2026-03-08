@@ -1,3 +1,9 @@
+## [1.44.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.43.0...v1.44.0) (2026-03-08)
+
+### Features
+
+* update color palette to sky/cyan and use CSS variable for hero corona glow ([0dfe310](https://github.com/asier-ortiz/asierortiz.com/commit/0dfe3106efd8d7cde42037c984eb0640e71d0aff))
+
 ## [1.43.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.42.4...v1.43.0) (2026-03-07)
 
 ### Features
