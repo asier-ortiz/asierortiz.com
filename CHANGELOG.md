@@ -1,3 +1,9 @@
+## [1.44.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.0...v1.44.1) (2026-03-08)
+
+### Bug Fixes
+
+* simplify job title to "Software Developer" ([b5e405b](https://github.com/asier-ortiz/asierortiz.com/commit/b5e405b4358ffbe5c27a58225d2e0103745bad1e))
+
 ## [1.44.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.43.0...v1.44.0) (2026-03-08)
 
 ### Features
