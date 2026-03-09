@@ -1,3 +1,9 @@
+## [1.44.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.2...v1.44.3) (2026-03-09)
+
+### Bug Fixes
+
+* lower reading progress bar z-index to prevent overlap with mobile nav ([6b5036f](https://github.com/asier-ortiz/asierortiz.com/commit/6b5036f164806783b436d138d252a22df6cec25c))
+
 ## [1.44.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.1...v1.44.2) (2026-03-09)
 
 ### Bug Fixes
