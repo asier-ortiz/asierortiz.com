@@ -1,3 +1,9 @@
+## [1.44.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.1...v1.44.2) (2026-03-09)
+
+### Bug Fixes
+
+* ensure mobile nav menu renders above reading progress bar ([9097cdf](https://github.com/asier-ortiz/asierortiz.com/commit/9097cdfb78d204028af37c96ba27132aac80a10b))
+
 ## [1.44.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.0...v1.44.1) (2026-03-08)
 
 ### Bug Fixes
