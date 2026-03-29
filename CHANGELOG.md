@@ -1,3 +1,9 @@
+## [1.45.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.45.1...v1.45.2) (2026-03-29)
+
+### Bug Fixes
+
+* **blog:** correct anchor link for table of contents in rescue article ([7e4c7b4](https://github.com/asier-ortiz/asierortiz.com/commit/7e4c7b42b358fd44b478adbfc75e062d46b0d985))
+
 ## [1.45.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.45.0...v1.45.1) (2026-03-29)
 
 ### Bug Fixes
