@@ -115,7 +115,7 @@ Each of these features would have been impossible on the broken foundation I inh
 
 Before fixing a single bug, if there's no dev environment, make that your day-one priority. You cannot safely work on a system you can't safely break.
 
-### Fix the database before building features
+### Schema first, features second
 
 There was pressure to deliver visible features immediately. I pushed back and prioritized migration scripts. It delayed delivery by weeks, but every feature built afterward was reliable from day one. The client noticed: data inconsistencies stopped, reports showed correct numbers, and trust started building.
 
