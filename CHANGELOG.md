@@ -1,3 +1,9 @@
+## [1.45.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.45.0...v1.45.1) (2026-03-29)
+
+### Bug Fixes
+
+* **blog:** improve lesson learned heading in rescue article ([183634a](https://github.com/asier-ortiz/asierortiz.com/commit/183634adc1962a145c3b8cdd101db63777bb3894))
+
 ## [1.45.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.3...v1.45.0) (2026-03-29)
 
 ### Features
