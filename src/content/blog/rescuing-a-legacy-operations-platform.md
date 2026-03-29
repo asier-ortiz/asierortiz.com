@@ -21,7 +21,7 @@ The desktop app had been running for over **15 years**, accumulating nearly 200,
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
   <ul class="flex flex-col gap-2">
     <li><a href="#1-what-i-found" class="text-base-300 hover:text-primary-400 transition-colors duration-300">1. What I Found</a></li>
-    <li><a href="#2-how-i-saved-it" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Turning It Around</a></li>
+    <li><a href="#2-turning-it-around" class="text-base-300 hover:text-primary-400 transition-colors duration-300">2. Turning It Around</a></li>
     <li><a href="#3-lessons-learned" class="text-base-300 hover:text-primary-400 transition-colors duration-300">3. Lessons Learned</a></li>
   </ul>
 </div>
