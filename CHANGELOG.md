@@ -1,3 +1,9 @@
+## [1.45.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.3...v1.45.0) (2026-03-29)
+
+### Features
+
+* **blog:** add legacy platform rescue article ([6f8c1af](https://github.com/asier-ortiz/asierortiz.com/commit/6f8c1af268fc74479e2e0ab4904cc3fd5291f5f4))
+
 ## [1.44.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.44.2...v1.44.3) (2026-03-09)
 
 ### Bug Fixes
