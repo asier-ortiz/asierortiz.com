@@ -1,3 +1,9 @@
+## [1.46.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.45.2...v1.46.0) (2026-04-03)
+
+### Features
+
+* **projects:** add FlareWatch project with dual-category filtering ([aaf2121](https://github.com/asier-ortiz/asierortiz.com/commit/aaf21210afccef76c9757b77fcd8865a48ccf0eb))
+
 ## [1.45.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.45.1...v1.45.2) (2026-03-29)
 
 ### Bug Fixes
