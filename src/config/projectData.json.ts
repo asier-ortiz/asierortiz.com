@@ -1,14 +1,15 @@
 import type { ImageMetadata } from 'astro';
 import ArabaMarket from '@images/projects/araba-market.webp';
 import Alcon from '@images/projects/alcon.webp';
+import FlareWatch from '@images/projects/flarewatch.webp';
 
 export interface ProjectItem {
   image: ImageMetadata;
   title: string;
   description: string;
-  href: URL;
+  href?: URL;
   languages: Language[];
-  type: string;
+  type: string | string[];
   buttonText: string;
   buttonIcon?: string;
 }
@@ -19,6 +20,29 @@ export interface Language {
 }
 
 export const projectData: ProjectItem[] = [
+  {
+    image: FlareWatch,
+    title: 'FlareWatch',
+    description: `An Android app for IBD patients to log daily symptoms, diet, and lifestyle habits.
+    Uses machine learning models on the backend to predict flare risk, track symptom trends over time,
+    and deliver personalized health recommendations based on each patient's data.
+    `,
+    languages: [
+      { language: 'Kotlin', color: '#A97BFF' },
+      { language: 'Jetpack Compose', color: '#4285F4' },
+      { language: 'Material 3', color: '#757575' },
+      { language: 'Vico', color: '#E91E63' },
+      { language: 'FastAPI', color: '#009688' },
+      { language: 'SQLAlchemy', color: '#D71F00' },
+      { language: 'scikit-learn', color: '#F7931E' },
+      { language: 'PyTorch', color: '#EE4C2C' },
+      { language: 'MySQL', color: '#4479A1' },
+      { language: 'Docker', color: '#2496ED' },
+    ],
+    type: ['mobile & web development', 'data science & machine learning'],
+    buttonText: 'In Development',
+    buttonIcon: 'tdesign:code',
+  },
   {
     image: Alcon,
     title: 'ALCON',

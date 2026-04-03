@@ -43,7 +43,7 @@ import Button from '@components/Button/Button.astro';
       >
         {
           projectData.map((project) => (
-            <ProjectCard {...project} data-type={project.type} class="project-card" />
+            <ProjectCard {...project} class="project-card" />
           ))
         }
       </div>
@@ -69,7 +69,8 @@ import Button from '@components/Button/Button.astro';
         let hasProjects = false;
 
         projectCards.forEach((card) => {
-          if (filter === 'all' || card.getAttribute('data-type') === filter) {
+          const types = card.getAttribute('data-type')?.split(',') || [];
+          if (filter === 'all' || types.includes(filter)) {
             card.style.display = '';
             hasProjects = true;
           } else {
