@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import ArabaMarket from '@images/projects/araba-market.webp';
 import Alcon from '@images/projects/alcon.webp';
+import Nieves from '@images/projects/nieves.webp';
 import FlareWatch from '@images/projects/flarewatch.webp';
 
 export interface ProjectItem {
@@ -62,6 +63,30 @@ export const projectData: ProjectItem[] = [
       { language: 'MapLibre', color: '#396CB2' },
       { language: 'Firebase', color: '#DD2C00' },
       { language: 'VOSK', color: '#FF6F00' },
+    ],
+    type: 'mobile & web development',
+    buttonText: 'Read Blog Post',
+  },
+  {
+    image: Nieves,
+    title: 'Nieves',
+    description: `A web platform for coordinating critical winter road operations at the Provincial Council of Álava.
+    Modernizes a 15-year-old legacy desktop system with real-time GPS vehicle tracking, IoT weather sensor integration,
+    a complex shift coordination calendar, automated weather alerts via WebSockets, document generation,
+    multi-factor authentication with role-based access, and bilingual responsive UI.
+    `,
+    href: new URL('https://asierortiz.com/blog/rescuing-a-legacy-operations-platform/'),
+    languages: [
+      { language: 'Angular', color: '#DD0031' },
+      { language: 'TypeScript', color: '#3178C6' },
+      { language: 'Node.js', color: '#339933' },
+      { language: 'Express', color: '#259dff' },
+      { language: 'PostgreSQL', color: '#336791' },
+      { language: 'PostGIS', color: '#65974A' },
+      { language: 'Socket.io', color: '#25C2A0' },
+      { language: 'OpenLayers', color: '#1F6B75' },
+      { language: 'Docker', color: '#2496ED' },
+      { language: 'JWT', color: '#FB015B' },
     ],
     type: 'mobile & web development',
     buttonText: 'Read Blog Post',
