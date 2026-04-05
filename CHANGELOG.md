@@ -1,3 +1,9 @@
+## [1.47.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.46.0...v1.47.0) (2026-04-05)
+
+### Features
+
+* **projects:** add Nieves winter operations platform ([6059807](https://github.com/asier-ortiz/asierortiz.com/commit/60598075d88fa95d7079d8c914a63a1dceb7cc13))
+
 ## [1.46.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.45.2...v1.46.0) (2026-04-03)
 
 ### Features
