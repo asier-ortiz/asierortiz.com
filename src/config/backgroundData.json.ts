@@ -11,8 +11,8 @@ const academicData: academicItem[] = [
     title: 'Professional Program in Artificial Intelligence and Data Science',
     center: 'UNIR - International University of La Rioja',
     description:
-      'Machine Learning model design and deployment, working with Python, TensorFlow, PyTorch, and NLP ' +
-      'to build scalable AI solutions for business applications.',
+      'Machine Learning model design and deployment, working with TensorFlow and PyTorch ' +
+      'to build AI systems applied to real business problems.',
   },
   {
     date: '2023',
@@ -27,8 +27,8 @@ const academicData: academicItem[] = [
     title: 'Higher Vocational Diploma in Cross-Platform Application Development',
     center: 'Egibide',
     description:
-      'Cross-platform development for Android, iOS, and Windows with hands-on experience ' +
-      'in programming, UI design, and database management through real-world projects.',
+      'Hands-on development of Android, iOS, and Windows applications, covering UI design, ' +
+      'database management, and end-to-end project delivery.',
   },
 ];
 
