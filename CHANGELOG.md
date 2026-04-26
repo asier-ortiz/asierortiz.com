@@ -1,3 +1,9 @@
+## [1.47.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.47.0...v1.47.1) (2026-04-26)
+
+### Bug Fixes
+
+* **hero:** remove text-pretty from bio so it fills the column width ([3777599](https://github.com/asier-ortiz/asierortiz.com/commit/377759903d37c579e2c5b2694757458d1cb9d039))
+
 ## [1.47.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.46.0...v1.47.0) (2026-04-05)
 
 ### Features
