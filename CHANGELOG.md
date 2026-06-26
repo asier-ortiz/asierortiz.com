@@ -1,3 +1,9 @@
+## [1.48.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.47.1...v1.48.0) (2026-06-26)
+
+### Features
+
+* **blog:** add digital Taylorism and invisible work article ([b25226f](https://github.com/asier-ortiz/asierortiz.com/commit/b25226f9701a200bbca604c43f6ff1ac951b4ea9))
+
 ## [1.47.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.47.0...v1.47.1) (2026-04-26)
 
 ### Bug Fixes
