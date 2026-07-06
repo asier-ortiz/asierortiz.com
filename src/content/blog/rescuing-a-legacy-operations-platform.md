@@ -1,5 +1,5 @@
 ---
-title: "From Legacy Desktop to Modern Web: Rescuing a Critical Operations Platform"
+title: "The Migration Nobody Wanted: Rescuing a Critical Operations Platform"
 description: "How I inherited a failing migration from a .NET desktop app to a modern web platform and turned 17 years of messy data into a system the client actually trusts."
 pubDate: "2026-03-28"
 image: "/assets/blog/rescuing-legacy-project.webp"
