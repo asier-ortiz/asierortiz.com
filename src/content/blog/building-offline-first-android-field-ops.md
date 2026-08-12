@@ -1,6 +1,6 @@
 ---
 title: "Building an Offline-First Android App for Field Operations with GeoPackage and Jetpack Compose"
-description: "How I built a native Android app for field teams — offline spatial queries with GeoPackage, real-time GPS tracking, and sync with PostgreSQL."
+description: "How I built a native Android app for field teams: offline spatial queries with GeoPackage, real-time GPS tracking, and sync with PostgreSQL."
 pubDate: "2026-02-01"
 image: "/assets/blog/offline-first-android.webp"
 tags: ["android", "kotlin", "geopackage", "jetpack-compose", "offline-first"]
@@ -8,13 +8,15 @@ author: "Asier Ortiz"
 draft: false
 ---
 
-Some apps are built for ideal conditions — fast Wi-Fi, stable connections, users sitting at desks. This is not one of those apps.
+Some apps are built for ideal conditions: fast Wi-Fi, stable connections, users sitting at desks. This is not one of those apps.
 
-This article covers the architecture and technical challenges behind a native Android application I built for **field operations teams** working on roads and highways. These teams patrol infrastructure, report incidents, manage emergencies, and log everything — often in areas with **zero cellular coverage**.
+This article covers the architecture and technical challenges behind a native Android application I built for **field operations teams** working on roads and highways. These teams patrol infrastructure, report incidents, manage emergencies, and log everything, often in areas with **zero cellular coverage**.
 
 All I had to start with was a document briefly describing what the client needed: their field workers were filling out **paper forms** during road patrols, then manually entering the data into a web portal back at the office. They wanted to digitize and automate the entire process. That single document was my roadmap for the next several months.
 
 Let's break down how it all came together.
+
+*Updated August 2026: the app has since shipped to production. I've revised the sections on maps, sync, and security to reflect how the system actually works today, including a couple of places where the original approach didn't survive contact with reality.*
 
 ---
 
@@ -45,11 +47,11 @@ The requirements were straightforward on paper:
 - Field teams drive along roads, performing surveillance patrols
 - They need to **report incidents** (debris, animals, road damage) with exact location
 - They manage **emergencies** with timestamps, assigned staff, photos, and detailed records
-- Everything must work **without internet** — syncing when back in range
+- Everything must work **without internet**, syncing when back in range
 - Location data must be precise: which road, which kilometer marker, which direction
-- Patrols where **nothing is found** should be logged automatically — no manual input needed
+- Patrols where **nothing is found** should be logged automatically, with no manual input needed
 
-The hard part? Making all of this feel fast, reliable, and simple for users who are not tech-savvy — often operating the app one-handed while standing on the side of a highway. Or worse: while driving.
+The hard part? Making all of this feel fast, reliable, and simple for users who are not tech-savvy, often operating the app one-handed while standing on the side of a highway. Or worse: while driving.
 
 That last point kept me up at night. These workers use the app **in a vehicle**. Touching a screen while driving is a safety problem I couldn't ignore.
 
@@ -61,7 +63,7 @@ That last point kept me up at night. These workers use the app **in a vehicle**.
 
 ### Room as the Local Database
 
-The app uses **Room** (Android's SQLite abstraction) as its primary data store. Every entity — patrols, incidents, emergencies, photos — lives locally first.
+The app uses **Room** (Android's SQLite abstraction) as its primary data store. Every entity (patrols, incidents, emergencies, photos) lives locally first.
 
 ```kotlin
 @Entity(tableName = "emergencies")
@@ -78,7 +80,9 @@ data class EmergencyEntity(
 
 ### UUIDs Everywhere
 
-Since records are created offline on multiple devices, auto-increment IDs would collide. Every record gets a **UUID** at creation time, which serves as the primary key. The server accepts these UUIDs and uses them for deduplication.
+Since records are created offline on multiple devices, auto-increment IDs would collide. Every record gets a **UUID** at creation time, which serves as the primary key. The server accepts these UUIDs and uses them for deduplication; on first upload it returns its own numeric ID, which the app stores alongside the UUID for subsequent updates. Relations between records (an incident belongs to a patrol) also use UUIDs, so records can be created and linked to each other entirely offline.
+
+There's no deduplication table or idempotency header behind any of this: the UNIQUE constraint on the UUID column is the mechanism. A duplicate upload trips PostgreSQL's unique-violation error, and the server responds with the existing ID and a success status instead of an error, so the app marks its copy as synced rather than retrying forever.
 
 ```kotlin
 val newEmergency = EmergencyEntity(
@@ -99,7 +103,7 @@ This pattern is simple but effective. It handles the common case (create offline
 
 ## 3. GeoPackage for Offline Spatial Queries
 
-This was the most technically challenging part of the project — and honestly, the one that gave me the most headaches.
+This was the most technically challenging part of the project, and honestly the one that gave me the most headaches.
 
 ### The Problem
 
@@ -108,7 +112,7 @@ When a field worker reports an incident, they need to specify:
 - **The kilometer marker** (KM point)
 - **The direction** of travel
 
-Doing this manually from a dropdown of hundreds of roads is impractical. The app needs to figure out this information **automatically from GPS coordinates** — and it needs to do it **offline**.
+Doing this manually from a dropdown of hundreds of roads is impractical. The app needs to figure out this information **automatically from GPS coordinates**, and it needs to do it **offline**.
 
 ### Why Not a Geocoding API?
 
@@ -116,11 +120,11 @@ Services like Google's Geocoding API or Mapbox require an internet connection. T
 
 ### Enter GeoPackage
 
-**GeoPackage** is an OGC standard for storing geospatial data in a SQLite container. It can hold vector features (points, lines, polygons) with their geometries and attributes — all in a single `.gpkg` file.
+**GeoPackage** is an OGC standard for storing geospatial data in a SQLite container. It can hold vector features (points, lines, polygons) with their geometries and attributes, all in a single `.gpkg` file.
 
-I'd never worked with GeoPackage before this project. The documentation is sparse, the Android community around it is tiny, and most examples I found online were either outdated or focused on desktop GIS tools. I spent days just figuring out how to properly query geometries and compute distances along road segments. There were moments where I questioned whether this was even the right approach — but the alternative (requiring internet for geocoding) was a non-starter.
+I'd never worked with GeoPackage before this project. The documentation is sparse, the Android community around it is tiny, and most examples I found online were either outdated or focused on desktop GIS tools. I spent days just figuring out how to properly query geometries and compute distances along road segments. There were moments where I questioned whether this was even the right approach, but the alternative (requiring internet for geocoding) was a non-starter.
 
-The road network data — every road segment with its geometry, name, and kilometer markers — is packaged into a GeoPackage file and shipped with the app (or updated periodically via sync).
+The road network data (every road segment with its geometry, name, and kilometer markers) is packaged into a GeoPackage file that the app downloads during onboarding and keeps current by checking a version signature against the server. It's a heavy download, so the app never fetches it over mobile data without explicit confirmation.
 
 ### How It Works
 
@@ -128,37 +132,30 @@ The road network data — every road segment with its geometry, name, and kilome
 
 ```kotlin
 val manager = GeoPackageFactory.getManager(context)
-manager.importGeoPackage(geoPackageFile)
-val geoPackage = manager.open("roads")
+val geoPackage = manager.openExternal(geoPackageFile)
 ```
 
-2. **Query by proximity** — given GPS coordinates, find the nearest road:
+2. **Query by proximity**. Given GPS coordinates, find nearby candidate segments through the GeoPackage's R-Tree spatial index:
 
 ```kotlin
 val featureDao = geoPackage.getFeatureDao("road_segments")
-val boundingBox = BoundingBox(
-    lng - buffer, lat - buffer,
-    lng + buffer, lat + buffer
+val indexManager = FeatureIndexManager(context, geoPackage, featureDao)
+val envelope = GeometryEnvelope(
+    lng - buffer, lng + buffer,
+    lat - buffer, lat + buffer
 )
-val results = featureDao.queryForBoundingBox(boundingBox)
+val results = indexManager.query(envelope)
 ```
 
-3. **Calculate the kilometer marker** — project the GPS point onto the nearest road segment and compute the distance along the line from the road's origin:
+3. **Calculate the kilometer marker**. The GPS point is projected onto the candidate segment's geometry. An early version then computed the KM by measuring the distance along the line from the road's origin; today the network ships pre-cut into short segments that each carry their official starting KM as an attribute, so the app projects the point and reads the marker straight from the data. Authoritative values beat on-device arithmetic: faster, and immune to the subtle errors that creep into distance calculations over reprojected geometries.
 
-```kotlin
-fun calculateKM(point: LatLng, roadGeometry: LineString): Double {
-    val projected = projectPointOnLine(point, roadGeometry)
-    return distanceAlongLine(roadGeometry.startPoint, projected)
-}
-```
-
-4. **Determine direction** — based on the heading from GPS updates and the road segment's bearing.
+4. **Determine direction**, based on the heading from GPS updates and the road segment's bearing.
 
 ### The Result
 
-The user taps "Report Incident," and the app **instantly** fills in the road name, KM, and direction — all computed locally from GPS + GeoPackage data. No internet required. The spatial query runs in milliseconds.
+The user taps "Report Incident," and the app **instantly** fills in the road name, KM, and direction, all computed locally from GPS + GeoPackage data. No internet required. The spatial query runs in milliseconds.
 
-This ended up being the feature that impressed everyone the most during demos. What previously required manually looking up road markers and typing values now happened automatically. The first time I showed it to the field workers and watched their reaction — that made all the frustration worth it.
+This ended up being the feature that impressed everyone the most during demos. What previously required manually looking up road markers and typing values now happened automatically. The first time I showed it to the field workers, their reaction alone made all the frustration worth it.
 
 ---
 
@@ -170,7 +167,7 @@ The polyline would zigzag across lanes. The KM calculation would fluctuate. The 
 
 ### The Solution: Kalman Filtering
 
-I implemented a **Kalman filter** to smooth GPS readings. The filter maintains a prediction of the device's position and velocity, and corrects it with each new GPS reading — weighting the prediction vs. the measurement based on their respective uncertainties.
+I implemented a **Kalman filter** to smooth GPS readings. The filter maintains a prediction of the device's position and velocity, and corrects it with each new GPS reading, weighting the prediction vs. the measurement based on their respective uncertainties.
 
 ```kotlin
 class KalmanFilter {
@@ -180,7 +177,7 @@ class KalmanFilter {
 
     fun process(newLat: Double, newLng: Double, accuracy: Float, timestamp: Long) {
         if (variance < 0) {
-            // First reading — initialize
+            // First reading: initialize
             lat = newLat
             lng = newLng
             variance = accuracy * accuracy
@@ -197,9 +194,11 @@ class KalmanFilter {
 }
 ```
 
-The GPS `accuracy` field reported by the device is key here — it lets the filter automatically trust high-accuracy readings more and discount noisy ones.
+The GPS `accuracy` field reported by the device is key here: it lets the filter automatically trust high-accuracy readings more and discount noisy ones.
 
 The difference was dramatic. The polyline went from a jittery mess to a smooth line that actually followed the road. KM calculations became stable. It was one of those changes where the before/after was immediately obvious.
+
+The filter has since grown an **innovation gate**: readings that deviate too far from the prediction (the classic signature of multipath reflections near tunnels and overpasses) get rejected outright instead of merely down-weighted. And filtering turned out to be only the first stage of the pipeline. Snapping a smoothed position to the *correct* road, not just the nearest one (think parallel carriageways or an overpass crossing the road you're actually on), eventually required full map matching with a Hidden Markov Model and Viterbi decoding. That's a story big enough to deserve its own article.
 
 ---
 
@@ -209,7 +208,11 @@ The app includes a map view that tracks the user's patrol in real time, drawing 
 
 ### MapLibre for Offline Maps
 
-We use **MapLibre GL** (the open-source fork of Mapbox GL) for map rendering. Map tiles are cached locally for offline use, and the GeoPackage road data is overlaid as vector layers.
+We use **MapLibre GL** (the open-source fork of Mapbox GL) for map rendering, with the GeoPackage road data overlaid as vector layers. Getting the base map offline, however, took two attempts.
+
+The first approach used MapLibre's built-in `OfflineRegion` API to pre-download tiles. It worked in testing and fell apart at real scale: covering the full patrol area fired over 4,500 individual tile requests, downloads stalled constantly, and regions routinely ended up 97% incomplete with no clean way to resume.
+
+The replacement is simpler and far more robust. The entire tile set ships as a single **MBTiles** file of around 160 MB: one SQLite database containing every tile. The app runs a tiny embedded HTTP server (NanoHTTPD) bound to `127.0.0.1` and points MapLibre's style at it. MapLibre believes it's talking to a remote tile server; in reality every request is answered from local disk in microseconds. One file to download, one file to swap atomically on updates, zero partial states.
 
 ### Drawing the Route
 
@@ -229,18 +232,17 @@ locationCallback = object : LocationCallback() {
 }
 ```
 
+One detail that matters more than it looks: the position marker is fed the filtered, road-matched position rather than raw GPS, through a custom `LocationEngine` that MapLibre consumes as if it were the device's own. The puck you see is the position the app believes, not the noise the antenna reports.
+
 ### Camera Behavior
 
 One subtle UX challenge: the map camera should follow the user's position during a patrol, but the user should also be able to pan around freely to inspect the map. If you lock the camera, it feels restrictive. If you don't, they lose their position.
 
-The solution: **auto snap-back**. If the user pans away, the camera stays free. But when a new GPS update places the marker close to the current camera center, the camera snaps back to tracking mode automatically. This gives users freedom without losing context.
+The solution: **auto snap-back**. If the user pans away, the camera stays free. But when they stop interacting and the camera comes to rest near their own position marker, tracking mode kicks back in automatically after a short delay, confirmed by a subtle haptic tick. The distance threshold scales with the zoom level, so "near" means the same thing on screen whether you're inspecting an intersection or looking at half the province. This gives users freedom without losing context.
 
 ### Battery Optimization
 
-Continuous GPS tracking is a battery killer. These patrols can last hours, and a dead phone means no incident reporting. The app balances accuracy and battery life by:
-- Using `PRIORITY_HIGH_ACCURACY` only during active patrols
-- Switching to `PRIORITY_BALANCED_POWER_ACCURACY` when idle
-- Batching location updates to reduce wake-ups
+Continuous GPS tracking is a battery killer. These patrols can last hours, and a dead phone means no incident reporting. The position pipeline needs a high-accuracy fix every second to work well, so degrading GPS quality was never really an option. The app attacks the problem from other angles instead: it asks to be exempted from the manufacturer's battery optimizations so the tracking service isn't killed mid-patrol (with per-vendor instructions, because every manufacturer hides that setting somewhere different), it raises a notification when the battery runs low during an active patrol suggesting the worker finish or plug in, and the pure-black theme cuts screen power on OLED panels during long night shifts.
 
 ---
 
@@ -252,24 +254,23 @@ I needed a way to interact with the app **without touching the screen**.
 
 ### VOSK for Offline Speech Recognition
 
-Online services like Google Speech API weren't an option — again, no guaranteed connectivity. I integrated **[VOSK](https://alphacephei.com/vosk/)**, an open-source speech recognition toolkit that runs entirely on-device.
+Online services like Google Speech API weren't an option: again, no guaranteed connectivity. I integrated **[VOSK](https://alphacephei.com/vosk/)**, an open-source speech recognition toolkit that runs entirely on-device.
 
 VOSK uses lightweight ML models (~50MB) that can be bundled with the app. It processes audio locally with decent accuracy for a focused vocabulary set.
 
-The implementation listens for specific voice commands:
-- **"Incidencia"** — opens the incident report with auto-filled location
-- **"Emergencia"** — triggers the emergency creation flow
-- **"Foto"** — captures a photo linked to the current patrol
+The vocabulary is deliberately tiny. In driving mode, the app listens for one action with two accepted phrasings, "nueva incidencia" and "registrar incidencia", which opens an incident report with the location already filled in. Vosk runs with a closed grammar: those phrases plus an unknown-word token, nothing else.
 
-The voice recognition doesn't need to be perfect — we're matching against a small set of known commands, not doing free-form dictation. This keeps the accuracy high even with road noise and regional accents.
+The voice recognition doesn't need to be perfect: matching a couple of known phrases against a closed grammar keeps accuracy high even with road noise and regional accents, in a way free-form dictation never could.
 
-This was another feature born from listening to the actual users. In a meeting room, the touchscreen UI seemed fine. But they told me — on a highway at 80 km/h, it would be a liability. Voice commands turned a safety problem into a solved problem.
+Recognition alone isn't enough while driving, though: the driver can't glance at the screen to confirm the command registered. So the app answers back with text-to-speech, closing the whole loop by ear.
+
+This was another feature born from listening to the actual users. In a meeting room, the touchscreen UI seemed fine. But they told me that on a highway at 80 km/h it would be a liability. Voice commands turned a safety problem into a solved problem.
 
 ---
 
 ## 7. PostgreSQL as the API Layer
 
-The backend uses **PostgreSQL** with **PL/pgSQL functions** as the primary API interface — no ORM, no query builder.
+The backend uses **PostgreSQL** with **PL/pgSQL functions** as the primary API interface: no ORM, no query builder.
 
 ### Functions as Endpoints
 
@@ -291,7 +292,9 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-A thin **Node.js/Express** layer sits in front, handling authentication and calling these functions via parameterized queries. The Express layer is deliberately minimal — it validates the request, calls the function, and returns the result.
+The example above is simplified; the real functions follow a numbered naming convention inherited from the legacy system this platform replaced, and some of the ported procedures take over thirty positional arguments.
+
+A thin **Node.js/Express** layer sits in front, handling authentication and calling these functions via parameterized queries. The Express layer is deliberately minimal: it validates the request, calls the function, and returns the result. The one place it earns its keep is the patrol upload, where the header, the GPS track, and the road assignments are committed in a single transaction. A header without its track would look like a perfectly valid patrol while the actual route got lost forever the moment the device marked it as synced.
 
 ### Why This Approach?
 
@@ -318,18 +321,18 @@ Building for field workers is fundamentally different from building for office u
 - Users operate the app **outdoors**, often in rain or direct sunlight
 - They may be wearing **gloves**
 - They're standing on a highway shoulder with **traffic passing by**
-- They are **not tech-savvy** — the app replaced paper forms they'd used for years
+- They are **not tech-savvy**: the app replaced paper forms they'd used for years
 - They need to log information **quickly** and get back to work
 
-The transition from paper to digital won't be smooth — I already know that. Some of these workers have been filling out the same paper forms for a decade. The app has to be **easier than paper**, not just "also digital." If it adds friction, they'll go back to the clipboard.
+The transition from paper to digital was never going to be smooth. Some of these workers have been filling out the same paper forms for a decade. The app has to be **easier than paper**, not just "also digital." If it adds friction, they'll go back to the clipboard.
 
 ### Design Decisions
 
 **Large touch targets**: Every button, every interactive element is oversized. Standard Material Design sizing is too small for gloved fingers on a bumpy highway shoulder.
 
-**Minimal required fields**: When creating an emergency, the app lets you save with almost no data. Fill in the basics, get back to the situation, and complete the details later. This came directly from feedback during early demos — field workers pointed out that being forced to fill mandatory fields during an actual highway incident would be a liability. They were right.
+**Minimal required fields**: When creating an emergency, the app lets you save with almost no data. Fill in the basics, get back to the situation, and complete the details later. This came directly from feedback during early demos: field workers pointed out that being forced to fill mandatory fields during an actual highway incident would be a liability. They were right.
 
-**Haptic feedback**: Subtle vibrations confirm actions — a short pulse when saving, a double pulse when completing a task. On a noisy highway, visual feedback alone isn't enough. I spent time tuning the vibration patterns on different devices, because what felt right in a quiet office would feel completely different with traffic noise and adrenaline.
+**Haptic feedback**: Subtle vibrations confirm actions, with a short pulse when saving and a double pulse when completing a task. On a noisy highway, visual feedback alone isn't enough. I spent time tuning the vibration patterns on different devices, because what felt right in a quiet office would feel completely different with traffic noise and adrenaline.
 
 ```kotlin
 object HapticFeedback {
@@ -344,21 +347,23 @@ object HapticFeedback {
 }
 ```
 
-**Automatic data population**: As described in the GeoPackage section, the app fills in location data automatically. Every field the user doesn't have to type is time saved and errors avoided. Automated patrols with no incidents detected get logged with zero manual input — just start the patrol, drive, and end it.
+**Automatic data population**: As described in the GeoPackage section, the app fills in location data automatically. Every field the user doesn't have to type is time saved and errors avoided. Automated patrols with no incidents detected get logged with zero manual input: just start the patrol, drive, and end it.
 
-**Adaptive layout for tablets and phones**: The primary devices are **tablets** mounted in vehicles, but field workers may also need to use their personal phones for off-shift emergencies. The UI adapts to both form factors — larger touch targets and multi-column layouts on tablets, a more compact single-column flow on phones. Building adaptive layouts in Jetpack Compose with `WindowSizeClass` made this manageable, but it still meant testing every screen at multiple breakpoints.
+**Adaptive layout for tablets and phones**: The primary devices are **tablets** mounted in vehicles, but field workers may also need to use their personal phones for off-shift emergencies. The UI adapts to both form factors: larger touch targets and multi-column layouts on tablets, a more compact single-column flow on phones. Building adaptive layouts in Jetpack Compose made this manageable, with a small window-size helper that buckets widths into compact, medium, and expanded at the usual 600 and 840 dp breakpoints, but it still meant testing every screen at multiple form factors. Foldables get the same treatment for free: unfolding promotes the layout to the wider bucket, and since the app absorbs the configuration change instead of recreating the screen, nothing in progress is lost mid-fold. Orientation follows the hardware too: free rotation on tablets, portrait-locked on phones.
 
-**State machines, not free-form flows**: Emergencies follow a strict lifecycle — Active, Finalized, Canceled. The UI adapts to each state, showing only relevant actions and preventing invalid transitions.
+**Accessibility as a setting, not an afterthought**: The app ships with selectable typefaces (including Atkinson Hyperlegible and OpenDyslexic) plus adjustable text scaling, a dark theme, and a pure-black AMOLED variant for night patrols. Not every field worker has perfect eyesight, and a font option costs very little to build compared to what it gives back.
+
+**State machines, not free-form flows**: Emergencies follow a strict lifecycle of Active, Finalized, and Canceled. The UI adapts to each state, showing only relevant actions and preventing invalid transitions.
 
 ---
 
 ## 9. Security: Encryption and Biometric Access
 
-The app handles sensitive operational data — incident locations, emergency details, staff assignments, photos of road conditions. This data can't just sit unprotected on a device that might be lost or stolen.
+The app handles sensitive operational data: incident locations, emergency details, staff assignments, photos of road conditions. This data can't just sit unprotected on a device that might be lost or stolen.
 
 ### Encrypted Credentials
 
-User credentials are stored using Android's **EncryptedSharedPreferences** with AES-256-GCM encryption, backed by the **Android Keystore**. This means login data is encrypted at rest with hardware-backed keys — even if someone extracts the app's data from the device, the credentials are unreadable without the Keystore.
+User credentials are stored using Android's **EncryptedSharedPreferences** with AES-256-GCM encryption, backed by the **Android Keystore**. This means login data is encrypted at rest with hardware-backed keys. Even if someone extracts the app's data from the device, the credentials are unreadable without the Keystore.
 
 Passwords are also hashed with SHA-256 for offline login validation, so the app can authenticate users even without a server connection.
 
@@ -366,9 +371,17 @@ Passwords are also hashed with SHA-256 for offline login validation, so the app 
 
 The app supports **biometric authentication** (fingerprint or face recognition) for quick access. After a successful login, users can enable biometric unlock so they don't have to type credentials every time.
 
-The implementation uses Android's **BiometricPrompt API**, which handles the variety of biometric hardware across manufacturers gracefully. It detects the available biometric type on the device and adapts accordingly — fingerprint, face, or both.
+The implementation uses Android's **BiometricPrompt API**, which handles the variety of biometric hardware across manufacturers gracefully. It detects the available biometric type on the device and adapts accordingly: fingerprint, face, or both.
 
 If a phone is left unattended in a vehicle (which happens), the session and credentials remain protected behind the device's biometric lock.
+
+### Shared Devices, Separate Users
+
+The tablets are shared: shifts rotate, and the same device serves different users over time. When a new user logs in, the app wipes the previous user's local data (records, photos, session) in a single transaction, warning first if anything is still unsynced. The subtle part is that the wipe must include the stored biometric credentials: leave them behind, and the next user would unlock straight into the previous user's account with their own fingerprint. Device-level data (maps, catalogs, theme) survives the handoff.
+
+### Silent Re-Login
+
+Token expiry is handled without bothering the user. An OkHttp `Authenticator` intercepts 401 responses, refreshes the token (falling back to the stored credentials if the refresh fails) and retries the original request, tagged so a second 401 can't trigger an infinite loop. A field worker never gets kicked to a login screen mid-patrol because a token quietly expired.
 
 ---
 
@@ -378,13 +391,13 @@ The sync process is the bridge between the offline-first local database and the 
 
 ### How It Works
 
-1. **Detect connectivity**: The app monitors network state. When a connection becomes available, it triggers a sync attempt.
+1. **Detect connectivity**: The app monitors network state. When a connection becomes available, it triggers a sync attempt. A process-wide mutex prevents two syncs from running concurrently, and periodic syncs respect a cooldown that manual ones are allowed to skip.
 
-2. **Push local changes**: All records with `synced = false` are collected and sent to the server in batch. This includes new records, updates, and photos.
+2. **Push local changes**: All records with `synced = false` are sent to the server. What started as one monolithic sync function evolved into a **Strategy pattern**: one sync strategy per entity type, each isolated in its own try/catch so a failure in one category never aborts the rest. Order matters: photos always go last, because they reference their parent record's UUID and that record must already exist server-side.
 
-3. **Pull server updates**: After pushing, the app pulls any new reference data — updated road lists, staff directories, configuration changes.
+3. **Pull server updates**: Sync became genuinely bidirectional over time. Beyond reference data (road lists, staff directories, configuration), the app also downloads records created on other devices within a 7-day window, matching the local retention policy, so a device never holds more history than it needs.
 
-4. **Mark as synced**: On successful push, records are flagged as `synced = true`.
+4. **Mark as synced**: On successful push, records are flagged as `synced = true`. The "last synced" timestamp updates even when there was nothing to upload: a device that's up to date is synced too.
 
 ### Photo Sync
 
@@ -406,11 +419,21 @@ suspend fun syncPhotos() {
 }
 ```
 
+One edge case earned dedicated handling: photos whose local file has vanished (cleared cache, deleted from the gallery). Retrying those forever would clog every future sync, so they're marked as synced with a sentinel path instead. A tombstone in a sync queue beats an immortal failure.
+
 ### Conflict Handling
 
-The current approach is **last-write-wins** at the record level. Since field workers operate in different zones and rarely edit the same records, conflicts are rare in practice. The server timestamps every update, and the most recent write takes precedence.
+The original plan was **last-write-wins** at the record level, with the server merging non-null fields for the rare concurrent edit. What ended up in production is more boring, and better: **avoiding conflicts by design**. Downloads only insert records that don't exist locally (matched by UUID) and never overwrite local data; the one change the server is allowed to push over a local record is a cancellation. In the other direction, a record with a server ID goes up as an update, one without goes up as a creation. Since field workers operate in different zones, genuine concurrent edits of the same record essentially don't occur, and the architecture no longer needs to resolve what it structurally prevents.
 
-For the rare case where two users modify the same emergency, the server-side function uses `COALESCE` to merge non-null fields, preserving data from both writes where possible.
+### When the Device Is the Wrong Place to Compute
+
+The biggest architectural change since launch came not from a design insight but from an Android platform limit. When a patrol ends, the raw GPS track gets re-matched against the road network as a whole, a global cleanup pass that produces the polished route shown in the history. That job originally ran on-device in a background worker, and reality intervened: Android's JobScheduler kills background work after roughly ten minutes, and long urban patrols never finished processing.
+
+The fix inverted the flow. The track now uploads immediately when the patrol ends, raw, with the matched coordinates left empty, and the server computes the re-match. The app picks up the result on a later pull; if the server hasn't finished yet, it simply shows the raw track, which is perfectly usable, and checks again the next time the record is opened. No spinner, no error state.
+
+The division of labor is deliberate. The device still computes the official attribution (which road, which KM) live during the patrol, because that's the business data the worker needs on the spot. What moved to the server is the cosmetic pass that aligns the drawn route with the map, handled by a small worker process running an off-the-shelf map-matching engine, with the database table itself acting as the job queue.
+
+There's a lesson in that for offline-first dogma. The doctrine says "compute locally," but what it really means is "degrade gracefully." Uploading raw data eagerly and treating the polished version as a progressive enhancement turned out to be more offline-friendly than insisting the device do everything itself.
 
 ---
 
@@ -418,29 +441,29 @@ For the rare case where two users modify the same emergency, the server-side fun
 
 After months of development and real-world deployment, here are the key takeaways:
 
-### GeoPackage is underrated — and under-documented
+### GeoPackage is underrated and under-documented
 
-For Android apps that need offline spatial data, GeoPackage is a hidden gem. But be prepared to struggle. The documentation is sparse, the community is small, and there's very little practical content about it online. I spent more time reading source code than documentation. That said, the technology itself is solid. Being able to run spatial queries locally on a phone — with sub-millisecond response times — was a game changer once I got it working.
+For Android apps that need offline spatial data, GeoPackage is a hidden gem. But be prepared to struggle. The documentation is sparse, the community is small, and there's very little practical content about it online. I spent more time reading source code than documentation. That said, the technology itself is solid. Being able to run spatial queries locally on a phone, with sub-millisecond response times, was a game changer once I got it working.
 
 ### Offline-first is a mindset, not a feature
 
-You can't bolt offline support onto an app designed for connectivity. It has to be the foundation. Every screen, every flow, every data model must assume the network doesn't exist. When you design this way, the online case becomes trivially easy — it's just sync.
+You can't bolt offline support onto an app designed for connectivity. It has to be the foundation. Every screen, every flow, every data model must assume the network doesn't exist. When you design this way, the online case becomes trivially easy: it's just sync.
 
 ### The office is not the field
 
-The most valuable feedback didn't come from meetings or design reviews. It came from the field workers themselves during early demos. Features I thought were intuitive weren't. Buttons I thought were big enough were too small. They told me the screen would be unreadable in direct sunlight. The vibrations I'd tuned in a quiet room would be imperceptible next to a highway. The app isn't fully deployed yet — we're about to start sending beta invitations through **Firebase App Distribution** — but the feedback from these sessions has already reshaped entire flows. You have to listen to the people who will actually use the app, ideally before launch.
+The most valuable feedback didn't come from meetings or design reviews. It came from the field workers themselves, starting with the early demos. Features I thought were intuitive weren't. Buttons I thought were big enough were too small. They told me the screen would be unreadable in direct sunlight. The vibrations I'd tuned in a quiet room would be imperceptible next to a highway. Those sessions reshaped entire flows before launch, and the pattern held afterward: now that the app is in production, the most useful bug reports and feature requests still come from the road, not the office.
 
-### A single document can be enough — if you listen carefully
+### A single document can be enough, if you listen carefully
 
 The entire project started from a brief document describing the client's pain points. No detailed specs, no wireframes, no user stories. Understanding what they actually needed (vs. what they literally wrote) required reading between the lines and asking a lot of questions. The document said "digitize forms." What they really needed was "eliminate manual data entry entirely."
 
 ### Simple sync beats clever sync
 
-I initially considered more sophisticated sync strategies — operational transforms, vector clocks, conflict resolution UIs. In practice, `synced = false` + last-write-wins covers 99% of real-world usage. Don't over-engineer sync unless you have evidence of actual conflicts.
+I initially considered more sophisticated sync strategies: operational transforms, vector clocks, conflict resolution UIs. What made it to production is `synced = false`, UUID-keyed idempotent uploads, and a data flow that prevents conflicts instead of resolving them. Months of real-world usage haven't produced a single case that needed more. Don't over-engineer sync unless you have evidence of actual conflicts.
 
 ### PostgreSQL functions are polarizing but effective
 
-The "functions as API" approach wasn't my choice — it was already the established pattern at the company when I joined the project. I'll admit I was skeptical at first. But after working with it for months, I came to appreciate its strengths: excellent performance, business logic centralized in one place, and a very thin backend layer. It's not what I'd pick for every project, but for a stable schema with a small team, it works well. I wouldn't recommend it for a team of 20 with a rapidly changing data model, though.
+The "functions as API" approach wasn't my choice: it was already the established pattern at the company when I joined the project. I'll admit I was skeptical at first. But after working with it for months, I came to appreciate its strengths: excellent performance, business logic centralized in one place, and a very thin backend layer. It's not what I'd pick for every project, but for a stable schema with a small team, it works well. I wouldn't recommend it for a team of 20 with a rapidly changing data model, though.
 
 ### Jetpack Compose changes everything
 
@@ -450,15 +473,15 @@ Coming from the XML/View system, building complex UIs with Compose was dramatica
 
 ## Final Thoughts
 
-Building this app pushed me into territory I hadn't explored before — geospatial computing, offline architecture, GPS signal processing, on-device ML for voice recognition, hardware integration with haptics. It's the kind of project that doesn't fit neatly into a "frontend" or "backend" box.
+Building this app pushed me into territory I hadn't explored before: geospatial computing, offline architecture, GPS signal processing, on-device ML for voice recognition, hardware integration with haptics. It's the kind of project that doesn't fit neatly into a "frontend" or "backend" box.
 
 I'll be honest: there were moments where I felt completely out of my depth. Staring at GeoPackage geometry calculations at 2 AM, wondering if I'd chosen the wrong approach entirely. Debugging GPS drift on a highway shoulder in the rain. Trying to translate vague requirements into concrete features when the client knew they wanted *something* digital but wasn't sure exactly *what*.
 
-But piece by piece, it came together. And the first time I watched a full patrol — start to finish, zero manual input, all data logged automatically — I knew the hard parts were worth it.
+But piece by piece, it came together. And the first time I watched a full patrol run start to finish, zero manual input, all data logged automatically, I knew the hard parts were worth it.
 
-If you're working on something similar — an app that needs to work in harsh conditions, offline, with spatial data — I hope this breakdown gives you useful starting points. The stack (Kotlin + Jetpack Compose + Room + GeoPackage + MapLibre + PostgreSQL + VOSK) proved to be robust and capable.
+If you're working on something similar (an app that needs to work in harsh conditions, offline, with spatial data) I hope this breakdown gives you useful starting points. The stack (Kotlin + Jetpack Compose + Room + GeoPackage + MapLibre + PostgreSQL + VOSK) proved to be robust and capable.
 
-The app is currently in testing, with beta distribution about to begin through Firebase App Distribution. We're also using **Firebase Crashlytics** to catch issues early before the full rollout. But from what the field workers have seen so far, the reaction has been overwhelmingly positive — they can already tell this will replace their stacks of paper forms with a few taps and voice commands. That's the kind of impact that makes the technical challenges worth it.
+The app has been in production since mid-2026, distributed as a self-hosted APK rather than through Google Play (a deliberate choice for a closed fleet of managed devices), with **Firebase Crashlytics** watching for issues in the field. The paper forms are gone. Patrols that used to end with manual data entry back at the office now end when the driver parks the vehicle. That's the kind of impact that makes the technical challenges worth it.
 
 ---
 
