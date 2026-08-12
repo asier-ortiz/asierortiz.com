@@ -1,3 +1,9 @@
+## [1.48.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.48.0...v1.48.1) (2026-08-04)
+
+### Bug Fixes
+
+* **seo, hero:** align job title to "Full-Stack & Data Developer" ([50b4ed8](https://github.com/asier-ortiz/asierortiz.com/commit/50b4ed8e004fc4e36f60117682a3fe3121f77c31))
+
 ## [1.48.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.47.1...v1.48.0) (2026-06-26)
 
 ### Features
