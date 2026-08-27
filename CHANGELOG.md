@@ -1,3 +1,9 @@
+## [1.49.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.48.1...v1.49.0) (2026-08-27)
+
+### Features
+
+* **background:** add UNIR Professional Program in Cloud Architectures ([ce692b3](https://github.com/asier-ortiz/asierortiz.com/commit/ce692b3e1ab5f6ea3acad30d1caf4f70e4eae58c))
+
 ## [1.48.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.48.0...v1.48.1) (2026-08-04)
 
 ### Bug Fixes
