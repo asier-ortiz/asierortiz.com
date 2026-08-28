@@ -8,7 +8,7 @@ export interface academicItem {
 const academicData: academicItem[] = [
   {
     date: '2027',
-    title: 'Professional Program in Cloud Architectures',
+    title: 'Advanced Program in Cloud Architecture',
     center: 'UNIR - International University of La Rioja',
     description:
       'Cloud architecture design and deployment on AWS and Azure, ' +
