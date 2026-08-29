@@ -1,8 +1,10 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Particles from '@components/Particles/Particles.vue';
+import StackMarquee from '@components/Stack/StackMarquee.astro';
 import siteData from '@config/siteData.json';
 import usesData from '@config/usesData.json';
+import stackData from '@config/stackData.json';
 ---
 
 <Layout
@@ -18,7 +20,8 @@ import usesData from '@config/usesData.json';
         list of my essential software and hardware that power my daily workflow.
       </p>
     </header>
-    <section class="prose mt-10">
+    <StackMarquee items={stackData} class="mt-12" />
+    <section class="prose mt-14">
       {
         usesData
           .sort((a, _) => (a.sectionTitle === 'Setup' ? -1 : 1))

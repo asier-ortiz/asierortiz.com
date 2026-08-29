@@ -1,0 +1,160 @@
+---
+import { Icon } from 'astro-icon/components';
+import StackMarqueeItem from '@components/Stack/StackMarqueeItem.astro';
+import { type StackItem } from '@config/stackData.json';
+
+interface Props {
+  items: StackItem[];
+  title?: string;
+  /** Must be unique per page: it feeds the heading id and the pause switch id. */
+  id?: string;
+  /** Seconds per item, so the speed stays constant when the list grows. */
+  secondsPerItem?: number;
+  class?: string;
+}
+
+const {
+  items,
+  title = 'Technologies I work with',
+  id = 'stack-marquee',
+  secondsPerItem = 3.5,
+  class: className,
+} = Astro.props as Props;
+
+const duration = `${items.length * secondsPerItem}s`;
+---
+
+<!--
+  Seamless loop: the track holds two identical copies and translates by -50%,
+  so the last frame equals the first. One copy must be wider than the viewport.
+  The second copy is aria-hidden and removed entirely under prefers-reduced-motion.
+  The pause checkbox must precede the viewport and the toggle: the pause rules rely on `~`.
+-->
+<section
+  class:list={['stack-marquee flex items-center gap-2', className]}
+  aria-labelledby={`${id}-title`}
+>
+  <h2 id={`${id}-title`} class="sr-only">{title}</h2>
+  <input id={`${id}-pause`} type="checkbox" role="switch" class="stack-marquee__pause sr-only" />
+  <div class="stack-marquee__viewport flex h-8 min-w-0 flex-1 items-center">
+    <div class="stack-marquee__track" style={`--marquee-duration: ${duration}`}>
+      <ul role="list" class="stack-marquee__list">
+        {items.map((item) => <StackMarqueeItem {...item} />)}
+      </ul>
+      <ul role="list" class="stack-marquee__list" aria-hidden="true">
+        {items.map((item) => <StackMarqueeItem {...item} />)}
+      </ul>
+    </div>
+  </div>
+  <label
+    for={`${id}-pause`}
+    class="stack-marquee__toggle grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-base-500 transition-colors duration-300 hover:text-base-200"
+  >
+    <Icon name="tdesign:pause" class="stack-marquee__icon-pause size-4" aria-hidden="true" />
+    <Icon name="tdesign:play" class="stack-marquee__icon-play hidden size-4" aria-hidden="true" />
+    <span class="sr-only">Pause animation</span>
+  </label>
+</section>
+
+<style lang="scss">
+  .stack-marquee {
+    --marquee-gap: 2.5rem;
+    --marquee-fade: 3rem;
+  }
+
+  .stack-marquee__viewport {
+    overflow: hidden;
+    overflow: clip; /* not a scroll container, so scrollIntoView() can never offset the track */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--marquee-fade),
+      #000 calc(100% - var(--marquee-fade)),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--marquee-fade),
+      #000 calc(100% - var(--marquee-fade)),
+      transparent
+    );
+  }
+
+  .stack-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: stack-marquee-scroll var(--marquee-duration, 90s) linear infinite;
+  }
+
+  .stack-marquee__list {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--marquee-gap);
+    padding-right: var(--marquee-gap);
+  }
+
+  @keyframes stack-marquee-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (hover: hover) {
+    .stack-marquee:hover .stack-marquee__track {
+      animation-play-state: paused;
+    }
+  }
+
+  .stack-marquee__pause:checked ~ .stack-marquee__viewport .stack-marquee__track {
+    animation-play-state: paused;
+  }
+
+  .stack-marquee__pause:checked ~ .stack-marquee__toggle {
+    .stack-marquee__icon-pause {
+      display: none;
+    }
+
+    .stack-marquee__icon-play {
+      display: block;
+    }
+  }
+
+  .stack-marquee__pause:focus-visible ~ .stack-marquee__toggle {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-base-950;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack-marquee__pause,
+    .stack-marquee__toggle {
+      display: none;
+    }
+
+    .stack-marquee__viewport {
+      height: auto;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .stack-marquee__track {
+      width: 100%;
+      animation: none;
+    }
+
+    .stack-marquee__list {
+      flex: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 0.75rem;
+      padding-right: 0;
+    }
+
+    .stack-marquee__list[aria-hidden='true'] {
+      display: none;
+    }
+  }
+</style>

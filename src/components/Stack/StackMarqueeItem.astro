@@ -1,0 +1,39 @@
+---
+import { Icon } from 'astro-icon/components';
+import { type StackItem } from '@config/stackData.json';
+
+type Props = StackItem;
+
+const { name, icon, color } = Astro.props as Props;
+---
+
+<li
+  class="stack-marquee__item flex shrink-0 items-center gap-2.5 text-base-400"
+  style={`--brand: ${color}`}
+>
+  <Icon
+    name={icon}
+    class="stack-marquee__icon size-5 shrink-0 transition-colors duration-300"
+    aria-hidden="true"
+  />
+  <span
+    class="stack-marquee__label whitespace-nowrap text-sm font-medium tracking-wide transition-colors duration-300"
+  >
+    {name}
+  </span>
+</li>
+
+<style lang="scss">
+  /* Pointer-only: on touch, :hover would stick to the tapped item. */
+  @media (hover: hover) {
+    .stack-marquee__item:hover {
+      .stack-marquee__icon {
+        color: var(--brand);
+      }
+
+      .stack-marquee__label {
+        @apply text-base-100;
+      }
+    }
+  }
+</style>
