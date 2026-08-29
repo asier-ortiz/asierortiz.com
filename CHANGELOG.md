@@ -1,3 +1,9 @@
+## [1.50.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.49.1...v1.50.0) (2026-08-29)
+
+### Features
+
+* **uses:** add technology logo marquee with CSS-only pause ([5a6e921](https://github.com/asier-ortiz/asierortiz.com/commit/5a6e921e50bb10caa07374c54c7acffa05e93139))
+
 ## [1.49.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.49.0...v1.49.1) (2026-08-28)
 
 ### Bug Fixes
