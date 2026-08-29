@@ -1,3 +1,9 @@
+## [1.49.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.49.0...v1.49.1) (2026-08-28)
+
+### Bug Fixes
+
+* **background:** align cloud program title to "Advanced Program in Cloud Architecture" ([990cbe3](https://github.com/asier-ortiz/asierortiz.com/commit/990cbe3bffec24919e17de8e2332c1a6b88e0722))
+
 ## [1.49.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.48.1...v1.49.0) (2026-08-27)
 
 ### Features
