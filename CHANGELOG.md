@@ -1,3 +1,9 @@
+## [1.50.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.50.0...v1.50.1) (2026-08-30)
+
+### Bug Fixes
+
+* **uses:** replace MX Keys with Keychron K5 Pro RGB ([0054d55](https://github.com/asier-ortiz/asierortiz.com/commit/0054d556ab64e92671f1a8d6fa5c282444dc99d3))
+
 ## [1.50.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.49.1...v1.50.0) (2026-08-29)
 
 ### Features
