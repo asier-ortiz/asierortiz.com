@@ -1,5 +1,6 @@
 {
   "name": "asieroritz",
+  "private": true,
   "type": "module",
   "version": "1.1.0",
   "scripts": {
