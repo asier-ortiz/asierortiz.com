@@ -83,7 +83,7 @@ const usesData: usesItem[] = [
       'Dell UltraSharp UW3417W 3440x1440 @60Hz',
       'BenQ PD2700U 3840x2160 @60Hz (Portrait)',
       'BenQ ScreenBar Plus',
-      'Logitech MX Keys',
+      'Keychron K5 Pro RGB (Gateron red switches)',
       'Logitech G502 X',
       'Logitech Master MX 3',
       'Focusrite Scarlett Solo 2nd gen',
