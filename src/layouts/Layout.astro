@@ -139,7 +139,15 @@ const defaultImage = siteData.defaultImage.src;
       import AOS from '@js/aos/aos';
 
       if (siteData.useAnimations === true && typeof window !== 'undefined') {
-        AOS.init({ once: true, duration: 0.75, distance: 15 });
+        AOS.init({
+          once: true,
+          duration: 0.75,
+          distance: 15,
+          // When disabled, AOS strips the data-aos attributes, so the hide rules
+          // in src/styles/aos.scss stop matching and content stays visible.
+          // Evaluated once per full page load.
+          disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        });
         document.addEventListener('astro:after-swap', AOS.refreshHard);
       }
     </script>

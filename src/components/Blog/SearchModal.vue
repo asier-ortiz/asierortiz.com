@@ -122,7 +122,12 @@ watch(selectedIndex, (newIndex) => {
         const selectedRect = selected.getBoundingClientRect();
 
         if (selectedRect.top < containerRect.top || selectedRect.bottom > containerRect.bottom) {
-          selected.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          selected.scrollIntoView({
+            block: 'nearest',
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              ? 'auto'
+              : 'smooth',
+          });
         }
       }
     });

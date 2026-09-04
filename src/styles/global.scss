@@ -5,8 +5,11 @@
 @layer base {
   html {
     @apply bg-base-950 font-sans leading-[1.6rem] text-base-50;
-    scroll-behavior: smooth;
     scrollbar-gutter: stable;
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   ::-webkit-scrollbar {
@@ -93,7 +96,7 @@
   }
 
   .skeleton {
-    @apply bg-base-800 animate-pulse;
+    @apply bg-base-800 motion-safe:animate-pulse;
   }
 
   img.fade-in {
@@ -162,7 +165,10 @@
   }
 
   .search-input:focus-within {
-    @apply animate-input-focus;
+    /* The scale pulse fires on keyboard focus too, so it must honor reduced motion. */
+    @media (prefers-reduced-motion: no-preference) {
+      @apply animate-input-focus;
+    }
   }
 
   :focus-visible {
@@ -177,10 +183,6 @@
 
   .group:hover .underline-ltr {
     background-size: 100% 2px;
-  }
-
-  .pause {
-    animation-play-state: paused !important;
   }
 
   .primary-focus {

@@ -99,6 +99,29 @@ import siteData from '@config/siteData.json.ts';
       @apply -right-72;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-nav__content {
+      /* The open position lives in animation-fill-mode: forwards, and the
+         element's transition-all would animate the pinned `right` change. */
+      @apply transition-none;
+
+      &.mobile-nav--slide-in {
+        animation: none;
+        @apply right-0;
+      }
+
+      &.mobile-nav--slide-out {
+        animation: none;
+        @apply -right-72;
+      }
+    }
+
+    .mobile-nav__backdrop--fade-in {
+      animation: none;
+      @apply opacity-40;
+    }
+  }
 </style>
 
 <script>
@@ -107,6 +130,7 @@ import siteData from '@config/siteData.json.ts';
   let mobileNavContent;
   let mobileNavCloseBtn;
   let mobileNavBackdrop;
+  let hideContentTimeout;
 
   function toggleMobileNav(event) {
     if (mobileNavBurger && mobileNavContent && mobileNavContainer && mobileNavBackdrop) {
@@ -114,6 +138,9 @@ import siteData from '@config/siteData.json.ts';
         mobileNavContainer.classList.add('open');
         mobileNavBurger.setAttribute('aria-expanded', 'true');
 
+        // A close scheduled this hide; reopening within its 300ms must cancel
+        // it or the open drawer gets display:none under a live backdrop.
+        clearTimeout(hideContentTimeout);
         mobileNavContent.classList.remove('hidden');
         mobileNavContent.classList.remove('mobile-nav--slide-out');
         mobileNavContent.classList.add('mobile-nav--slide-in');
@@ -128,7 +155,7 @@ import siteData from '@config/siteData.json.ts';
         mobileNavContent.classList.remove('mobile-nav--slide-in');
         mobileNavContent.classList.add('mobile-nav--slide-out');
 
-        setTimeout(() => {
+        hideContentTimeout = setTimeout(() => {
           mobileNavContent?.classList.add('hidden');
         }, 300);
 

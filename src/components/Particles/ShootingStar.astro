@@ -37,13 +37,28 @@
       transform: rotate(var(--angle)) translateX(300px);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shooting-star {
+      animation: none;
+      display: none;
+    }
+  }
 </style>
 
 <script is:inline>
   (function () {
     function createShootingStar() {
       var container = document.getElementById('shooting-stars-container');
-      if (!container || window.innerWidth < 768) return;
+      // Checked per spawn (not around the loop) so stars stop and resume with
+      // the OS reduced-motion setting without needing a media query listener.
+      if (
+        !container ||
+        window.innerWidth < 768 ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        return;
+      }
 
       var star = document.createElement('div');
       star.className = 'shooting-star';
@@ -55,6 +70,11 @@
       container.appendChild(star);
 
       star.addEventListener('animationend', function () {
+        star.remove();
+      });
+
+      // A reduced-motion toggle mid-flight cancels the animation instead of ending it.
+      star.addEventListener('animationcancel', function () {
         star.remove();
       });
     }

@@ -95,4 +95,13 @@
       @apply transform scale-110 bg-primary-500 text-base-800 shadow-lg;
     }
   }
+
+  /* Must come after the @screen xl hover rule: same specificity, last wins. */
+  @media (prefers-reduced-motion: reduce) {
+    @apply transition-none;
+
+    &:hover {
+      @apply scale-100;
+    }
+  }
 }

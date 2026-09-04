@@ -68,6 +68,13 @@ import siteData from '@config/siteData.json';
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    /* Keep the static glow (base box-shadow above); only stop the breathing. */
+    .eclipse-ring {
+      animation: none;
+    }
+  }
+
   /* Large desktops and monitors */
   @media (min-width: 1200px) {
     #hero .max-w-sm {

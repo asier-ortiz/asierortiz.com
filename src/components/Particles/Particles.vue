@@ -8,14 +8,28 @@ import { tsParticles } from 'tsparticles-engine';
 import { loadStarsPreset } from 'tsparticles-preset-stars';
 
 let container = null;
+let motionQuery = null;
+let opQueue = Promise.resolve();
 
-async function initParticles() {
+// Serializes init/destroy: resize bursts and reduced-motion toggles would
+// otherwise interleave with an in-flight load (double containers for the same
+// id, or a sub-768px crossing during init leaving a hidden loop running).
+function enqueue(op) {
+  opQueue = opQueue.then(op, op);
+  return opQueue;
+}
+
+async function initParticles(reducedMotion) {
   await loadStarsPreset(tsParticles);
 
-  container = await tsParticles.load('page-particles', {
+  const loaded = await tsParticles.load('page-particles', {
     preset: 'stars',
     fullScreen: { enable: false },
     background: { color: 'transparent' },
+    // Under reduced motion the engine's IntersectionObserver must not call
+    // play() and undo the manual pause below; the canvas is viewport-fixed,
+    // so the option provides no value here anyway.
+    pauseOnOutsideViewport: !reducedMotion,
     style: {
       position: 'fixed',
       inset: '0',
@@ -32,7 +46,7 @@ async function initParticles() {
         value: { min: 1, max: 1.5 },
       },
       move: {
-        enable: true,
+        enable: !reducedMotion,
         speed: 0.5,
         direction: 'top',
         straight: false,
@@ -43,7 +57,7 @@ async function initParticles() {
       opacity: {
         value: { min: 0.3, max: 0.8 },
         animation: {
-          enable: true,
+          enable: !reducedMotion,
           speed: 0.5,
           minimumValue: 0.3,
           sync: false,
@@ -52,11 +66,20 @@ async function initParticles() {
     },
   });
 
-  document.addEventListener('visibilitychange', () => {
-    if (!container) return;
-    if (document.hidden) container.pause();
-    else container.play();
-  });
+  container = loaded;
+
+  if (reducedMotion && loaded) {
+    // The engine only paints inside requestAnimationFrame callbacks, and
+    // pause() cancels the pending frame. Wait two frames so the stars are
+    // drawn at least once, then freeze the loop (zero CPU afterwards). The
+    // instance is captured: a stale callback after a quick preference toggle
+    // must not pause (or blank) the replacement container.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (container === loaded) loaded.pause();
+      });
+    });
+  }
 }
 
 async function destroyParticles() {
@@ -66,30 +89,77 @@ async function destroyParticles() {
   }
 }
 
+async function manageParticles() {
+  const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+  if (isDesktop && !container) {
+    await initParticles(motionQuery.matches);
+  } else if (!isDesktop && container) {
+    await destroyParticles();
+  }
+}
+
 let resizeHandler;
+let motionChangeHandler;
+let visibilityHandler;
+let frozenRepaintTimer = null;
+
+// A window resize clears the canvas bitmap, and the engine repaints it only
+// from its animation loop — which is paused under reduced motion. Repaint one
+// frame after the engine's own debounced resize (0.5s default) has settled.
+function scheduleFrozenRepaint() {
+  if (frozenRepaintTimer) clearTimeout(frozenRepaintTimer);
+  frozenRepaintTimer = setTimeout(() => {
+    frozenRepaintTimer = null;
+    if (container && motionQuery.matches) container.draw(true);
+  }, 700);
+}
 
 onMounted(() => {
-  const checkScreenAndManageParticles = async () => {
-    const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+  motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    if (isDesktop && !container) {
-      await initParticles();
-    } else if (!isDesktop && container) {
-      await destroyParticles();
-    }
+  enqueue(manageParticles);
+
+  resizeHandler = () => {
+    enqueue(manageParticles);
+    if (motionQuery.matches) scheduleFrozenRepaint();
   };
-
-  checkScreenAndManageParticles();
-
-  resizeHandler = () => checkScreenAndManageParticles();
   window.addEventListener('resize', resizeHandler);
+
+  // Live OS toggle: rebuild with the config matching the new preference.
+  motionChangeHandler = () => {
+    enqueue(async () => {
+      await destroyParticles();
+      await manageParticles();
+    });
+  };
+  motionQuery.addEventListener('change', motionChangeHandler);
+
+  // Registered once, not per init: a stale closure would otherwise play() a
+  // frozen container after a live reduced-motion re-init.
+  visibilityHandler = () => {
+    if (!container) return;
+    if (document.hidden) container.pause();
+    else if (!motionQuery.matches) container.play();
+  };
+  document.addEventListener('visibilitychange', visibilityHandler);
 });
 
 onBeforeUnmount(() => {
   if (resizeHandler) {
     window.removeEventListener('resize', resizeHandler);
   }
-  destroyParticles();
+  if (motionQuery && motionChangeHandler) {
+    motionQuery.removeEventListener('change', motionChangeHandler);
+  }
+  if (visibilityHandler) {
+    document.removeEventListener('visibilitychange', visibilityHandler);
+  }
+  if (frozenRepaintTimer) {
+    clearTimeout(frozenRepaintTimer);
+  }
+  // Through the queue so an in-flight init is destroyed, not orphaned.
+  enqueue(destroyParticles);
 });
 </script>
 

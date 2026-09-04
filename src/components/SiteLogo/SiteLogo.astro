@@ -6,7 +6,7 @@ import siteData from '@config/siteData.json';
   class="primary-focus group/navlink text-xl"
   href="/"
   data-section="hero"
-  onclick="if (location.pathname === '/' && location.hash === '#hero') { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }"
+  onclick="if (location.pathname === '/' && location.hash === '#hero') { event.preventDefault(); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }"
 >
   <span class="navlink__underline-ltr inline">
     {siteData.author.name}

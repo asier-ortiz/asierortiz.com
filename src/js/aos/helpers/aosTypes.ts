@@ -20,7 +20,7 @@ export interface AOSDefaultOptions extends AnimeOptions {
   offset: number;
   once: boolean;
   mirror: boolean;
-  disable: boolean;
+  disable: boolean | 'mobile' | 'phone' | 'tablet' | (() => boolean);
   anchorPlacement: TriggerPlacement;
   startEvent: string;
   animatedClassName: string;

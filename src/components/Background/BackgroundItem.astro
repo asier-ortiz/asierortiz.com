@@ -41,4 +41,10 @@ const { title, center, description, date, initialOpen } = Astro.props;
       transform: scale(1.2);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bullet {
+      animation: none;
+    }
+  }
 </style>
