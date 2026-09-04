@@ -1,3 +1,9 @@
+## [1.51.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.50.1...v1.51.0) (2026-09-04)
+
+### Features
+
+* **a11y:** respect prefers-reduced-motion across the site ([7d6cecc](https://github.com/asier-ortiz/asierortiz.com/commit/7d6ceccb02852013b0867283f8ce0cf295b52590))
+
 ## [1.50.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.50.0...v1.50.1) (2026-08-30)
 
 ### Bug Fixes
