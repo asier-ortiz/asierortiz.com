@@ -5,6 +5,7 @@ import AlconPhones from '@images/projects/alcon-phones.webp';
 import AlconTablet from '@images/projects/alcon-tablet.webp';
 import Nieves from '@images/projects/nieves.webp';
 import FlareWatch from '@images/projects/flarewatch.webp';
+import VGarbi from '@images/projects/vgarbi.webp';
 
 export interface ProjectItem {
   /** Gallery frames; the first one is shown on load and a single frame means no carousel. */
@@ -92,6 +93,27 @@ export const projectData: ProjectItem[] = [
       { language: 'OpenLayers', color: '#1F6B75' },
       { language: 'Docker', color: '#2496ED' },
       { language: 'JWT', color: '#FB015B' },
+    ],
+    type: 'mobile & web development',
+    buttonText: 'Read Blog Post',
+  },
+  {
+    images: [VGarbi],
+    title: 'VGarbi',
+    description: `A WhatsApp bot for reporting street-cleaning and waste-collection problems in Vitoria-Gasteiz.
+    Features a bilingual Spanish and Basque conversation, a native WhatsApp form with the full incident taxonomy and a photo,
+    address geocoding with service-area validation, tracking references for every report,
+    and automatic forwarding to the cleaning contractor's incident platform.
+    `,
+    href: new URL('https://asierortiz.com/blog/whatsapp-as-the-front-end/'),
+    languages: [
+      { language: 'Python', color: '#3776AB' },
+      { language: 'FastAPI', color: '#009688' },
+      { language: 'PostgreSQL', color: '#336791' },
+      { language: 'PostGIS', color: '#65974A' },
+      { language: 'WhatsApp Cloud API', color: '#25D366' },
+      { language: 'WhatsApp Flows', color: '#128C7E' },
+      { language: 'Docker', color: '#2496ED' },
     ],
     type: 'mobile & web development',
     buttonText: 'Read Blog Post',
