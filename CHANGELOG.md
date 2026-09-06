@@ -1,3 +1,9 @@
+## [1.54.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.53.0...v1.54.0) (2026-09-06)
+
+### Features
+
+* **projects:** add VGarbi WhatsApp reporting bot project card ([db10cb9](https://github.com/asier-ortiz/asierortiz.com/commit/db10cb9e82bf297f4914ed9ef59a9c91d23efff7))
+
 ## [1.53.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.52.0...v1.53.0) (2026-09-06)
 
 ### Features
