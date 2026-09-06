@@ -1,3 +1,9 @@
+## [1.52.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.51.0...v1.52.0) (2026-09-06)
+
+### Features
+
+* **blog:** add WhatsApp citizen reporting bot article ([63136d7](https://github.com/asier-ortiz/asierortiz.com/commit/63136d724c5e3a9e53083c6243afdb814ee909d4))
+
 ## [1.51.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.50.1...v1.51.0) (2026-09-04)
 
 ### Features
