@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" width="800" height="548" role="img" aria-labelledby="title desc">
+  <title id="title">Path of one completed-form message through the API process and the worker process</title>
+  <desc id="desc">The API process verifies the webhook signature, inserts the raw event and answers 200. The worker process claims the row with SKIP LOCKED, checks the dedup table, takes the chat lock, downloads the photo, runs the conditional UPDATE that closes the report, sends the confirmation, marks the message id, acks and releases the lock. Three callouts mark where a redelivery, a crash or a duplicate is absorbed.</desc>
+  <style>
+    .lane { fill: #171717; stroke: #404040; stroke-width: 1; }
+    .lane-title { font: 600 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .lane-sub { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .num { font: 600 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .step { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #e5e5e5; }
+    .call { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    .call-key { font: 700 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .legend { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .pg { fill: #38bdf8; }
+    .http { fill: none; stroke: #a3a3a3; stroke-width: 1.2; }
+    .divider { stroke: #404040; stroke-width: 1; stroke-dasharray: 3 3; }
+    .link { stroke: #38bdf8; stroke-width: 1.2; fill: none; }
+  </style>
+
+  <!-- API process lane -->
+  <rect class="lane" x="16" y="16" width="768" height="166" rx="10" />
+  <text class="lane-title" x="32" y="40">API process</text>
+  <text class="lane-sub" x="768" y="40" text-anchor="end">one request, three statements, answered in milliseconds</text>
+  <line class="divider" x1="32" y1="50" x2="768" y2="50" />
+
+  <circle class="http" cx="38" cy="70" r="4" />
+  <text class="num" x="50" y="74">1</text>
+  <text class="step" x="68" y="74">POST /whatsapp/webhook, body signed with X-Hub-Signature-256</text>
+
+  <circle class="http" cx="38" cy="96" r="4" />
+  <text class="num" x="50" y="100">2</text>
+  <text class="step" x="68" y="100">HMAC-SHA256 over the raw bytes, compared in constant time</text>
+
+  <circle class="pg" cx="38" cy="122" r="4" />
+  <text class="num" x="50" y="126">3</text>
+  <text class="step" x="68" y="126">INSERT inbound_event (state pending, visible now)</text>
+
+  <circle class="http" cx="38" cy="148" r="4" />
+  <text class="num" x="50" y="152">4</text>
+  <text class="step" x="68" y="152">200 OK</text>
+
+  <text class="call" x="576" y="152"><tspan class="call-key">A</tspan>  No 200 within a few seconds:</text>
+  <text class="call" x="576" y="165">WhatsApp redelivers the message.</text>
+  <text class="call" x="576" y="178">Absorbed by 6 and 7 below.</text>
+
+  <!-- link between lanes -->
+  <path class="link" d="M 120 182 L 120 196" marker-end="url(#arrow)" />
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <!-- Worker process lane -->
+  <rect class="lane" x="16" y="198" width="768" height="288" rx="10" />
+  <text class="lane-title" x="32" y="222">Worker process</text>
+  <text class="lane-sub" x="768" y="222" text-anchor="end">claims batches of ten, polls once per second when idle</text>
+  <line class="divider" x1="32" y1="232" x2="768" y2="232" />
+
+  <circle class="pg" cx="38" cy="250" r="4" />
+  <text class="num" x="50" y="254">5</text>
+  <text class="step" x="68" y="254">claim: UPDATE ... FOR UPDATE SKIP LOCKED, invisible 60 s</text>
+  <text class="call" x="576" y="254"><tspan class="call-key">B</tspan>  Worker died mid-way: the row</text>
+  <text class="call" x="576" y="267">stays in processing and step 5</text>
+  <text class="call" x="576" y="280">reclaims it after 60 s.</text>
+
+  <circle class="pg" cx="38" cy="276" r="4" />
+  <text class="num" x="50" y="280">6</text>
+  <text class="step" x="68" y="280">dedup: seen this message id? (7-day table)</text>
+
+  <circle class="pg" cx="38" cy="302" r="4" />
+  <text class="num" x="50" y="306">7</text>
+  <text class="step" x="68" y="306">chat lock: INSERT ... ON CONFLICT ... WHERE expired, TTL 30 s</text>
+  <text class="call" x="576" y="306">Busy after 5 tries: defer 1 s,</text>
+  <text class="call" x="576" y="319">attempt refunded.</text>
+
+  <circle class="http" cx="38" cy="328" r="4" />
+  <text class="num" x="50" y="332">8</text>
+  <text class="step" x="68" y="332">handle: download the photo from the Graph API (30 s)</text>
+
+  <circle class="pg" cx="38" cy="354" r="4" />
+  <text class="num" x="50" y="358">9</text>
+  <text class="step" x="68" y="358">UPDATE report SET state='received' WHERE state='draft' RETURNING id</text>
+  <text class="call" x="576" y="358"><tspan class="call-key">C</tspan>  No row returned: a duplicate</text>
+  <text class="call" x="576" y="371">completion. Reply again,</text>
+  <text class="call" x="576" y="384">register nothing.</text>
+
+  <circle class="http" cx="38" cy="380" r="4" />
+  <text class="num" x="50" y="384">10</text>
+  <text class="step" x="68" y="384">send the confirmation with the reference (20 s)</text>
+
+  <circle class="pg" cx="38" cy="406" r="4" />
+  <text class="num" x="50" y="410">11</text>
+  <text class="step" x="68" y="410">mark message id processed (ON CONFLICT DO NOTHING)</text>
+
+  <circle class="pg" cx="38" cy="432" r="4" />
+  <text class="num" x="50" y="436">12</text>
+  <text class="step" x="68" y="436">ack: state = done</text>
+  <text class="call" x="576" y="436">Exception in 8 to 12: retry with</text>
+  <text class="call" x="576" y="449">backoff 2^attempts s, dead after 5.</text>
+
+  <circle class="pg" cx="38" cy="458" r="4" />
+  <text class="num" x="50" y="462">13</text>
+  <text class="step" x="68" y="462">finally: release the chat lock WHERE owner = me</text>
+
+  <!-- legend -->
+  <circle class="pg" cx="38" cy="512" r="4" />
+  <text class="legend" x="50" y="516">statement against PostgreSQL</text>
+  <circle class="http" cx="250" cy="512" r="4" />
+  <text class="legend" x="262" y="516">HTTP call or local step</text>
+  <text class="legend" x="420" y="516"><tspan class="call-key">A B C</tspan>  where a redelivery, a crash or a duplicate is absorbed</text>
+</svg>
