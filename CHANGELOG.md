@@ -1,3 +1,10 @@
+## [1.53.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.52.0...v1.53.0) (2026-09-06)
+
+### Features
+
+* **blog:** scroll wide Markdown tables inside the article on small screens ([baa546a](https://github.com/asier-ortiz/asierortiz.com/commit/baa546a3b1c2e7a80e4835274bd78a4764fc3699))
+* **projects:** add rotating image gallery to project cards and refresh ALCON shots ([361b23d](https://github.com/asier-ortiz/asierortiz.com/commit/361b23dd1b4c16d7eaae7ae77aa4837a248befad))
+
 ## [1.52.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.51.0...v1.52.0) (2026-09-06)
 
 ### Features
