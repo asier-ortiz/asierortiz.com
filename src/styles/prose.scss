@@ -7,4 +7,19 @@
   @apply prose-h4:text-lg md:prose-h4:text-xl;
   @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:font-medium;
   @apply prose-p:my-4;
+
+  /* Tables scroll inside the article on narrow screens instead of widening the page. */
+  .table-wrap {
+    @apply my-8 max-w-full overflow-x-auto;
+    -webkit-overflow-scrolling: touch;
+
+    > table {
+      @apply my-0 min-w-full;
+    }
+
+    /* Four or more columns: keep the columns readable and let the wrapper scroll. */
+    > table[data-wide] {
+      min-width: 40rem;
+    }
+  }
 }
