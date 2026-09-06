@@ -1,0 +1,138 @@
+---
+/**
+ * Image gallery for a project card.
+ *
+ * Renders the frames stacked on top of each other and cross-fades between them
+ * while the gallery is on screen. With a single frame it is a plain image.
+ * The rotation is skipped when the visitor prefers reduced motion or when site
+ * animations are disabled (the `use-animations` class on <body>, same rule AOS uses).
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  images: ImageMetadata[];
+  alt: string;
+  /** Milliseconds each frame stays visible. */
+  interval?: number;
+  class?: string;
+}
+
+const { images, alt, interval = 7000, class: className = '' } = Astro.props;
+const [first] = images;
+---
+
+<div
+  class:list={['project-gallery', className]}
+  style={`aspect-ratio: ${first.width} / ${first.height};`}
+  data-interval={interval}
+  aria-live="off"
+>
+  {
+    images.map((image, index) => (
+      <Image
+        class:list={['project-gallery__frame', { 'is-active': index === 0 }]}
+        src={image}
+        alt={alt}
+        height={700}
+        loading={index === 0 ? 'eager' : 'lazy'}
+        decoding={index === 0 ? 'auto' : 'async'}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .project-gallery {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.25rem;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .project-gallery.zoom {
+    transform: scale(1.02);
+  }
+
+  .project-gallery__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .project-gallery__frame.is-active {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-gallery,
+    .project-gallery__frame {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function setupGallery(gallery: HTMLElement) {
+    const frames = Array.from(gallery.querySelectorAll<HTMLElement>('.project-gallery__frame'));
+    if (frames.length < 2) return;
+    if (reducedMotion.matches || !document.body.classList.contains('use-animations')) return;
+
+    const interval = Number(gallery.dataset.interval) || 7000;
+    let index = 0;
+    let timer: number | undefined;
+    let visible = false;
+    let paused = false;
+
+    const show = (next: number) => {
+      frames[index].classList.remove('is-active');
+      index = next;
+      frames[index].classList.add('is-active');
+    };
+
+    const start = () => {
+      if (timer !== undefined || !visible || paused || document.hidden) return;
+      timer = window.setInterval(() => show((index + 1) % frames.length), interval);
+    };
+
+    const stop = () => {
+      if (timer === undefined) return;
+      window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    // Rotate only while the card is actually on screen.
+    new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        visible ? start() : stop();
+      },
+      { threshold: 0.4 }
+    ).observe(gallery);
+
+    // Hold the current frame while the visitor is looking at or interacting with the card.
+    const pause = () => {
+      paused = true;
+      stop();
+    };
+    const resume = () => {
+      paused = false;
+      start();
+    };
+    gallery.addEventListener('mouseenter', pause);
+    gallery.addEventListener('mouseleave', resume);
+    gallery.addEventListener('focusin', pause);
+    gallery.addEventListener('focusout', resume);
+
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  }
+
+  document.querySelectorAll<HTMLElement>('.project-gallery').forEach(setupGallery);
+</script>

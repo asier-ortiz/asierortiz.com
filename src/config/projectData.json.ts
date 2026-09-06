@@ -1,11 +1,14 @@
 import type { ImageMetadata } from 'astro';
 import ArabaMarket from '@images/projects/araba-market.webp';
-import Alcon from '@images/projects/alcon.webp';
+import AlconFoldable from '@images/projects/alcon-foldable.webp';
+import AlconPhones from '@images/projects/alcon-phones.webp';
+import AlconTablet from '@images/projects/alcon-tablet.webp';
 import Nieves from '@images/projects/nieves.webp';
 import FlareWatch from '@images/projects/flarewatch.webp';
 
 export interface ProjectItem {
-  image: ImageMetadata;
+  /** Gallery frames; the first one is shown on load and a single frame means no carousel. */
+  images: ImageMetadata[];
   title: string;
   description: string;
   href?: URL;
@@ -22,7 +25,7 @@ export interface Language {
 
 export const projectData: ProjectItem[] = [
   {
-    image: FlareWatch,
+    images: [FlareWatch],
     title: 'FlareWatch',
     description: `An Android app for IBD patients to log daily symptoms, diet, and lifestyle habits.
     Uses machine learning models on the backend to predict flare risk, track symptom trends over time,
@@ -47,7 +50,7 @@ export const projectData: ProjectItem[] = [
     buttonIcon: 'tdesign:code',
   },
   {
-    image: Alcon,
+    images: [AlconFoldable, AlconPhones, AlconTablet],
     title: 'ALCON',
     description: `An offline-first Android app for road surveillance teams at the Provincial Council of Álava.
     Features real-time GPS tracking with automatic road and kilometer-point detection, incident and emergency reporting with photos,
@@ -70,7 +73,7 @@ export const projectData: ProjectItem[] = [
     buttonText: 'Read Blog Post',
   },
   {
-    image: Nieves,
+    images: [Nieves],
     title: 'Nieves',
     description: `A web platform for coordinating critical winter road operations at the Provincial Council of Álava.
     Modernizes a 15-year-old legacy desktop system with real-time GPS vehicle tracking, IoT weather sensor integration,
@@ -94,7 +97,7 @@ export const projectData: ProjectItem[] = [
     buttonText: 'Read Blog Post',
   },
   {
-    image: ArabaMarket,
+    images: [ArabaMarket],
     title: 'Araba Market',
     description: `A hybrid mobile app for discovering local shops, producers, and services across the province of Álava.
     Features an interactive map, business directory organized by districts, and a promotional voucher system to boost local commerce.

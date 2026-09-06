@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import ProjectGallery from '@components/Projects/ProjectGallery.astro';
 import Button from '@components/Button/Button.astro';
 import { type ProjectItem } from '@config/projectData.json';
 
@@ -8,7 +8,7 @@ interface Props extends ProjectItem {
   rest?: any;
 }
 
-const { image, title, description, href, languages, type, buttonText, buttonIcon, ...rest } =
+const { images, title, description, href, languages, type, buttonText, buttonIcon, ...rest } =
   Astro.props as Props;
 ---
 
@@ -17,14 +17,8 @@ const { image, title, description, href, languages, type, buttonText, buttonIcon
   data-type={Array.isArray(type) ? type.join(',') : type}
   {...rest}
 >
-  <div class="mx-auto max-w-4xl image-container">
-    <Image
-      class="project-image object-cover rounded fade-in"
-      src={image}
-      alt={title}
-      loading="eager"
-      height={700}
-    />
+  <div class="mx-auto w-full max-w-4xl image-container">
+    <ProjectGallery images={images} alt={title} />
   </div>
   <div class="mt-4 flex flex-grow flex-col justify-between">
     <div>
@@ -90,14 +84,6 @@ const { image, title, description, href, languages, type, buttonText, buttonIcon
     overflow: hidden;
   }
 
-  .project-image {
-    transition: transform 0.4s ease-in-out;
-  }
-
-  .project-image.zoom {
-    transform: scale(1.02);
-  }
-
   .disabled-button {
     opacity: 0.5;
     cursor: default;
@@ -108,28 +94,16 @@ const { image, title, description, href, languages, type, buttonText, buttonIcon
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
 
-    // Zoom effect on hover
+    // Zoom the card's gallery while the visitor hovers the action button
     const buttons = document.querySelectorAll('.hover-button');
     buttons.forEach((button) => {
-      const image = button.closest('.project-container')?.querySelector('.project-image');
-      if (button && image) {
+      const gallery = button.closest('.project-container')?.querySelector('.project-gallery');
+      if (button && gallery) {
         button.addEventListener('mouseover', () => {
-          image.classList.add('zoom');
+          gallery.classList.add('zoom');
         });
         button.addEventListener('mouseout', () => {
-          image.classList.remove('zoom');
-        });
-      }
-    });
-
-    // Fade-in effect once image is loaded
-    const images = document.querySelectorAll('img.fade-in');
-    images.forEach((img) => {
-      if (img.complete) {
-        img.classList.add('loaded');
-      } else {
-        img.addEventListener('load', () => {
-          img.classList.add('loaded');
+          gallery.classList.remove('zoom');
         });
       }
     });
