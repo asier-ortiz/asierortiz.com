@@ -1,3 +1,9 @@
+## [1.56.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.56.0...v1.56.1) (2026-09-10)
+
+### Bug Fixes
+
+* **blog:** align the digital taylorism closing with the other posts ([0a325a7](https://github.com/asier-ortiz/asierortiz.com/commit/0a325a7f98d93dc32cc1eea05f9d14b980c117e6))
+
 ## [1.56.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.55.2...v1.56.0) (2026-09-10)
 
 ### Features
