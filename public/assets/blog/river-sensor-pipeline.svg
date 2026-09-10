@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470" role="img" aria-labelledby="title desc">
+  <title id="title">Two phases: an audit that modifies nothing and a consolidation with bounded repairs</title>
+  <desc id="desc">Phase 1, the audit, modifies nothing: scan the archive into a catalogue of claims, parse headers and tails, run the analyzers for structure, naming, coverage, identity, ranges and duplicates, and write the incident workbook. Phase 2, the consolidation: parse each file in full by dialect, repair lost decimals within physical ranges, snap timestamps to the ten-minute grid, insert with INSERT OR IGNORE under a unique index on station, timestamp and parameter, then left-join a generate_series grid on a pivot to produce one workbook per station. Files with severe identity discrepancies flow from the audit into an exclusion list and never enter phase 2.</desc>
+  <style>
+    .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
+    .box { fill: #171717; stroke: #404040; stroke-width: 1; }
+    .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
+    .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
+    .t { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
+    .s { font: 10.5px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    .mono { font: 10.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #d4d4d4; }
+    .warn { fill: #fbbf24; }
+    .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
+    .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" />
+    </marker>
+    <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" />
+    </marker>
+  </defs>
+
+  <!-- Phase 1 lane -->
+  <rect class="lane" x="14" y="14" width="772" height="176" rx="12" />
+  <text class="k" x="28" y="36">Phase 1 · Audit</text>
+  <text class="s" x="772" y="36" text-anchor="end">reads headers and tails, modifies nothing</text>
+
+  <rect class="box" x="28" y="54" width="170" height="92" rx="8" />
+  <text class="t" x="113" y="76" text-anchor="middle">Scan</text>
+  <text class="s" x="113" y="94" text-anchor="middle">one row per file</text>
+  <text class="s" x="113" y="108" text-anchor="middle">station from folder and filename</text>
+  <text class="s" x="113" y="122" text-anchor="middle">kept as separate claims</text>
+
+  <path class="arrow" d="M 198 100 L 224 100" marker-end="url(#ah)" />
+
+  <rect class="box" x="224" y="54" width="170" height="92" rx="8" />
+  <text class="t" x="309" y="76" text-anchor="middle">Head and tail parse</text>
+  <text class="s" x="309" y="94" text-anchor="middle">35 head lines, 15 tail lines</text>
+  <text class="s" x="309" y="108" text-anchor="middle">LOCATION code, serial, tab,</text>
+  <text class="s" x="309" y="122" text-anchor="middle">parameters, has data?</text>
+
+  <path class="arrow" d="M 394 100 L 420 100" marker-end="url(#ah)" />
+
+  <rect class="box-accent" x="420" y="54" width="170" height="92" rx="8" />
+  <text class="t" x="505" y="76" text-anchor="middle">Analyzers</text>
+  <text class="s" x="505" y="94" text-anchor="middle">structure · naming · coverage</text>
+  <text class="s" x="505" y="108" text-anchor="middle">identity · ranges · duplicates</text>
+  <text class="s" x="505" y="122" text-anchor="middle">fingerprint suggestions</text>
+
+  <path class="arrow" d="M 590 100 L 616 100" marker-end="url(#ah)" />
+
+  <rect class="box" x="616" y="54" width="156" height="92" rx="8" />
+  <text class="t" x="694" y="76" text-anchor="middle">Incident workbook</text>
+  <text class="s" x="694" y="94" text-anchor="middle">twelve tabs</text>
+  <text class="s" x="694" y="108" text-anchor="middle">coverage matrix, evidence</text>
+  <text class="s" x="694" y="122" text-anchor="middle">applied vs pending decisions</text>
+
+  <text class="s" x="28" y="172" text-anchor="start">every regenerated report is compared with the previous one</text>
+
+  <!-- Exclusion list between lanes -->
+  <path class="arrow-dim" d="M 505 146 L 505 200" marker-end="url(#ahd)" />
+  <rect class="inner" x="405" y="200" width="200" height="30" rx="6" />
+  <text class="lbl warn" x="505" y="220" text-anchor="middle">severe discrepancies → excluded</text>
+  <path class="arrow-dim" d="M 405 215 L 118 215 L 118 262" marker-end="url(#ahd)" />
+  <text class="s" x="262" y="209" text-anchor="middle">the consolidation skips these files</text>
+
+  <!-- Phase 2 lane -->
+  <rect class="lane" x="14" y="262" width="772" height="194" rx="12" />
+  <text class="k" x="28" y="284">Phase 2 · Consolidation</text>
+  <text class="s" x="772" y="284" text-anchor="end">reads every remaining file in full, once</text>
+
+  <rect class="box" x="28" y="302" width="112" height="100" rx="8" />
+  <text class="t" x="84" y="322" text-anchor="middle">Parse by dialect</text>
+  <text class="s" x="84" y="340" text-anchor="middle">3 CSV formats</text>
+  <text class="s" x="84" y="354" text-anchor="middle">+ workbooks</text>
+  <text class="s" x="84" y="368" text-anchor="middle">delimiter and decimal</text>
+  <text class="s" x="84" y="382" text-anchor="middle">from data lines</text>
+
+  <path class="arrow" d="M 140 352 L 156 352" marker-end="url(#ah)" />
+
+  <rect class="box" x="156" y="302" width="112" height="100" rx="8" />
+  <text class="t" x="212" y="322" text-anchor="middle">Repair decimal</text>
+  <text class="mono" x="212" y="342" text-anchor="middle">563977</text>
+  <text class="mono" x="212" y="356" text-anchor="middle">÷ 1000 → 563.977</text>
+  <text class="s" x="212" y="372" text-anchor="middle">only if it lands in</text>
+  <text class="s" x="212" y="386" text-anchor="middle">the physical range</text>
+
+  <path class="arrow" d="M 268 352 L 284 352" marker-end="url(#ah)" />
+
+  <rect class="box" x="284" y="302" width="112" height="100" rx="8" />
+  <text class="t" x="340" y="322" text-anchor="middle">Snap to grid</text>
+  <text class="mono" x="340" y="342" text-anchor="middle">21:29:56</text>
+  <text class="mono" x="340" y="356" text-anchor="middle">→ 21:20:00</text>
+  <text class="s" x="340" y="372" text-anchor="middle">truncate to the</text>
+  <text class="s" x="340" y="386" text-anchor="middle">ten-minute slot</text>
+
+  <path class="arrow" d="M 396 352 L 412 352" marker-end="url(#ah)" />
+
+  <rect class="box-accent" x="412" y="302" width="128" height="100" rx="8" />
+  <text class="t" x="476" y="322" text-anchor="middle">INSERT OR IGNORE</text>
+  <text class="mono" x="476" y="342" text-anchor="middle">UNIQUE (station,</text>
+  <text class="mono" x="476" y="356" text-anchor="middle">ts, parameter)</text>
+  <text class="s" x="476" y="372" text-anchor="middle">duplicates collapse here</text>
+  <text class="s" x="476" y="386" text-anchor="middle">every row keeps file_id</text>
+
+  <path class="arrow" d="M 540 352 L 556 352" marker-end="url(#ah)" />
+
+  <rect class="box" x="556" y="302" width="112" height="100" rx="8" />
+  <text class="t" x="612" y="322" text-anchor="middle">Grid join pivot</text>
+  <text class="mono" x="612" y="342" text-anchor="middle">generate_series</text>
+  <text class="mono" x="612" y="356" text-anchor="middle">LEFT JOIN wide</text>
+  <text class="s" x="612" y="372" text-anchor="middle">one row per slot,</text>
+  <text class="s" x="612" y="386" text-anchor="middle">blank if no reading</text>
+
+  <path class="arrow" d="M 668 352 L 684 352" marker-end="url(#ah)" />
+
+  <rect class="box" x="684" y="302" width="88" height="100" rx="8" />
+  <text class="t" x="728" y="322" text-anchor="middle">Workbooks</text>
+  <text class="s" x="728" y="342" text-anchor="middle">one per station</text>
+  <text class="s" x="728" y="356" text-anchor="middle">one sheet</text>
+  <text class="s" x="728" y="372" text-anchor="middle">plus the DuckDB</text>
+  <text class="s" x="728" y="386" text-anchor="middle">file itself</text>
+
+  <text class="s" x="400" y="438" text-anchor="middle">a sampling validator reads random timestamps back from the source file, the table and the workbook</text>
+</svg>
