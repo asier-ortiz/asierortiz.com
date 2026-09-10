@@ -1,3 +1,9 @@
+## [1.55.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.55.0...v1.55.1) (2026-09-10)
+
+### Bug Fixes
+
+* **seo:** restore sitemap generation ([4b27074](https://github.com/asier-ortiz/asierortiz.com/commit/4b2707483ebabe49ec7ab73344e296221de804e5))
+
 ## [1.55.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.54.0...v1.55.0) (2026-09-10)
 
 ### Features
