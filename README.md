@@ -20,7 +20,7 @@ It features:
 - **Hero Section**: Brief introduction and call to action.
 - **Background**: Overview of my experience, skills, and technologies that I use.
 - **Projects**: Selected portfolio projects with detailed descriptions and repository links.
-- **Blog**: A space for articles about web development, machine learning, and more.
+- **Blog**: Write-ups of real projects I've built (field apps, data pipelines, integrations) and the occasional essay on the craft.
 - **Newsletter Subscription**: Visitors can subscribe via [Buttondown](https://buttondown.com/asierortiz/).
 - **Contact**: Includes links to my email and social media profiles for easy connection.
 
@@ -42,7 +42,7 @@ It features:
 This project uses GitHub Actions to ensure code quality and automate deployment:
 
 - **Semantic Release**: Automatically determines the next version, updates the changelog, tags the release, and publishes it to GitHub based on commit messages.
-- **Validate RSS Feed**: Checks that the generated RSS feed (`/feed.xml`) is valid after each push.
+- **Validate RSS Feed**: Checks that the generated RSS feed (`/rss.xml`) is valid after each push.
 - **Check Broken Links**: Scans the site for broken links after each build to ensure reliability.
 - **Continuous Deployment**: If all validations pass, the site is automatically deployed to Netlify.
 
@@ -53,7 +53,7 @@ This project uses GitHub Actions to ensure code quality and automate deployment:
 Clone and Run Locally:
 
 ```bash
-git clone https://github.com/yourusername/asierortiz.com.git
+git clone https://github.com/asier-ortiz/asierortiz.com.git
 cd asierortiz.com
 npm install
 npm run dev
