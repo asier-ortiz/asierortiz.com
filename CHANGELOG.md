@@ -1,3 +1,9 @@
+## [1.55.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.54.0...v1.55.0) (2026-09-10)
+
+### Features
+
+* **blog:** add river sensor data audit article ([d9a0794](https://github.com/asier-ortiz/asierortiz.com/commit/d9a07942055d83eac15516fa7012a1f8ec418af0))
+
 ## [1.54.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.53.0...v1.54.0) (2026-09-06)
 
 ### Features
