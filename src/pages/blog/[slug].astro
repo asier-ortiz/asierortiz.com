@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '@/utils/posts';
 import Layout from '@layouts/Layout.astro';
 import Button from '@/components/Button/Button.astro';
 import SocialShare from '@/components/Social/SocialShare.astro';
@@ -12,7 +12,7 @@ import ReadingProgress from '@/components/Blog/ReadingProgress.astro';
 import ScrollSpyToc from '@/components/Blog/ScrollSpyToc.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },

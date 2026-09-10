@@ -1,8 +1,8 @@
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '@/utils/posts';
 import siteData from '@/config/siteData.json';
 
 export async function GET(context) {
-  const posts = await getCollection('blog');
+  const posts = await getPublishedPosts();
 
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
@@ -13,7 +13,6 @@ export async function GET(context) {
     language: siteData.language,
     favicon: `${context.site}/favicon.ico`,
     items: posts
-      .filter((post) => !post.data.draft)
       .map((post) => ({
         id: `${context.site}/blog/${post.slug}`,
         url: `${context.site}/blog/${post.slug}`,

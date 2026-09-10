@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '@/utils/posts';
 import Layout from '@layouts/Layout.astro';
 import Particles from '@components/Particles/Particles.vue';
 import PostImage from '@/components/Media/PostImage.astro';
@@ -9,8 +9,7 @@ import { getReadingTime } from '@/utils/readingTime';
 import { formatDate } from '@/utils/formatDate';
 import Button from '@/components/Button/Button.astro';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
+const posts = (await getPublishedPosts())
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 const allTags = Array
