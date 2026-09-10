@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-labelledby="title desc">
+  <title id="title">One coherence rule applied in three places over an append-only table of raw telemetry frames</title>
+  <desc id="desc">The telemetry platform's map matching emits a road name and kilometre point per frame with no temporal memory; the poller stores each frame verbatim every sixty seconds into an append-only table that is never rewritten. The same five-minute window is then used in three places. At read time, three rules clean ten months of history with no data migration: a one-frame debounce that inherits road and kilometre point when the neighbouring frames agree and the current one does not, a continuity rule that rejects a change in kilometre point larger than twice the haversine distance travelled plus half a kilometre, and a freeze that makes stopped frames inherit the first road of their movement group. At ingestion, a change of stretch is written only if the preceding frame already named that stretch, which works because the poller stores every frame before calling the procedure, so the debounce needs no state in the process and no redeploy. Retroactively, automatic reports already materialised are purged under the same criterion, copied first into a backup table created from SELECT star WHERE false, and restored by a rollback that reinserts them with OVERRIDING SYSTEM VALUE so the identity keys come back unchanged.</desc>
+  <style>
+    .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
+    .box { fill: #171717; stroke: #404040; stroke-width: 1; }
+    .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
+    .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
+    .t { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
+    .s { font: 10.5px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    .mono { font: 10.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #d4d4d4; }
+    .warn { fill: #fbbf24; }
+    .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
+    .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" />
+    </marker>
+    <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" />
+    </marker>
+  </defs>
+
+  <!-- Source chain -->
+  <rect class="box" x="14" y="18" width="176" height="58" rx="8" />
+  <text class="t" x="28" y="40">Transponder</text>
+  <text class="s" x="28" y="57">position every 60 s,</text>
+  <text class="s" x="28" y="70">roof antenna, 3.9 m scatter</text>
+
+  <path class="arrow-dim" d="M 190 47 L 222 47" marker-end="url(#ahd)" />
+
+  <rect class="box" x="230" y="18" width="300" height="58" rx="8" />
+  <text class="t" x="244" y="40">Telemetry platform</text>
+  <text class="s" x="244" y="57">its own map matching, point-wise:</text>
+  <text class="warn s" x="244" y="70">re-decides the road every frame, from scratch</text>
+
+  <path class="arrow-dim" d="M 530 47 L 562 47" marker-end="url(#ahd)" />
+
+  <rect class="box" x="570" y="18" width="216" height="58" rx="8" />
+  <text class="t" x="584" y="40">Poller</text>
+  <text class="s" x="584" y="57">stores the payload verbatim</text>
+  <text class="s" x="584" y="70">before calling anything else</text>
+
+  <!-- Raw table -->
+  <rect class="box-accent" x="14" y="94" width="772" height="52" rx="10" />
+  <text class="k" x="28" y="118">Raw frames</text>
+  <text class="s" x="112" y="118">append-only, never rewritten: the frame is what the vendor sent</text>
+  <text class="mono" x="772" y="118" text-anchor="end">1,179,280 rows · 54 vehicles · 10 months</text>
+  <text class="s" x="28" y="136">Position is good. Attribution is not: 152 A→B→A flips per 1,000 transitions, 87% lasting one frame.</text>
+
+  <!-- Shared window label -->
+  <text class="k" x="400" y="172" text-anchor="middle">one 5-minute window, written three times so history and future obey one rule</text>
+
+  <path class="arrow" d="M 138 146 L 138 182" marker-end="url(#ah)" />
+  <path class="arrow" d="M 400 146 L 400 182" marker-end="url(#ah)" />
+  <path class="arrow" d="M 662 146 L 662 182" marker-end="url(#ah)" />
+
+  <!-- Column 1: read time -->
+  <rect class="lane" x="14" y="182" width="248" height="270" rx="10" />
+  <text class="k" x="28" y="204">1 · Read time</text>
+  <text class="s" x="28" y="221">derived segment views</text>
+
+  <rect class="inner" x="28" y="232" width="220" height="52" rx="6" />
+  <text class="t" x="40" y="250">One-frame debounce</text>
+  <text class="s" x="40" y="265">neighbours agree, current differs:</text>
+  <text class="s" x="40" y="277">inherit road and kilometre point</text>
+
+  <rect class="inner" x="28" y="294" width="220" height="52" rx="6" />
+  <text class="t" x="40" y="312">Kilometre continuity</text>
+  <text class="s" x="40" y="327">reject a jump larger than twice the</text>
+  <text class="s" x="40" y="339">haversine distance, plus 0.5 km</text>
+
+  <rect class="inner" x="28" y="356" width="220" height="52" rx="6" />
+  <text class="t" x="40" y="374">Freeze while parked</text>
+  <text class="s" x="40" y="389">stopped frames inherit the first</text>
+  <text class="s" x="40" y="401">road of their movement group</text>
+
+  <text class="lbl" x="28" y="428">Ten months of history cleaned</text>
+  <text class="lbl" x="28" y="443">with no data migration.</text>
+
+  <!-- Column 2: ingestion -->
+  <rect class="lane" x="276" y="182" width="248" height="270" rx="10" />
+  <text class="k" x="290" y="204">2 · Ingestion</text>
+  <text class="s" x="290" y="221">automatic reports, as they are written</text>
+
+  <rect class="inner" x="290" y="232" width="220" height="52" rx="6" />
+  <text class="t" x="302" y="250">Confirm with the previous frame</text>
+  <text class="s" x="302" y="265">a change of stretch is written only</text>
+  <text class="s" x="302" y="277">if the preceding frame named it too</text>
+
+  <rect class="inner" x="290" y="294" width="220" height="52" rx="6" />
+  <text class="t" x="302" y="312">Why not the next one</text>
+  <text class="s" x="302" y="327">confirming forward needs state in a</text>
+  <text class="s" x="302" y="339">process that restarts. This needs none.</text>
+
+  <rect class="inner" x="290" y="356" width="220" height="52" rx="6" />
+  <text class="t" x="302" y="374">While stopped</text>
+  <text class="s" x="302" y="389">no stretch change is recorded; a new</text>
+  <text class="s" x="302" y="401">task lands on the last confirmed one</text>
+
+  <text class="lbl" x="290" y="428">No in-process state, no redeploy.</text>
+  <text class="lbl warn" x="290" y="443">Costs about 60 s of latency.</text>
+
+  <!-- Column 3: retroactive -->
+  <rect class="lane" x="538" y="182" width="248" height="270" rx="10" />
+  <text class="k" x="552" y="204">3 · Retroactive</text>
+  <text class="s" x="552" y="221">rows that were already materialised</text>
+
+  <rect class="inner" x="552" y="232" width="220" height="52" rx="6" />
+  <text class="t" x="564" y="250">Same criterion, same window</text>
+  <text class="s" x="564" y="265">names compared after alias lookup,</text>
+  <text class="s" x="564" y="277">so an alias flip is not a change</text>
+
+  <rect class="inner" x="552" y="294" width="220" height="52" rx="6" />
+  <text class="t" x="564" y="312">Backup before delete</text>
+  <text class="mono" x="564" y="329">SELECT * ... WHERE false</text>
+  <text class="s" x="564" y="341">inherits the full structure</text>
+
+  <rect class="inner" x="552" y="356" width="220" height="52" rx="6" />
+  <text class="t" x="564" y="374">Reversible</text>
+  <text class="mono" x="564" y="391">OVERRIDING SYSTEM VALUE</text>
+  <text class="s" x="564" y="403">restores the identity keys unchanged</text>
+
+  <text class="lbl" x="552" y="428">918 rows at the chosen window;</text>
+  <text class="lbl" x="552" y="443">597 at three minutes, 1,038 at ten.</text>
+
+  <!-- Footer -->
+  <text class="s" x="14" y="478">Because the raw table is never rewritten, a better rule later re-cleans the same history. Materialised rows do not get that.</text>
+</svg>

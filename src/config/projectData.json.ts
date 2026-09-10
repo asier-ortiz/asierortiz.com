@@ -79,9 +79,9 @@ export const projectData: ProjectItem[] = [
     description: `A web platform for coordinating critical winter road operations at the Provincial Council of Álava.
     Modernizes a 15-year-old legacy desktop system with real-time GPS vehicle tracking, IoT weather sensor integration,
     a complex shift coordination calendar, automated weather alerts via WebSockets, document generation,
-    multi-factor authentication with role-based access, and bilingual responsive UI.
+    multi-factor authentication with role-based access, and a responsive UI.
     `,
-    href: new URL('https://asierortiz.com/blog/rescuing-a-legacy-operations-platform/'),
+    href: new URL('https://asierortiz.com/blog/schema-only-existed-in-production/'),
     languages: [
       { language: 'Angular', color: '#DD0031' },
       { language: 'TypeScript', color: '#3178C6' },
