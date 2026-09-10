@@ -1,3 +1,9 @@
+## [1.56.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.55.2...v1.56.0) (2026-09-10)
+
+### Features
+
+* **blog:** rewrite the Nieves article and move it to a title-based URL ([3401d6e](https://github.com/asier-ortiz/asierortiz.com/commit/3401d6e753a2864a652a47d2dde94adeeb0e3445))
+
 ## [1.55.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.55.1...v1.55.2) (2026-09-10)
 
 ### Bug Fixes
