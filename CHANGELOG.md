@@ -1,3 +1,9 @@
+## [1.55.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.55.1...v1.55.2) (2026-09-10)
+
+### Bug Fixes
+
+* **blog:** keep draft posts out of production builds ([25e6fac](https://github.com/asier-ortiz/asierortiz.com/commit/25e6fac125e6364b67686a1420376a0d841358d9))
+
 ## [1.55.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.55.0...v1.55.1) (2026-09-10)
 
 ### Bug Fixes
