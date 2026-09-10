@@ -167,4 +167,6 @@ But the forces themselves aren't going anywhere, and they aren't anyone's to con
 
 The craft isn't dying. It's just getting harder to see. The job is to keep doing it well anyway, and wherever possible, to drag it back into view of the people who decide.
 
-> 🛠️ The work that holds everything up is the work nobody sees. Do it anyway.
+---
+
+**Thanks for reading. If you found this useful, feel free to share it with anyone whose best work this week will not show up on a dashboard.**
