@@ -14,9 +14,8 @@ export default defineConfig({
   integrations: [
     vue(),
     sitemap({
-      changefreq: 'weekly',
-      lastmod: true,
-      sitemap: '/sitemap-index.xml',
+      // Landing page for newsletter confirmations; only reachable from the email link.
+      filter: (page) => !page.includes('/confirmed'),
     }),
     icon(),
     mdx(),
