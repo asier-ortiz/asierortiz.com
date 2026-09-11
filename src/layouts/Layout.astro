@@ -5,18 +5,20 @@ import Footer from '@components/Footer/Footer.astro';
 import ScrollToTop from '@components/Button/ScrollToTop.astro';
 import ShootingStar from '@components/Particles/ShootingStar.astro';
 import siteData from '@config/siteData.json';
+import { absoluteUrl } from '@/utils/absoluteUrl';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
-  pubDate?: string;
+  pubDate?: Date | string;
   isPost?: boolean;
 }
 
 const { title, description, image, pubDate, isPost } = Astro.props as Props;
 const pageUrl = Astro.url;
-const defaultImage = siteData.defaultImage.src;
+const ogImage = absoluteUrl(image ?? siteData.defaultImage.src, Astro.site);
+const published = pubDate ? new Date(pubDate) : undefined;
 ---
 
 <!doctype html>
@@ -44,20 +46,20 @@ const defaultImage = siteData.defaultImage.src;
     <meta property="og:url" content={pageUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${Astro.site}${image ?? defaultImage}`} />
+    <meta property="og:image" content={ogImage} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={pageUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${Astro.site}${image ?? defaultImage}`} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Article meta for blog posts -->
     {
-      isPost && pubDate && (
+      isPost && published && (
         <>
-          <meta property="article:published_time" content={pubDate} />
+          <meta property="article:published_time" content={published.toISOString()} />
           <meta property="article:author" content={siteData.author.name} />
         </>
       )
@@ -94,8 +96,8 @@ const defaultImage = siteData.defaultImage.src;
           headline: title,
           description: description,
           url: pageUrl,
-          image: `${Astro.site}${image ?? defaultImage}`,
-          datePublished: pubDate,
+          image: ogImage,
+          datePublished: published?.toISOString(),
           author: {
             '@type': 'Person',
             name: siteData.author.name,
