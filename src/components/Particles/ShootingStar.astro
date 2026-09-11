@@ -48,12 +48,15 @@
 
 <script is:inline>
   (function () {
+    var timer = null;
+
     function createShootingStar() {
       var container = document.getElementById('shooting-stars-container');
       // Checked per spawn (not around the loop) so stars stop and resume with
       // the OS reduced-motion setting without needing a media query listener.
       if (
         !container ||
+        document.hidden ||
         window.innerWidth < 768 ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ) {
@@ -80,20 +83,33 @@
     }
 
     function scheduleNext() {
+      // Only one chain of timers, whatever fires the reschedule.
+      clearTimeout(timer);
       var delay = 8000 + Math.random() * 7000;
-      setTimeout(function () {
+      timer = setTimeout(function () {
         createShootingStar();
         scheduleNext();
       }, delay);
     }
 
+    // A hidden window paints no frames, so a star spawned while hidden never
+    // starts its animation and never removes itself; they pile up and all
+    // shoot at once on restore. Stop the loop while hidden, resume on return.
+    function onVisibilityChange() {
+      if (document.hidden) {
+        clearTimeout(timer);
+        timer = null;
+        var container = document.getElementById('shooting-stars-container');
+        if (container) container.textContent = '';
+      } else {
+        scheduleNext();
+      }
+    }
+
     if (typeof window !== 'undefined') {
-      document.addEventListener('DOMContentLoaded', function () {
-        scheduleNext();
-      });
-      document.addEventListener('astro:after-swap', function () {
-        scheduleNext();
-      });
+      document.addEventListener('DOMContentLoaded', scheduleNext);
+      document.addEventListener('astro:after-swap', scheduleNext);
+      document.addEventListener('visibilitychange', onVisibilityChange);
     }
   })();
 </script>
