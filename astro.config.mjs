@@ -20,7 +20,9 @@ export default defineConfig({
     icon(),
     mdx(),
     tailwind(),
-    compress(),
+    // astro-compress >= 2.4 re-encodes WebP losslessly by default, which never
+    // beats a lossy source, so large WebPs stopped shrinking. Keep it lossy.
+    compress({ Image: { sharp: { webp: { lossless: false } } } }),
   ],
   markdown: {
     remarkPlugins: [remarkExtractHeadings],
