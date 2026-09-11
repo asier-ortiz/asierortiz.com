@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Particles from '@components/Particles/Particles.vue';
+import BlogListing from '@components/Blog/BlogListing.astro';
+import siteData from '@config/siteData.json';
+import { getPublishedPostsSorted, POSTS_PER_PAGE } from '@/utils/posts';
+
+type Post = CollectionEntry<'blog'>;
+
+// Tag pages only exist once the listing is paginated. Until then the chips
+// filter the single page in place, and these routes would be dead weight.
+export async function getStaticPaths() {
+  const posts = await getPublishedPostsSorted();
+  if (posts.length <= POSTS_PER_PAGE) return [];
+
+  const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])));
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((post) => post.data.tags?.includes(tag)),
+      allPosts: posts,
+    },
+  }));
+}
+
+const { tag, posts, allPosts } = Astro.props as { tag: string; posts: Post[]; allPosts: Post[] };
+---
+
+<Layout title={`${siteData.author.name} - Blog - #${tag}`} description={`Posts tagged #${tag}.`}>
+  <Particles client:only="vue" />
+  <BlogListing allPosts={allPosts} posts={posts} activeTag={tag} />
+</Layout>

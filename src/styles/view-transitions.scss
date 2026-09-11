@@ -1,0 +1,23 @@
+/* Cross-document View Transitions: a short cross-fade between pages, with the
+   blog listing's header and filter row pinned so only the grid and the pager
+   visibly change. Browsers without support simply navigate as before, and the
+   whole block is opt-in under no-preference, so reduced-motion users keep
+   instant navigations. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+  }
+
+  .blog-header {
+    view-transition-name: blog-header;
+  }
+
+  .blog-filters {
+    view-transition-name: blog-filters;
+  }
+}

@@ -10,12 +10,15 @@ import rehypeTableWrap from './src/utils/rehypeTableWrap.ts';
 
 export default defineConfig({
   site: 'https://asierortiz.com',
+  // Only links marked data-astro-prefetch (the blog pager) are prefetched.
+  prefetch: true,
   trailingSlash: 'ignore',
   integrations: [
     vue(),
     sitemap({
       // Landing page for newsletter confirmations; only reachable from the email link.
-      filter: (page) => !page.includes('/confirmed'),
+      // Tag pages are thin by nature and reachable from the listing chips.
+      filter: (page) => !page.includes('/confirmed') && !page.includes('/blog/tag/'),
     }),
     icon(),
     mdx(),

@@ -33,11 +33,12 @@ onMounted(() => {
     title: post.title || 'Untitled Post',
     description: post.description || '',
     url: post.url || '#',
+    tags: post.tags || [],
     pubDate: post.pubDate || null,
   }));
 
   fuse.value = new Fuse(normalizedPosts.value, {
-    keys: ['title', 'description'],
+    keys: ['title', 'description', 'tags'],
     threshold: 0.4,
     includeMatches: true,
     minMatchCharLength: 1,

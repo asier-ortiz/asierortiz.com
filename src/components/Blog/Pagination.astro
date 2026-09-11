@@ -1,0 +1,51 @@
+---
+import type { PaginationInfo } from '@/utils/posts';
+import Button from '@/components/Button/Button.astro';
+
+interface Props {
+  pagination?: PaginationInfo;
+}
+
+const { pagination } = Astro.props;
+
+// Newer / Older is enough while the archive is a handful of pages. Numbered
+// links become worth adding once lastPage passes about five.
+---
+
+{
+  pagination && pagination.lastPage > 1 && (
+    <nav aria-label="Blog pages" class="mt-16 grid grid-cols-3 items-center">
+      <div class="justify-self-start">
+        {pagination.prevUrl && (
+          <Button
+            variant="post-ghost"
+            arrow="left"
+            href={pagination.prevUrl}
+            rel="prev"
+            data-astro-prefetch
+            class="min-h-[44px]"
+          >
+            Newer<span class="sr-only"> posts</span>
+          </Button>
+        )}
+      </div>
+      <p class="justify-self-center text-sm text-base-400">
+        Page {pagination.currentPage} of {pagination.lastPage}
+      </p>
+      <div class="justify-self-end">
+        {pagination.nextUrl && (
+          <Button
+            variant="post-ghost"
+            arrow="right"
+            href={pagination.nextUrl}
+            rel="next"
+            data-astro-prefetch
+            class="min-h-[44px]"
+          >
+            Older<span class="sr-only"> posts</span>
+          </Button>
+        )}
+      </div>
+    </nav>
+  )
+}

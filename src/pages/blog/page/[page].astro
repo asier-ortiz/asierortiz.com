@@ -1,0 +1,31 @@
+---
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Particles from '@components/Particles/Particles.vue';
+import BlogListing from '@components/Blog/BlogListing.astro';
+import siteData from '@config/siteData.json';
+import { getPublishedPostsSorted, paginationInfo, POSTS_PER_PAGE } from '@/utils/posts';
+
+type Post = CollectionEntry<'blog'>;
+
+// Listing pages 2 onwards. Page 1 is src/pages/blog.astro at /blog/, so it is
+// left out here; /blog/page/1/ redirects there in public/_redirects.
+export async function getStaticPaths({ paginate }) {
+  const posts = await getPublishedPostsSorted();
+  return paginate(posts, { pageSize: POSTS_PER_PAGE, props: { allPosts: posts } }).filter(
+    (route) => route.params.page !== '1'
+  );
+}
+
+const { page, allPosts } = Astro.props as { page: Page<Post>; allPosts: Post[] };
+const pagination = paginationInfo(page.currentPage, page.lastPage);
+---
+
+<Layout
+  title={`${siteData.author.name} - Blog - Page ${page.currentPage}`}
+  description="Posts about web, mobile and AI. Mostly notes from projects, things that broke, things I figured out along the way."
+>
+  <Particles client:only="vue" />
+  <BlogListing allPosts={allPosts} posts={page.data} pagination={pagination} />
+</Layout>
