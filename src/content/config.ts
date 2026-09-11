@@ -10,6 +10,9 @@ const blogCollection = defineCollection({
 
     pubDate: z.coerce.date(),
 
+    // Set when a published post is substantially revised; pubDate stays put.
+    updatedDate: z.coerce.date().optional(),
+
     image: z.string().startsWith('/', { message: "Image path must start with '/'." }),
 
     author: z.string().min(3, { message: 'Author name must be at least 3 characters long.' }),

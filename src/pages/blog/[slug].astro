@@ -29,6 +29,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
   title={`${post.data.title} | ${siteData.author.name}`}
   description={post.data.description}
   pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
   image={post.data.image}
   isPost={true}
 >
@@ -60,6 +61,22 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
         >
           {formatDate(post.data.pubDate, siteData.language)}
         </time>
+        {
+          post.data.updatedDate && (
+            <>
+              <span>·</span>
+              <span>
+                Updated{' '}
+                <time
+                  datetime={post.data.updatedDate.toISOString()}
+                  title={formatDate(post.data.updatedDate, siteData.language)}
+                >
+                  {formatDate(post.data.updatedDate, siteData.language)}
+                </time>
+              </span>
+            </>
+          )
+        }
         <span>·</span>
         <span>{readingDuration}</span>
         {

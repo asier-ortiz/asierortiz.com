@@ -2,6 +2,7 @@
 title: "From the Stopwatch to the Dashboard: Digital Taylorism and the Invisible Work of Software"
 description: "A reflection on managers who don't understand the work yet dictate how it's done. From Frederick Taylor's stopwatch to today's tickets, metrics, and AI: why the most valuable work we do is the work nobody with authority can see."
 pubDate: "2026-06-22"
+updatedDate: "2026-09-11"
 image: "/assets/blog/digital-taylorism.webp"
 tags: ["career", "software-development", "digital-taylorism", "management", "ai"]
 author: "Asier Ortiz"

@@ -25,6 +25,7 @@ export async function GET(context) {
         `,
         summary: post.data.description,
         date_published: new Date(post.data.pubDate).toISOString(),
+        date_modified: post.data.updatedDate?.toISOString(),
         tags: post.data.tags ?? [],
         image: absoluteUrl(post.data.image, context.site),
         author: {
