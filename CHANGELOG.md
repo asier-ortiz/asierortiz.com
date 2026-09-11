@@ -1,3 +1,13 @@
+## [1.57.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.56.2...v1.57.0) (2026-09-11)
+
+### Features
+
+* **blog:** add updatedDate for substantially revised posts ([424b16c](https://github.com/asier-ortiz/asierortiz.com/commit/424b16c069680e04a97db4ae8469ed0599ee2b52))
+
+### Bug Fixes
+
+* **seo:** build absolute URLs without a doubled slash and emit ISO dates ([f2d2c93](https://github.com/asier-ortiz/asierortiz.com/commit/f2d2c93db7f4f3a4ca6773443897ec09d89b60b7))
+
 ## [1.56.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.56.1...v1.56.2) (2026-09-11)
 
 ### Bug Fixes
