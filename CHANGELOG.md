@@ -1,3 +1,10 @@
+## [1.56.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.56.1...v1.56.2) (2026-09-11)
+
+### Bug Fixes
+
+* **particles:** stop spawning shooting stars while the tab is hidden ([093888f](https://github.com/asier-ortiz/asierortiz.com/commit/093888f947de3e08d13fe70c7c198bccced6d392))
+* **uses:** start the stack marquee reliably on first load in Safari ([11176c0](https://github.com/asier-ortiz/asierortiz.com/commit/11176c0346d521bf026132ce9a90133ea14a89b5))
+
 ## [1.56.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.56.0...v1.56.1) (2026-09-10)
 
 ### Bug Fixes
