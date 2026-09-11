@@ -65,6 +65,9 @@ const duration = `${items.length * secondsPerItem}s`;
   .stack-marquee__viewport {
     overflow: hidden;
     overflow: clip; /* not a scroll container, so scrollIntoView() can never offset the track */
+    /* Own compositing layer, so WebKit applies the mask per frame instead of
+       leaving a software-masked subtree that a moving child does not repaint. */
+    will-change: transform;
     -webkit-mask-image: linear-gradient(
       to right,
       transparent,
@@ -84,7 +87,13 @@ const duration = `${items.length * secondsPerItem}s`;
   .stack-marquee__track {
     display: flex;
     width: max-content;
-    animation: stack-marquee-scroll var(--marquee-duration, 90s) linear infinite;
+    /* Longhands on purpose: Safari can fail to start an animation whose
+       shorthand contains var() and only pick it up on a later style recalc,
+       which showed as a frozen strip on first load that a reload "fixed". */
+    animation-name: stack-marquee-scroll;
+    animation-duration: var(--marquee-duration, 90s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
   }
 
   .stack-marquee__list {
