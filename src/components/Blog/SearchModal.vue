@@ -178,7 +178,10 @@ const highlightMatch = (post, field) => {
 </script>
 
 <template>
-
+  <!-- Rendered at body level: the listing's filter row carries a view-transition-name, which makes it a
+       stacking context and backdrop root, and a fixed overlay left inside it stays confined to that box
+       in WebKit (blurred chips, no dialog on iPhone). -->
+  <Teleport to="body">
   <div
     class="fixed inset-0 z-50 flex justify-center transition-opacity duration-200"
     :class="isClosing ? 'opacity-0' : 'opacity-100'"
@@ -250,4 +253,5 @@ const highlightMatch = (post, field) => {
       </div>
     </div>
   </div>
+  </Teleport>
 </template>
