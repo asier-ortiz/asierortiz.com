@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 414" width="800" height="414" role="img" aria-labelledby="title desc">
+  <title id="title">From a GPS fix to a road and kilometre marker, offline, in two different ways</title>
+  <desc id="desc">Single lookup, used by the incident form and run on every fix while the form is open: a raw fused GPS fix at about one per second; a search window whose radius in metres is converted to degrees, 500 metres for the form and 50 by default; an R-tree query over the GeoPackage returning candidate sections of the official network; the point projected onto every vertex pair of each candidate with the parameter clamped to the segment and the distance measured by haversine; the best candidate is the minimum distance with a 3 metre penalty for slip roads. The kilometre marker is the matched section's starting KM and metre attributes read from the data, with no offset along the section; the road name comes from the section id looked up in the cached road catalogue, with link roads flagged separately; the form is filled with road and KM, the direction is picked by hand, and with no candidate the fields are left for manual entry. During a patrol the same GeoPackage feeds a different decision, one fix per second: a Kalman-filtered fix with adaptive noise by speed and an innovation gate, candidates within a radius of three times the GPS accuracy clamped to 35 to 50 metres, an HMM Viterbi matcher over the road graph with heading-versus-bearing filters, a confirmation step with a 40 metre cutoff and hysteresis that returns null off-road rather than the nearest road, and a direction derived from the kilometre at entry versus exit.</desc>
+  <style>
+    .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
+    .box { fill: #171717; stroke: #404040; stroke-width: 1; }
+    .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
+    .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
+    .t { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
+    .s { font: 10.5px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    .mono { font: 10.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #d4d4d4; }
+    .warn { fill: #fbbf24; }
+    .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
+    .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" /></marker>
+    <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" /></marker>
+    <marker id="ahs" viewBox="0 0 8 8" refX="1" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 8 0 L 0 4 L 8 8 z" fill="#38bdf8" /></marker>
+  </defs>
+
+  <rect class="lane" x="14" y="14" width="772" height="222" rx="10" />
+  <text class="k" x="28" y="36">Single lookup: the incident form</text>
+  <text class="s" x="772" y="36" text-anchor="end">runs on every fix while the form is open</text>
+  <rect class="box" x="28" y="46" width="142" height="66" rx="6" />
+  <text class="t" x="40" y="64">GPS fix</text>
+  <text class="s" x="40" y="81">fused location, ~1/s</text>
+  <text class="s warn" x="40" y="94">raw, unfiltered here</text>
+  <rect class="box" x="182" y="46" width="142" height="66" rx="6" />
+  <text class="t" x="194" y="64">Search window</text>
+  <text class="s" x="194" y="81">radius in m → degrees</text>
+  <text class="s" x="194" y="94">500 m (form) · 50 m</text>
+  <rect class="box" x="336" y="46" width="142" height="66" rx="6" />
+  <text class="t" x="348" y="64">R-tree query</text>
+  <text class="s" x="348" y="81">candidate sections</text>
+  <text class="s" x="348" y="94">official network only</text>
+  <rect class="box" x="490" y="46" width="142" height="66" rx="6" />
+  <text class="t" x="502" y="64">Project the point</text>
+  <text class="s" x="502" y="81">onto each vertex pair</text>
+  <text class="s" x="502" y="94">t clamped to [0, 1]</text>
+  <rect class="box" x="644" y="46" width="142" height="66" rx="6" />
+  <text class="t" x="656" y="64">Best candidate</text>
+  <text class="s" x="656" y="81">closest by haversine</text>
+  <text class="s" x="656" y="94">+3 m for slip roads</text>
+  <path class="arrow" d="M 170 79 L 182 79" marker-end="url(#ah)" />
+  <path class="arrow" d="M 324 79 L 336 79" marker-end="url(#ah)" />
+  <path class="arrow" d="M 478 79 L 490 79" marker-end="url(#ah)" />
+  <path class="arrow" d="M 632 79 L 644 79" marker-end="url(#ah)" />
+  <path class="arrow" d="M 715 112 L 715 128 L 139 128 L 139 144" marker-end="url(#ah)" />
+  <rect class="box-accent" x="28" y="146" width="222" height="66" rx="6" />
+  <text class="t" x="40" y="164">KM = section start KM + m</text>
+  <text class="s" x="40" y="181">read from the section attributes</text>
+  <text class="s warn" x="40" y="194">no offset along the section</text>
+  <rect class="box" x="296" y="146" width="222" height="66" rx="6" />
+  <text class="t" x="308" y="164">Road name</text>
+  <text class="s" x="308" y="181">section id → cached road catalogue</text>
+  <text class="s" x="308" y="194">link roads flagged separately</text>
+  <rect class="box" x="564" y="146" width="222" height="66" rx="6" />
+  <text class="t" x="576" y="164">Form filled: road + KM</text>
+  <text class="s warn" x="576" y="181">direction picked by hand</text>
+  <text class="s" x="576" y="194">no candidate → manual entry</text>
+  <path class="arrow" d="M 250 179 L 296 179" marker-end="url(#ah)" />
+  <path class="arrow" d="M 518 179 L 564 179" marker-end="url(#ah)" />
+  <rect class="lane" x="14" y="252" width="772" height="150" rx="10" />
+  <text class="k" x="28" y="274">During a patrol: same GeoPackage, a different decision</text>
+  <text class="s" x="772" y="274" text-anchor="end">one fix per second, continuously</text>
+  <rect class="box" x="28" y="286" width="142" height="66" rx="6" />
+  <text class="t" x="40" y="304">Filtered fix</text>
+  <text class="s" x="40" y="321">Kalman, noise by speed</text>
+  <text class="s" x="40" y="334">gate, relocalisation</text>
+  <rect class="box" x="182" y="286" width="142" height="66" rx="6" />
+  <text class="t" x="194" y="304">Candidates</text>
+  <text class="s" x="194" y="321">radius = accuracy × 3</text>
+  <text class="s" x="194" y="334">clamped to 35–50 m</text>
+  <rect class="box" x="336" y="286" width="142" height="66" rx="6" />
+  <text class="t" x="348" y="304">HMM / Viterbi</text>
+  <text class="s" x="348" y="321">over the road graph</text>
+  <text class="s" x="348" y="334">heading vs bearing</text>
+  <rect class="box" x="490" y="286" width="142" height="66" rx="6" />
+  <text class="t" x="502" y="304">Confirmation</text>
+  <text class="s" x="502" y="321">40 m cutoff, hysteresis</text>
+  <text class="s" x="502" y="334">off-road gives null</text>
+  <rect class="box" x="644" y="286" width="142" height="66" rx="6" />
+  <text class="t" x="656" y="304">Direction</text>
+  <text class="s" x="656" y="321">KM at entry vs exit</text>
+  <text class="s" x="656" y="334">ascending / descending</text>
+  <path class="arrow" d="M 170 319 L 182 319" marker-end="url(#ah)" />
+  <path class="arrow" d="M 324 319 L 336 319" marker-end="url(#ah)" />
+  <path class="arrow" d="M 478 319 L 490 319" marker-end="url(#ah)" />
+  <path class="arrow" d="M 632 319 L 644 319" marker-end="url(#ah)" />
+  <text class="s" x="28" y="382">The form trusts the closest section; the patrol trusts a sequence. Both read the kilometre from the data, never from arithmetic on the device.</text>
+</svg>

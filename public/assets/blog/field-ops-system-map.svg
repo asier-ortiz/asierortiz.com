@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 526" width="800" height="526" role="img" aria-labelledby="title desc">
+  <title id="title">Device on the left, server on the right: the offline-first field app and the services behind it</title>
+  <desc id="desc">On the device, a WorkManager sync runs after every save, on app open and every fifteen minutes, with one strategy per entity type in the order patrols, incidents, emergencies, photos, each in its own try/catch. Room (SQLite) is the source of truth, holding patrols, tracks, incidents, emergencies, photos and reference caches with UUID primary keys, a synced flag and the server id. A foreground tracking service feeds fused GPS through a Kalman filter and, during patrols, an HMM map matcher. A roads GeoPackage opened with the NGA SDK provides offline road and kilometre attribution through an R-tree over the official network. Map tiles in an MBTiles file are served by a local HTTP server to MapLibre. VOSK speech recognition uses a small Spanish model downloaded once, with a closed grammar and spoken feedback. Credentials live in EncryptedSharedPreferences behind a biometric prompt with silent re-login on 401. The Jetpack Compose UI keeps one task per screen. On the server, an Express API in TypeScript checks a JWT and a server-side session and makes one parameterised call per operation into PostgreSQL PL/pgSQL functions, where the business logic lives and the patrol upload is one transaction. A JVM matcher worker running GraphHopper map matching on OpenStreetMap polls the patrol table as a queue. Offline data downloads serve the tiles and the roads GeoPackage with a SHA-256 signature. Photo files are stored on the server filesystem with their metadata in the database.</desc>
+  <style>
+    .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
+    .box { fill: #171717; stroke: #404040; stroke-width: 1; }
+    .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
+    .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
+    .t { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
+    .s { font: 10.5px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    .mono { font: 10.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #d4d4d4; }
+    .warn { fill: #fbbf24; }
+    .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
+    .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" /></marker>
+    <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" /></marker>
+    <marker id="ahs" viewBox="0 0 8 8" refX="1" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 8 0 L 0 4 L 8 8 z" fill="#38bdf8" /></marker>
+  </defs>
+
+  <rect class="lane" x="14" y="14" width="440" height="480" rx="10" />
+  <text class="k" x="28" y="36">Device</text>
+  <text class="s" x="440" y="36" text-anchor="end">works with no connection at all</text>
+  <rect class="box" x="26" y="54" width="420" height="72" rx="6" />
+  <text class="t" x="38" y="72">Sync (WorkManager)</text>
+  <text class="s" x="38" y="89">after every save, on app open and every 15 min; one strategy per entity type:</text>
+  <text class="s warn" x="38" y="102">patrols → incidents → emergencies → photos, each in its own try/catch</text>
+  <rect class="box-accent" x="26" y="142" width="204" height="72" rx="6" />
+  <text class="t" x="38" y="160">Room: the source of truth</text>
+  <text class="s" x="38" y="177">patrols, tracks, incidents,</text>
+  <text class="s" x="38" y="190">emergencies, photos, caches</text>
+  <text class="s" x="38" y="203">UUID key · synced flag · server id</text>
+  <rect class="box" x="242" y="142" width="204" height="72" rx="6" />
+  <text class="t" x="254" y="160">Tracking service</text>
+  <text class="s" x="254" y="177">fused GPS → Kalman filter</text>
+  <text class="s" x="254" y="190">→ HMM matcher during patrols</text>
+  <rect class="box" x="26" y="230" width="204" height="72" rx="6" />
+  <text class="t" x="38" y="248">Roads GeoPackage (NGA SDK)</text>
+  <text class="s" x="38" y="265">R-tree over the official network</text>
+  <text class="s" x="38" y="278">road + KM attribution, offline</text>
+  <rect class="box" x="242" y="230" width="204" height="72" rx="6" />
+  <text class="t" x="254" y="248">VOSK speech recognition</text>
+  <text class="s" x="254" y="265">Spanish model, downloaded once</text>
+  <text class="s" x="254" y="278">closed grammar, spoken feedback</text>
+  <rect class="box" x="26" y="318" width="204" height="72" rx="6" />
+  <text class="t" x="38" y="336">Map tiles (MBTiles)</text>
+  <text class="s" x="38" y="353">local HTTP server inside the app</text>
+  <text class="s" x="38" y="366">→ MapLibre, fully offline</text>
+  <rect class="box" x="242" y="318" width="204" height="72" rx="6" />
+  <text class="t" x="254" y="336">Background work</text>
+  <text class="s" x="254" y="353">WorkManager retries with backoff</text>
+  <text class="s" x="254" y="366">track prefetch, daily data check</text>
+  <rect class="box" x="26" y="406" width="204" height="72" rx="6" />
+  <text class="t" x="38" y="424">Jetpack Compose UI</text>
+  <text class="s" x="38" y="441">one task per screen, large targets</text>
+  <text class="s" x="38" y="454">voice path for hands-free use</text>
+  <rect class="box" x="242" y="406" width="204" height="72" rx="6" />
+  <text class="t" x="254" y="424">Credentials + biometrics</text>
+  <text class="s" x="254" y="441">EncryptedSharedPreferences</text>
+  <text class="s" x="254" y="454">biometric prompt</text>
+  <text class="s" x="254" y="467">silent re-login on 401</text>
+  <rect class="lane" x="562" y="14" width="224" height="480" rx="10" />
+  <text class="k" x="576" y="36">Server</text>
+  <rect class="box" x="574" y="54" width="200" height="72" rx="6" />
+  <text class="t" x="586" y="72">Express API (TypeScript)</text>
+  <text class="s" x="586" y="89">JWT + server-side session</text>
+  <text class="s" x="586" y="102">one parameterised call per op</text>
+  <rect class="box-accent" x="574" y="142" width="200" height="72" rx="6" />
+  <text class="t" x="586" y="160">PostgreSQL functions</text>
+  <text class="s" x="586" y="177">PL/pgSQL: logic lives in the DB</text>
+  <text class="s" x="586" y="190">patrol upload in one transaction</text>
+  <rect class="box" x="574" y="230" width="200" height="72" rx="6" />
+  <text class="t" x="586" y="248">Matcher worker (JVM)</text>
+  <text class="s" x="586" y="265">GraphHopper matching on OSM</text>
+  <text class="s" x="586" y="278">polls the patrol table as queue</text>
+  <rect class="box" x="574" y="318" width="200" height="72" rx="6" />
+  <text class="t" x="586" y="336">Offline data downloads</text>
+  <text class="s" x="586" y="353">map tiles + roads GeoPackage</text>
+  <text class="s" x="586" y="366">SHA-256 signature, ETag, 304</text>
+  <rect class="box" x="574" y="406" width="200" height="72" rx="6" />
+  <text class="t" x="586" y="424">Photo files</text>
+  <text class="s" x="586" y="441">multipart upload, metadata in DB</text>
+  <text class="s" x="586" y="454">stored on the server filesystem</text>
+  <path class="arrow" d="M 674 126 L 674 142" marker-end="url(#ah)" />
+  <path class="arrow-dim" d="M 674 214 L 674 230" marker-end="url(#ahd)" />
+  <path class="arrow" d="M 454 90 L 562 90" marker-end="url(#ah)" marker-start='url(#ahs)' />
+  <text class="s" x="508" y="80" text-anchor="middle">push · pull</text>
+  <text class="s" x="508" y="106" text-anchor="middle">HTTPS, JWT</text>
+  <path class="arrow" d="M 562 354 L 454 354" marker-end="url(#ah)" />
+  <text class="s" x="508" y="344" text-anchor="middle">tiles, roads</text>
+  <text class="s" x="508" y="370" text-anchor="middle">versioned</text>
+  <text class="s" x="14" y="514">Nothing on the device waits for the server: records are created locally with their own identity and reconciled later.</text>
+</svg>

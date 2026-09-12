@@ -2,6 +2,7 @@
 title: "Building an Offline-First Android App for Field Operations with GeoPackage and Jetpack Compose"
 description: "How I built a native Android app for field teams: offline spatial queries with GeoPackage, real-time GPS tracking, and sync with PostgreSQL."
 pubDate: "2026-02-01"
+updatedDate: "2026-09-12"
 image: "/assets/blog/offline-first-android.webp"
 tags: ["android", "kotlin", "geopackage", "jetpack-compose", "offline-first"]
 author: "Asier Ortiz"
@@ -99,6 +100,8 @@ Every entity has a `synced` boolean. When a record is created or modified locall
 
 This pattern is simple but effective. It handles the common case (create offline, sync later) without the complexity of conflict resolution frameworks like CRDTs.
 
+<img src="/assets/blog/field-ops-system-map.svg" alt="On the device, a WorkManager sync runs after every save, on app open and every fifteen minutes, with one strategy per entity type in the order patrols, incidents, emergencies, photos, each in its own try/catch. Room (SQLite) is the source of truth, holding patrols, tracks, incidents, emergencies, photos and reference caches with UUID primary keys, a synced flag and the server id. A foreground tracking service feeds fused GPS through a Kalman filter and, during patrols, an HMM map matcher. A roads GeoPackage opened with the NGA SDK provides offline road and kilometre attribution through an R-tree over the official network. Map tiles in an MBTiles file are served by a local HTTP server to MapLibre. VOSK speech recognition uses a small Spanish model downloaded once, with a closed grammar and spoken feedback. Credentials live in EncryptedSharedPreferences behind a biometric prompt with silent re-login on 401. The Jetpack Compose UI keeps one task per screen. On the server, an Express API in TypeScript checks a JWT and a server-side session and makes one parameterised call per operation into PostgreSQL PL/pgSQL functions, where the business logic lives and the patrol upload is one transaction. A JVM matcher worker running GraphHopper map matching on OpenStreetMap polls the patrol table as a queue. Offline data downloads serve the tiles and the roads GeoPackage with a SHA-256 signature. Photo files are stored on the server filesystem with their metadata in the database." data-zoomable />
+
 ---
 
 ## 3. GeoPackage for Offline Spatial Queries
@@ -135,25 +138,27 @@ val manager = GeoPackageFactory.getManager(context)
 val geoPackage = manager.openExternal(geoPackageFile)
 ```
 
-2. **Query by proximity**. Given GPS coordinates, find nearby candidate segments through the GeoPackage's R-Tree spatial index:
+2. **Query by proximity**. Given GPS coordinates, find nearby candidate segments through the GeoPackage's R-Tree spatial index, with a search radius in metres converted to degrees:
 
 ```kotlin
 val featureDao = geoPackage.getFeatureDao("road_segments")
 val indexManager = FeatureIndexManager(context, geoPackage, featureDao)
 val envelope = GeometryEnvelope(
-    lng - buffer, lng + buffer,
-    lat - buffer, lat + buffer
+    lng - lonDelta, lat - latDelta,
+    lng + lonDelta, lat + latDelta
 )
 val results = indexManager.query(envelope)
 ```
 
-3. **Calculate the kilometer marker**. The GPS point is projected onto the candidate segment's geometry. An early version then computed the KM by measuring the distance along the line from the road's origin; today the network ships pre-cut into short segments that each carry their official starting KM as an attribute, so the app projects the point and reads the marker straight from the data. Authoritative values beat on-device arithmetic: faster, and immune to the subtle errors that creep into distance calculations over reprojected geometries.
+3. **Calculate the kilometer marker**. The GPS point is projected onto the candidate segment's geometry. An early version then computed the KM by measuring the distance along the line from the road's origin; today the network ships pre-cut into short segments that each carry their official starting KM as an attribute, so the app projects the point onto the closest segment and reads that segment's marker straight from the data, with no offset along it. Authoritative values beat on-device arithmetic: faster, and immune to the subtle errors that creep into distance calculations over reprojected geometries.
 
-4. **Determine direction**, based on the heading from GPS updates and the road segment's bearing.
+4. **Ask for the direction**. It is picked from a two-option dialog rather than inferred; GPS heading against segment bearing is only used inside the patrol map matcher, to filter candidates.
+
+<img src="/assets/blog/field-ops-road-attribution.svg" alt="Single lookup, used by the incident form and run on every fix while the form is open: a raw fused GPS fix at about one per second; a search window whose radius in metres is converted to degrees, 500 metres for the form and 50 by default; an R-tree query over the GeoPackage returning candidate sections of the official network; the point projected onto every vertex pair of each candidate with the parameter clamped to the segment and the distance measured by haversine; the best candidate is the minimum distance with a 3 metre penalty for slip roads. The kilometre marker is the matched section's starting KM and metre attributes read from the data, with no offset along the section; the road name comes from the section id looked up in the cached road catalogue, with link roads flagged separately; the form is filled with road and KM, the direction is picked by hand, and with no candidate the fields are left for manual entry. During a patrol the same GeoPackage feeds a different decision, one fix per second: a Kalman-filtered fix with adaptive noise by speed and an innovation gate, candidates within a radius of three times the GPS accuracy clamped to 35 to 50 metres, an HMM Viterbi matcher over the road graph with heading-versus-bearing filters, a confirmation step with a 40 metre cutoff and hysteresis that returns null off-road rather than the nearest road, and a direction derived from the kilometre at entry versus exit." data-zoomable />
 
 ### The Result
 
-The user taps "Report Incident," and the app **instantly** fills in the road name, KM, and direction, all computed locally from GPS + GeoPackage data. No internet required. The spatial query runs in milliseconds.
+The user taps "Report Incident," and the app **instantly** fills in the road name and KM, computed locally from GPS + GeoPackage data. No internet required. The spatial query runs in milliseconds.
 
 This ended up being the feature that impressed everyone the most during demos. What previously required manually looking up road markers and typing values now happened automatically. The first time I showed it to the field workers, their reaction alone made all the frustration worth it.
 
@@ -208,7 +213,7 @@ The app includes a map view that tracks the user's patrol in real time, drawing 
 
 ### MapLibre for Offline Maps
 
-We use **MapLibre GL** (the open-source fork of Mapbox GL) for map rendering, with the GeoPackage road data overlaid as vector layers. Getting the base map offline, however, took two attempts.
+We use **MapLibre GL** (the open-source fork of Mapbox GL) for map rendering, with the route and incident markers drawn as GeoJSON layers on top. Getting the base map offline, however, took two attempts.
 
 The first approach used MapLibre's built-in `OfflineRegion` API to pre-download tiles. It worked in testing and fell apart at real scale: covering the full patrol area fired over 4,500 individual tile requests, downloads stalled constantly, and regions routinely ended up 97% incomplete with no clean way to resume.
 
@@ -256,7 +261,7 @@ I needed a way to interact with the app **without touching the screen**.
 
 Online services like Google Speech API weren't an option: again, no guaranteed connectivity. I integrated **[VOSK](https://alphacephei.com/vosk/)**, an open-source speech recognition toolkit that runs entirely on-device.
 
-VOSK uses lightweight ML models (~50MB) that can be bundled with the app. It processes audio locally with decent accuracy for a focused vocabulary set.
+VOSK uses lightweight ML models (~50MB); the Spanish one is downloaded once, over Wi-Fi unless the user allows mobile data. It processes audio locally with decent accuracy for a focused vocabulary set.
 
 The vocabulary is deliberately tiny. In driving mode, the app listens for one action with two accepted phrasings, "nueva incidencia" and "registrar incidencia", which opens an incident report with the location already filled in. Vosk runs with a closed grammar: those phrases plus an unknown-word token, nothing else.
 
@@ -353,7 +358,7 @@ object HapticFeedback {
 
 **Accessibility as a setting, not an afterthought**: The app ships with selectable typefaces (including Atkinson Hyperlegible and OpenDyslexic) plus adjustable text scaling, a dark theme, and a pure-black AMOLED variant for night patrols. Not every field worker has perfect eyesight, and a font option costs very little to build compared to what it gives back.
 
-**State machines, not free-form flows**: Emergencies follow a strict lifecycle of Active, Finalized, and Canceled. The UI adapts to each state, showing only relevant actions and preventing invalid transitions.
+**State machines, not free-form flows**: Emergencies follow a strict lifecycle: Active, En Route, On Site, Finalized, and Canceled. The UI adapts to each state, showing only relevant actions and preventing invalid transitions.
 
 ---
 
@@ -363,7 +368,7 @@ The app handles sensitive operational data: incident locations, emergency detail
 
 ### Encrypted Credentials
 
-User credentials are stored using Android's **EncryptedSharedPreferences** with AES-256-GCM encryption, backed by the **Android Keystore**. This means login data is encrypted at rest with hardware-backed keys. Even if someone extracts the app's data from the device, the credentials are unreadable without the Keystore.
+The username and password kept for biometric login are stored using Android's **EncryptedSharedPreferences** with AES-256-GCM encryption, backed by the **Android Keystore**, so they are encrypted at rest with hardware-backed keys. Even if someone extracts the app's data from the device, the credentials are unreadable without the Keystore.
 
 Passwords are also hashed with SHA-256 for offline login validation, so the app can authenticate users even without a server connection.
 
@@ -391,13 +396,15 @@ The sync process is the bridge between the offline-first local database and the 
 
 ### How It Works
 
-1. **Detect connectivity**: The app monitors network state. When a connection becomes available, it triggers a sync attempt. A process-wide mutex prevents two syncs from running concurrently, and periodic syncs respect a cooldown that manual ones are allowed to skip.
+1. **Detect connectivity**: The app monitors network state. When a connection comes back, it pushes whatever is pending; the full push-and-pull runs on app open and from the list screens. A process-wide mutex prevents two syncs from running concurrently, and the app-open sync respects a ten-minute cooldown that a manual "sync now" is allowed to skip.
 
-2. **Push local changes**: All records with `synced = false` are sent to the server. What started as one monolithic sync function evolved into a **Strategy pattern**: one sync strategy per entity type, each isolated in its own try/catch so a failure in one category never aborts the rest. Order matters: photos always go last, because they reference their parent record's UUID and that record must already exist server-side.
+2. **Push local changes**: Records with `synced = false` are sent to the server (patrols only once finished or cancelled). What started as one monolithic sync function evolved into a **Strategy pattern**: one sync strategy per entity type, each isolated in its own try/catch so a failure in one category never aborts the rest. Order matters: photos always go last, because they reference their parent record's UUID and that record must already exist server-side.
 
-3. **Pull server updates**: Sync became genuinely bidirectional over time. Beyond reference data (road lists, staff directories, configuration), the app also downloads records created on other devices within a 7-day window, matching the local retention policy, so a device never holds more history than it needs.
+3. **Pull server updates**: Sync became genuinely bidirectional over time. Reference data (road lists, staff directories, configuration) refreshes on its own daily cycle, and the app downloads the worker's own records created on another device within a 7-day window, matching the local retention policy, so a device never holds more history than it needs.
 
 4. **Mark as synced**: On successful push, records are flagged as `synced = true`. The "last synced" timestamp updates even when there was nothing to upload: a device that's up to date is synced too.
+
+<img src="/assets/blog/field-ops-sync.svg" alt="Four things start a sync: the network coming back pushes pending records only, with no pull and no cooldown; opening the app or a list screen runs a full push and pull, skipped if the last success was under ten minutes ago; Sync now in Settings runs a full sync ignoring the cooldown; and a WorkManager job runs every fifteen minutes when the battery is not low. One process-wide mutex keeps runs from overlapping. The push goes in order, each type and each record in its own try/catch: patrols, only once finished or cancelled; incidents, holding back drafts without a type; emergencies, created or updated by server id; photos always last, one multipart upload each, with a missing local file marked by a tombstone path. A record with a server id goes up as an update and one without as a creation, except patrols, which are only created or cancelled; a duplicate UUID trips a unique violation and the server answers 200 with the existing id; on success the record is marked synced with its server id and the last-sync stamp is updated even when nothing was uploaded. After the push, the pull inserts the worker's own records created on another device in the last seven days if missing by UUID, never overwrites except for a cancellation pushed by the server, deletes synced records older than seven days with their tracks and photos, and reference catalogues refresh on a separate daily cycle. At patrol end the inverted flow uploads the header, the raw track and the road windows in one transaction with no matched coordinates; the matcher worker claims the pending row with SKIP LOCKED, polling every thirty seconds with three attempts; GraphHopper snaps the track to OpenStreetMap and writes the matched coordinates back; the detail screen fetches them once per open, matched by timestamp, showing the raw track until then." data-zoomable />
 
 ### Photo Sync
 
@@ -423,15 +430,15 @@ One edge case earned dedicated handling: photos whose local file has vanished (c
 
 ### Conflict Handling
 
-The original plan was **last-write-wins** at the record level, with the server merging non-null fields for the rare concurrent edit. What ended up in production is more boring, and better: **avoiding conflicts by design**. Downloads only insert records that don't exist locally (matched by UUID) and never overwrite local data; the one change the server is allowed to push over a local record is a cancellation. In the other direction, a record with a server ID goes up as an update, one without goes up as a creation. Since field workers operate in different zones, genuine concurrent edits of the same record essentially don't occur, and the architecture no longer needs to resolve what it structurally prevents.
+The original plan was **last-write-wins** at the record level, with the server merging non-null fields for the rare concurrent edit. What ended up in production is more boring, and better: **avoiding conflicts by design**. Downloads only insert records that don't exist locally (matched by UUID) and never overwrite local data; the one change the server is allowed to push over a local record is a cancellation. In the other direction, an incident or emergency with a server ID goes up as an update and one without as a creation; a patrol is only ever created or cancelled. Since field workers operate in different zones, genuine concurrent edits of the same record essentially don't occur, and the architecture no longer needs to resolve what it structurally prevents.
 
 ### When the Device Is the Wrong Place to Compute
 
 The biggest architectural change since launch came not from a design insight but from an Android platform limit. When a patrol ends, the raw GPS track gets re-matched against the road network as a whole, a global cleanup pass that produces the polished route shown in the history. That job originally ran on-device in a background worker, and reality intervened: Android's JobScheduler kills background work after roughly ten minutes, and long urban patrols never finished processing.
 
-The fix inverted the flow. The track now uploads immediately when the patrol ends, raw, with the matched coordinates left empty, and the server computes the re-match. The app picks up the result on a later pull; if the server hasn't finished yet, it simply shows the raw track, which is perfectly usable, and checks again the next time the record is opened. No spinner, no error state.
+The fix inverted the flow. The track now uploads immediately when the patrol ends, raw, with the matched coordinates left empty, and the server computes the re-match. The app fetches the result the next time the patrol is opened; if the server hasn't finished yet, it simply shows the raw track, which is perfectly usable, and tries again on the next open. No spinner, no error state.
 
-The division of labor is deliberate. The device still computes the official attribution (which road, which KM) live during the patrol, because that's the business data the worker needs on the spot. What moved to the server is the cosmetic pass that aligns the drawn route with the map, handled by a small worker process running an off-the-shelf map-matching engine, with the database table itself acting as the job queue.
+The division of labor is deliberate. The device still computes the official attribution (which road, which KM) live during the patrol, because that's the business data the worker needs on the spot. What moved to the server is the cosmetic pass that aligns the drawn route with the map, handled by a small worker process running GraphHopper's map matching over OpenStreetMap data, polling the patrol table as its job queue.
 
 There's a lesson in that for offline-first dogma. The doctrine says "compute locally," but what it really means is "degrade gracefully." Uploading raw data eagerly and treating the polished version as a progressive enhancement turned out to be more offline-friendly than insisting the device do everything itself.
 

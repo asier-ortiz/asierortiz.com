@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 584" width="800" height="584" role="img" aria-labelledby="title desc">
+  <title id="title">The sync cycle: what starts it, the push order, the pull, and the inverted flow for patrol tracks</title>
+  <desc id="desc">Four things start a sync: the network coming back pushes pending records only, with no pull and no cooldown; opening the app or a list screen runs a full push and pull, skipped if the last success was under ten minutes ago; Sync now in Settings runs a full sync ignoring the cooldown; and a WorkManager job runs every fifteen minutes when the battery is not low. One process-wide mutex keeps runs from overlapping. The push goes in order, each type and each record in its own try/catch: patrols, only once finished or cancelled; incidents, holding back drafts without a type; emergencies, created or updated by server id; photos always last, one multipart upload each, with a missing local file marked by a tombstone path. A record with a server id goes up as an update and one without as a creation, except patrols, which are only created or cancelled; a duplicate UUID trips a unique violation and the server answers 200 with the existing id; on success the record is marked synced with its server id and the last-sync stamp is updated even when nothing was uploaded. After the push, the pull inserts the worker's own records created on another device in the last seven days if missing by UUID, never overwrites except for a cancellation pushed by the server, deletes synced records older than seven days with their tracks and photos, and reference catalogues refresh on a separate daily cycle. At patrol end the inverted flow uploads the header, the raw track and the road windows in one transaction with no matched coordinates; the matcher worker claims the pending row with SKIP LOCKED, polling every thirty seconds with three attempts; GraphHopper snaps the track to OpenStreetMap and writes the matched coordinates back; the detail screen fetches them once per open, matched by timestamp, showing the raw track until then.</desc>
+  <style>
+    .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
+    .box { fill: #171717; stroke: #404040; stroke-width: 1; }
+    .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
+    .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
+    .t { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
+    .s { font: 10.5px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
+    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    .mono { font: 10.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #d4d4d4; }
+    .warn { fill: #fbbf24; }
+    .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
+    .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" /></marker>
+    <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" /></marker>
+    <marker id="ahs" viewBox="0 0 8 8" refX="1" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 8 0 L 0 4 L 8 8 z" fill="#38bdf8" /></marker>
+  </defs>
+
+  <rect class="lane" x="14" y="14" width="772" height="132" rx="10" />
+  <text class="k" x="28" y="36">What starts a sync</text>
+  <rect class="box" x="28" y="46" width="178" height="60" rx="6" />
+  <text class="t" x="40" y="64">Network comes back</text>
+  <text class="s" x="40" y="81">push pending records only</text>
+  <text class="s warn" x="40" y="94">no pull, no cooldown</text>
+  <rect class="box" x="218" y="46" width="178" height="60" rx="6" />
+  <text class="t" x="230" y="64">App open, list screens</text>
+  <text class="s" x="230" y="81">full sync: push + pull</text>
+  <text class="s" x="230" y="94">skipped if last OK &lt; 10 min</text>
+  <rect class="box" x="408" y="46" width="178" height="60" rx="6" />
+  <text class="t" x="420" y="64">“Sync now” in Settings</text>
+  <text class="s" x="420" y="81">full sync</text>
+  <text class="s" x="420" y="94">cooldown ignored</text>
+  <rect class="box" x="598" y="46" width="178" height="60" rx="6" />
+  <text class="t" x="610" y="64">Every 15 minutes</text>
+  <text class="s" x="610" y="81">WorkManager periodic job</text>
+  <text class="s" x="610" y="94">battery not low</text>
+  <rect class="inner" x="28" y="114" width="748" height="22" rx="6" />
+  <text class="lbl" x="400" y="129" text-anchor="middle">one process-wide mutex: runs never overlap</text>
+  <rect class="lane" x="14" y="160" width="772" height="176" rx="10" />
+  <text class="k" x="28" y="182">Push, in this order</text>
+  <text class="s" x="772" y="182" text-anchor="end">each type and each record in its own try/catch</text>
+  <rect class="box" x="28" y="192" width="178" height="60" rx="6" />
+  <text class="t" x="40" y="210">Patrols</text>
+  <text class="s" x="40" y="227">only once finished</text>
+  <text class="s" x="40" y="240">or cancelled</text>
+  <rect class="box" x="218" y="192" width="178" height="60" rx="6" />
+  <text class="t" x="230" y="210">Incidents</text>
+  <text class="s" x="230" y="227">drafts without a type</text>
+  <text class="s" x="230" y="240">are held back</text>
+  <rect class="box" x="408" y="192" width="178" height="60" rx="6" />
+  <text class="t" x="420" y="210">Emergencies</text>
+  <text class="s" x="420" y="227">created or updated</text>
+  <text class="s" x="420" y="240">with server id</text>
+  <rect class="box" x="598" y="192" width="178" height="60" rx="6" />
+  <text class="t" x="610" y="210">Photos, always last</text>
+  <text class="s" x="610" y="227">one multipart upload each</text>
+  <text class="s warn" x="610" y="240">missing file → tombstone</text>
+  <path class="arrow" d="M 206 222 L 218 222" marker-end="url(#ah)" />
+  <path class="arrow" d="M 396 222 L 408 222" marker-end="url(#ah)" />
+  <path class="arrow" d="M 586 222 L 598 222" marker-end="url(#ah)" />
+  <rect class="box" x="28" y="264" width="244" height="60" rx="6" />
+  <text class="t" x="40" y="282">Server id present?</text>
+  <text class="s" x="40" y="299">yes → update, no → create</text>
+  <text class="s" x="40" y="312">patrols: create or cancel only</text>
+  <rect class="box" x="280" y="264" width="244" height="60" rx="6" />
+  <text class="t" x="292" y="282">Server sees a duplicate UUID</text>
+  <text class="s" x="292" y="299">unique violation → 200</text>
+  <text class="s" x="292" y="312">with the existing id</text>
+  <rect class="box" x="532" y="264" width="244" height="60" rx="6" />
+  <text class="t" x="544" y="282">On success</text>
+  <text class="s" x="544" y="299">synced = 1, server id stored</text>
+  <text class="s" x="544" y="312">last-sync stamp even if empty</text>
+  <rect class="lane" x="14" y="350" width="772" height="96" rx="10" />
+  <text class="k" x="28" y="372">Pull and cleanup, after the push</text>
+  <rect class="box" x="28" y="378" width="178" height="60" rx="6" />
+  <text class="t" x="40" y="396">Own records, 7 days</text>
+  <text class="s" x="40" y="413">created on another device</text>
+  <text class="s" x="40" y="426">insert if missing, by UUID</text>
+  <rect class="box" x="218" y="378" width="178" height="60" rx="6" />
+  <text class="t" x="230" y="396">Never overwrite</text>
+  <text class="s warn" x="230" y="413">except a cancellation</text>
+  <text class="s" x="230" y="426">pushed by the server</text>
+  <rect class="box" x="408" y="378" width="178" height="60" rx="6" />
+  <text class="t" x="420" y="396">Delete after 7 days</text>
+  <text class="s" x="420" y="413">synced records only</text>
+  <text class="s" x="420" y="426">with tracks and photos</text>
+  <rect class="box" x="598" y="378" width="178" height="60" rx="6" />
+  <text class="t" x="610" y="396">Reference catalogues</text>
+  <text class="s" x="610" y="413">separate daily refresh</text>
+  <text class="s" x="610" y="426">roads, staff, types</text>
+  <rect class="lane" x="14" y="460" width="772" height="110" rx="10" />
+  <text class="k" x="28" y="482">Patrol end: the inverted flow</text>
+  <text class="s" x="772" y="482" text-anchor="end">the device never waits for the polished route</text>
+  <rect class="box-accent" x="28" y="492" width="178" height="60" rx="6" />
+  <text class="t" x="40" y="510">Upload right away</text>
+  <text class="s" x="40" y="527">header, track, road windows</text>
+  <text class="s" x="40" y="540">one transaction, raw coords</text>
+  <rect class="box" x="218" y="492" width="178" height="60" rx="6" />
+  <text class="t" x="230" y="510">Matcher claims it</text>
+  <text class="s" x="230" y="527">pending row, SKIP LOCKED</text>
+  <text class="s" x="230" y="540">30 s poll, 3 attempts</text>
+  <rect class="box" x="408" y="492" width="178" height="60" rx="6" />
+  <text class="t" x="420" y="510">GraphHopper snaps it</text>
+  <text class="s" x="420" y="527">matched coordinates written</text>
+  <text class="s" x="420" y="540">back to the track rows</text>
+  <rect class="box" x="598" y="492" width="178" height="60" rx="6" />
+  <text class="t" x="610" y="510">Detail screen fetches</text>
+  <text class="s" x="610" y="527">once per open, by timestamp</text>
+  <text class="s warn" x="610" y="540">raw track shown until then</text>
+  <path class="arrow-dim" d="M 206 522 L 218 522" marker-end="url(#ahd)" />
+  <path class="arrow-dim" d="M 396 522 L 408 522" marker-end="url(#ahd)" />
+  <path class="arrow" d="M 586 522 L 598 522" marker-end="url(#ah)" />
+</svg>
