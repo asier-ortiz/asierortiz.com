@@ -1,3 +1,9 @@
+## [1.58.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.57.0...v1.58.0) (2026-09-11)
+
+### Features
+
+* **blog:** paginate the listing and cross-fade page changes ([4380297](https://github.com/asier-ortiz/asierortiz.com/commit/4380297b8ffeb5424a4239eafaf278cf049bdb86))
+
 ## [1.57.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.56.2...v1.57.0) (2026-09-11)
 
 ### Features
