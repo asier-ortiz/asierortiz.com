@@ -1,3 +1,9 @@
+## [1.59.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.58.0...v1.59.0) (2026-09-12)
+
+### Features
+
+* **blog:** add three figures to the field-ops article and align it with the code ([4299e18](https://github.com/asier-ortiz/asierortiz.com/commit/4299e187ced751708171136fb7dd01145e9a7c99))
+
 ## [1.58.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.57.0...v1.58.0) (2026-09-11)
 
 ### Features
