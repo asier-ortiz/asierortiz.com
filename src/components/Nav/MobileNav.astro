@@ -1,9 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import NavLink from '@components/Nav/NavLink.astro';
-import Button from '@components/Button/Button.astro';
 import navData from '@config/navData.json';
-import siteData from '@config/siteData.json.ts';
 ---
 
 <div id="mobile-nav__container">
@@ -38,15 +36,6 @@ import siteData from '@config/siteData.json.ts';
           }
         </ul>
       </nav>
-      <div class="mx-1 mt-2 w-full px-4">
-        <Button
-          variant="primary"
-          class="w-full"
-          href={`mailto:${siteData.author.email}`}
-        >
-          Contact
-        </Button>
-      </div>
     </div>
   </div>
   <button
