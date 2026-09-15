@@ -6,6 +6,10 @@
  * while the gallery is on screen. With a single frame it is a plain image.
  * The rotation is skipped when the visitor prefers reduced motion or when site
  * animations are disabled (the `use-animations` class on <body>, same rule AOS uses).
+ *
+ * The first frame loads eagerly so the gallery is complete when the visitor reaches it,
+ * but at low priority so it never competes with the hero, fonts and CSS. Candidates are
+ * sized to the rendered card (measured 322px on phones, 452px on desktop).
  */
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -34,8 +38,11 @@ const [first] = images;
         class:list={['project-gallery__frame', { 'is-active': index === 0 }]}
         src={image}
         alt={alt}
-        height={700}
+        width={960}
+        widths={[480, 720, 960, 1440]}
+        sizes="(min-width: 1024px) 452px, (min-width: 768px) 42vw, 83vw"
         loading={index === 0 ? 'eager' : 'lazy'}
+        fetchpriority={index === 0 ? 'low' : undefined}
         decoding={index === 0 ? 'auto' : 'async'}
       />
     ))
