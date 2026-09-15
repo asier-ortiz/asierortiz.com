@@ -1,3 +1,18 @@
+## [1.64.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.63.0...v1.64.0) (2026-09-15)
+
+### Features
+
+* **nav:** show the Contact button on phones instead of hiding it in the drawer ([f28bf78](https://github.com/asier-ortiz/asierortiz.com/commit/f28bf7833c5e1aaa5053079875bd87ff4ed9fddb))
+
+### Bug Fixes
+
+* **blog:** bring code comments and post meta lines up to AA contrast ([f65b2c9](https://github.com/asier-ortiz/asierortiz.com/commit/f65b2c985407ce2c7fccd53d61eb2de519fda302))
+* **site:** wire the favicon set and derive theme colours from the palette ([f612ff2](https://github.com/asier-ortiz/asierortiz.com/commit/f612ff23f8f36a2b9f990bbd25a6d6ac7d71d548))
+
+### Performance Improvements
+
+* **projects:** size gallery frames to the card and load them at low priority ([a3241e6](https://github.com/asier-ortiz/asierortiz.com/commit/a3241e6b2e94cd65b7fb678202e472f184329a43))
+
 ## [1.63.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.62.0...v1.63.0) (2026-09-15)
 
 ### Features
