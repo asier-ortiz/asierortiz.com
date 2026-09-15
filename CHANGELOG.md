@@ -1,3 +1,14 @@
+## [1.63.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.62.0...v1.63.0) (2026-09-15)
+
+### Features
+
+* **blog:** add an end-of-post block for the newsletter and replies ([6567154](https://github.com/asier-ortiz/asierortiz.com/commit/6567154f206daa0c784a39d6bfe393d5a0d83f53))
+
+### Performance Improvements
+
+* **hero:** paint the portrait on the first frame and serve it at its rendered size ([7c6be1f](https://github.com/asier-ortiz/asierortiz.com/commit/7c6be1f2006a7a4477eed52fb6a6c89cbab2af45))
+* **home:** paint the hero on the first frame instead of waiting for AOS ([f292d69](https://github.com/asier-ortiz/asierortiz.com/commit/f292d692a56e9410a348c47a97cc568b0ca178f8))
+
 ## [1.62.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.61.0...v1.62.0) (2026-09-15)
 
 ### Features
