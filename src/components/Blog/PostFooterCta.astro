@@ -1,0 +1,46 @@
+---
+/**
+ * End-of-article call to action: one primary action (subscribe) and one secondary
+ * (reply by email, with the post title already in the subject line).
+ */
+import Button from '@/components/Button/Button.astro';
+import siteData from '@/config/siteData.json';
+
+interface Props {
+  /** Post title, used to prefill the subject of the reply email. */
+  title: string;
+}
+
+const { title } = Astro.props;
+const replyHref = `mailto:${siteData.author.email}?subject=${encodeURIComponent(`Re: ${title}`)}`;
+---
+
+<aside
+  aria-labelledby="post-footer-cta-title"
+  class="mt-16 rounded-xl border border-base-700 bg-base-900 p-6 md:p-8"
+>
+  <h2 id="post-footer-cta-title" class="h3">Get the next one by email</h2>
+  <p class="description mt-3 text-pretty">
+    New posts land in your inbox as they come out. I only write when there's something worth
+    reading: no schedule, no filler, one click to leave.
+  </p>
+  <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
+    <Button
+      variant="secondary"
+      href={siteData.newsletter.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={siteData.newsletter.label}
+    >
+      Subscribe
+    </Button>
+    <p class="description text-pretty">
+      Spotted a mistake, or want to talk about this?
+      <a
+        href={replyHref}
+        class="primary-focus underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400"
+        >Reply by email.</a
+      >
+    </p>
+  </div>
+</aside>

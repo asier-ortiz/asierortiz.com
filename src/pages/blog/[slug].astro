@@ -10,6 +10,7 @@ import ZoomImages from '@/components/Media/ZoomImages.vue';
 import { formatDate } from '@/utils/formatDate';
 import ReadingProgress from '@/components/Blog/ReadingProgress.astro';
 import ScrollSpyToc from '@/components/Blog/ScrollSpyToc.astro';
+import PostFooterCta from '@/components/Blog/PostFooterCta.astro';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -107,6 +108,8 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
 
     <!-- Vue Island that applies medium-zoom only to images inside the Markdown content -->
     <ZoomImages client:load />
+
+    <PostFooterCta title={post.data.title} />
 
     <div class="flex justify-start mt-16">
       <Button href="/blog/" variant="post-ghost" arrow="left" data-back-to-listing>
