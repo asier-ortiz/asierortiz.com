@@ -4,7 +4,7 @@ import heroImage from '@assets/images/asier-ortiz.webp';
 import siteData from '@config/siteData.json';
 ---
 
-<section id="hero" class="relative flex w-full z-[25]" data-aos="fade-up">
+<section id="hero" class="hero-enter relative flex w-full z-[25]">
   <div class="container grid items-center gap-10 pt-24 md:pt-36 lg:pt-44 md:grid-cols-3 md:gap-20">
     <div class="mx-auto max-w-lg md:col-span-2 md:ml-0 md:max-w-full">
       <h1 class="h1">Hey, I'm <span class="text-gradient">{siteData.author.name}</span></h1>
@@ -36,6 +36,25 @@ import siteData from '@config/siteData.json';
 </section>
 
 <style lang="scss">
+  /* Entrance without hiding the content. The hero is the LCP element on phones: anything
+     that starts at opacity 0 (the AOS fade-up, or a CSS fade) delays the LCP until the main
+     thread is free again, measured at +0.8 s on a throttled phone. A slide alone keeps the
+     motion cue while the text is painted, and counted, on the first frame. Same distance,
+     duration and easing as the AOS fade-up (15px, 0.75s, easeOutCubic). */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(body.use-animations) .hero-enter {
+      animation: hero-enter 0.75s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+    }
+  }
+
+  @keyframes hero-enter {
+    from {
+      transform: translate3d(0, 15px, 0);
+    }
+    to {
+      transform: none;
+    }
+  }
 
   .eclipse-wrapper {
     position: relative;
