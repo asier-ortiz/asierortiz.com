@@ -1,0 +1,99 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Particles from '@components/Particles/Particles.vue';
+import siteData from '@config/siteData.json';
+
+const email = siteData.author.email;
+const updated = '15 September 2026';
+---
+
+<Layout
+  title={`${siteData.author.name} - Privacy`}
+  description={`How ${siteData.author.name}'s website handles your data: hosting logs, the newsletter, email contact, and no cookies or analytics.`}
+>
+  <Particles client:only="vue" />
+  <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
+    <header>
+      <h1 class="h1 text-pretty text-gradient lg:pb-2">Privacy</h1>
+      <p class="description mt-6 text-pretty">
+        This site collects as little as it can. Here is what is processed, by whom, and what you
+        can do about it.
+      </p>
+    </header>
+
+    <section class="prose mt-14">
+      <h2>Who is responsible</h2>
+      <p>
+        {siteData.author.name}, the author of this site. For anything related to your data,
+        write to <a href={`mailto:${email}`}>{email}</a>.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        The site is static and served by Netlify, Inc. (United States). Like any web server,
+        Netlify records access logs when you load a page: your IP address, browser identifier,
+        the page requested and the time. Those logs exist to deliver the site and to protect it
+        from abuse, on the basis of legitimate interest. Netlify keeps them for a limited time and
+        commits to the EU Standard Contractual Clauses in its data processing agreement. See
+        <a href="https://www.netlify.com/privacy/" rel="noopener noreferrer" target="_blank"
+          >Netlify's privacy policy</a
+        >.
+      </p>
+
+      <h2>Newsletter</h2>
+      <p>
+        If you subscribe, your email address is stored by Buttondown (Buttondown, LLC, United
+        States), the service that sends the emails on my behalf. It is used for one thing: telling
+        you when I publish something new. There is no fixed schedule.
+      </p>
+      <ul>
+        <li>
+          The subscription is based on your consent, confirmed by the link in the first email
+          (double opt-in). Nothing is sent until you confirm.
+        </li>
+        <li>
+          Your address is kept until you unsubscribe. Every email has an unsubscribe link, and
+          you can also write to me to be removed.
+        </li>
+        <li>
+          The subscription page runs on Buttondown's servers, even though it lives under this
+          domain. Buttondown may set its own cookies there and records basic delivery data for
+          the emails it sends. See
+          <a href="https://buttondown.com/legal/privacy" rel="noopener noreferrer" target="_blank"
+            >Buttondown's privacy policy</a
+          >.
+        </li>
+      </ul>
+
+      <h2>Email</h2>
+      <p>
+        If you write to me, your message and address stay in my mailbox for as long as the
+        conversation needs them. They are not shared with anyone or used for anything else.
+      </p>
+
+      <h2>Cookies and analytics</h2>
+      <p>
+        None. The site sets no cookies, stores nothing in your browser and runs no analytics.
+        Fonts and scripts are served from this domain, so loading a page contacts no third party.
+        The only external requests happen when you follow a link to another site, such as GitHub,
+        LinkedIn, Kaggle or the newsletter page, each of which has its own policy.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Under the GDPR you can ask to access, correct, delete or export the data held about you,
+        object to or restrict its processing, and withdraw consent at any time. Email
+        <a href={`mailto:${email}`}>{email}</a> and I will answer. You can also lodge a complaint
+        with the Spanish data protection authority, the
+        <a href="https://www.aepd.es/" rel="noopener noreferrer" target="_blank">AEPD</a>, or with
+        the authority in your own country.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        If the way the site handles data changes, this page will change with it. Last updated on
+        {updated}.
+      </p>
+    </section>
+  </article>
+</Layout>
