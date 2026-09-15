@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require('tailwindcss/colors');
+import colors from 'tailwindcss/colors';
+import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
 
-module.exports = {
+export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
   // Wrap every hover: utility in @media (hover: hover): touch browsers otherwise
@@ -367,8 +369,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
+    typography,
+    forms,
     function ({ addBase, theme }) {
       const hex = theme('colors.primary.600');
       const r = parseInt(hex.slice(1, 3), 16);
@@ -379,7 +381,6 @@ module.exports = {
           '--color-primary-600': hex,
           '--color-primary-600-rgb': `${r}, ${g}, ${b}`,
           '--color-secondary-50': theme('colors.secondary.50'),
-          '--theme-color': theme('colors.primary.900'),
         },
       });
     },

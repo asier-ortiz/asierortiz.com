@@ -18,6 +18,7 @@ import ScrollToTop from '@components/Button/ScrollToTop.astro';
 import ShootingStar from '@components/Particles/ShootingStar.astro';
 import siteData from '@config/siteData.json';
 import { absoluteUrl } from '@/utils/absoluteUrl';
+import { backgroundColor } from '@/config/theme';
 
 interface Props {
   title: string;
@@ -40,13 +41,16 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- /favicon.ico and /apple-touch-icon.png also exist at the site root for clients that
+         request them blindly. The 192px icon is the one search engines pick for results. -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="var(--theme-color)" />
+    <meta name="theme-color" content={backgroundColor} />
     <link rel="canonical" href={pageUrl} />
 
     <!-- RSS / JSON Feed alternate links -->

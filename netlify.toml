@@ -5,10 +5,9 @@ framework = "astro"
 [build]
 command = "npm run build"
 publish = "dist"
-functions = "netlify/functions/"
 
-[[redirects]]
-from = "/api/*" # simplify all calls to serverless functions
-to = "/.netlify/functions/:splat" # all function calls will go to this path
-status = 200 # ok code
-force = true # ensure to always redirect
+# Netlify serves .webmanifest as application/octet-stream by default.
+[[headers]]
+for = "/favicons/site.webmanifest"
+[headers.values]
+Content-Type = "application/manifest+json"
