@@ -21,14 +21,30 @@ import siteData from '@config/siteData.json';
         <div class="eclipse-ring"></div>
         <div class="overflow-hidden rounded-full">
           <Image
+            id="hero-portrait"
             src={heroImage}
-            class="w-full object-cover rounded-full fade-in"
+            class="w-full object-cover rounded-full"
             alt="asier ortiz profile"
             loading="eager"
-            width={600}
-            densities={[1.5, 2]}
+            decoding="sync"
+            fetchpriority="high"
+            width={640}
+            widths={[160, 320, 480, 640]}
+            sizes="(min-width: 1200px) 280px, (min-width: 768px) 20vw, 40vw"
             oncontextmenu="return false"
           />
+          <!-- Runs while the HTML is parsed, before the first paint. A portrait that is already
+               available is never hidden; only one still in flight gets the fade-in on arrival. -->
+          <script is:inline>
+            (() => {
+              const img = document.getElementById('hero-portrait');
+              if (!img || img.complete) return;
+              img.classList.add('fade-in');
+              const reveal = () => img.classList.add('loaded');
+              img.addEventListener('load', reveal, { once: true });
+              img.addEventListener('error', reveal, { once: true });
+            })();
+          </script>
         </div>
       </div>
     </div>
@@ -129,18 +145,3 @@ import siteData from '@config/siteData.json';
     }
   }
 </style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const img = document.querySelector('img.fade-in');
-    if (!img) return;
-
-    if (img.complete) {
-      img.classList.add('loaded');
-    } else {
-      img.addEventListener('load', () => {
-        img.classList.add('loaded');
-      });
-    }
-  });
-</script>

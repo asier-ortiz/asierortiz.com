@@ -110,15 +110,6 @@
     @apply bg-base-800 motion-safe:animate-pulse;
   }
 
-  img.fade-in {
-    @apply opacity-0;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  img.fade-in.loaded {
-    @apply opacity-100;
-  }
-
   .hide-scrollbar {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer & Edge */
