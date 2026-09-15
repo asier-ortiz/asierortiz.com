@@ -60,8 +60,9 @@
     @apply text-xl font-medium md:text-2xl;
   }
 
+  /* Reading text outside articles: hero, section intros, cards, listing excerpts. */
   .description {
-    @apply text-base-400;
+    @apply font-serif text-base-400 md:text-base lg:text-lg;
   }
 
   .container {
@@ -125,10 +126,6 @@
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
-  }
-
-  p {
-    @apply md:text-base lg:text-lg;
   }
 
   .text-gradient {

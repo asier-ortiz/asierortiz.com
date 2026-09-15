@@ -326,10 +326,12 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        'BlinkMacSystemFont',
-        '-apple-system',
-        'Segoe UI',
         'Poppins',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Roboto',
         'Helvetica',
         'Arial',
         'sans-serif',
@@ -338,6 +340,8 @@ module.exports = {
         'Segoe UI Symbol',
       ],
       serif: [
+        // Quoted on purpose: a family name ending in a digit is invalid CSS when unquoted.
+        '"Source Serif 4"',
         'Iowan Old Style',
         'Apple Garamond',
         'Baskerville',

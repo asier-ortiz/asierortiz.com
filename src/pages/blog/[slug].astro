@@ -51,7 +51,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
     <header class="text-left mb-12">
       <h1 class="h1 text-pretty text-gradient pb-2">{post.data.title}</h1>
 
-      {post.data.description && <p class="mt-4 text-base text-base-400">{post.data.description}</p>}
+      {post.data.description && <p class="mt-4 font-serif text-base text-base-400">{post.data.description}</p>}
 
       <div class="flex flex-wrap items-center gap-2 text-base-500 text-xs mt-6">
         <time
@@ -101,7 +101,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
       <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
 
-    <section class="prose prose-lg mx-auto mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
+    <section class="prose mx-auto mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
       <Content />
     </section>
 

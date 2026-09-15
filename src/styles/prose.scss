@@ -1,6 +1,25 @@
+/* Article typography. The typography plugin provides structure, spacing and colours; every
+   SIZE is set here, so do not add prose-sm/lg/xl modifiers in the markup: they would only
+   half-apply (headings, tables and code sizes are pinned below) and mislead the next reader. */
 .prose {
-  @apply prose-base dark:prose-invert;
+  @apply dark:prose-invert;
   @apply break-words;
+  /* Reading text in serif; headings keep the site's sans. Code keeps its own family. */
+  @apply font-serif prose-headings:font-sans;
+  /* Fixed measure instead of the plugin's 65ch: ch depends on the font's zero width, and
+     Source Serif's is narrow enough to lose ~100px of column. 42rem ≈ 65-70 characters. */
+  @apply max-w-[42rem];
+  /* Reading sizes. The serif has a lower x-height than a sans, so it gets one extra point:
+     17px on phones, 19px from md. Tables, code and captions keep their own sizes. */
+  :is(p, li, blockquote) {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  @screen md {
+    :is(p, li, blockquote) {
+      font-size: 1.1875rem;
+    }
+  }
   @apply prose-h1:text-3xl md:prose-h1:text-4xl;
   @apply prose-h2:text-2xl md:prose-h2:text-3xl;
   @apply prose-h3:text-xl md:prose-h3:text-2xl;

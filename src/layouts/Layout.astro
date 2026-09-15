@@ -1,5 +1,17 @@
 ---
 import '@/styles/global.scss';
+// Self-hosted fonts (latin subsets, font-display: swap); nothing is fetched from Google.
+// Poppins: headings, navigation, buttons and small UI text. Source Serif 4: reading text
+// (descriptions and article prose), see .description and .prose in src/styles.
+import '@fontsource/poppins/latin-400.css';
+import '@fontsource/poppins/latin-500.css';
+import '@fontsource/poppins/latin-700.css';
+import '@fontsource/source-serif-4/latin-400.css';
+import '@fontsource/source-serif-4/latin-400-italic.css';
+import '@fontsource/source-serif-4/latin-600.css';
+import poppins400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2';
+import poppins700 from '@fontsource/poppins/files/poppins-latin-700-normal.woff2';
+import serif400 from '@fontsource/source-serif-4/files/source-serif-4-latin-400-normal.woff2';
 import Nav from '@components/Nav/Nav.astro';
 import Footer from '@components/Footer/Footer.astro';
 import ScrollToTop from '@components/Button/ScrollToTop.astro';
@@ -116,12 +128,10 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
       )
     }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Faces needed for the first paint (h1, nav, hero paragraph); the rest load on demand -->
+    <link rel="preload" href={poppins700} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={poppins400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serif400} as="font" type="font/woff2" crossorigin />
   </head>
 
   <body
