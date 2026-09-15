@@ -244,7 +244,7 @@ const highlightMatch = (post, field) => {
             <div>
               <strong v-html="highlightMatch(post, 'title')"></strong>
               <p class="text-base-400 text-sm mt-1" v-html="highlightMatch(post, 'description')"></p>
-              <p v-if="post.pubDate" class="text-base-500 text-xs mt-1">
+              <p v-if="post.pubDate" class="text-base-400 text-xs mt-1">
                 {{ formatDate(post.pubDate, props.language) }}
               </p>
             </div>

@@ -29,6 +29,10 @@ export default defineConfig({
     compress({ Image: { sharp: { webp: { lossless: false } } } }),
   ],
   markdown: {
+    // Astro's default theme (github-dark) renders comments at 3:1 on its background.
+    // github-dark-default keeps GitHub's palette with comments above 6:1, on a
+    // near-black background that matches the site.
+    shikiConfig: { theme: 'github-dark-default' },
     remarkPlugins: [remarkExtractHeadings],
     rehypePlugins: [rehypeTableWrap, rehypeImageSize],
   },

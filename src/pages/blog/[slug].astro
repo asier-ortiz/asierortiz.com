@@ -54,7 +54,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
 
       {post.data.description && <p class="mt-4 font-serif text-base text-base-400">{post.data.description}</p>}
 
-      <div class="flex flex-wrap items-center gap-2 text-base-500 text-xs mt-6">
+      <div class="flex flex-wrap items-center gap-2 text-base-400/75 text-xs mt-6">
         <time
           datetime={post.data.pubDate.toISOString()}
           data-relative-limit="7"
