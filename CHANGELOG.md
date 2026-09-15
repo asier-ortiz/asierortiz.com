@@ -1,3 +1,9 @@
+## [1.62.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.61.0...v1.62.0) (2026-09-15)
+
+### Features
+
+* **site:** add privacy page and link it from the footer ([4a9e419](https://github.com/asier-ortiz/asierortiz.com/commit/4a9e4194d8363239bc7db3bc051f13cdf175f74a))
+
 ## [1.61.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.60.0...v1.61.0) (2026-09-15)
 
 ### Features
