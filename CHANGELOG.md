@@ -1,3 +1,9 @@
+## [1.61.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.60.0...v1.61.0) (2026-09-15)
+
+### Features
+
+* **ui:** self-host Poppins and set Source Serif 4 for reading text ([4045d89](https://github.com/asier-ortiz/asierortiz.com/commit/4045d89f4fe00e3300fdbf195ca604943f509923))
+
 ## [1.60.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.59.1...v1.60.0) (2026-09-12)
 
 ### Features
