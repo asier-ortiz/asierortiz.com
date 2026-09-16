@@ -25,7 +25,7 @@ const { name, icon, color } = Astro.props as Props;
 
 <style lang="scss">
   /* Pointer-only: on touch, :hover would stick to the tapped item. */
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     .stack-marquee__item:hover {
       .stack-marquee__icon {
         color: var(--brand);

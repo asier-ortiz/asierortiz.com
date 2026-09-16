@@ -80,7 +80,7 @@
     @apply absolute top-1 right-1 bg-primary-600 text-white p-3 rounded-md transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
 
     /* Revealed by hovering the block where hovering exists; always shown on touch. */
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
       opacity: 0;
 
       .group:hover &,
@@ -160,7 +160,7 @@
   }
 
   /* Hand-written hover rules are gated like the Tailwind ones (see tailwind.config.cjs). */
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     a:hover mark {
       background-color: rgba(255, 255, 255, 0.3);
       color: inherit;
@@ -189,7 +189,9 @@
   @import 'aos';
   @import 'animations';
 
-  @media (hover: hover) {
+  /* Hand-written hover rules use the same guard Tailwind puts on hover: utilities. Some phones
+     report a hoverable input (a stylus, a paired mouse) while the finger is the primary pointer. */
+  @media (hover: hover) and (pointer: fine) {
     .group:hover .underline-ltr {
       background-size: 100% 2px;
     }
