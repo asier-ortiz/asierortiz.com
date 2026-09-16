@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" width="800" height="548" role="img" aria-labelledby="title desc">
   <title id="title">Path of one completed-form message through the API process and the worker process</title>
-  <desc id="desc">The API process verifies the webhook signature, inserts the raw event and answers 200. The worker process claims the row with SKIP LOCKED, checks the dedup table, takes the chat lock, downloads the photo, runs the conditional UPDATE that closes the report, sends the confirmation, marks the message id, acks and releases the lock. Three callouts mark where a redelivery, a crash or a duplicate is absorbed.</desc>
   <style>
     .lane { fill: #171717; stroke: #404040; stroke-width: 1; }
     .lane-title { font: 600 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }

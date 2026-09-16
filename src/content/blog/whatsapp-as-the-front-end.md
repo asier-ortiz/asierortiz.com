@@ -85,7 +85,11 @@ Two of these decisions were reversals. The queue ran on Redis Streams first and 
 
 The shape those decisions produce fits in one picture: two processes, one database, and every outbound call leaving from the worker.
 
-<img src="/assets/blog/whatsapp-bot-architecture.svg" alt="Architecture: WhatsApp posts signed webhooks to the API process, which inserts them into PostgreSQL; the worker process claims events from the queue table, keeps chat locks and report state in the same database, and makes every outbound call to the Graph API, the CartoCiudad geocoder and the contractor's platform" data-zoomable />
+<img src="/assets/blog/whatsapp-bot-architecture.svg" alt="Architecture diagram of the citizen reporting bot: WhatsApp, the API process, PostgreSQL and the worker process." data-zoomable />
+<details class="figure-description">
+<summary>Text description of the diagram</summary>
+<p>Architecture: WhatsApp posts signed webhooks to the API process, which inserts them into PostgreSQL; the worker process claims events from the queue table, keeps chat locks and report state in the same database, and makes every outbound call to the Graph API, the CartoCiudad geocoder and the contractor's platform</p>
+</details>
 
 ---
 
@@ -115,7 +119,11 @@ The handler does not parse the payload or read any session state; the first repl
 
 A complete report is four citizen messages, so four webhook deliveries that carry work, and each one passes through claim, deduplication, lock and state machine before the bot answers. The figure below follows the fourth message, the completed form, from that 200 to the worker's acknowledgement, with the three points where a redelivery, a crash or a concurrent copy is absorbed. Sections 4 and 5 walk it step by step.
 
-<img src="/assets/blog/whatsapp-bot-message-path.svg" alt="Path of one completed-form message through the API process and the worker process: signature check and insert, 200 OK, claim with SKIP LOCKED, dedup check, chat lock, photo download, conditional UPDATE, confirmation, mark processed, ack and lock release, with the three points where a redelivery, a crash or a duplicate is absorbed" data-zoomable />
+<img src="/assets/blog/whatsapp-bot-message-path.svg" alt="Diagram of the path of one completed-form message through the API process and the worker process." data-zoomable />
+<details class="figure-description">
+<summary>Text description of the diagram</summary>
+<p>Path of one completed-form message through the API process and the worker process: signature check and insert, 200 OK, claim with SKIP LOCKED, dedup check, chat lock, photo download, conditional UPDATE, confirmation, mark processed, ack and lock release, with the three points where a redelivery, a crash or a duplicate is absorbed</p>
+</details>
 
 ---
 
@@ -267,7 +275,11 @@ The report row is inserted as a draft when the location passes the coverage gate
 
 The form exists twice, once per language, cannot be edited once published, and returns a route that has to be validated on the way in and mapped to the contractor's taxonomy on the way out. Hand-writing the Flow JSON would have meant keeping four copies of one tree in step by hand: two JSON documents, the validator's accepted routes and the outbox mapping. I chose to hold the tree once, in Python, and derive the rest from it.
 
-<img src="/assets/blog/whatsapp-bot-taxonomy.svg" alt="One taxonomy tree in Python feeds three consumers: the Flow generator that emits one published Flow per language, the check script run by hand before each publish, and the runtime that validates the returned route and maps it to the contractor's taxonomy" data-zoomable />
+<img src="/assets/blog/whatsapp-bot-taxonomy.svg" alt="Diagram of one taxonomy tree feeding three consumers: the Flow generator, the check script and the runtime." data-zoomable />
+<details class="figure-description">
+<summary>Text description of the diagram</summary>
+<p>One taxonomy tree in Python feeds three consumers: the Flow generator that emits one published Flow per language, the check script run by hand before each publish, and the runtime that validates the returned route and maps it to the contractor's taxonomy</p>
+</details>
 
 The taxonomy is a nested Python literal built with three constructors: a group, a report leaf and an informational leaf. Labels, prompts and descriptions live in one YAML catalog per language, 81 keys each. A generator walks the tree and emits Flow JSON: one screen per group, a shared informational screen and a terminal summary screen. No Flow JSON is committed. The same tree validates the route a completed form returns and drives the mapping to the contractor's taxonomy in section 9.
 

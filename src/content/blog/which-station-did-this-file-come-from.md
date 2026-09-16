@@ -73,7 +73,11 @@ Delimiter, decimal separator and date order vary by province and by period rathe
 
 Those decisions produce two lanes that fit in one picture: an audit lane that modifies nothing, and a consolidation lane that reads each remaining file once, repairs what physics constrains, and writes the grid.
 
-<img src="/assets/blog/river-sensor-pipeline.svg" alt="Two lanes. Phase 1, the audit, modifies nothing: scan the archive into a catalogue of claims, parse headers and tails, run the analyzers for structure, naming, coverage, identity, ranges and duplicates, and write the incident workbook. Phase 2, the consolidation: parse each file in full, repair lost decimals within physical ranges, snap timestamps to the ten-minute grid, insert with INSERT OR IGNORE under a unique index on station, timestamp and parameter, then left-join a generate_series grid on a pivot to produce one workbook per station. Files with severe identity discrepancies flow from the audit into an exclusion list and never enter phase 2" data-zoomable />
+<img src="/assets/blog/river-sensor-pipeline.svg" alt="Diagram of the two phases: an audit that modifies nothing and a consolidation with bounded repairs." data-zoomable />
+<details class="figure-description">
+<summary>Text description of the diagram</summary>
+<p>Two lanes. Phase 1, the audit, modifies nothing: scan the archive into a catalogue of claims, parse headers and tails, run the analyzers for structure, naming, coverage, identity, ranges and duplicates, and write the incident workbook. Phase 2, the consolidation: parse each file in full, repair lost decimals within physical ranges, snap timestamps to the ten-minute grid, insert with INSERT OR IGNORE under a unique index on station, timestamp and parameter, then left-join a generate_series grid on a pivot to produce one workbook per station. Files with severe identity discrepancies flow from the audit into an exclusion list and never enter phase 2</p>
+</details>
 
 ---
 
@@ -177,7 +181,11 @@ In the report, each of those files is one row with its claims and the verdict si
 | `2021-03_S11_PH.csv` | Station D | S11, maps to Station C | Station C (high, 1 parameter), gap at C that month | Relocate to Station C |
 | `2023-05_monthly.xlsx` | Station E | tab: Station F | Station F (low, 2 parameters) | Review manually |
 
-<img src="/assets/blog/river-sensor-file-identity.svg" alt="One CSV file carries two claims about its station: the folder says station B, the export header code maps to station A; the sensor code in the filename is recorded but not read as a claim. Four pieces of evidence are weighed: the hydrochemical fingerprint with its confidence, the header code, the controller serial, and whether the suggested station has a coverage gap that month. Two or more pieces give a relocation suggestion, a lone profile or serial match gives a review with a suggested station, anything less gives a manual review; in every case the file stays out of the consolidation until a person decides" data-zoomable />
+<img src="/assets/blog/river-sensor-file-identity.svg" alt="Diagram of one file with two conflicting station claims, four pieces of evidence and three possible verdicts." data-zoomable />
+<details class="figure-description">
+<summary>Text description of the diagram</summary>
+<p>One CSV file carries two claims about its station: the folder says station B, the export header code maps to station A; the sensor code in the filename is recorded but not read as a claim. Four pieces of evidence are weighed: the hydrochemical fingerprint with its confidence, the header code, the controller serial, and whether the suggested station has a coverage gap that month. Two or more pieces give a relocation suggestion, a lone profile or serial match gives a review with a suggested station, anything less gives a manual review; in every case the file stays out of the consolidation until a person decides</p>
+</details>
 
 ---
 

@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" width="760" height="310" role="img" aria-labelledby="title desc">
   <title id="title">One taxonomy tree, three consumers</title>
-  <desc id="desc">The Python taxonomy tree feeds a generator that emits one Flow JSON per language for WhatsApp, a check script run by hand before each publish, and the runtime route validation and contractor mapping used by the outbox.</desc>
   <style>
     .box { fill: #171717; stroke: #404040; stroke-width: 1; }
     .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }

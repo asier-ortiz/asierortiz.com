@@ -7,9 +7,15 @@ import Nieves from '@images/projects/nieves.webp';
 import FlareWatch from '@images/projects/flarewatch.webp';
 import VGarbi from '@images/projects/vgarbi.webp';
 
+export interface GalleryFrame {
+  src: ImageMetadata;
+  /** What the screenshot shows; the project name is already the heading next to it. */
+  alt: string;
+}
+
 export interface ProjectItem {
   /** Gallery frames; the first one is shown on load and a single frame means no carousel. */
-  images: ImageMetadata[];
+  images: GalleryFrame[];
   title: string;
   description: string;
   href?: URL;
@@ -26,7 +32,12 @@ export interface Language {
 
 export const projectData: ProjectItem[] = [
   {
-    images: [FlareWatch],
+    images: [
+      {
+        src: FlareWatch,
+        alt: 'FlareWatch on two phones: a flare-risk score with recommendations, and monthly symptom and lifestyle trend charts.',
+      },
+    ],
     title: 'FlareWatch',
     description: `An Android app for IBD patients to log daily symptoms, diet, and lifestyle habits.
     Uses machine learning models on the backend to predict flare risk, track symptom trends over time,
@@ -51,7 +62,20 @@ export const projectData: ProjectItem[] = [
     buttonIcon: 'tdesign:code',
   },
   {
-    images: [AlconFoldable, AlconPhones, AlconTablet],
+    images: [
+      {
+        src: AlconFoldable,
+        alt: 'ALCON on a foldable: live patrol tracking on the N-622 with speed and distance, and a finished surveillance with its route and the roads covered.',
+      },
+      {
+        src: AlconPhones,
+        alt: 'ALCON on three phones: the home screen with surveillances, incidents and emergencies, the list of past patrols, and the settings menu.',
+      },
+      {
+        src: AlconTablet,
+        alt: 'ALCON on a tablet: patrol tracking on the A-1 with speed, distance, kilometre point, and pause and stop controls.',
+      },
+    ],
     title: 'ALCON',
     description: `An offline-first Android app for road surveillance teams at the Provincial Council of Álava.
     Features real-time GPS tracking with automatic road and kilometer-point detection, incident and emergency reporting with photos,
@@ -74,7 +98,12 @@ export const projectData: ProjectItem[] = [
     buttonText: 'Read Blog Post',
   },
   {
-    images: [Nieves],
+    images: [
+      {
+        src: Nieves,
+        alt: 'The winter road operations platform on a desktop, a tablet and a phone: the shift schedule, weather station readings and road status.',
+      },
+    ],
     title: 'Nieves',
     description: `A web platform for coordinating critical winter road operations at the Provincial Council of Álava.
     Modernizes a 15-year-old legacy desktop system with real-time GPS vehicle tracking, IoT weather sensor integration,
@@ -98,7 +127,12 @@ export const projectData: ProjectItem[] = [
     buttonText: 'Read Blog Post',
   },
   {
-    images: [VGarbi],
+    images: [
+      {
+        src: VGarbi,
+        alt: 'The WhatsApp bot on two phones: a chat asking for the location of a problem, and the report form with type, details and a photo.',
+      },
+    ],
     title: 'VGarbi',
     description: `A WhatsApp bot for reporting street-cleaning and waste-collection problems in Vitoria-Gasteiz.
     Features a bilingual Spanish and Basque conversation, a native WhatsApp form with the full incident taxonomy and a photo,
@@ -119,7 +153,12 @@ export const projectData: ProjectItem[] = [
     buttonText: 'Read Blog Post',
   },
   {
-    images: [ArabaMarket],
+    images: [
+      {
+        src: ArabaMarket,
+        alt: "Araba Market on three phones: a map of nearby shops, a producer's profile, and the list of local businesses.",
+      },
+    ],
     title: 'Araba Market',
     description: `A hybrid mobile app for discovering local shops, producers, and services across the province of Álava.
     Features an interactive map, business directory organized by districts, and a promotional voucher system to boost local commerce.

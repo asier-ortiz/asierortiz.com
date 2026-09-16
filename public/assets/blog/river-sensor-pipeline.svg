@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470" role="img" aria-labelledby="title desc">
   <title id="title">Two phases: an audit that modifies nothing and a consolidation with bounded repairs</title>
-  <desc id="desc">Phase 1, the audit, modifies nothing: scan the archive into a catalogue of claims, parse headers and tails, run the analyzers for structure, naming, coverage, identity, ranges and duplicates, and write the incident workbook. Phase 2, the consolidation: parse each file in full by dialect, repair lost decimals within physical ranges, snap timestamps to the ten-minute grid, insert with INSERT OR IGNORE under a unique index on station, timestamp and parameter, then left-join a generate_series grid on a pivot to produce one workbook per station. Files with severe identity discrepancies flow from the audit into an exclusion list and never enter phase 2.</desc>
   <style>
     .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
     .box { fill: #171717; stroke: #404040; stroke-width: 1; }

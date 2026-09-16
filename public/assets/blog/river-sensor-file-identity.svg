@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440" role="img" aria-labelledby="title desc">
   <title id="title">One file, two claims, four pieces of evidence, three verdicts</title>
-  <desc id="desc">A CSV file carries two claims about its station: the folder says station B and the export header code maps to station A; the sensor code in the filename is recorded but not read as a claim. Four pieces of evidence are weighed: the hydrochemical fingerprint with its confidence, the header code, the controller serial, and whether the suggested station has a coverage gap that month. Two or more pieces give a relocation suggestion, a lone profile or serial match gives a review with a suggested station, anything less gives a manual review. In every case the file stays out of the consolidation until a person decides.</desc>
   <style>
     .box { fill: #171717; stroke: #404040; stroke-width: 1; }
     .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }

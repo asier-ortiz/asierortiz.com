@@ -12,23 +12,22 @@
  * sized to the rendered card (measured 322px on phones, 452px on desktop).
  */
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import type { GalleryFrame } from '@config/projectData.json';
 
 interface Props {
-  images: ImageMetadata[];
-  alt: string;
+  images: GalleryFrame[];
   /** Milliseconds each frame stays visible. */
   interval?: number;
   class?: string;
 }
 
-const { images, alt, interval = 7000, class: className = '' } = Astro.props;
+const { images, interval = 7000, class: className = '' } = Astro.props;
 const [first] = images;
 ---
 
 <div
   class:list={['project-gallery', className]}
-  style={`aspect-ratio: ${first.width} / ${first.height};`}
+  style={`aspect-ratio: ${first.src.width} / ${first.src.height};`}
   data-interval={interval}
   aria-live="off"
 >
@@ -36,8 +35,9 @@ const [first] = images;
     images.map((image, index) => (
       <Image
         class:list={['project-gallery__frame', { 'is-active': index === 0 }]}
-        src={image}
-        alt={alt}
+        src={image.src}
+        alt={image.alt}
+        aria-hidden={index === 0 ? undefined : 'true'}
         width={960}
         widths={[480, 720, 960, 1440]}
         sizes="(min-width: 1024px) 452px, (min-width: 768px) 42vw, 83vw"
@@ -98,10 +98,13 @@ const [first] = images;
     let visible = false;
     let paused = false;
 
+    // Only the visible frame is exposed to assistive tech; the stacked ones stay hidden.
     const show = (next: number) => {
       frames[index].classList.remove('is-active');
+      frames[index].setAttribute('aria-hidden', 'true');
       index = next;
       frames[index].classList.add('is-active');
+      frames[index].removeAttribute('aria-hidden');
     };
 
     const start = () => {

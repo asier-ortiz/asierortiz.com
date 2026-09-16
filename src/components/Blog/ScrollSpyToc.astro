@@ -13,6 +13,8 @@ const { sections } = Astro.props as { sections: Section[] };
     <!-- Compact mode -->
     <button
       id="toc-toggle"
+      aria-label="Table of contents"
+      aria-controls="toc-panel"
       aria-expanded="false"
       class="flex flex-col gap-2 items-center p-2 bg-base-900 border border-base-700 rounded-md shadow hover:ring-2 hover:ring-primary-400 hover:ring-opacity-50 hover:shadow-lg hover:shadow-primary-400/50 transition-all duration-300"
     >

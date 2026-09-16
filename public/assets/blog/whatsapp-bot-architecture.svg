@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470" role="img" aria-labelledby="title desc">
   <title id="title">Architecture of the citizen reporting bot</title>
-  <desc id="desc">WhatsApp posts signed webhooks to an API process that inserts them into PostgreSQL. A worker process claims events from the queue table, keeps per-chat locks and report state in the same database, and makes every outbound call: replies and photo downloads through the Graph API, geocoding through CartoCiudad, and the push into the contractor's platform.</desc>
   <style>
     .box { fill: #171717; stroke: #404040; stroke-width: 1; }
     .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
