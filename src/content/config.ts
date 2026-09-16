@@ -1,5 +1,26 @@
 import { defineCollection, z } from 'astro:content';
 
+/**
+ * Tags are the themes a reader browses by, not the keywords of a post: the full-text
+ * search already covers libraries, tools and product names. A theme earns a place here
+ * when a second post needs it; anything else fails the build.
+ */
+const TAGS = [
+  'ai',
+  'android',
+  'data-engineering',
+  'data-quality',
+  'essays',
+  'gis',
+  'legacy-systems',
+  'postgresql',
+  'python',
+  'reliability',
+] as const;
+
+/** More than this reads as keywords, not themes. */
+const MAX_TAGS_PER_POST = 4;
+
 const blogCollection = defineCollection({
   schema: z.object({
     title: z.string().min(5, { message: 'Title must be at least 5 characters long.' }),
@@ -20,9 +41,9 @@ const blogCollection = defineCollection({
     draft: z.boolean().optional(),
 
     tags: z
-      .array(z.string())
+      .array(z.enum(TAGS))
       .nonempty({ message: 'Tags must contain at least one tag.' })
-      .optional(),
+      .max(MAX_TAGS_PER_POST, { message: `Use at most ${MAX_TAGS_PER_POST} tags; keywords belong in the text.` }),
 
     headings: z.array(
       z.object({

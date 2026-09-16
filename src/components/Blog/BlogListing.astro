@@ -23,15 +23,27 @@ interface Props {
 
 const { allPosts, posts, pagination, activeTag } = Astro.props;
 
-const allTags = Array.from(new Set(allPosts.flatMap((post) => post.data.tags || []))).sort(
-  (a, b) => a.localeCompare(b)
+// Chips are ordered by how many posts they group, so the themes of the blog come first.
+const tagCounts = new Map<string, number>();
+for (const tag of allPosts.flatMap((post) => post.data.tags)) {
+  tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+}
+const allTags = [...tagCounts.keys()].sort(
+  (a, b) => tagCounts.get(b)! - tagCounts.get(a)! || a.localeCompare(b)
 );
 
-// While everything fits on one page the chips filter the grid in place, as
-// they always have. Once the archive is paginated an in-page filter would only
-// see the cards of the current page, so the chips become links to tag pages.
-const paginated = (pagination?.lastPage ?? 1) > 1;
-const chipsAreLinks = paginated || !!activeTag;
+// Progressive disclosure: the first chips are always visible, the rest sit behind a
+// "More tags" button. A couple of extras are not worth a button, and the active tag is
+// never hidden.
+const VISIBLE_TAGS = 8;
+const collapsed = allTags.length > VISIBLE_TAGS + 2;
+const isHidden = (tag: string, index: number) => collapsed && index >= VISIBLE_TAGS && tag !== activeTag;
+const hiddenCount = allTags.filter(isHidden).length;
+
+// Chips are links to the tag pages, so filtering works without JavaScript and every
+// filter has a URL. When this page holds every post, a script enhances the same links to
+// filter the grid in place and push that URL, instead of navigating.
+const filterable = posts.length === allPosts.length;
 
 const searchIndex = allPosts.map((post) => ({
   title: post.data.title || '',
@@ -63,57 +75,56 @@ const searchIndex = allPosts.map((post) => ({
   <!-- Search Button & Tag Filter Buttons -->
   {
     allTags.length > 0 && (
-      <div id="tag-filters" class="blog-filters flex flex-wrap gap-2 mb-12 items-center max-h-[6rem] overflow-y-auto hide-scrollbar p-1">
+      <div
+        id="tag-filters"
+        class="blog-filters flex flex-wrap gap-2 mb-6 items-center p-1"
+        data-filterable={filterable ? '' : undefined}
+      >
         <SearchButton client:only="vue" posts={searchIndex} language={siteData.language} />
 
-        {chipsAreLinks ? (
-          <>
-            <a
-              href="/blog/"
-              class:list={['button button--chip', { 'button--chip-active': !activeTag }]}
-              aria-current={!activeTag ? 'page' : undefined}
-            >
-              Show All
-            </a>
-            {allTags.map((tag) => (
-              <a
-                href={`/blog/tag/${tag}/`}
-                class:list={['button button--chip', { 'button--chip-active': activeTag === tag }]}
-                aria-current={activeTag === tag ? 'page' : undefined}
-              >
-                #{tag}
-              </a>
-            ))}
-          </>
-        ) : (
-          <>
-            <button type="button" class="button button--chip filter-btn" data-tag="all">
-              Show All
-            </button>
-            {allTags.map((tag) => (
-              <button type="button" class="button button--chip filter-btn" data-tag={tag}>
-                #{tag}
-              </button>
-            ))}
-          </>
+        <a
+          href="/blog/"
+          class:list={['button button--chip', { 'button--chip-active': !activeTag }]}
+          aria-current={!activeTag ? 'page' : undefined}
+          data-tag="all"
+        >
+          All
+        </a>
+        {allTags.map((tag, index) => (
+          <a
+            href={`/blog/tag/${tag}/`}
+            class:list={['button button--chip', { 'button--chip-active': activeTag === tag, hidden: isHidden(tag, index) }]}
+            aria-current={activeTag === tag ? 'page' : undefined}
+            data-tag={tag}
+            data-tag-extra={isHidden(tag, index) ? '' : undefined}
+          >
+            #{tag}
+          </a>
+        ))}
+        {collapsed && (
+          <button
+            type="button"
+            id="tag-filters-more"
+            class="button button--chip button--chip-muted"
+            aria-expanded="false"
+            aria-controls="tag-filters"
+          >
+            More tags (+{hiddenCount})
+          </button>
         )}
       </div>
     )
   }
 
-  {
-    activeTag ? (
-      <p class="text-sm text-base-400 mb-6" role="status">
-        {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged #{activeTag}
-      </p>
-    ) : (
-      pagination && pagination.currentPage > 1 && (
-        <p class="text-sm text-base-400 mb-6" role="status">
-          Page {pagination.currentPage} of {pagination.lastPage}
-        </p>
-      )
-    )
-  }
+  <p id="tag-filters-status" class="text-sm text-base-400 mb-6" role="status">
+    {
+      activeTag
+        ? `${posts.length} ${posts.length === 1 ? 'post' : 'posts'} tagged #${activeTag}`
+        : pagination && pagination.currentPage > 1
+          ? `Page ${pagination.currentPage} of ${pagination.lastPage}`
+          : ''
+    }
+  </p>
 
   <!-- Posts List -->
   <div id="posts-grid" class="grid gap-10 grid-cols-1 md:grid-cols-2">
@@ -196,32 +207,69 @@ const searchIndex = allPosts.map((post) => ({
     });
   </script>
 
-  <!-- Posts filtering with tag highlight (single-page archive only) -->
-  {
-    !chipsAreLinks && (
-      <script is:inline>
-        const tagButtons = document.querySelectorAll('.filter-btn');
-        const posts = document.querySelectorAll('#posts-grid .post-card');
-
-        tagButtons.forEach((button) => {
-          button.addEventListener('click', () => {
-            const selectedTag = button.dataset.tag;
-
-            // Highlight only selected button
-            tagButtons.forEach((btn) => {
-              btn.classList.remove('button--chip-active');
-            });
-
-            button.classList.add('button--chip-active');
-
-            // Filter posts
-            posts.forEach((post) => {
-              const postTags = post.dataset.tags?.split(',') || [];
-              post.style.display = selectedTag === 'all' || postTags.includes(selectedTag) ? '' : 'none';
-            });
-          });
+  <!-- "More tags" / "Fewer tags": a filter row is a control, so it folds back as well -->
+  <script>
+    const moreButton = document.getElementById('tag-filters-more');
+    if (moreButton) {
+      const extras = document.querySelectorAll<HTMLElement>('#tag-filters [data-tag-extra]');
+      const moreLabel = moreButton.textContent;
+      moreButton.addEventListener('click', () => {
+        const expand = moreButton.getAttribute('aria-expanded') !== 'true';
+        // A selected tag stays visible when folding, so the active filter is never hidden.
+        extras.forEach((chip) => {
+          const active = chip.classList.contains('button--chip-active') || chip.hasAttribute('aria-current');
+          chip.classList.toggle('hidden', !expand && !active);
         });
-      </script>
-    )
-  }
+        moreButton.setAttribute('aria-expanded', String(expand));
+        moreButton.textContent = expand ? 'Fewer tags' : moreLabel;
+        if (expand) extras[0]?.focus();
+      });
+    }
+  </script>
+
+  <!-- In-page filtering when every post is on this page: the chip links filter the grid
+       and push their URL (a real tag page), so the filter survives reload, back and sharing.
+       Clicking the active tag deselects it. -->
+  <script>
+    const filters = document.getElementById('tag-filters');
+    if (filters?.hasAttribute('data-filterable')) {
+      const chips = [...filters.querySelectorAll<HTMLAnchorElement>('a[data-tag]')];
+      const cards = [...document.querySelectorAll<HTMLElement>('#posts-grid .post-card')];
+      const status = document.getElementById('tag-filters-status');
+
+      const tagFromPath = (path: string) => path.match(/^\/blog\/tag\/([^/]+)\/?$/)?.[1] ?? 'all';
+
+      const apply = (tag: string) => {
+        let shown = 0;
+        cards.forEach((card) => {
+          const match = tag === 'all' || (card.dataset.tags ?? '').split(',').includes(tag);
+          card.style.display = match ? '' : 'none';
+          if (match) shown++;
+        });
+        chips.forEach((chip) => {
+          const active = chip.dataset.tag === tag;
+          chip.classList.toggle('button--chip-active', active);
+          if (active) chip.setAttribute('aria-current', 'page');
+          else chip.removeAttribute('aria-current');
+        });
+        if (status) status.textContent = tag === 'all' ? '' : `${shown} ${shown === 1 ? 'post' : 'posts'} tagged #${tag}`;
+      };
+
+      chips.forEach((chip) =>
+        chip.addEventListener('click', (event) => {
+          const modified = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+          if (event.defaultPrevented || event.button !== 0 || modified) return;
+          event.preventDefault();
+          const tag = chip.dataset.tag ?? 'all';
+          const next = tag !== 'all' && chip.getAttribute('aria-current') === 'page' ? 'all' : tag;
+          const url = next === 'all' ? '/blog/' : `/blog/tag/${next}/`;
+          if (location.pathname !== url) history.pushState({ tag: next }, '', url);
+          apply(next);
+        })
+      );
+
+      window.addEventListener('popstate', () => apply(tagFromPath(location.pathname)));
+      apply(tagFromPath(location.pathname));
+    }
+  </script>
 </section>

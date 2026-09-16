@@ -62,6 +62,10 @@
   @apply bg-primary-500 text-white;
 }
 
+.button--chip-muted {
+  @apply bg-transparent border border-base-700 text-base-300 hover:bg-base-800 hover:text-base-100;
+}
+
 .scroll-to-top {
   @apply fixed bottom-12 right-6 w-12 h-12 bg-base-800 text-base-300 border-2 border-primary-600 rounded-full cursor-pointer;
   @apply flex items-center justify-center;

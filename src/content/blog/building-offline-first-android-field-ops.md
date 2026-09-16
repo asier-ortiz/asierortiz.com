@@ -4,7 +4,7 @@ description: "How I built a native Android app for field teams: offline spatial 
 pubDate: "2026-02-01"
 updatedDate: "2026-09-12"
 image: "/assets/blog/offline-first-android.webp"
-tags: ["android", "kotlin", "geopackage", "jetpack-compose", "offline-first"]
+tags: ["android", "gis", "reliability"]
 author: "Asier Ortiz"
 draft: false
 ---

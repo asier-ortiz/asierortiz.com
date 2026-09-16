@@ -18,8 +18,7 @@ export default defineConfig({
     vue(),
     sitemap({
       // Landing page for newsletter confirmations; only reachable from the email link.
-      // Tag pages are thin by nature and reachable from the listing chips.
-      filter: (page) => !page.includes('/confirmed') && !page.includes('/blog/tag/'),
+      filter: (page) => new URL(page).pathname !== '/confirmed/',
     }),
     icon(),
     mdx(),

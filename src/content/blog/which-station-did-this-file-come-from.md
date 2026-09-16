@@ -3,7 +3,7 @@ title: "Which Station Did This File Come From? Auditing Seven Years of River Sen
 description: "How I audited and consolidated about four thousand files of river water-quality readings for a regional water agency: a catalogue that keeps every claim about a file's origin, a hydrochemical fingerprint that had to remain a suggestion, a DuckDB file instead of a database server, and the anomaly that turned out to be a model error."
 pubDate: "2026-09-10"
 image: "/assets/blog/which-station-did-this-file-come-from.webp"
-tags: ["python", "duckdb", "pandas", "data-quality", "data-forensics", "data-engineering", "reliability"]
+tags: ["python", "data-engineering", "data-quality"]
 author: "Asier Ortiz"
 draft: false
 ---

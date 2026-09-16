@@ -1,8 +1,8 @@
 import { getCollection } from 'astro:content';
 
 /**
- * Posts per listing page. Below this many posts the pager, the "Page N of M"
- * line and the /blog/tag/ routes are not generated at all.
+ * Posts per listing page. Below this many posts the pager and the "Page N of M"
+ * line are not rendered.
  */
 export const POSTS_PER_PAGE = 10;
 

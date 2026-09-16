@@ -4,7 +4,7 @@ description: "A reflection on managers who don't understand the work yet dictate
 pubDate: "2026-06-22"
 updatedDate: "2026-09-11"
 image: "/assets/blog/digital-taylorism.webp"
-tags: ["career", "software-development", "digital-taylorism", "management", "ai"]
+tags: ["essays", "ai"]
 author: "Asier Ortiz"
 draft: false
 ---
