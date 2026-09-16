@@ -1,3 +1,9 @@
+## [1.67.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.0...v1.67.1) (2026-09-16)
+
+### Bug Fixes
+
+* **footer:** show the contact email as text and name the social links properly ([c5a42f3](https://github.com/asier-ortiz/asierortiz.com/commit/c5a42f30becc61664256c93fb277c84349734518))
+
 ## [1.67.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.66.0...v1.67.0) (2026-09-16)
 
 ### Features
