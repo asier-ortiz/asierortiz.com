@@ -4,7 +4,7 @@ import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import compress from 'astro-compress';
+import compress, { Default as compressDefaults } from 'astro-compress';
 import icon from 'astro-icon';
 import remarkExtractHeadings from './src/utils/remarkHeadings.ts';
 import rehypeTableWrap from './src/utils/rehypeTableWrap.ts';
@@ -54,6 +54,16 @@ export default defineConfig({
     // off. The SVG pass keeps role="img" on the diagrams, which svgo strips by default.
     compress({
       Image: false,
+      HTML: {
+        'html-minifier-terser': {
+          // Vue renders a closed v-if as an empty comment and looks for it when hydrating, so the
+          // minifier must keep it. The option replaces the default list rather than extending it.
+          ignoreCustomComments: [
+            ...compressDefaults.HTML['html-minifier-terser'].ignoreCustomComments,
+            /^$/,
+          ],
+        },
+      },
       SVG: {
         svgo: {
           plugins: [

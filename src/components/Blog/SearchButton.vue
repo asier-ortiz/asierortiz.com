@@ -39,11 +39,15 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleGlobalShortcut);
 });
 
-// Detect if the user is on a Mac device
+// The shortcut hint depends on the platform, which only the browser knows. The button is
+// server-rendered, so the hint is kept invisible (but sized) until mount, then filled in;
+// nothing shifts and nothing shows the wrong key first.
+const mounted = ref(false);
 const isMac = ref(false);
 
 onMounted(() => {
   isMac.value = /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
+  mounted.value = true;
 });
 
 // Only display the search button if there are posts available
@@ -56,29 +60,30 @@ const hasPosts = computed(() => props.posts.length > 0);
       type="button"
       @click="openModal"
       class="filter-btn bg-primary-500 hover:bg-primary-400 text-xs text-black font-medium py-1 px-3 rounded-full transition flex items-center gap-2 relative"
-      :aria-label="`Search Articles (${isMac ? 'Command + K' : 'Control + K'})`"
+      :aria-label="mounted ? `Search posts (${isMac ? 'Command + K' : 'Control + K'})` : 'Search posts'"
     >
       <Search class="h-4 w-4" />
 
       <span class="hidden sm:inline">Search</span>
 
-      <span class="hidden sm:flex items-center gap-1 opacity-70 text-[0.65rem]">
-        <span
-          class="px-1.5 py-0.5 bg-zinc-700 border border-white/30 rounded text-xs font-mono leading-none text-white"
-          aria-hidden="true"
-        >
-          {{ isMac ? '⌘' : 'Ctrl' }}
-        </span>
-        <span
-          class="px-1.5 py-0.5 bg-zinc-700 border border-white/30 rounded text-xs font-mono leading-none text-white"
-          aria-hidden="true"
-        >
-          K
-        </span>
+      <!-- Key labels are written without surrounding whitespace: the HTML minifier would
+           collapse it in the served markup, and Vue would then flag a hydration mismatch. -->
+      <span
+        class="hidden sm:flex items-center gap-1 opacity-70 text-[0.65rem] min-w-[3.25rem]"
+        :class="{ invisible: !mounted }"
+        aria-hidden="true"
+      >
+        <span class="key">{{ isMac ? '⌘' : 'Ctrl' }}</span>
+        <span class="key">K</span>
       </span>
-
     </button>
 
     <SearchModal v-if="isOpen" :posts="posts" :language="language" @close="closeModal" />
   </div>
 </template>
+
+<style scoped>
+.key {
+  @apply rounded border border-white/30 bg-zinc-700 px-1.5 py-0.5 font-mono text-xs leading-none text-white;
+}
+</style>

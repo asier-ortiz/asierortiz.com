@@ -15,8 +15,7 @@
       />
     </button>
 
-    <!-- v-show, not v-if: a closed v-if leaves an empty comment in the server HTML that the minifier
-         strips, and Vue then reports a hydration mismatch. This also keeps every description in the HTML. -->
+    <!-- v-show, not v-if, so every description is in the server HTML (for crawlers and no-JS). -->
     <transition name="accordion">
       <div
         v-show="open"
