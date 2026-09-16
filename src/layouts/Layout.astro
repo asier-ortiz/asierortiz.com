@@ -19,19 +19,25 @@ import ShootingStar from '@components/Particles/ShootingStar.astro';
 import siteData from '@config/siteData.json';
 import { absoluteUrl } from '@/utils/absoluteUrl';
 import { backgroundColor } from '@/config/theme';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   title: string;
   description: string;
-  image?: string;
+  /** Share image; falls back to the site's default card. */
+  image?: ImageMetadata;
+  imageAlt?: string;
   pubDate?: Date | string;
   updatedDate?: Date | string;
   isPost?: boolean;
 }
 
-const { title, description, image, pubDate, updatedDate, isPost } = Astro.props as Props;
+const { title, description, image, imageAlt, pubDate, updatedDate, isPost } = Astro.props as Props;
 const pageUrl = Astro.url;
-const ogImage = absoluteUrl(image ?? siteData.defaultImage.src, Astro.site);
+const shareImage = image ?? siteData.defaultImage.src;
+const shareImageAlt = imageAlt ?? siteData.defaultImage.alt;
+const ogImage = absoluteUrl(shareImage.src, Astro.site);
+const ogLocale = siteData.language.replace(/-(\w+)$/, (_, region) => `_${region.toUpperCase()}`);
 const published = pubDate ? new Date(pubDate) : undefined;
 const modified = updatedDate ? new Date(updatedDate) : undefined;
 ---
@@ -65,6 +71,11 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(shareImage.width)} />
+    <meta property="og:image:height" content={String(shareImage.height)} />
+    <meta property="og:image:alt" content={shareImageAlt} />
+    <meta property="og:site_name" content={siteData.name} />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +83,7 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={shareImageAlt} />
 
     <!-- Article meta for blog posts -->
     {

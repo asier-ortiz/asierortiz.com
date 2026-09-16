@@ -1,3 +1,6 @@
+import type { ImageMetadata } from 'astro';
+import defaultOgImage from '@/assets/images/default-og-image.png';
+
 export interface SocialLinkProps {
   platform:
     | 'github'
@@ -40,7 +43,7 @@ export interface SiteDataProps {
     email: string;
   };
   defaultImage: {
-    src: string;
+    src: ImageMetadata;
     alt: string;
   };
   rss: {
@@ -89,9 +92,10 @@ const siteData: SiteDataProps = {
     email: 'hello@asierortiz.com',
   },
 
+  // Share card for pages without one of their own (1200x630, the monogram plus the role).
   defaultImage: {
-    src: '/images/default-og-image.png', // Default Image for social networks
-    alt: 'Default social image for Asier Ortiz portfolio & blog.',
+    src: defaultOgImage,
+    alt: 'Asier Ortiz monogram with the words Full-Stack & Data Developer and asierortiz.com',
   },
 
   rss: {

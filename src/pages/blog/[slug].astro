@@ -31,7 +31,8 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
   description={post.data.description}
   pubDate={post.data.pubDate}
   updatedDate={post.data.updatedDate}
-  image={post.data.image.src}
+  image={post.data.image}
+  imageAlt={post.data.title}
   isPost={true}
 >
 

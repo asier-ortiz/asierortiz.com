@@ -18,7 +18,7 @@ export async function GET(context) {
       <language>${siteData.language}</language>
       <copyright>© ${new Date().getFullYear()} ${siteData.author.name}</copyright>
       <image>
-        <url>${absoluteUrl(siteData.defaultImage.src, context.site)}</url>
+        <url>${absoluteUrl(siteData.defaultImage.src.src, context.site)}</url>
         <title>${siteData.rss.title}</title>
         <link>${context.site}</link>
       </image>
