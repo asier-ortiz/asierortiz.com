@@ -1,3 +1,13 @@
+## [1.66.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.65.1...v1.66.0) (2026-09-16)
+
+### Features
+
+* **seo:** describe the home and uses pages instead of labelling them ([6070af7](https://github.com/asier-ortiz/asierortiz.com/commit/6070af7acfea6ec200188b70642b65d9e6025a1d))
+
+### Performance Improvements
+
+* **blog:** serve post covers as responsive assets and prioritise the first one ([fe3c3b6](https://github.com/asier-ortiz/asierortiz.com/commit/fe3c3b6bdee722b947894fdb9e9aa74ecf959bc8))
+
 ## [1.65.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.65.0...v1.65.1) (2026-09-16)
 
 ### Performance Improvements
