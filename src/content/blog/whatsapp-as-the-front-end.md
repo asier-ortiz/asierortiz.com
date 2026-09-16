@@ -1,5 +1,6 @@
 ---
 title: "WhatsApp as the Front End: Building a Citizen Reporting Bot with FastAPI, PostgreSQL and WhatsApp Flows"
+seoTitle: "WhatsApp as the Front End: a Citizen Reporting Bot"
 description: "How I built the WhatsApp bot citizens of Vitoria-Gasteiz use to report street-cleaning problems: the constraints WhatsApp imposes as a front end, the options I weighed, and the design that gets every report, with its photo and location, into the cleaning contractor's platform without anyone re-typing it."
 pubDate: "2026-09-05"
 image: "../../assets/blog/whatsapp-as-the-front-end.webp"

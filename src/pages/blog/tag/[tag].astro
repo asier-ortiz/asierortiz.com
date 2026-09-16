@@ -28,7 +28,7 @@ const { tag, posts, allPosts } = Astro.props as { tag: string; posts: Post[]; al
 ---
 
 <Layout
-  title={`${siteData.author.name} - Blog - #${tag}`}
+  title={`Posts tagged #${tag}`}
   description={`${posts.length} ${posts.length === 1 ? 'post' : 'posts'} tagged #${tag} on ${siteData.author.name}'s blog: notes from real projects, things that broke, things I figured out along the way.`}
 >
   <Particles client:media="(min-width: 768px)" />

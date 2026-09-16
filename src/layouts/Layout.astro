@@ -22,7 +22,9 @@ import { backgroundColor } from '@/config/theme';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
+  /** What this page is, e.g. "Blog"; the site name is appended. The home page passes its full title. */
   title: string;
+  bareTitle?: boolean;
   description: string;
   /** Share image; falls back to the site's default card. */
   image?: ImageMetadata;
@@ -34,7 +36,9 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, image, imageAlt, pubDate, updatedDate, isPost, noindex } = Astro.props as Props;
+const { title, bareTitle, description, image, imageAlt, pubDate, updatedDate, isPost, noindex } =
+  Astro.props as Props;
+const pageTitle = bareTitle ? title : `${title} · ${siteData.author.name}`;
 const pageUrl = Astro.url;
 const shareImage = image ?? siteData.defaultImage.src;
 const shareImageAlt = imageAlt ?? siteData.defaultImage.alt;
@@ -65,12 +69,12 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
     <link rel="alternate" type="application/feed+json" title="JSON Feed" href="/feed.json" />
 
-    <title>{title}</title>
+    <title>{pageTitle}</title>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={isPost ? 'article' : 'website'} />
     <meta property="og:url" content={pageUrl} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content={String(shareImage.width)} />
@@ -82,7 +86,7 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={pageUrl} />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={shareImageAlt} />

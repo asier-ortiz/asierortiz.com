@@ -1,5 +1,6 @@
 ---
 title: "Building an Offline-First Android App for Field Operations with GeoPackage and Jetpack Compose"
+seoTitle: "Offline-First Android for Field Ops with GeoPackage"
 description: "How I built a native Android app for field teams: offline spatial queries with GeoPackage, real-time GPS tracking, and sync with PostgreSQL."
 pubDate: "2026-02-01"
 updatedDate: "2026-09-12"

@@ -21,7 +21,7 @@ const external = /^https?:\/\//.test(href);
   href={href}
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener noreferrer' : undefined}
-  class:list={['social-icon flex gap-2 p-1 hover:text-primary-600 active:text-primary-600 transition-colors', className]}
+  class:list={['social-icon flex p-2.5 hover:text-primary-600 active:text-primary-600 transition-colors', className]}
 >
   {
     social === 'github' && (

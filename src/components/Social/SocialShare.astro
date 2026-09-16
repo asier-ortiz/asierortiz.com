@@ -41,8 +41,8 @@ const shareLinks = [
 ];
 ---
 
-<div class="flex items-center gap-4 mt-8">
-  <span class="text-base-400 text-sm">Share:</span>
+<div class="mt-8 flex items-center gap-1">
+  <span class="mr-2 text-sm text-base-400">Share:</span>
 
   {shareLinks.map((share) => (
     <SocialIcon href={share.link} social={share.platform} label={`Share on ${share.name}`} />
@@ -51,7 +51,7 @@ const shareLinks = [
   <button
     id="copy-link-btn"
     aria-label="Copy link"
-    class="social-icon flex gap-2 p-1 hover:text-primary-600 active:text-primary-600 transition-colors"
+    class="social-icon flex p-2.5 hover:text-primary-600 active:text-primary-600 transition-colors"
   >
     <svg
       id="copy-link-icon"

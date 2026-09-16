@@ -34,11 +34,11 @@ const { sections } = Astro.props as { sections: Section[] };
       aria-hidden="true"
     >
       <h2 class="mb-4 text-xs font-bold tracking-wide uppercase text-base-400">Contents</h2>
-      <nav id="scrollspy-nav" class="flex flex-col gap-3">
+      <nav id="scrollspy-nav" class="flex flex-col gap-1">
         {sections.map(({ id, title }) => (
           <a
             href={`#${id}`}
-            class="scrollspy-link group text-sm text-base-400 hover:text-primary-400 transition-colors"
+            class="scrollspy-link group py-1.5 text-sm text-base-400 hover:text-primary-400 transition-colors"
             data-target={id}
           >
             {title}

@@ -27,7 +27,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
 ---
 
 <Layout
-  title={`${post.data.title} | ${siteData.author.name}`}
+  title={post.data.seoTitle ?? post.data.title}
   description={post.data.description}
   pubDate={post.data.pubDate}
   updatedDate={post.data.updatedDate}

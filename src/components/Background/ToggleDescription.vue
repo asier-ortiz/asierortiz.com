@@ -2,7 +2,7 @@
   <div>
     <button
       @click="toggle"
-      class="group inline-flex items-center gap-1 text-sm text-primary-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+      class="group -my-2.5 inline-flex items-center gap-1 py-2.5 text-sm text-primary-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
       :aria-expanded="open.toString()"
       :aria-controls="contentId"
     >

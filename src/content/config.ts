@@ -26,6 +26,10 @@ const blogCollection = defineCollection({
     z.object({
     title: z.string().min(5, { message: 'Title must be at least 5 characters long.' }),
 
+    // Short form for the browser tab and search results, where the site name is appended and
+    // Google cuts at roughly 60 characters. The full title stays on the page and in the feeds.
+    seoTitle: z.string().max(60, { message: 'seoTitle must be at most 60 characters.' }).optional(),
+
     description: z
       .string()
       .min(10, { message: 'Description must be at least 10 characters long.' }),

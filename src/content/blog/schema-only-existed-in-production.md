@@ -1,5 +1,6 @@
 ---
 title: "The Schema Only Existed in Production: Rescuing a Winter Road Operations Platform"
+seoTitle: "The Schema Only Existed in Production"
 description: "Nine months and 226 SQL migrations spent repairing a half-finished migration of a fifteen-year-old desktop system into a live web platform for winter road operations: a schema that lived only on the production server, a telemetry feed whose road attribution had no memory, three classes of orphaned record with three different correct answers, and a query builder rebuilt from the client's own 2009 manual."
 pubDate: "2026-09-11"
 image: "../../assets/blog/schema-only-existed-in-production.webp"

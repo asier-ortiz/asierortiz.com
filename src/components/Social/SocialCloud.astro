@@ -12,7 +12,7 @@ const labels: Partial<Record<(typeof siteData.socialLinks)[number]['platform'], 
 ---
 
 <div class="flex flex-col items-center">
-  <div class="flex gap-2">
+  <div class="-mx-2.5 flex">
     {
       siteData.socialLinks.map((social) => (
         <SocialIcon href={social.link} social={social.platform} label={labels[social.platform] ?? social.platform} />
