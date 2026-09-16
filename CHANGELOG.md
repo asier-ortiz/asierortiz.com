@@ -1,3 +1,14 @@
+## [1.67.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.3...v1.67.4) (2026-09-16)
+
+### Bug Fixes
+
+* **blog:** search button hydrates cleanly and shows the right shortcut key ([110bbcf](https://github.com/asier-ortiz/asierortiz.com/commit/110bbcfe7e78dcde4ee68846a7befce2635b62a8))
+* **ui:** search modal, copy button, zoom and tables usable on touch and keyboard ([7038cf9](https://github.com/asier-ortiz/asierortiz.com/commit/7038cf9f484582dfe4f0bec3d0106c863ee4e76a))
+
+### Performance Improvements
+
+* load particles only where drawn, drop unreferenced originals, animate on the compositor ([1d0d74d](https://github.com/asier-ortiz/asierortiz.com/commit/1d0d74d601cef087635ba83a4d53e07167f83a0a))
+
 ## [1.67.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.2...v1.67.3) (2026-09-16)
 
 ### Bug Fixes
