@@ -1,3 +1,9 @@
+## [1.67.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.2...v1.67.3) (2026-09-16)
+
+### Bug Fixes
+
+* **seo:** valid feeds, noindex where due, sitemap lastmod, one blog description ([3587626](https://github.com/asier-ortiz/asierortiz.com/commit/35876261c1ce333f8d753c316ea4563a2f096fbf))
+
 ## [1.67.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.1...v1.67.2) (2026-09-16)
 
 ### Bug Fixes
