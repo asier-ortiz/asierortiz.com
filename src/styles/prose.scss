@@ -40,9 +40,24 @@
     }
   }
 
-  /* Tables scroll inside the article on narrow screens instead of widening the page. */
+  /* Tables scroll inside the article on narrow screens instead of widening the page.
+     While columns remain out of view, the right edge fades into the background. */
+  .table-scroll {
+    @apply relative my-8;
+
+    &::after {
+      content: '';
+      @apply pointer-events-none absolute inset-y-0 right-0 w-12 opacity-0 transition-opacity duration-200;
+      background: linear-gradient(to right, transparent, theme('colors.base.950'));
+    }
+
+    &.has-more::after {
+      @apply opacity-100;
+    }
+  }
+
   .table-wrap {
-    @apply my-8 max-w-full overflow-x-auto;
+    @apply max-w-full overflow-x-auto;
     -webkit-overflow-scrolling: touch;
 
     > table {

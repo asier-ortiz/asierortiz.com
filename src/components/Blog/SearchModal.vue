@@ -66,6 +66,13 @@ const filteredPosts = computed(() => {
   }));
 });
 
+// Read by screen readers as the list changes; sighted users see the list itself.
+const resultsStatus = computed(() => {
+  if (!searchQuery.value.trim()) return '';
+  const n = filteredPosts.value.length;
+  return n === 0 ? 'No results' : `${n} ${n === 1 ? 'result' : 'results'}`;
+});
+
 const resetSearch = () => {
   isClosing.value = true;
   setTimeout(() => {
@@ -189,33 +196,47 @@ const highlightMatch = (post, field) => {
     @click="handleBackgroundClick"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="search-modal-title"
-    aria-describedby="search-modal-desc"
+    aria-label="Search posts"
   >
 
     <div
       class="bg-base-900 rounded-2xl w-full max-w-lg overflow-hidden flex flex-col shadow-xl transition-all duration-300 absolute top-[10vh]"
     >
-      <div class="px-6 pt-6 sticky top-0 bg-base-900 z-10">
-        <div class="relative search-input">
-          <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-base-400" />
+      <div class="px-6 pt-6 sticky top-0 bg-base-900 z-10 flex items-center gap-2">
+        <div class="relative search-input flex-1">
+          <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-base-400" aria-hidden="true" />
           <input
             ref="searchInput"
             v-model="searchQuery"
             @keydown="handleKeyDown"
-            type="text"
+            type="search"
+            autocomplete="off"
+            aria-label="Search posts"
             placeholder="Search posts..."
             class="w-full pl-10 p-3 rounded-lg bg-base-800 text-white placeholder-base-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
         </div>
+        <!-- On touch there is no Escape key and no cursor to find the backdrop with. -->
+        <button
+          type="button"
+          @click="resetSearch"
+          aria-label="Close search"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-base-400 hover:bg-base-800 hover:text-white active:bg-base-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6L6 18" /><path d="M6 6l12 12" />
+          </svg>
+        </button>
       </div>
+
+      <p class="sr-only" role="status">{{ resultsStatus }}</p>
 
       <div
         id="results-container"
-        class="overflow-y-auto hide-scrollbar px-6 py-4 mt-4 transition-all duration-200"
+        class="overflow-y-auto px-6 py-4 mt-4 transition-all duration-200"
         :class="[
           filteredPosts.length > 0
-          ? 'space-y-4 max-h-[300px]'
+          ? 'space-y-4 max-h-[min(300px,50dvh)]'
           : 'flex items-center justify-center h-[100px]'
         ]"
       >

@@ -80,7 +80,7 @@ const searchIndex = allPosts.map((post) => ({
         class="blog-filters flex flex-wrap gap-2 mb-6 items-center p-1"
         data-filterable={filterable ? '' : undefined}
       >
-        <SearchButton client:only="vue" posts={searchIndex} language={siteData.language} />
+        <SearchButton client:load posts={searchIndex} language={siteData.language} />
 
         <a
           href="/blog/"

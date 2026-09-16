@@ -186,8 +186,10 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
     </script>
 
 
-    <!-- Load Copy Code Script dynamically -->
-    <script src={import.meta.env.DEV ? '/src/scripts/copy-code.js' : '/assets/scripts/copy-code.js'} type="module" defer is:inline></script>
+    <!-- Copy buttons for code blocks; bundled by Astro, one source for dev and production -->
+    <script>
+      import '@/scripts/copy-code.js';
+    </script>
 
   </body>
 </html>

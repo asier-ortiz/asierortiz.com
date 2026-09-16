@@ -10,7 +10,7 @@ function addCopyButtonsToCodeBlocks() {
 
   codeBlocks.forEach((pre) => {
     const wrapper = document.createElement('div');
-    wrapper.classList.add('relative', 'group');
+    wrapper.classList.add('code-block', 'relative', 'group');
 
     pre.parentNode.insertBefore(wrapper, pre);
     wrapper.appendChild(pre);
@@ -22,36 +22,39 @@ function addCopyButtonsToCodeBlocks() {
     button.innerHTML = COPY_ICON;
     wrapper.appendChild(button);
 
+    // A live region: setting its text announces the outcome to screen readers too.
     const tooltip = document.createElement('div');
     tooltip.className = 'copy-tooltip copy-tooltip-hidden';
-    tooltip.innerText = 'Copied!';
+    tooltip.setAttribute('role', 'status');
     wrapper.appendChild(tooltip);
 
+    let hideTimer;
+    const showTooltip = (text) => {
+      tooltip.textContent = text;
+      tooltip.classList.replace('copy-tooltip-hidden', 'copy-tooltip-visible');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(hideTooltip, 2000);
+    };
+    const hideTooltip = () => {
+      tooltip.classList.replace('copy-tooltip-visible', 'copy-tooltip-hidden');
+      tooltip.textContent = '';
+      button.innerHTML = COPY_ICON;
+    };
+
     button.addEventListener('click', async () => {
+      const codeElement = pre.querySelector('code');
+      const textToCopy = codeElement ? codeElement.innerText : pre.innerText;
       try {
-        const codeElement = pre.querySelector('code');
-        const textToCopy = codeElement ? codeElement.innerText : pre.innerText;
         await navigator.clipboard.writeText(textToCopy);
-
         button.innerHTML = CHECK_ICON;
-        tooltip.classList.remove('copy-tooltip-hidden');
-        tooltip.classList.add('copy-tooltip-visible');
-
-        setTimeout(() => {
-          button.innerHTML = COPY_ICON;
-          tooltip.classList.remove('copy-tooltip-visible');
-          tooltip.classList.add('copy-tooltip-hidden');
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy code:', err);
+        showTooltip('Copied!');
+      } catch {
+        // Clipboard access can be refused (insecure context, permissions); say so instead of nothing.
+        showTooltip('Copy failed');
       }
     });
 
-    wrapper.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('copy-tooltip-visible');
-      tooltip.classList.add('copy-tooltip-hidden');
-      button.innerHTML = COPY_ICON;
-    });
+    wrapper.addEventListener('mouseleave', hideTooltip);
   });
 }
 
