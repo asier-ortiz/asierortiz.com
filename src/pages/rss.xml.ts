@@ -32,10 +32,10 @@ export async function GET(context) {
         author: `${siteData.author.name} <${siteData.author.email}>`,
         customData: `
           ${post.data.tags?.map((tag: string) => `<category>${tag}</category>`).join('\n') || ''}
-          <media:content url="${absoluteUrl(post.data.image, context.site)}" medium="image" />
-          <image>${absoluteUrl(post.data.image, context.site)}</image>
+          <media:content url="${absoluteUrl(post.data.image.src, context.site)}" medium="image" />
+          <image>${absoluteUrl(post.data.image.src, context.site)}</image>
           <content:encoded><![CDATA[
-            <img src="${absoluteUrl(post.data.image, context.site)}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
+            <img src="${absoluteUrl(post.data.image.src, context.site)}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
             <p>${post.data.description}</p>
             <p><a href="${absoluteUrl(`/blog/${post.slug}/`, context.site)}">→ Read the full post</a></p>
           ]]></content:encoded>

@@ -31,7 +31,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
   description={post.data.description}
   pubDate={post.data.pubDate}
   updatedDate={post.data.updatedDate}
-  image={post.data.image}
+  image={post.data.image.src}
   isPost={true}
 >
 
@@ -98,7 +98,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
     </div>
 
     <div class="mb-16">
-      <PostImage src={post.data.image} alt={post.data.title} className="rounded-lg shadow" />
+      <PostImage src={post.data.image} alt={post.data.title} variant="hero" priority class="rounded-lg shadow" />
       <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
 

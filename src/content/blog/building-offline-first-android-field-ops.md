@@ -3,7 +3,7 @@ title: "Building an Offline-First Android App for Field Operations with GeoPacka
 description: "How I built a native Android app for field teams: offline spatial queries with GeoPackage, real-time GPS tracking, and sync with PostgreSQL."
 pubDate: "2026-02-01"
 updatedDate: "2026-09-12"
-image: "/assets/blog/offline-first-android.webp"
+image: "../../assets/blog/offline-first-android.webp"
 tags: ["android", "gis", "reliability"]
 author: "Asier Ortiz"
 draft: false

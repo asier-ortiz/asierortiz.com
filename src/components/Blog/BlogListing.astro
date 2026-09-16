@@ -129,7 +129,7 @@ const searchIndex = allPosts.map((post) => ({
   <!-- Posts List -->
   <div id="posts-grid" class="grid gap-10 grid-cols-1 md:grid-cols-2">
     {
-      posts.map((post) => {
+      posts.map((post, index) => {
         const readingDuration = getReadingTime(post.body);
         return (
           <a
@@ -137,7 +137,7 @@ const searchIndex = allPosts.map((post) => ({
             class="post-card group block overflow-hidden rounded-2xl border border-base-700 bg-base-900 hover:border-primary-500 hover:shadow-xl hover:scale-[1.02] active:border-primary-500 transform transition-all duration-300"
             data-tags={post.data.tags?.join(',')}
           >
-            <PostImage src={post.data.image} alt={`Cover image for ${post.data.title}`} />
+            <PostImage src={post.data.image} alt={`Cover image for ${post.data.title}`} variant="card" priority={index === 0} />
 
             <div class="p-6">
               <h2 class="text-2xl font-semibold mb-2 underline-ltr">{post.data.title}</h2>

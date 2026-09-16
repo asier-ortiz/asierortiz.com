@@ -19,7 +19,7 @@ export async function GET(context) {
         url: absoluteUrl(`/blog/${post.slug}/`, context.site),
         title: post.data.title,
         content_html: `
-          <img src="${absoluteUrl(post.data.image, context.site)}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
+          <img src="${absoluteUrl(post.data.image.src, context.site)}" alt="${post.data.title}" style="max-width: 100%; border-radius: 10px; margin-bottom: 1em;" />
           <p>${post.data.description}</p>
           <p><a href="${absoluteUrl(`/blog/${post.slug}/`, context.site)}">→ Read the full post</a></p>
         `,
@@ -27,7 +27,7 @@ export async function GET(context) {
         date_published: new Date(post.data.pubDate).toISOString(),
         date_modified: post.data.updatedDate?.toISOString(),
         tags: post.data.tags ?? [],
-        image: absoluteUrl(post.data.image, context.site),
+        image: absoluteUrl(post.data.image.src, context.site),
         author: {
           name: siteData.author.name,
           url: `mailto:${siteData.author.email}`,

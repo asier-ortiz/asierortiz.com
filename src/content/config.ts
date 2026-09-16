@@ -22,7 +22,8 @@ const TAGS = [
 const MAX_TAGS_PER_POST = 4;
 
 const blogCollection = defineCollection({
-  schema: z.object({
+  schema: ({ image }) =>
+    z.object({
     title: z.string().min(5, { message: 'Title must be at least 5 characters long.' }),
 
     description: z
@@ -34,7 +35,9 @@ const blogCollection = defineCollection({
     // Set when a published post is substantially revised; pubDate stays put.
     updatedDate: z.coerce.date().optional(),
 
-    image: z.string().startsWith('/', { message: "Image path must start with '/'." }),
+    // Cover under src/assets/blog/, referenced relative to the post file; Astro generates the
+    // responsive variants and the metadata (width/height) from it.
+    image: image(),
 
     author: z.string().min(3, { message: 'Author name must be at least 3 characters long.' }),
 
