@@ -32,6 +32,14 @@ const lastmodFor = (pathname) => {
 };
 
 export default defineConfig({
+  vite: {
+    // Pre-bundle every package the islands load, so the dev server never discovers one
+    // mid-session: that re-optimisation changes the dependency hashes and leaves modules
+    // already served pointing at outdated files ("Failed to fetch dynamically imported module").
+    optimizeDeps: {
+      include: ['fuse.js', 'medium-zoom', 'tsparticles-engine', 'tsparticles-preset-stars'],
+    },
+  },
   site: 'https://asierortiz.com',
   // Only links marked data-astro-prefetch (the blog pager) are prefetched.
   prefetch: true,
