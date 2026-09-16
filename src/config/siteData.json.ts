@@ -46,8 +46,10 @@ export interface SiteDataProps {
     src: ImageMetadata;
     alt: string;
   };
-  rss: {
+  blog: {
+    /** Listing heading. */
     title: string;
+    /** One-line pitch: listing intro, page meta and feed description. */
     description: string;
   };
   newsletter: {
@@ -98,9 +100,10 @@ const siteData: SiteDataProps = {
     alt: 'Asier Ortiz monogram with the words Full-Stack & Data Developer and asierortiz.com',
   },
 
-  rss: {
-    title: 'Asier Ortiz - Blog',
-    description: 'Latest posts about AI, Machine Learning and Web Development',
+  blog: {
+    title: 'Between commits',
+    description:
+      'Posts about web, mobile and AI. Mostly notes from projects, things that broke, things I figured out along the way.',
   },
 
   newsletter: {

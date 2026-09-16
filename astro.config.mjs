@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { readdirSync, readFileSync } from 'node:fs';
 import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
@@ -8,6 +9,27 @@ import icon from 'astro-icon';
 import remarkExtractHeadings from './src/utils/remarkHeadings.ts';
 import rehypeTableWrap from './src/utils/rehypeTableWrap.ts';
 import rehypeImageSize from './src/utils/rehypeImageSize.ts';
+
+// Sitemap <lastmod> comes from the posts' frontmatter: a post's own date, and for the
+// listing and the tag pages the newest post they contain. Read from disk because the
+// content collection is not available at config time.
+const posts = readdirSync('src/content/blog')
+  .filter((file) => file.endsWith('.md'))
+  .map((file) => {
+    const source = readFileSync(`src/content/blog/${file}`, 'utf8');
+    const field = (name) => source.match(new RegExp(`^${name}:\\s*"?([^"\\n]+)`, 'm'))?.[1]?.trim();
+    const tags = (source.match(/^tags:\s*(.+)$/m)?.[1] ?? '').match(/[a-z0-9-]+/g) ?? [];
+    return { slug: file.replace(/\.md$/, ''), date: field('updatedDate') ?? field('pubDate'), tags };
+  });
+const newest = (list) => list.map((post) => post.date).sort().at(-1);
+const lastmodFor = (pathname) => {
+  const post = pathname.match(/^\/blog\/([^/]+)\/$/)?.[1];
+  if (post) return posts.find((p) => p.slug === post)?.date;
+  const tag = pathname.match(/^\/blog\/tag\/([^/]+)\/$/)?.[1];
+  if (tag) return newest(posts.filter((p) => p.tags.includes(tag)));
+  if (pathname === '/' || pathname.startsWith('/blog/')) return newest(posts);
+  return undefined;
+};
 
 export default defineConfig({
   site: 'https://asierortiz.com',
@@ -19,6 +41,10 @@ export default defineConfig({
     sitemap({
       // Landing page for newsletter confirmations; only reachable from the email link.
       filter: (page) => new URL(page).pathname !== '/confirmed/',
+      serialize: (item) => {
+        const lastmod = lastmodFor(new URL(item.url).pathname);
+        return lastmod ? { ...item, lastmod: new Date(lastmod).toISOString() } : item;
+      },
     }),
     icon(),
     mdx(),

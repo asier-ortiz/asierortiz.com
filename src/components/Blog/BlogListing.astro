@@ -56,9 +56,9 @@ const searchIndex = allPosts.map((post) => ({
 
 <section class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
   <header class="blog-header text-left mb-12">
-    <h1 class="h1 text-pretty text-gradient pb-2">Between commits</h1>
+    <h1 class="h1 text-pretty text-gradient pb-2">{siteData.blog.title}</h1>
     <p class="description mt-6 text-pretty">
-      Posts about web, mobile and AI. Mostly notes from projects, things that broke, things I figured out along the way.
+      {siteData.blog.description}
       <Button
         variant="link"
         href={siteData.newsletter.url}
