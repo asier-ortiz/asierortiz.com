@@ -1,3 +1,9 @@
+## [1.67.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.66.0...v1.67.0) (2026-09-16)
+
+### Features
+
+* **seo:** 1200x630 share image and complete Open Graph image metadata ([e40ef26](https://github.com/asier-ortiz/asierortiz.com/commit/e40ef26943a4b483ac22e0caf432d37b850e890a))
+
 ## [1.66.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.65.1...v1.66.0) (2026-09-16)
 
 ### Features
