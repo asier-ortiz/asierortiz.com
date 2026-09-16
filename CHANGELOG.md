@@ -1,3 +1,9 @@
+## [1.65.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.65.0...v1.65.1) (2026-09-16)
+
+### Performance Improvements
+
+* **netlify:** cache hashed assets for a year and add baseline security headers ([3479d34](https://github.com/asier-ortiz/asierortiz.com/commit/3479d343e390e3ba13045b2120dd27089cb20cff))
+
 ## [1.65.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.64.0...v1.65.0) (2026-09-16)
 
 ### Features
