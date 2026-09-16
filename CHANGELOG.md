@@ -1,3 +1,9 @@
+## [1.67.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.1...v1.67.2) (2026-09-16)
+
+### Bug Fixes
+
+* **a11y:** name every control and image, and move long diagram alts into visible text ([cc03c00](https://github.com/asier-ortiz/asierortiz.com/commit/cc03c008abb2101b5ec098957f9d8bc4d9323703))
+
 ## [1.67.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.0...v1.67.1) (2026-09-16)
 
 ### Bug Fixes
