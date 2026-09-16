@@ -90,7 +90,9 @@ npm run dev
 
 ## 📄 License
 
-This project is licensed under the [MIT License](./LICENSE).
+The source code is licensed under the [MIT License](./LICENSE).
+
+The content is not: blog posts, images, diagrams and other written material under `src/content/` and `src/assets/` are © Asier Ortiz, all rights reserved. Quote with attribution and a link; ask before republishing.
 
 ---
 
