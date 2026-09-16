@@ -11,7 +11,7 @@
  * but at low priority so it never competes with the hero, fonts and CSS. Candidates are
  * sized to the rendered card (measured 322px on phones, 452px on desktop).
  */
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { GalleryFrame } from '@config/projectData.json';
 
 interface Props {
@@ -23,11 +23,14 @@ interface Props {
 
 const { images, interval = 7000, class: className = '' } = Astro.props;
 const [first] = images;
+// Reading width/height off the imported original would mark it as used and ship the
+// full-size file; the smallest candidate (already generated for the srcset) has the ratio.
+const thumb = await getImage({ src: first.src, width: 480 });
 ---
 
 <div
   class:list={['project-gallery', className]}
-  style={`aspect-ratio: ${first.src.width} / ${first.src.height};`}
+  style={`aspect-ratio: ${thumb.attributes.width} / ${thumb.attributes.height};`}
   data-interval={interval}
   aria-live="off"
 >

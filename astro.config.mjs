@@ -49,9 +49,19 @@ export default defineConfig({
     icon(),
     mdx(),
     tailwind(),
-    // astro-compress >= 2.4 re-encodes WebP losslessly by default, which never
-    // beats a lossy source, so large WebPs stopped shrinking. Keep it lossy.
-    compress({ Image: { sharp: { webp: { lossless: false } } } }),
+    // Rasters are already optimised by astro:assets, and astro-compress's own image pass is a
+    // no-op on lossy WebP (its size check measures the UTF-8 length of binary data), so it is
+    // off. The SVG pass keeps role="img" on the diagrams, which svgo strips by default.
+    compress({
+      Image: false,
+      SVG: {
+        svgo: {
+          plugins: [
+            { name: 'preset-default', params: { overrides: { removeUnknownsAndDefaults: { keepRoleAttr: true } } } },
+          ],
+        },
+      },
+    }),
   ],
   markdown: {
     // Astro's default theme (github-dark) renders comments at 3:1 on its background.

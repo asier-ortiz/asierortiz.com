@@ -4,8 +4,6 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue';
-import { tsParticles } from 'tsparticles-engine';
-import { loadStarsPreset } from 'tsparticles-preset-stars';
 
 let container = null;
 let motionQuery = null;
@@ -20,6 +18,12 @@ function enqueue(op) {
 }
 
 async function initParticles(reducedMotion) {
+  // Loaded here, not at module level: the component now renders on the server (client:media
+  // only hydrates it from 768px up) and the tsparticles packages cannot be imported in Node.
+  const [{ tsParticles }, { loadStarsPreset }] = await Promise.all([
+    import('tsparticles-engine'),
+    import('tsparticles-preset-stars'),
+  ]);
   await loadStarsPreset(tsParticles);
 
   const loaded = await tsParticles.load('page-particles', {

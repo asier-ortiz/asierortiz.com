@@ -8,7 +8,7 @@ import siteData from '@config/siteData.json';
 ---
 
 <Layout title={siteData.title} description={siteData.description}>
-  <Particles client:only="vue" />
+  <Particles client:media="(min-width: 768px)" />
   <article class="min-h-screen">
     <Hero />
     <Background />

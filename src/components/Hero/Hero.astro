@@ -77,6 +77,8 @@ import siteData from '@config/siteData.json';
     border-radius: 50%;
   }
 
+  /* The static glow, plus a second glow layer that fades in and out: animating opacity
+     runs on the compositor, whereas animating box-shadow repaints every frame. */
   .eclipse-ring {
     position: absolute;
     inset: 0;
@@ -85,27 +87,30 @@ import siteData from '@config/siteData.json';
       0 0 15px 3px rgba(var(--color-primary-600-rgb), 0.15),
       0 0 35px 8px rgba(var(--color-primary-600-rgb), 0.08),
       0 0 60px 15px rgba(var(--color-primary-600-rgb), 0.04);
+  }
+
+  .eclipse-ring::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow:
+      0 0 20px 5px rgba(var(--color-primary-600-rgb), 0.22),
+      0 0 45px 12px rgba(var(--color-primary-600-rgb), 0.12),
+      0 0 70px 20px rgba(var(--color-primary-600-rgb), 0.06);
+    opacity: 0;
     animation: corona-breathe 5s ease-in-out infinite;
   }
 
   @keyframes corona-breathe {
-    0%, 100% {
-      box-shadow:
-        0 0 15px 3px rgba(var(--color-primary-600-rgb), 0.15),
-        0 0 35px 8px rgba(var(--color-primary-600-rgb), 0.08),
-        0 0 60px 15px rgba(var(--color-primary-600-rgb), 0.04);
-    }
     50% {
-      box-shadow:
-        0 0 20px 5px rgba(var(--color-primary-600-rgb), 0.22),
-        0 0 45px 12px rgba(var(--color-primary-600-rgb), 0.12),
-        0 0 70px 20px rgba(var(--color-primary-600-rgb), 0.06);
+      opacity: 1;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    /* Keep the static glow (base box-shadow above); only stop the breathing. */
-    .eclipse-ring {
+    /* Keep the static glow; only stop the breathing. */
+    .eclipse-ring::after {
       animation: none;
     }
   }

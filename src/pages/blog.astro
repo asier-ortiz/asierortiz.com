@@ -15,6 +15,6 @@ const pagination = paginationInfo(1, lastPage);
   title={`${siteData.author.name} - Blog`}
   description={siteData.blog.description}
 >
-  <Particles client:only="vue" />
+  <Particles client:media="(min-width: 768px)" />
   <BlogListing allPosts={posts} posts={posts.slice(0, POSTS_PER_PAGE)} pagination={pagination} />
 </Layout>
