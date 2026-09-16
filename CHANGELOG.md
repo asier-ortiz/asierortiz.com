@@ -1,3 +1,9 @@
+## [1.68.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.68.0...v1.68.1) (2026-09-16)
+
+### Bug Fixes
+
+* **ui:** no touch feedback on post cards, one hover guard for hand-written rules ([71195ae](https://github.com/asier-ortiz/asierortiz.com/commit/71195aeccae4d92479e8c32c27b8f93236ba55f2))
+
 ## [1.68.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.4...v1.68.0) (2026-09-16)
 
 ### Features
