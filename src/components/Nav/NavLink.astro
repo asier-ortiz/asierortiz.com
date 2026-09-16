@@ -14,14 +14,15 @@ const sectionId = href.startsWith('/#') ? href.slice(2) : null;
 <li>
   <a
     class:list={[
-      `primary-focus group/navlink relative block w-full px-4 py-2 font-medium ${className}`,
-      sectionId ? `navlink-${sectionId}` : '',
+      'primary-focus group/navlink relative block w-full px-4 py-2 font-medium',
+      className,
+      sectionId && `navlink-${sectionId}`,
     ]}
     href={href}
     data-section={sectionId}
     aria-label={label}
-    target={newTab ? '_blank' : ''}
-    rel={newTab ? 'noopener noreferrer' : ''}
+    target={newTab ? '_blank' : undefined}
+    rel={newTab ? 'noopener noreferrer' : undefined}
   >
     <span
       class:list={['navlink__underline-ltr', Astro.url.pathname === href ? 'active-navlink' : '']}

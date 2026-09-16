@@ -4,24 +4,29 @@ import { type SocialLinkProps } from '@config/siteData.json';
 interface Props {
   social: SocialLinkProps['platform'];
   href: string;
+  /** Accessible name of the link, e.g. "Asier Ortiz on GitHub" or "Share on X". */
+  label: string;
   text?: string;
   class?: string;
 }
 
-const { social, href, text = '', class: className } = Astro.props as Props;
+const { social, href, label, text = '', class: className } = Astro.props as Props;
+
+// Only pages on other sites open in a new tab; mailto: and same-origin links stay put.
+const external = /^https?:\/\//.test(href);
 ---
 
 <a
-  aria-label={social}
+  aria-label={label}
   href={href}
-  target="_blank"
-  rel="noopener noreferrer"
-  class=`social-icon flex gap-2 p-1 hover:text-primary-600 active:text-primary-600 transition-colors ${className}`
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  class:list={['social-icon flex gap-2 p-1 hover:text-primary-600 active:text-primary-600 transition-colors', className]}
 >
-  <p class="sr-only">{social}</p>
   {
     social === 'github' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-github"
         width="24"
@@ -44,6 +49,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'twitter' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-x"
         width="24"
@@ -67,6 +73,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'mastodon' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-mastodon"
         width="24"
@@ -90,6 +97,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'linkedin' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-linkedin"
         width="24"
@@ -116,6 +124,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'instagram' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-instagram"
         width="24"
@@ -140,6 +149,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'threads' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-threads"
         width="24"
@@ -162,6 +172,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'facebook' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-facebook"
         width="24"
@@ -184,6 +195,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'youtube' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-youtube"
         width="24"
@@ -207,6 +219,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'twitch' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-twitch"
         width="24"
@@ -231,6 +244,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'tiktok' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-tiktok"
         width="24"
@@ -253,6 +267,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'snapchat' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-snapchat"
         width="24"
@@ -275,6 +290,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'reddit' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-reddit"
         width="24"
@@ -302,6 +318,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'pinterest' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-pinterest"
         width="24"
@@ -326,6 +343,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'medium' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-medium"
         width="24"
@@ -353,6 +371,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'dev' && (
       <svg
+        aria-hidden="true"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -370,6 +389,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'dribbble' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-dribbble"
         width="24"
@@ -395,6 +415,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'behance' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-behance"
         width="24"
@@ -420,6 +441,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'behance' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-behance"
         width="24"
@@ -445,6 +467,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'codepen' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-codepen"
         width="24"
@@ -472,6 +495,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'producthunt' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-producthunt"
         width="24"
@@ -495,6 +519,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'discord' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-discord"
         width="24"
@@ -520,6 +545,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'slack' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-slack"
         width="24"
@@ -545,6 +571,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'whatsapp' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-whatsapp"
         width="24"
@@ -568,6 +595,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'telegram' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-telegram"
         width="24"
@@ -590,6 +618,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'email' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-mail"
         width="24"
@@ -613,6 +642,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'kaggle' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-brand-kaggle"
         width="24"
@@ -635,6 +665,7 @@ const { social, href, text = '', class: className } = Astro.props as Props;
   {
     social === 'rss' && (
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-rss"
         width="24"

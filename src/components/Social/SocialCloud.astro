@@ -1,13 +1,21 @@
 ---
 import SocialIcon from '@components/Social/SocialIcon.astro';
 import siteData from '@config/siteData.json';
+
+const labels: Partial<Record<(typeof siteData.socialLinks)[number]['platform'], string>> = {
+  github: `${siteData.author.name} on GitHub`,
+  kaggle: `${siteData.author.name} on Kaggle`,
+  linkedin: `${siteData.author.name} on LinkedIn`,
+  email: `Email ${siteData.author.email}`,
+  rss: 'RSS feed',
+};
 ---
 
 <div class="flex flex-col items-center">
   <div class="flex gap-2">
     {
       siteData.socialLinks.map((social) => (
-        <SocialIcon href={social.link} social={social.platform} />
+        <SocialIcon href={social.link} social={social.platform} label={labels[social.platform] ?? social.platform} />
       ))
     }
   </div>

@@ -20,18 +20,22 @@ const threadsText = `${title}\n\n${url}`;
 const shareLinks = [
   {
     platform: 'twitter',
+    name: 'X',
     link: `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(twitterText)}`,
   },
   {
     platform: 'linkedin',
+    name: 'LinkedIn',
     link: `https://www.linkedin.com/shareArticle?url=${url}&title=${encodeURIComponent(title)}`,
   },
   {
     platform: 'facebook',
+    name: 'Facebook',
     link: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
   },
   {
     platform: 'threads',
+    name: 'Threads',
     link: `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`,
   },
 ];
@@ -41,7 +45,7 @@ const shareLinks = [
   <span class="text-base-400 text-sm">Share:</span>
 
   {shareLinks.map((share) => (
-    <SocialIcon href={share.link} social={share.platform} />
+    <SocialIcon href={share.link} social={share.platform} label={`Share on ${share.name}`} />
   ))}
 
   <button
