@@ -1,3 +1,13 @@
+## [1.68.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.4...v1.68.0) (2026-09-16)
+
+### Features
+
+* **ux:** one title pattern with short post titles, and 40px tap targets ([9d3f580](https://github.com/asier-ortiz/asierortiz.com/commit/9d3f580f27e0f8a2d7b96754c466bead21c3497e))
+
+### Bug Fixes
+
+* **dev:** pre-bundle island dependencies so hydration survives dev sessions ([e8913cd](https://github.com/asier-ortiz/asierortiz.com/commit/e8913cd9d00f5db45677ecea183c99cd7fcadce5))
+
 ## [1.67.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.67.3...v1.67.4) (2026-09-16)
 
 ### Bug Fixes
