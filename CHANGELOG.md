@@ -1,3 +1,9 @@
+## [1.65.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.64.0...v1.65.0) (2026-09-16)
+
+### Features
+
+* **blog:** curate tags into a fixed vocabulary and make the filter URL-driven ([b1614b2](https://github.com/asier-ortiz/asierortiz.com/commit/b1614b2938a0d8a891b8370ae1c527e1081355d5))
+
 ## [1.64.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.63.0...v1.64.0) (2026-09-15)
 
 ### Features
