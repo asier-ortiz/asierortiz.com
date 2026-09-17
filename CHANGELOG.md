@@ -1,3 +1,12 @@
+## [1.68.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.68.1...v1.68.2) (2026-09-17)
+
+### Bug Fixes
+
+* **blog:** post cards and search results stay pressed while the post loads ([276e61a](https://github.com/asier-ortiz/asierortiz.com/commit/276e61a811977528cedc1beb13cf9f6e06fb21e6))
+* **blog:** search results explain themselves again ([2ddcd57](https://github.com/asier-ortiz/asierortiz.com/commit/2ddcd57eab08ab5ea54949c990ee47cb750071a0))
+* **nav:** nav links and the logo stay pressed until the next page loads ([a8fdd7a](https://github.com/asier-ortiz/asierortiz.com/commit/a8fdd7a998995e84d4129eefed598cdb6e79f31b))
+* **ui:** small controls take their press colour at once ([72180cb](https://github.com/asier-ortiz/asierortiz.com/commit/72180cb36a4f7302d2389bfbfc2e77c2ebc7efbf))
+
 ## [1.68.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.68.0...v1.68.1) (2026-09-16)
 
 ### Bug Fixes
