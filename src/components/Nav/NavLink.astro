@@ -45,4 +45,10 @@ const sectionId = href.startsWith('/#') ? href.slice(2) : null;
   .active-navlink {
     @apply bg-[length:100%_2px];
   }
+
+  /* Tapped, while the next page loads (Layout.astro): full underline and brighter text, so it reads
+     apart from the current page's underline. Instant, as iOS freezes transitions then. */
+  a[data-pressed] .navlink__underline-ltr {
+    @apply bg-[length:100%_2px] text-primary-400 duration-0;
+  }
 </style>
