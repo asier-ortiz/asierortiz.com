@@ -172,6 +172,18 @@
     }
   }
 
+  /* A tapped link while the next page loads (pressed-links.js) takes the selected look at once. */
+  a[data-pressed] mark {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: inherit;
+    transition: none;
+  }
+
+  a[data-pressed] p {
+    color: rgba(255, 255, 255, 0.8);
+    transition: none;
+  }
+
   .search-input:focus-within {
     /* The scale pulse fires on keyboard focus too, so it must honor reduced motion. */
     @media (prefers-reduced-motion: no-preference) {

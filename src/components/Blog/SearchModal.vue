@@ -253,7 +253,7 @@ const highlightMatch = (post, field) => {
             :href="post.url"
             :data-selected="selectedIndex !== -1 && index === selectedIndex ? 'true' : 'false'"
             :class="[
-            'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out',
+            'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out data-[pressed]:bg-primary-600 data-[pressed]:text-white data-[pressed]:duration-0',
             {
               'bg-primary-600 text-white': selectedIndex !== -1 && index === selectedIndex,
               'hover:bg-primary-700 hover:text-white': !(
