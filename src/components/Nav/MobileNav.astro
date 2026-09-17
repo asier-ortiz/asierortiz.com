@@ -156,25 +156,6 @@ import navData from '@config/navData.json';
     }
   }
 
-  function highlightNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('a[data-section] span');
-
-    if (!sections.length) return;
-
-    let index = sections.length;
-
-    while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
-
-    navLinks.forEach((link) => link.classList.remove('active-navlink'));
-    if (sections[index]) {
-      const activeSection = sections[index].id;
-      document
-        .querySelectorAll(`a[data-section="${activeSection}"] span`)
-        .forEach((link) => link.classList.add('active-navlink'));
-    }
-  }
-
   function initMobileNav() {
     if (typeof window !== 'undefined') {
       mobileNavContainer = document.getElementById('mobile-nav__container');
@@ -188,9 +169,6 @@ import navData from '@config/navData.json';
         mobileNavCloseBtn.addEventListener('click', toggleMobileNav);
         mobileNavBackdrop.addEventListener('click', toggleMobileNav);
       }
-
-      highlightNavLink();
-      window.addEventListener('scroll', highlightNavLink);
     }
   }
 

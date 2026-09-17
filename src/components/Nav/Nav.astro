@@ -40,29 +40,29 @@ import siteData from '@config/siteData.json.ts';
   </div>
 </div>
 
-<script is:inline>
-  if (typeof window !== 'undefined') {
-    const highlightNavLink = () => {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('[data-section] span');
+<script>
+  // Scroll-spy for the logo and the section links, header and drawer alike: underlines the link
+  // of the section in view. Pages without section[id] keep their server-rendered underline.
+  function highlightNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('[data-section] span');
 
-      if (!sections.length) return;
+    if (!sections.length) return;
 
-      let index = sections.length;
-      while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
+    let index = sections.length;
+    while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
 
-      navLinks.forEach((link) => link.classList.remove('active-navlink'));
+    navLinks.forEach((link) => link.classList.remove('active-navlink'));
 
-      if (sections[index]) {
-        const activeSection = sections[index].id;
-        document
-          .querySelectorAll(`[data-section="${activeSection}"] span`)
-          .forEach((link) => link.classList.add('active-navlink'));
-      }
-    };
-
-    document.addEventListener('DOMContentLoaded', highlightNavLink);
-    window.addEventListener('load', highlightNavLink);
-    window.addEventListener('scroll', highlightNavLink);
+    if (sections[index]) {
+      const activeSection = sections[index].id;
+      document
+        .querySelectorAll(`[data-section="${activeSection}"] span`)
+        .forEach((link) => link.classList.add('active-navlink'));
+    }
   }
+
+  highlightNavLink();
+  window.addEventListener('load', highlightNavLink);
+  window.addEventListener('scroll', highlightNavLink);
 </script>
