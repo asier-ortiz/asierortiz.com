@@ -39,9 +39,12 @@ onMounted(() => {
 
   fuse.value = new Fuse(normalizedPosts.value, {
     keys: ['title', 'description', 'tags'],
-    threshold: 0.4,
-    includeMatches: true,
-    minMatchCharLength: 1,
+    // Fuse scores a hit by how far into the field it sits unless this is off, so at 0.4 only the
+    // first ~40 characters of a field could match: "data" missed a title ending in "River Sensor
+    // Data". Without that accidental filter the threshold carries the noise alone, and at 0.3 a
+    // short query stays exact while a typo in a longer one is still forgiven.
+    ignoreLocation: true,
+    threshold: 0.3,
   });
 
   nextTick(() => {
@@ -51,19 +54,27 @@ onMounted(() => {
   });
 
   window.addEventListener('keydown', handleGlobalKeyDown);
+  window.addEventListener('pageshow', handleRestore);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleGlobalKeyDown);
+  window.removeEventListener('pageshow', handleRestore);
 });
+
+// Back from a post restores this page with the modal open, and WebKit then empties an
+// autocomplete="off" field while the query and its results stay here: the box would list results
+// for a query the reader can no longer see. The frame is needed; the reset lands after pageshow.
+const handleRestore = (event) => {
+  if (!event.persisted) return;
+  requestAnimationFrame(() => {
+    if (searchInput.value) searchInput.value.value = searchQuery.value;
+  });
+};
 
 const filteredPosts = computed(() => {
   if (!searchQuery.value.trim()) return [];
-  const result = fuse.value.search(searchQuery.value);
-  return result.map((res) => ({
-    ...res.item,
-    matches: res.matches,
-  }));
+  return fuse.value.search(searchQuery.value).map((res) => res.item);
 });
 
 // Read by screen readers as the list changes; sighted users see the list itself.
@@ -146,41 +157,40 @@ watch(searchQuery, () => {
   selectedIndex.value = -1;
 });
 
+// Fuse ranks the rows, the reader's own words make the marks: Fuse's indices are fuzzy (a stray
+// "he" out of "The") and cover none of the tags a row can also match on.
+const queryPattern = computed(() => {
+  const terms = searchQuery.value.trim().split(/\s+/).filter(Boolean);
+  if (!terms.length) return null;
+  const escaped = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return new RegExp(`(${escaped.join('|')})`, 'gi');
+});
+
+const truncate = (text, limit) => (text.length > limit ? `${text.slice(0, limit)}...` : text);
+
+const highlightTag = (tag) => {
+  const pattern = queryPattern.value;
+  return pattern ? `#${tag.replace(pattern, '<mark>$1</mark>')}` : `#${tag}`;
+};
+
 const highlightMatch = (post, field) => {
-  if (!post.matches) return post[field];
+  const text = post[field];
+  const pattern = queryPattern.value;
+  if (!text) return text;
 
-  const match = post.matches.find((m) => m.key === field);
-  if (!match) return post[field];
-
-  let text = post[field];
-  const minHighlightLength = 30;
+  // A description is a whole paragraph: it is cut to a window around its first hit, or to its
+  // opening when the row matched on a tag instead and there is nothing to centre on.
+  const windowed = field === 'description';
   const contextChars = 30;
+  if (pattern) pattern.lastIndex = 0;
+  const hit = pattern?.exec(text);
+  if (!hit) return windowed ? truncate(text, 2 * contextChars) : text;
 
-  if (field === 'description' && match.indices.length > 0) {
-    const [start, end] = match.indices[0];
-    const matchLength = end - start + 1;
+  const start = windowed ? Math.max(hit.index - contextChars, 0) : 0;
+  const end = windowed ? Math.min(pattern.lastIndex + contextChars, text.length) : text.length;
+  const marked = text.slice(start, end).replace(pattern, '<mark>$1</mark>');
 
-    if (matchLength < minHighlightLength) {
-      const startContext = Math.max(start - contextChars, 0);
-      const endContext = Math.min(end + 1 + contextChars, text.length);
-      text = text.slice(startContext, endContext);
-
-      match.indices = [[start - startContext, end - startContext]];
-    }
-  }
-
-  let result = '';
-  let lastIndex = 0;
-
-  match.indices.forEach(([start, end]) => {
-    result += text.slice(lastIndex, start);
-    result += `<mark>${text.slice(start, end + 1)}</mark>`;
-    lastIndex = end + 1;
-  });
-
-  result += text.slice(lastIndex);
-
-  return field === 'description' ? `...${result}...` : result;
+  return `${start > 0 ? '...' : ''}${marked}${end < text.length ? '...' : ''}`;
 };
 </script>
 
@@ -265,8 +275,10 @@ const highlightMatch = (post, field) => {
             <div>
               <strong v-html="highlightMatch(post, 'title')"></strong>
               <p class="text-base-400 text-sm mt-1" v-html="highlightMatch(post, 'description')"></p>
-              <p v-if="post.pubDate" class="text-base-400 text-xs mt-1">
-                {{ formatDate(post.pubDate, props.language) }}
+              <!-- Tags are searched too, so a row that matched on one shows why it is here. -->
+              <p class="text-base-400 text-xs mt-1">
+                <span v-if="post.pubDate">{{ formatDate(post.pubDate, props.language) }}</span>
+                <span v-for="tag in post.tags" :key="tag" class="ml-2" v-html="highlightTag(tag)" />
               </p>
             </div>
           </a>

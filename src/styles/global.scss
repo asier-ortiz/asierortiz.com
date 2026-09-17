@@ -30,8 +30,10 @@
   }
 
   mark {
-    background-color: rgba(59, 130, 246, 0.3);
-    color: inherit;
+    /* Only the search results use it: bright enough to read as the hit over the base-400 a
+       description is set in. The rows that recolour it below keep their own text colour. */
+    background-color: rgba(59, 130, 246, 0.45);
+    @apply text-base-50;
     padding: 0 0.15em;
     border-radius: 0.25rem;
   }
@@ -149,8 +151,9 @@
     background-clip: initial;
   }
 
+  /* On a blue row a white wash leaves the marked word at 2.6:1; a dark one keeps it readable. */
   [data-selected="true"] mark {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     color: inherit;
   }
 
@@ -162,7 +165,7 @@
   /* Hand-written hover rules are gated like the Tailwind ones (see tailwind.config.cjs). */
   @media (hover: hover) and (pointer: fine) {
     a:hover mark {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(0, 0, 0, 0.3);
       color: inherit;
     }
 
@@ -174,7 +177,7 @@
 
   /* A tapped link while the next page loads (pressed-links.js) takes the selected look at once. */
   a[data-pressed] mark {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     color: inherit;
     transition: none;
   }
