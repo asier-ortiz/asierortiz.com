@@ -25,6 +25,9 @@
 .button--ghost {
   @apply bg-base-700 text-base-300;
   @apply hover:bg-primary-500 hover:text-base-800 active:bg-primary-500 active:text-base-800;
+  /* data-pressed: a tapped same-tab link while the next page loads (pressed-links.js); instant, as iOS
+     freezes transitions then. */
+  @apply data-[pressed]:bg-primary-500 data-[pressed]:text-base-800 data-[pressed]:duration-0;
   @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
 }
 
@@ -33,11 +36,14 @@
   @apply bg-transparent;
   @apply px-4 py-2;
   @apply border-2 border-transparent;
-  @apply hover:text-primary-300 hover:border-primary-600 active:text-primary-300 active:border-primary-600;
+  /* The press colour switches at once: a 300ms fade barely shows in a tap, and one still running
+     when a navigation starts stays frozen on iOS. Release still fades. */
+  @apply hover:text-primary-300 hover:border-primary-600 active:text-primary-300 active:border-primary-600 active:duration-0;
+  @apply data-[pressed]:text-primary-300 data-[pressed]:border-primary-600 data-[pressed]:duration-0;
 }
 
 .button--link {
-  @apply text-primary-300 hover:text-primary-200 active:text-primary-200 underline decoration-dashed underline-offset-4 decoration-1;
+  @apply text-primary-300 hover:text-primary-200 active:text-primary-200 active:duration-0 underline decoration-dashed underline-offset-4 decoration-1;
   @apply font-medium bg-transparent border-none p-0 transition-colors duration-200;
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-900;
 }
