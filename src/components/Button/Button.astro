@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 
 interface Props {
   type?: 'button' | 'submit' | 'reset' | null | undefined;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'post-ghost' | 'link';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'post-ghost' | 'link';
   href?: URL | string;
   arrow?: 'left' | 'right' | 'none';
   onclick?: any;
@@ -33,9 +33,6 @@ const {
         },
         {
           'button--secondary': variant === 'secondary',
-        },
-        {
-          'button--outline': variant === 'outline',
         },
         {
           'button--ghost': variant === 'ghost',
@@ -81,9 +78,6 @@ const {
         },
         {
           'button--secondary': variant === 'secondary',
-        },
-        {
-          'button--outline': variant === 'outline',
         },
         {
           'button--ghost': variant === 'ghost',
