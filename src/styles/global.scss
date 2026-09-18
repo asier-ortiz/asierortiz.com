@@ -221,9 +221,9 @@
     }
   }
 
+  /* Ring only: the element keeps its own corner radius and transitions while focused. */
   :focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-base-950 transition duration-150;
-    border-radius: inherit;
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-base-950;
   }
 }
 
