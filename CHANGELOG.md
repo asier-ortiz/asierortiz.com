@@ -1,3 +1,18 @@
+## [1.69.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.69.0...v1.69.1) (2026-09-18)
+
+### Bug Fixes
+
+* **a11y:** focus rings keep the element's shape and timing ([086591a](https://github.com/asier-ortiz/asierortiz.com/commit/086591a90b6450bf1147b60aec67ac464f2ecce6))
+* **blog:** tag chips switch at once and the selected one clears ([303439b](https://github.com/asier-ortiz/asierortiz.com/commit/303439bdf26ffa34a05e15538fe29b1747773b80))
+* **home:** background toggles close without a lag and honour reduced motion ([4761448](https://github.com/asier-ortiz/asierortiz.com/commit/4761448660235992df922ad806c1e69ebd30e15c))
+* **projects:** write-ups on this site open in the same tab ([58c953b](https://github.com/asier-ortiz/asierortiz.com/commit/58c953b8ef01b2cd62dffdb8f9c8515c2556fc62))
+* **site:** keep breakpoints working in Safari before 16.4 ([2159c8f](https://github.com/asier-ortiz/asierortiz.com/commit/2159c8fccd173cfa1b8db95073df7f87e9206ddc))
+
+### Performance Improvements
+
+* **projects:** ship the gallery zoom script once, not once per card ([a43f2db](https://github.com/asier-ortiz/asierortiz.com/commit/a43f2db87cb0227a4a75e88dee3e72bf43cb524a))
+* **site:** drop the prefetch script that served a pager with no pages ([af03dc3](https://github.com/asier-ortiz/asierortiz.com/commit/af03dc3cfdc4e6b0ffb833de27daa12587faf92e))
+
 ## [1.69.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.68.2...v1.69.0) (2026-09-18)
 
 ### Features
