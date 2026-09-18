@@ -117,11 +117,11 @@ const handleKeyDown = (event) => {
         : (selectedIndex.value - 1 + filteredPosts.value.length) % filteredPosts.value.length;
   }
 
-  if (event.key === 'Enter') {
+  // Enter opens the row picked with the arrows, or the best match: phone keyboards have no arrows,
+  // only Go. Clicking the row, rather than setting location, makes it behave like a tap on it.
+  if (event.key === 'Enter' && !event.isComposing) {
     event.preventDefault();
-    if (filteredPosts.value.length > 0 && selectedIndex.value !== -1) {
-      window.location.href = filteredPosts.value[selectedIndex.value].url;
-    }
+    document.querySelectorAll('#results-container a')[Math.max(selectedIndex.value, 0)]?.click();
   }
 };
 
@@ -215,11 +215,15 @@ const highlightMatch = (post, field) => {
       <div class="px-6 pt-6 sticky top-0 bg-base-900 z-10 flex items-center gap-2">
         <div class="relative search-input flex-1">
           <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-base-400" aria-hidden="true" />
+          <!-- Not v-model: it skips input while a word is being composed, and Android keyboards compose
+               every word as it is typed, so results would only update after a space. -->
           <input
             ref="searchInput"
-            v-model="searchQuery"
+            :value="searchQuery"
+            @input="searchQuery = $event.target.value"
             @keydown="handleKeyDown"
             type="search"
+            enterkeyhint="go"
             autocomplete="off"
             aria-label="Search posts"
             placeholder="Search posts..."
