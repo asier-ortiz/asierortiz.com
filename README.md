@@ -18,8 +18,8 @@ My personal website showcases my work, projects, and technical blog.
 It features:
 
 - **Hero Section**: Brief introduction and call to action.
-- **Background**: Overview of my experience, skills, and technologies that I use.
 - **Projects**: Selected portfolio projects with detailed descriptions and repository links.
+- **Background**: Overview of my experience, skills, and technologies that I use.
 - **Blog**: Write-ups of real projects I've built (field apps, data pipelines, integrations) and the occasional essay on the craft.
 - **Newsletter Subscription**: Visitors can subscribe via [Buttondown](https://buttondown.com/asierortiz/).
 - **Contact**: Includes links to my email and social media profiles for easy connection.
