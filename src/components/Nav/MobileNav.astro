@@ -18,9 +18,11 @@ import navData from '@config/navData.json';
       aria-hidden="true"
     />
   </button>
+  <!-- touch-none here and on the backdrop keeps a swipe over the open drawer from scrolling the
+       page behind; overflow: hidden on body does not stop it on iOS (WebKit bug 240859). -->
   <div
     id="mobile-nav__content"
-    class="whitespace-nowrap fixed -right-72 top-0 z-40 hidden h-screen w-72 items-center overflow-x-hidden bg-base-900 text-lg font-normal transition-all duration-300"
+    class="whitespace-nowrap fixed -right-72 top-0 z-40 hidden h-screen w-72 touch-none items-center overflow-x-hidden bg-base-900 text-lg font-normal transition-all duration-300"
   >
     <div class="w-full px-2">
       <div class="mx-1 my-2 flex w-full justify-end pl-6 pr-4">
@@ -40,7 +42,7 @@ import navData from '@config/navData.json';
   </div>
   <button
     id="mobile-nav__backdrop"
-    class="mobile-nav__backdrop--fade-out fixed left-0 top-0 z-30 h-screen bg-black"
+    class="mobile-nav__backdrop--fade-out fixed left-0 top-0 z-30 h-screen touch-none bg-black"
     aria-label="close navigation menu"></button>
 </div>
 
@@ -138,22 +140,33 @@ import navData from '@config/navData.json';
         mobileNavBackdrop.classList.remove('mobile-nav__backdrop--fade-out');
         mobileNavBackdrop.classList.add('mobile-nav__backdrop--fade-in');
       } else {
-        mobileNavContainer.classList.remove('open');
-        mobileNavBurger.setAttribute('aria-expanded', 'false');
-
-        mobileNavContent.classList.remove('mobile-nav--slide-in');
-        mobileNavContent.classList.add('mobile-nav--slide-out');
-
-        hideContentTimeout = setTimeout(() => {
-          mobileNavContent?.classList.add('hidden');
-        }, 300);
-
-        mobileNavBackdrop.classList.remove('mobile-nav__backdrop--fade-in');
-        mobileNavBackdrop.classList.add('mobile-nav__backdrop--fade-out');
+        closeMobileNav();
       }
 
       event.preventDefault();
     }
+  }
+
+  // No preventDefault: link clicks and page events call this too, and their default must run.
+  function closeMobileNav({ animate = true } = {}) {
+    if (mobileNavContent.classList.contains('hidden')) return;
+
+    mobileNavContainer.classList.remove('open');
+    mobileNavBurger.setAttribute('aria-expanded', 'false');
+
+    mobileNavContent.classList.remove('mobile-nav--slide-in');
+    clearTimeout(hideContentTimeout);
+    if (animate) {
+      mobileNavContent.classList.add('mobile-nav--slide-out');
+      hideContentTimeout = setTimeout(() => {
+        mobileNavContent.classList.add('hidden');
+      }, 300);
+    } else {
+      mobileNavContent.classList.add('hidden');
+    }
+
+    mobileNavBackdrop.classList.remove('mobile-nav__backdrop--fade-in');
+    mobileNavBackdrop.classList.add('mobile-nav__backdrop--fade-out');
   }
 
   function initMobileNav() {
@@ -164,10 +177,30 @@ import navData from '@config/navData.json';
       mobileNavCloseBtn = document.getElementById('mobile-nav__close');
       mobileNavBackdrop = document.getElementById('mobile-nav__backdrop');
 
-      if (mobileNavBurger && mobileNavCloseBtn && mobileNavBackdrop) {
+      if (mobileNavBurger && mobileNavContent && mobileNavCloseBtn && mobileNavBackdrop) {
         mobileNavBurger.addEventListener('click', toggleMobileNav);
         mobileNavCloseBtn.addEventListener('click', toggleMobileNav);
         mobileNavBackdrop.addEventListener('click', toggleMobileNav);
+
+        // A link into this same page (Background or Projects on /) never unloads it, so nothing
+        // else would close the drawer.
+        mobileNavContent.addEventListener('click', (event) => {
+          const link = event.target.closest('a[href]');
+          if (link && link.href.split('#')[0] === location.href.split('#')[0]) closeMobileNav();
+        });
+
+        // The back/forward cache restores the page as it was left: close the drawer on the way
+        // out, and again on return in case a browser restored it before pagehide ran.
+        window.addEventListener('pagehide', () => closeMobileNav({ animate: false }));
+        window.addEventListener('pageshow', (event) => {
+          if (event.persisted) closeMobileNav({ animate: false });
+        });
+
+        // Nav.astro hides the drawer from md (768px) up. Rotating there closes it, instead of
+        // leaving it open out of sight to reappear and replay its entrance on the way back.
+        window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
+          if (event.matches) closeMobileNav({ animate: false });
+        });
       }
     }
   }
