@@ -71,8 +71,9 @@
     @apply mx-auto max-w-5xl px-4;
   }
 
-  /* On touch the copy button is always visible, so the block leaves it room above the code. */
-  @media (hover: none) {
+  /* Where no fine pointer can hover, the copy button is always visible, so the block leaves it room
+     above the code. The guard is the exact complement of the one that hides the button below. */
+  @media not all and (hover: hover) and (pointer: fine) {
     .code-block > pre {
       padding-top: 2.75rem;
     }
@@ -81,7 +82,7 @@
   .copy-code-button {
     @apply absolute top-1 right-1 bg-primary-600 text-white p-3 rounded-md transition-opacity active:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
 
-    /* Revealed by hovering the block where hovering exists; always shown on touch. */
+    /* Revealed by hovering the block where a fine pointer hovers; always visible elsewhere. */
     @media (hover: hover) and (pointer: fine) {
       opacity: 0;
 
@@ -162,7 +163,7 @@
     transition: color 0.2s ease-in-out;
   }
 
-  /* Hand-written hover rules are gated like the Tailwind ones (see tailwind.config.cjs). */
+  /* Hand-written hover rules are gated like the Tailwind ones (see tailwind.config.mjs). */
   @media (hover: hover) and (pointer: fine) {
     a:hover mark {
       background-color: rgba(0, 0, 0, 0.3);

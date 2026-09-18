@@ -7,8 +7,8 @@ import forms from '@tailwindcss/forms';
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
-  // Wrap every hover: utility in @media (hover: hover): touch browsers otherwise
-  // apply :hover on tap and it sticks to the last thing the finger touched.
+  // Wrap every hover: utility in @media (hover: hover) and (pointer: fine): touch browsers
+  // otherwise apply :hover on tap and it sticks to the last thing the finger touched.
   future: { hoverOnlyWhenSupported: true },
   theme: {
     screens: {
