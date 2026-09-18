@@ -2,7 +2,12 @@
 import siteData from '@config/siteData.json';
 ---
 
-<a class="primary-focus group/navlink py-2 text-xl" href="/" data-section="hero">
+<a
+  class="primary-focus group/navlink py-2 text-xl"
+  href="/"
+  data-section="hero"
+  aria-current={Astro.url.pathname === '/' ? 'page' : undefined}
+>
   <span class="navlink__underline-ltr inline">
     {siteData.author.name}
   </span>

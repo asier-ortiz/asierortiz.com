@@ -9,6 +9,9 @@ interface Props {
 const { navItem, class: className } = Astro.props as Props;
 const { text, href, label, newTab = false } = navItem;
 const sectionId = href.startsWith('/#') ? href.slice(2) : null;
+// A page link stays marked on the pages below it: '/ blog' on posts and tag pages.
+const { pathname } = Astro.url;
+const current = pathname === href ? 'page' : pathname.startsWith(href) ? 'true' : undefined;
 ---
 
 <li>
@@ -20,14 +23,12 @@ const sectionId = href.startsWith('/#') ? href.slice(2) : null;
     ]}
     href={href}
     data-section={sectionId}
+    aria-current={current}
     aria-label={label}
     target={newTab ? '_blank' : undefined}
     rel={newTab ? 'noopener noreferrer' : undefined}
   >
-    <span
-      class:list={['navlink__underline-ltr', Astro.url.pathname === href ? 'active-navlink' : '']}
-      >{text}</span
-    >
+    <span class:list={['navlink__underline-ltr', current && 'active-navlink']}>{text}</span>
   </a>
 </li>
 
