@@ -1,3 +1,16 @@
+## [1.70.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.69.1...v1.70.0) (2026-09-18)
+
+### Features
+
+* **home:** lead with the projects, academic background after ([eddae39](https://github.com/asier-ortiz/asierortiz.com/commit/eddae39b033d2d525362b71858389ba651756c3a))
+
+### Bug Fixes
+
+* **home:** section headings align when they wrap ([9d1f5a7](https://github.com/asier-ortiz/asierortiz.com/commit/9d1f5a7e6825bee545a3f16dee0d665a3c3d0622))
+* **home:** the Background heading wraps on narrow phones ([c269ff9](https://github.com/asier-ortiz/asierortiz.com/commit/c269ff9994c7cbbb1e0e8062f2c3c67c50f0e306))
+* **nav:** more room between Contact and the menu button ([3145766](https://github.com/asier-ortiz/asierortiz.com/commit/31457660e8e5f33c849d4f9ff3c196bbb9da976e))
+* **ui:** shooting stars pass behind the content, not over it ([ee35ba1](https://github.com/asier-ortiz/asierortiz.com/commit/ee35ba137205078816c305b6b266ae1beb623df4))
+
 ## [1.69.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.69.0...v1.69.1) (2026-09-18)
 
 ### Bug Fixes
