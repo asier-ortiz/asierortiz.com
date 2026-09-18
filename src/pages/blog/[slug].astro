@@ -121,12 +121,14 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
 </Layout>
 
 <script>
-  // Show the fade on a wide table only while there is something to scroll to.
+  // Fade each edge of a wide table only while there is something to scroll to on that side.
   document.querySelectorAll<HTMLElement>('.table-scroll').forEach((outer) => {
     const scroller = outer.querySelector<HTMLElement>('.table-wrap');
     if (!scroller) return;
-    const update = () =>
+    const update = () => {
+      outer.classList.toggle('has-less', scroller.scrollLeft > 1);
       outer.classList.toggle('has-more', scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 1);
+    };
     scroller.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();

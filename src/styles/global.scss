@@ -79,6 +79,32 @@
     }
   }
 
+  /* Like wide tables, code that runs past an edge fades out on that side, into the block's own
+     background (--code-bg, set by src/scripts/copy-code.js). The right fade is ::before so it
+     paints under the copy button, which comes later in the block. */
+  .code-block {
+    &::before,
+    &::after {
+      content: '';
+      @apply pointer-events-none absolute inset-y-0 w-12 opacity-0 transition-opacity duration-200;
+    }
+
+    &::before {
+      @apply right-0 rounded-r-md;
+      background: linear-gradient(to right, transparent, var(--code-bg));
+    }
+
+    &::after {
+      @apply left-0 rounded-l-md;
+      background: linear-gradient(to left, transparent, var(--code-bg));
+    }
+
+    &.has-more::before,
+    &.has-less::after {
+      @apply opacity-100;
+    }
+  }
+
   .copy-code-button {
     @apply absolute top-1 right-1 bg-primary-600 text-white p-3 rounded-md transition-opacity active:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
 

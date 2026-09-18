@@ -15,6 +15,16 @@ function addCopyButtonsToCodeBlocks() {
     pre.parentNode.insertBefore(wrapper, pre);
     wrapper.appendChild(pre);
 
+    // Edge fades while code is out of view on that side (styles in global.scss).
+    wrapper.style.setProperty('--code-bg', getComputedStyle(pre).backgroundColor);
+    const updateFades = () => {
+      wrapper.classList.toggle('has-less', pre.scrollLeft > 1);
+      wrapper.classList.toggle('has-more', pre.scrollLeft + pre.clientWidth < pre.scrollWidth - 1);
+    };
+    pre.addEventListener('scroll', updateFades, { passive: true });
+    window.addEventListener('resize', updateFades);
+    updateFades();
+
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.setAttribute('aria-label', 'Copy code to clipboard');
