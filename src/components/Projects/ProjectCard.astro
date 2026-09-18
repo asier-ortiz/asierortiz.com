@@ -93,22 +93,15 @@ const external = /^https?:\/\//.test(href ?? '');
   }
 </style>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // Zoom the card's gallery while the visitor hovers the action button
-    const buttons = document.querySelectorAll('.hover-button');
-    buttons.forEach((button) => {
-      const gallery = button.closest('.project-container')?.querySelector('.project-gallery');
-      if (button && gallery) {
-        // Mouse only: a tap would synthesise the enter and never the leave.
-        button.addEventListener('pointerenter', (event) => {
-          if (event.pointerType === 'mouse') gallery.classList.add('zoom');
-        });
-        button.addEventListener('pointerleave', () => {
-          gallery.classList.remove('zoom');
-        });
-      }
+<script>
+  // Zoom the card's gallery while a mouse hovers the action button. Mouse only: a tap would
+  // synthesise the enter and never the leave.
+  document.querySelectorAll<HTMLElement>('.hover-button').forEach((button) => {
+    const gallery = button.closest('.project-container')?.querySelector('.project-gallery');
+    if (!gallery) return;
+    button.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse') gallery.classList.add('zoom');
     });
+    button.addEventListener('pointerleave', () => gallery.classList.remove('zoom'));
   });
 </script>
