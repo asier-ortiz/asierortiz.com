@@ -2,21 +2,21 @@
   <div>
     <button
       @click="toggle"
-      class="group -my-2.5 inline-flex items-center gap-1 py-2.5 text-sm text-primary-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+      class="group -my-2.5 inline-flex items-center gap-1 py-2.5 text-sm text-primary-400 hover:underline active:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
       :aria-expanded="open.toString()"
       :aria-controls="contentId"
     >
       <span>{{ open ? 'Show less' : 'Show more' }}</span>
       <ChevronDown
         :class="[
-          'size-4 transition-transform duration-300',
+          'size-4 motion-safe:transition-transform motion-safe:duration-300',
           open ? 'rotate-180' : ''
         ]"
       />
     </button>
 
     <!-- v-show, not v-if, so every description is in the server HTML (for crawlers and no-JS). -->
-    <transition name="accordion">
+    <transition name="accordion" @enter="measure" @before-leave="measure">
       <div
         v-show="open"
         :id="contentId"
@@ -50,6 +50,9 @@ const contentId = props.contentId
 const toggle = () => {
   open.value = !open.value
 }
+
+// The accordion animates to the text's real height, so closing starts on the first frame.
+const measure = (el) => el.style.setProperty('--accordion-height', `${el.scrollHeight}px`)
 </script>
 
 <style scoped>
@@ -63,7 +66,13 @@ const toggle = () => {
 }
 .accordion-enter-to,
 .accordion-leave-from {
-  max-height: 500px;
+  max-height: var(--accordion-height);
+}
+@media (prefers-reduced-motion: reduce) {
+  .accordion-enter-active,
+  .accordion-leave-active {
+    transition: none;
+  }
 }
 .rotate-180 {
   transform: rotate(180deg);
