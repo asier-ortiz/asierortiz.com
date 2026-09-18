@@ -48,60 +48,83 @@ const shareLinks = [
     <SocialIcon href={share.link} social={share.platform} label={`Share on ${share.name}`} />
   ))}
 
-  <button
-    id="copy-link-btn"
-    aria-label="Copy link"
-    class="social-icon flex p-2.5 hover:text-primary-600 active:text-primary-600 active:duration-0 transition-colors"
-  >
-    <svg
-      id="copy-link-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      class="icon"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      stroke-width="2"
-      stroke="currentColor"
-      fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+  <span class="relative flex">
+    <button
+      id="copy-link-btn"
+      aria-label="Copy link"
+      class="social-icon flex p-2.5 hover:text-primary-600 active:text-primary-600 active:duration-0 transition-colors"
     >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M9 15l6 -6" />
-      <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
-      <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
-    </svg>
-    <svg
-      id="copy-link-check"
-      xmlns="http://www.w3.org/2000/svg"
-      class="icon hidden"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      stroke-width="2"
-      stroke="currentColor"
-      fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M5 12l5 5l10 -10" />
-    </svg>
-  </button>
+      <svg
+        id="copy-link-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M9 15l6 -6" />
+        <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+        <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+      </svg>
+      <svg
+        id="copy-link-check"
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon hidden text-primary-400"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M5 12l5 5l10 -10" />
+      </svg>
+    </button>
+    <!-- Same tooltip as the code copy buttons; a live region, so the outcome is announced too. -->
+    <span id="copy-link-status" role="status" class="copy-tooltip copy-tooltip-hidden"></span>
+  </span>
 </div>
 
 <script>
   const btn = document.getElementById('copy-link-btn');
   const linkIcon = document.getElementById('copy-link-icon');
   const checkIcon = document.getElementById('copy-link-check');
+  const status = document.getElementById('copy-link-status');
+
+  let resetTimer: ReturnType<typeof setTimeout> | undefined;
+  const show = (text: string, copied: boolean) => {
+    if (!status) return;
+    status.textContent = text;
+    status.classList.replace('copy-tooltip-hidden', 'copy-tooltip-visible');
+    linkIcon?.classList.toggle('hidden', copied);
+    checkIcon?.classList.toggle('hidden', !copied);
+    // A second tap restarts the 2 s instead of letting the first timer cut it short.
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => {
+      status.classList.replace('copy-tooltip-visible', 'copy-tooltip-hidden');
+      status.textContent = '';
+      linkIcon?.classList.remove('hidden');
+      checkIcon?.classList.add('hidden');
+    }, 2000);
+  };
 
   btn?.addEventListener('click', async () => {
-    await navigator.clipboard.writeText(window.location.href);
-    linkIcon?.classList.add('hidden');
-    checkIcon?.classList.remove('hidden');
-    setTimeout(() => {
-      checkIcon?.classList.add('hidden');
-      linkIcon?.classList.remove('hidden');
-    }, 2000);
+    try {
+      // The page's own address, like the share links: no #section or ?query picked up on the way.
+      await navigator.clipboard.writeText(location.origin + location.pathname);
+      show('Link copied', true);
+    } catch {
+      // Clipboard access can be refused (in-app browsers, insecure context, permissions).
+      show('Copy failed', false);
+    }
   });
 </script>

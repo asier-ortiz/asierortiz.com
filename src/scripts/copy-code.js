@@ -54,7 +54,11 @@ function addCopyButtonsToCodeBlocks() {
       }
     });
 
-    wrapper.addEventListener('mouseleave', hideTooltip);
+    // Only a mouse leaving hides it early: on touch, the next tap anywhere else fires a
+    // compatibility mouseleave that would cut the 2 s confirmation short.
+    wrapper.addEventListener('pointerleave', (event) => {
+      if (event.pointerType === 'mouse') hideTooltip();
+    });
   });
 }
 
