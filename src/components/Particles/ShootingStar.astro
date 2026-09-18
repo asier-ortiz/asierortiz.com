@@ -1,7 +1,9 @@
 ---
 ---
 
-<div id="shooting-stars-container" class="fixed inset-0 z-20 pointer-events-none overflow-hidden hidden md:block"></div>
+<!-- Same background layer as the star field (Particles.vue): stars cross the sky behind the
+     content, so screenshots, cards and text cover them instead of being crossed by them. -->
+<div id="shooting-stars-container" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden hidden md:block"></div>
 
 <style is:global>
   .shooting-star {
