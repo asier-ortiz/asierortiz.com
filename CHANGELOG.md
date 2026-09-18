@@ -1,3 +1,22 @@
+## [1.69.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.68.2...v1.69.0) (2026-09-18)
+
+### Features
+
+* **blog:** fade the edges of code blocks and wide tables ([a1fa0f6](https://github.com/asier-ortiz/asierortiz.com/commit/a1fa0f616a9b4d4adafeb1ac576988d660f7e599))
+* **nav:** mark the blog link on posts and tag pages ([0d200d4](https://github.com/asier-ortiz/asierortiz.com/commit/0d200d42d481118e1c36a7456403595a210cf7b1))
+
+### Bug Fixes
+
+* **a11y:** hover and press animations respect reduced motion ([6c5ebe3](https://github.com/asier-ortiz/asierortiz.com/commit/6c5ebe37c9e87a481a48a5b4dafaf6ea3dcdb3eb))
+* **blog:** enlarge diagrams only where zooming makes them bigger ([a3f0a67](https://github.com/asier-ortiz/asierortiz.com/commit/a3f0a67109ff931495d386e1a51605fd3ed9f068))
+* **blog:** mark the heading a table-of-contents link lands on ([73573d1](https://github.com/asier-ortiz/asierortiz.com/commit/73573d1b3a845ecd0118ba60c33704b719cc0e72))
+* **blog:** the phone keyboard's Go key opens the best match ([9f77db6](https://github.com/asier-ortiz/asierortiz.com/commit/9f77db6dc8fb35f0f843879289809fe51dc38713))
+* **nav:** the drawer closes when the page changes under it ([12c0173](https://github.com/asier-ortiz/asierortiz.com/commit/12c0173459e7e9d5f6ba6a1b79e7e68335dcd6f4))
+* **projects:** a thumb resting on a filter no longer looks like a choice ([1d2407c](https://github.com/asier-ortiz/asierortiz.com/commit/1d2407c4703bd957626cf36b25f633968bfde2ae))
+* **ui:** copy confirmations survive a tap and say what happened ([3d1b8d9](https://github.com/asier-ortiz/asierortiz.com/commit/3d1b8d98375466e2f5f5c0c3542a3c395c62a03e))
+* **ui:** leave room for the copy button wherever it is always shown ([11553ab](https://github.com/asier-ortiz/asierortiz.com/commit/11553ab054006a3da59d6d3e953d819428e5e106))
+* **ui:** press state and a 40px tap area on the remaining controls ([b8313e3](https://github.com/asier-ortiz/asierortiz.com/commit/b8313e37e9b855884d97ba3b6bd1a65a29e806d9))
+
 ## [1.68.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.68.1...v1.68.2) (2026-09-17)
 
 ### Bug Fixes
