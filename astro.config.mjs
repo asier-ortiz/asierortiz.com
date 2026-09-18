@@ -60,6 +60,9 @@ export default defineConfig({
     // off. The SVG pass keeps role="img" on the diagrams, which svgo strips by default.
     compress({
       Image: false,
+      // astro-compress targets iOS 18.5, so lightningcss rewrites min-width queries into range
+      // syntax that Safari before 16.4 ignores (iPhone 6s/7 and macOS Catalina stop at 15).
+      CSS: { lightningcss: { targets: { ios_saf: 15 << 16, safari: 15 << 16 } } },
       HTML: {
         'html-minifier-terser': {
           // Vue renders a closed v-if as an empty comment and looks for it when hydrating, so the
