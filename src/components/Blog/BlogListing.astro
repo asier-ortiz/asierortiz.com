@@ -90,17 +90,22 @@ const searchIndex = allPosts.map((post) => ({
         >
           All
         </a>
-        {allTags.map((tag, index) => (
-          <a
-            href={`/blog/tag/${tag}/`}
-            class:list={['button button--chip', { 'button--chip-active': activeTag === tag, hidden: isHidden(tag, index) }]}
-            aria-current={activeTag === tag ? 'page' : undefined}
-            data-tag={tag}
-            data-tag-extra={isHidden(tag, index) ? '' : undefined}
-          >
-            #{tag}
-          </a>
-        ))}
+        {allTags.map((tag, index) => {
+          // Without in-page filtering (a tag page), the selected chip links back to every post, as a
+          // second tap does on /blog/. It no longer points at this page, so it is not aria-current.
+          const clears = activeTag === tag && !filterable;
+          return (
+            <a
+              href={clears ? '/blog/' : `/blog/tag/${tag}/`}
+              class:list={['button button--chip', { 'button--chip-active': activeTag === tag, hidden: isHidden(tag, index) }]}
+              aria-current={activeTag === tag && !clears ? 'page' : undefined}
+              data-tag={tag}
+              data-tag-extra={isHidden(tag, index) ? '' : undefined}
+            >
+              #{tag}{clears && <span class="sr-only"> (clear filter)</span>}
+            </a>
+          );
+        })}
         {collapsed && (
           <button
             type="button"
@@ -213,7 +218,7 @@ const searchIndex = allPosts.map((post) => ({
     if (moreButton) {
       const extras = document.querySelectorAll<HTMLElement>('#tag-filters [data-tag-extra]');
       const moreLabel = moreButton.textContent;
-      moreButton.addEventListener('click', () => {
+      moreButton.addEventListener('click', (event) => {
         const expand = moreButton.getAttribute('aria-expanded') !== 'true';
         // A selected tag stays visible when folding, so the active filter is never hidden.
         extras.forEach((chip) => {
@@ -222,7 +227,8 @@ const searchIndex = allPosts.map((post) => ({
         });
         moreButton.setAttribute('aria-expanded', String(expand));
         moreButton.textContent = expand ? 'Fewer tags' : moreLabel;
-        if (expand) extras[0]?.focus();
+        // Keyboard activation (detail 0) moves on to the chips it revealed; a tap leaves focus alone.
+        if (expand && event.detail === 0) extras[0]?.focus();
       });
     }
   </script>

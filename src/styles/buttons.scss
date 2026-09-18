@@ -63,8 +63,18 @@
   @apply bg-primary-500 text-white;
 }
 
+/* A tag page stays up until the next one arrives: the tapped chip (data-pressed, pressed-links.js) takes
+   the selected look at once and the current selection lets go of it, as when /blog/ filters in place. */
+.button--chip[data-pressed] {
+  @apply bg-primary-500 text-white duration-0;
+}
+
+:has(> .button--chip[data-pressed]) > .button--chip-active {
+  @apply bg-base-800 text-primary-400 duration-0;
+}
+
 .button--chip-muted {
-  @apply bg-transparent border border-base-700 text-base-300 hover:bg-base-800 hover:text-base-100;
+  @apply bg-transparent border border-base-700 text-base-300 hover:bg-base-800 hover:text-base-100 active:bg-base-800 active:text-base-100;
 }
 
 .scroll-to-top {
