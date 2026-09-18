@@ -79,7 +79,7 @@
   }
 
   .copy-code-button {
-    @apply absolute top-1 right-1 bg-primary-600 text-white p-3 rounded-md transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
+    @apply absolute top-1 right-1 bg-primary-600 text-white p-3 rounded-md transition-opacity active:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
 
     /* Revealed by hovering the block where hovering exists; always shown on touch. */
     @media (hover: hover) and (pointer: fine) {

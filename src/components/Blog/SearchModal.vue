@@ -231,7 +231,7 @@ const highlightMatch = (post, field) => {
           type="button"
           @click="resetSearch"
           aria-label="Close search"
-          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-base-400 hover:bg-base-800 hover:text-white active:bg-base-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-base-400 hover:bg-base-800 hover:text-white active:bg-base-800 active:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M18 6L6 18" /><path d="M6 6l12 12" />

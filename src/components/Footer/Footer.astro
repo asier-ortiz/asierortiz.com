@@ -10,19 +10,20 @@ const today = new Date();
     <div class="flex items-center">
       <SocialCloud />
     </div>
+    <!-- The 20px-tall text links reach a 40px tap area through ::before. -->
     <div class="description font-sans text-sm">
       &copy; {today.getFullYear()}
       {' '}{siteData.name}. All rights reserved.
       <span aria-hidden="true" class="mx-1">·</span>
       <a
         href={`mailto:${siteData.author.email}`}
-        class="primary-focus underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400"
+        class="primary-focus relative underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400 active:text-base-200 active:decoration-primary-400 before:absolute before:-inset-x-1 before:-inset-y-2.5 before:content-['']"
         >{siteData.author.email}</a
       >
       <span aria-hidden="true" class="mx-1">·</span>
       <a
         href="/privacy/"
-        class="primary-focus underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400"
+        class="primary-focus relative underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400 active:text-base-200 active:decoration-primary-400 before:absolute before:-inset-x-1 before:-inset-y-2.5 before:content-['']"
         >Privacy</a
       >
     </div>

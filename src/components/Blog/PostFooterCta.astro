@@ -34,11 +34,13 @@ const replyHref = `mailto:${siteData.author.email}?subject=${encodeURIComponent(
     >
       Subscribe
     </Button>
+    <!-- The reply link's ::before gives it a 40px tap area; nowrap keeps it on one line,
+         since a link split over two lines would stretch that area across both. -->
     <p class="description text-pretty">
       Spotted a mistake, or want to talk about this?
       <a
         href={replyHref}
-        class="primary-focus underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400"
+        class="primary-focus relative whitespace-nowrap underline decoration-base-600 underline-offset-4 hover:text-base-200 hover:decoration-primary-400 active:text-base-200 active:decoration-primary-400 before:absolute before:-inset-x-1 before:-inset-y-2.5 before:content-['']"
         >Reply by email.</a
       >
     </p>

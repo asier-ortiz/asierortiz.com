@@ -29,6 +29,7 @@ const duration = `${items.length * secondsPerItem}s`;
   so the last frame equals the first. One copy must be wider than the viewport.
   The second copy is aria-hidden and removed entirely under prefers-reduced-motion.
   The pause checkbox must precede the viewport and the toggle: the pause rules rely on `~`.
+  The toggle draws at 28px; its ::before stretches the tap area to 40px.
 -->
 <section
   class:list={['stack-marquee flex items-center gap-2', className]}
@@ -48,7 +49,7 @@ const duration = `${items.length * secondsPerItem}s`;
   </div>
   <label
     for={`${id}-pause`}
-    class="stack-marquee__toggle grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-base-500 transition-colors duration-300 hover:text-base-200"
+    class="stack-marquee__toggle relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-base-500 transition-colors duration-300 hover:text-base-200 active:bg-base-800 active:text-base-200 active:duration-0 before:absolute before:-inset-1.5 before:content-['']"
   >
     <Icon name="tdesign:pause" class="stack-marquee__icon-pause size-4" aria-hidden="true" />
     <Icon name="tdesign:play" class="stack-marquee__icon-play hidden size-4" aria-hidden="true" />

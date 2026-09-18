@@ -59,7 +59,7 @@ const hasPosts = computed(() => props.posts.length > 0);
     <button
       type="button"
       @click="openModal"
-      class="filter-btn relative flex items-center gap-2 rounded-full bg-primary-500 px-3 py-2 text-xs font-medium text-black transition hover:bg-primary-400 before:absolute before:-inset-1 before:content-['']"
+      class="filter-btn relative flex items-center gap-2 rounded-full bg-primary-500 px-3 py-2 text-xs font-medium text-black transition hover:bg-primary-400 active:bg-primary-400 active:duration-0 before:absolute before:-inset-1 before:content-['']"
       :aria-label="mounted ? `Search posts (${isMac ? 'Command + K' : 'Control + K'})` : 'Search posts'"
     >
       <Search class="h-4 w-4" />

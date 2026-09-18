@@ -18,7 +18,7 @@
 
 .button--secondary {
   @apply border border-base-500 bg-base-800;
-  @apply hover:border-primary-500 active:border-primary-500;
+  @apply hover:border-primary-500 hover:bg-base-700 active:border-primary-500 active:bg-base-700;
   @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
 }
 
@@ -84,6 +84,18 @@
 
   &.hiding {
     @apply translate-x-full;
+  }
+
+  /* Only the colours skip the transition on press: a slide-out that starts mid-press still
+     animates, and reduced motion keeps transitions off. */
+  &:active {
+    @apply bg-primary-500 text-base-800;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:active {
+      transition-property: opacity, transform;
+    }
   }
 
   @media (max-width: 639px) {
