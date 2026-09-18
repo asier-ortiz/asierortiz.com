@@ -41,8 +41,6 @@ export default defineConfig({
     },
   },
   site: 'https://asierortiz.com',
-  // Only links marked data-astro-prefetch (the blog pager) are prefetched.
-  prefetch: true,
   trailingSlash: 'ignore',
   integrations: [
     vue(),

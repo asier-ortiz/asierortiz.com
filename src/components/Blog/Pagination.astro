@@ -22,7 +22,6 @@ const { pagination } = Astro.props;
             arrow="left"
             href={pagination.prevUrl}
             rel="prev"
-            data-astro-prefetch
             class="min-h-[44px]"
           >
             Newer<span class="sr-only"> posts</span>
@@ -39,7 +38,6 @@ const { pagination } = Astro.props;
             arrow="right"
             href={pagination.nextUrl}
             rel="next"
-            data-astro-prefetch
             class="min-h-[44px]"
           >
             Older<span class="sr-only"> posts</span>
