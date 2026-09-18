@@ -15,7 +15,7 @@ import siteData from '@config/siteData.json';
 
 <style lang="scss">
   .navlink__underline-ltr {
-    @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover/navlink:bg-[length:100%_2px];
+    @apply bg-gradient-to-r from-primary-600 to-primary-600 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover/navlink:bg-[length:100%_2px] motion-reduce:transition-none;
   }
 
   .active-navlink {

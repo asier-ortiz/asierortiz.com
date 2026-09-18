@@ -224,6 +224,10 @@
     background-size: 0% 2px;
     background-position: left bottom;
     transition: background-size 300ms;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }
 

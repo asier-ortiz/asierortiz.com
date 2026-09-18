@@ -35,7 +35,7 @@ const sizes =
     loading={priority ? 'eager' : 'lazy'}
     fetchpriority={priority ? 'high' : undefined}
     decoding={priority ? 'sync' : 'async'}
-    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105"
+    class="absolute inset-0 w-full h-full object-cover motion-safe:group-hover:scale-105"
     style="transition: transform 0.3s ease-in-out;"
   />
 </div>
