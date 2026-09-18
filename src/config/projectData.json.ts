@@ -18,7 +18,8 @@ export interface ProjectItem {
   images: GalleryFrame[];
   title: string;
   description: string;
-  href?: URL;
+  /** A same-site path such as /blog/<slug>/, or an absolute URL, which opens in a new tab. */
+  href?: string;
   languages: Language[];
   type: string | string[];
   buttonText: string;
@@ -81,7 +82,7 @@ export const projectData: ProjectItem[] = [
     Features real-time GPS tracking with automatic road and kilometer-point detection, incident and emergency reporting with photos,
     voice commands for hands-free operation, biometric authentication, and automatic sync when connectivity is restored.
     `,
-    href: new URL('https://asierortiz.com/blog/building-offline-first-android-field-ops/'),
+    href: '/blog/building-offline-first-android-field-ops/',
     languages: [
       { language: 'Kotlin', color: '#A97BFF' },
       { language: 'Jetpack Compose', color: '#4285F4' },
@@ -110,7 +111,7 @@ export const projectData: ProjectItem[] = [
     a complex shift coordination calendar, automated weather alerts via WebSockets, document generation,
     multi-factor authentication with role-based access, and a responsive UI.
     `,
-    href: new URL('https://asierortiz.com/blog/schema-only-existed-in-production/'),
+    href: '/blog/schema-only-existed-in-production/',
     languages: [
       { language: 'Angular', color: '#DD0031' },
       { language: 'TypeScript', color: '#3178C6' },
@@ -139,7 +140,7 @@ export const projectData: ProjectItem[] = [
     address geocoding with service-area validation, tracking references for every report,
     and automatic forwarding to the cleaning contractor's incident platform.
     `,
-    href: new URL('https://asierortiz.com/blog/whatsapp-as-the-front-end/'),
+    href: '/blog/whatsapp-as-the-front-end/',
     languages: [
       { language: 'Python', color: '#3776AB' },
       { language: 'FastAPI', color: '#009688' },
@@ -163,7 +164,7 @@ export const projectData: ProjectItem[] = [
     description: `A hybrid mobile app for discovering local shops, producers, and services across the province of Álava.
     Features an interactive map, business directory organized by districts, and a promotional voucher system to boost local commerce.
     `,
-    href: new URL('https://apps.apple.com/es/app/arabamarket/id1574698689/'),
+    href: 'https://apps.apple.com/es/app/arabamarket/id1574698689/',
     languages: [
       { language: 'Ionic', color: '#3880FF' },
       { language: 'Vue', color: '#41B883' },

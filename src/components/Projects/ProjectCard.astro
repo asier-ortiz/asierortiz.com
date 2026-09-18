@@ -10,6 +10,8 @@ interface Props extends ProjectItem {
 
 const { images, title, description, href, languages, type, buttonText, buttonIcon, ...rest } =
   Astro.props as Props;
+// A write-up on this site stays in the tab, so it cross-fades and Back returns to the card.
+const external = /^https?:\/\//.test(href ?? '');
 ---
 
 <div
@@ -41,8 +43,8 @@ const { images, title, description, href, languages, type, buttonText, buttonIco
           variant="ghost"
           href={href}
           arrow="right"
-          target="_blank"
-          rel="noopener noreferrer"
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
           class="hover-button"
         >
           {buttonIcon && <Icon name={buttonIcon} class="h-5 w-5 mr-2" aria-hidden="true" />}
