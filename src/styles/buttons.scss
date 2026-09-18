@@ -48,11 +48,6 @@
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-900;
 }
 
-.button--active {
-  @apply bg-primary-500 text-white;
-  @apply border-primary-500;
-}
-
 .button--chip {
   @apply relative px-3 py-2 text-xs rounded-full bg-base-800 text-primary-400 hover:bg-primary-500 hover:text-white active:bg-primary-500 active:text-white;
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-0;

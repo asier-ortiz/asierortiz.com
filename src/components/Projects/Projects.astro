@@ -18,20 +18,25 @@ import Button from '@components/Button/Button.astro';
       </p>
     </div>
     <div class="mx-auto mt-10 max-w-lg md:mt-10 md:max-w-full min-h-[600px]">
+      <!-- aria-pressed drives the selected look. The press is grey, so a thumb resting on a filter
+           while scrolling never looks like a selection. -->
       <div class="flex flex-wrap gap-2">
         <Button
           variant="ghost"
-          class="filter-button button--active w-full sm:w-auto"
+          class="filter-button active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
+          aria-pressed="true"
           data-filter="all">All</Button
         >
         <Button
           variant="ghost"
-          class="filter-button w-full sm:w-auto"
+          class="filter-button active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
+          aria-pressed="false"
           data-filter="mobile & web development">Mobile & Web Development</Button
         >
         <Button
           variant="ghost"
-          class="filter-button w-full sm:w-auto"
+          class="filter-button active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
+          aria-pressed="false"
           data-filter="data science & machine learning">Data Science & Machine Learning</Button
         >
       </div>
@@ -83,8 +88,7 @@ import Button from '@components/Button/Button.astro';
           noProjectsMessage.classList.add('hidden');
         }
 
-        buttons.forEach((btn) => btn.classList.remove('button--active'));
-        button.classList.add('button--active');
+        buttons.forEach((btn) => btn.setAttribute('aria-pressed', String(btn === button)));
       });
     });
   });
