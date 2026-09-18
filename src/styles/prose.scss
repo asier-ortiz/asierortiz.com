@@ -27,6 +27,12 @@
   @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:font-medium;
   @apply prose-p:my-4;
 
+  /* The heading a table-of-contents link (or a shared #link) points at. It follows the URL, so it
+     stays right after Back and Forward; colour only, since shared links match it too. */
+  :is(h2, h3):target {
+    @apply text-primary-300;
+  }
+
   /* Long text description under a diagram, folded by default. */
   .figure-description {
     @apply -mt-4 mb-8 text-sm;
