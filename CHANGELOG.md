@@ -1,3 +1,9 @@
+## [1.71.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.71.0...v1.71.1) (2026-09-19)
+
+### Bug Fixes
+
+* **home:** the Background section appears after filtering the projects ([487790d](https://github.com/asier-ortiz/asierortiz.com/commit/487790d698931bbd49d4dac9f674c9fb01b19104))
+
 ## [1.71.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.70.0...v1.71.0) (2026-09-18)
 
 ### Features
