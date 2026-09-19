@@ -1,3 +1,9 @@
+## [1.71.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.70.0...v1.71.0) (2026-09-18)
+
+### Features
+
+* **home:** the hero says what I work on and how ([d2ddf1a](https://github.com/asier-ortiz/asierortiz.com/commit/d2ddf1a8cc12b7a49512a90a7d0cc1553e3a1f85))
+
 ## [1.70.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.69.1...v1.70.0) (2026-09-18)
 
 ### Features
