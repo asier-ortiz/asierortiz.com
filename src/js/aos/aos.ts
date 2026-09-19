@@ -98,7 +98,7 @@ const recalculatePositions = function recalculate() {
     aosElements.forEach((el, i) => {
       el.position = {
         in: getPositionIn(el.node, options.offset, options.anchorPlacement),
-        out: options.mirror && getPositionOut(el.node, options.offset),
+        out: el.options?.mirror && getPositionOut(el.node, options.offset),
       };
     });
     // Perform scroll event, to refresh view and show/hide elements
@@ -159,7 +159,7 @@ const isDisabled = function (optionDisable) {
  * - Create options merging defaults with user defined options
  * - Set attributes on <body> as global setting - css relies on it
  * - Attach preparing elements to options.startEvent,
- *   window resize and orientation change
+ *   window resize, orientation change and document height change
  * - Attach function that handle scroll and everything connected to it
  *   to window scroll event and fire once document is ready to set initial state
  */
@@ -223,6 +223,14 @@ const init = function init(settings?: Partial<AOSDefaultOptions>) {
     'orientationchange',
     debounce(recalculatePositions, options.debounceDelay, true)
   );
+
+  /**
+   * Recalculate them as well when the document changes height on its own (cards hidden by a filter,
+   * a toggle opening, a late font swap): an element further down would otherwise keep waiting for
+   * a scroll position the page may no longer reach.
+   * Animations only change opacity and transform, so they never feed the observer.
+   */
+  new ResizeObserver(debounce(recalculatePositions, options.debounceDelay)).observe(document.body);
 
   return aosElements;
 };
