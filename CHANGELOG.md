@@ -1,3 +1,9 @@
+## [1.71.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.71.1...v1.71.2) (2026-09-20)
+
+### Bug Fixes
+
+* **blog:** diagrams stay legible outside the site ([b5c27c7](https://github.com/asier-ortiz/asierortiz.com/commit/b5c27c7754cf08361018f769dd5f587c8db5ec81))
+
 ## [1.71.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.71.0...v1.71.1) (2026-09-19)
 
 ### Bug Fixes
