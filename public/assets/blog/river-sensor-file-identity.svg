@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440" role="img" aria-labelledby="title desc">
   <title id="title">One file, two claims, four pieces of evidence, three verdicts</title>
   <style>
+    /* Opaque page colour: the figure stays legible outside the site (own tab, feed readers). */
+    svg { background: #0a0a0a; }
     .box { fill: #171717; stroke: #404040; stroke-width: 1; }
     .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
     .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
@@ -21,6 +23,8 @@
       <path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" />
     </marker>
   </defs>
+
+  <rect width="100%" height="100%" fill="#0a0a0a" />
 
   <!-- Column titles -->
   <text class="k" x="20" y="30">The file</text>

@@ -8,7 +8,9 @@ const MARGIN = 64
 const MIN_SCALE = 1.2
 
 onMounted(() => {
-  const zoom = mediumZoom({ background: '#000', margin: MARGIN })
+  // The page colour (base-950), which the SVG figures also carry as their own background: on any
+  // other overlay colour an enlarged figure shows as a box.
+  const zoom = mediumZoom({ background: '#0a0a0a', margin: MARGIN })
   const figures = [...document.querySelectorAll('.prose img[data-zoomable]')]
 
   // medium-zoom only listens for clicks; a zoomable figure also opens with Enter or Space.
