@@ -1,3 +1,9 @@
+## [1.72.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.71.2...v1.72.0) (2026-09-22)
+
+### Features
+
+* **blog:** publish "Judgment Debt: Shipping Faster Than We Learn" ([5bf2200](https://github.com/asier-ortiz/asierortiz.com/commit/5bf22004d06bdd1eb59372eacb51512ef96dd79d))
+
 ## [1.71.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.71.1...v1.71.2) (2026-09-20)
 
 ### Bug Fixes
