@@ -8,6 +8,7 @@ import FlareWatch from '@images/projects/flarewatch.webp';
 import VGarbi from '@images/projects/vgarbi.webp';
 
 export interface GalleryFrame {
+  /** Shown in a 4:3 box that the image covers: export at 4:3, or keep background on the long sides. */
   src: ImageMetadata;
   /** What the screenshot shows; the project name is already the heading next to it. */
   alt: string;

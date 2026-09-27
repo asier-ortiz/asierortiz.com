@@ -7,11 +7,15 @@
  * The rotation is skipped when the visitor prefers reduced motion or when site
  * animations are disabled (the `use-animations` class on <body>, same rule AOS uses).
  *
+ * Every gallery is a 4:3 box and the frames cover it, so the cards in a grid row keep
+ * their images the same height whatever the screenshots' own proportions are. The
+ * screenshots are device mockups with wide margins, so the crop only takes background.
+ *
  * The first frame loads eagerly so the gallery is complete when the visitor reaches it,
  * but at low priority so it never competes with the hero, fonts and CSS. Candidates are
  * sized to the rendered card (measured 322px on phones, 452px on desktop).
  */
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import type { GalleryFrame } from '@config/projectData.json';
 
 interface Props {
@@ -22,18 +26,9 @@ interface Props {
 }
 
 const { images, interval = 7000, class: className = '' } = Astro.props;
-const [first] = images;
-// Reading width/height off the imported original would mark it as used and ship the
-// full-size file; the smallest candidate (already generated for the srcset) has the ratio.
-const thumb = await getImage({ src: first.src, width: 480 });
 ---
 
-<div
-  class:list={['project-gallery', className]}
-  style={`aspect-ratio: ${thumb.attributes.width} / ${thumb.attributes.height};`}
-  data-interval={interval}
-  aria-live="off"
->
+<div class:list={['project-gallery', className]} data-interval={interval} aria-live="off">
   {
     images.map((image, index) => (
       <Image
@@ -56,6 +51,7 @@ const thumb = await getImage({ src: first.src, width: 480 });
   .project-gallery {
     position: relative;
     width: 100%;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     border-radius: 0.25rem;
     transition: transform 0.4s ease-in-out;
