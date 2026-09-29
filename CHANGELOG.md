@@ -1,3 +1,10 @@
+## [1.72.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.1...v1.72.2) (2026-09-29)
+
+### Bug Fixes
+
+* **home:** the projects and Background sections appear sooner on scroll ([cb76b8c](https://github.com/asier-ortiz/asierortiz.com/commit/cb76b8cab92487c05e9121579b0434c9f4b4f9cd))
+* **home:** the projects and Background sections show without JavaScript ([2592965](https://github.com/asier-ortiz/asierortiz.com/commit/2592965bcd1a00e305b6957e2cdc790025a328cd))
+
 ## [1.72.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.0...v1.72.1) (2026-09-27)
 
 ### Bug Fixes
