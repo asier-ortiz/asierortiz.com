@@ -1,3 +1,9 @@
+## [1.72.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.0...v1.72.1) (2026-09-27)
+
+### Bug Fixes
+
+* **projects:** images in a row match in height ([5cbb4c8](https://github.com/asier-ortiz/asierortiz.com/commit/5cbb4c871da135ca6844cdcf5d7519e85efbc9bc))
+
 ## [1.72.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.71.2...v1.72.0) (2026-09-22)
 
 ### Features
