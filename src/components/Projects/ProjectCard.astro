@@ -12,6 +12,8 @@ const { images, title, description, href, languages, type, buttonText, buttonIco
   Astro.props as Props;
 // A write-up on this site stays in the tab, so it cross-fades and Back returns to the card.
 const external = /^https?:\/\//.test(href ?? '');
+// Titles are unique on the page, so they make the gallery's id.
+const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
 ---
 
 <div
@@ -20,7 +22,7 @@ const external = /^https?:\/\//.test(href ?? '');
   {...rest}
 >
   <div class="mx-auto w-full max-w-4xl image-container">
-    <ProjectGallery images={images} />
+    <ProjectGallery images={images} id={galleryId} />
   </div>
   <div class="mt-4 flex flex-grow flex-col justify-between">
     <div>

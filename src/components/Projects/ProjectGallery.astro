@@ -6,6 +6,9 @@
  * while the gallery is on screen. With a single frame it is a plain image.
  * The rotation is skipped when the visitor prefers reduced motion or when site
  * animations are disabled (the `use-animations` class on <body>, same rule AOS uses).
+ * While it rotates, a switch in the corner pauses it until switched back (WCAG 2.2.2
+ * asks for a way to stop content that moves on its own); a mouse over the gallery only
+ * holds it while there.
  *
  * Every gallery is a 4:3 box and the frames cover it, so the cards in a grid row keep
  * their images the same height whatever the screenshots' own proportions are. The
@@ -16,16 +19,19 @@
  * sized to the rendered card (measured 322px on phones, 452px on desktop).
  */
 import { Image } from 'astro:assets';
+import PauseSwitch from '@components/Button/PauseSwitch.astro';
 import type { GalleryFrame } from '@config/projectData.json';
 
 interface Props {
   images: GalleryFrame[];
+  /** Must be unique per page: it feeds the pause switch id. */
+  id: string;
   /** Milliseconds each frame stays visible. */
   interval?: number;
   class?: string;
 }
 
-const { images, interval = 7000, class: className = '' } = Astro.props;
+const { images, id, interval = 7000, class: className = '' } = Astro.props;
 ---
 
 <div class:list={['project-gallery', className]} data-interval={interval} aria-live="off">
@@ -44,6 +50,18 @@ const { images, interval = 7000, class: className = '' } = Astro.props;
         decoding={index === 0 ? 'auto' : 'async'}
       />
     ))
+  }
+  {/* Hidden until the script sets up the rotation, the only case where anything moves. */}
+  {
+    images.length > 1 && (
+      <PauseSwitch
+        id={`${id}-pause`}
+        label="Pause slideshow"
+        variant="overlay"
+        class="absolute bottom-2 right-2"
+        hidden
+      />
+    )
   }
 </div>
 
@@ -88,14 +106,15 @@ const { images, interval = 7000, class: className = '' } = Astro.props;
 
   function setupGallery(gallery: HTMLElement) {
     const frames = Array.from(gallery.querySelectorAll<HTMLElement>('.project-gallery__frame'));
-    if (frames.length < 2) return;
+    const pauseSwitch = gallery.querySelector<HTMLInputElement>('.pause-switch__input');
+    if (frames.length < 2 || !pauseSwitch) return;
     if (reducedMotion.matches || !document.body.classList.contains('use-animations')) return;
 
     const interval = Number(gallery.dataset.interval) || 7000;
     let index = 0;
     let timer: number | undefined;
     let visible = false;
-    let paused = false;
+    let hovered = false;
 
     // Only the visible frame is exposed to assistive tech; the stacked ones stay hidden.
     const show = (next: number) => {
@@ -106,44 +125,42 @@ const { images, interval = 7000, class: className = '' } = Astro.props;
       frames[index].removeAttribute('aria-hidden');
     };
 
-    const start = () => {
-      if (timer !== undefined || !visible || paused || document.hidden) return;
-      timer = window.setInterval(() => show((index + 1) % frames.length), interval);
+    // Rotate only while the card is on screen in a visible tab and nothing holds it: the pause
+    // switch, a mouse over the gallery, or reduced motion turned on mid-visit.
+    const sync = () => {
+      const rotate =
+        visible && !hovered && !pauseSwitch.checked && !document.hidden && !reducedMotion.matches;
+      if (rotate && timer === undefined) {
+        timer = window.setInterval(() => show((index + 1) % frames.length), interval);
+      } else if (!rotate && timer !== undefined) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
     };
 
-    const stop = () => {
-      if (timer === undefined) return;
-      window.clearInterval(timer);
-      timer = undefined;
-    };
-
-    // Rotate only while the card is actually on screen.
     new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
-        visible ? start() : stop();
+        sync();
       },
       { threshold: 0.4 }
     ).observe(gallery);
 
-    // Hold the current frame while the visitor is looking at or interacting with the card.
-    const pause = () => {
-      paused = true;
-      stop();
-    };
-    const resume = () => {
-      paused = false;
-      start();
-    };
-    // Mouse only: a tap would pause the rotation until the next tap elsewhere.
+    // Mouse only: touch has no hover to hold the rotation with.
     gallery.addEventListener('pointerenter', (event) => {
-      if (event.pointerType === 'mouse') pause();
+      if (event.pointerType !== 'mouse') return;
+      hovered = true;
+      sync();
     });
-    gallery.addEventListener('pointerleave', resume);
-    gallery.addEventListener('focusin', pause);
-    gallery.addEventListener('focusout', resume);
+    gallery.addEventListener('pointerleave', () => {
+      hovered = false;
+      sync();
+    });
+    pauseSwitch.addEventListener('change', sync);
+    reducedMotion.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
 
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    pauseSwitch.closest<HTMLElement>('.pause-switch')?.removeAttribute('hidden');
   }
 
   document.querySelectorAll<HTMLElement>('.project-gallery').forEach(setupGallery);

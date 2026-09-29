@@ -6,11 +6,19 @@ interface Props {
   id: string;
   /** Screen reader name of the switch; on means paused. */
   label?: string;
+  /** 'overlay' adds a dark backdrop, for a switch drawn on top of an image. */
+  variant?: 'plain' | 'overlay';
   class?: string;
   rest?: any;
 }
 
-const { id, label = 'Pause animation', class: className, ...rest } = Astro.props as Props;
+const {
+  id,
+  label = 'Pause animation',
+  variant = 'plain',
+  class: className,
+  ...rest
+} = Astro.props as Props;
 ---
 
 <!--
@@ -22,7 +30,12 @@ const { id, label = 'Pause animation', class: className, ...rest } = Astro.props
   <input id={id} type="checkbox" role="switch" class="pause-switch__input sr-only" />
   <label
     for={id}
-    class="pause-switch__toggle relative grid size-7 cursor-pointer place-items-center rounded-full text-base-500 transition-colors duration-300 hover:text-base-200 active:bg-base-800 active:text-base-200 active:duration-0 before:absolute before:-inset-1.5 before:content-['']"
+    class:list={[
+      "pause-switch__toggle relative grid size-7 cursor-pointer place-items-center rounded-full transition-colors duration-300 active:bg-base-800 active:duration-0 before:absolute before:-inset-1.5 before:content-['']",
+      variant === 'overlay'
+        ? 'bg-base-950/70 text-base-200 hover:text-white active:text-white'
+        : 'text-base-500 hover:text-base-200 active:text-base-200',
+    ]}
   >
     <Icon name="tdesign:pause" class="pause-switch__icon-pause size-4" aria-hidden="true" />
     <Icon name="tdesign:play" class="pause-switch__icon-play hidden size-4" aria-hidden="true" />
