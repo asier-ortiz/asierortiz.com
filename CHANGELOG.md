@@ -1,3 +1,10 @@
+## [1.72.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.2...v1.72.3) (2026-09-29)
+
+### Bug Fixes
+
+* **home:** only the current timeline item pulses ([22680ff](https://github.com/asier-ortiz/asierortiz.com/commit/22680ffc20fabbd2147fbe0b14ec0e63b1679a34))
+* **projects:** the rotating gallery can be paused ([f860f4b](https://github.com/asier-ortiz/asierortiz.com/commit/f860f4bcec2ebe3e382c68d90b62fc4bf974b15a))
+
 ## [1.72.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.1...v1.72.2) (2026-09-29)
 
 ### Bug Fixes
