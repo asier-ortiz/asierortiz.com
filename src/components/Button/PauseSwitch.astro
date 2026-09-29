@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  /** Must be unique per page: the label points at the switch through it. */
+  id: string;
+  /** Screen reader name of the switch; on means paused. */
+  label?: string;
+  class?: string;
+  rest?: any;
+}
+
+const { id, label = 'Pause animation', class: className, ...rest } = Astro.props as Props;
+---
+
+<!--
+  A checkbox with role="switch" (checked = paused), so the state is exposed natively and CSS or
+  a script can read it. The label draws the control at 28px; its ::before stretches the tap
+  area to 40px. Hidden under reduced motion, where nothing moves.
+-->
+<div class:list={['pause-switch', className]} {...rest}>
+  <input id={id} type="checkbox" role="switch" class="pause-switch__input sr-only" />
+  <label
+    for={id}
+    class="pause-switch__toggle relative grid size-7 cursor-pointer place-items-center rounded-full text-base-500 transition-colors duration-300 hover:text-base-200 active:bg-base-800 active:text-base-200 active:duration-0 before:absolute before:-inset-1.5 before:content-['']"
+  >
+    <Icon name="tdesign:pause" class="pause-switch__icon-pause size-4" aria-hidden="true" />
+    <Icon name="tdesign:play" class="pause-switch__icon-play hidden size-4" aria-hidden="true" />
+    <span class="sr-only">{label}</span>
+  </label>
+</div>
+
+<style lang="scss">
+  .pause-switch__input:checked + .pause-switch__toggle {
+    .pause-switch__icon-pause {
+      display: none;
+    }
+
+    .pause-switch__icon-play {
+      display: block;
+    }
+  }
+
+  .pause-switch__input:focus-visible + .pause-switch__toggle {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-base-950;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pause-switch {
+      display: none;
+    }
+  }
+</style>
