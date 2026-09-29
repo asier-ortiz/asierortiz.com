@@ -57,10 +57,10 @@ import siteData from '@config/siteData.json';
      that starts at opacity 0 (the AOS fade-up, or a CSS fade) delays the LCP until the main
      thread is free again, measured at +0.8 s on a throttled phone. A slide alone keeps the
      motion cue while the text is painted, and counted, on the first frame. Same distance,
-     duration and easing as the AOS fade-up (15px, 0.75s, easeOutCubic). */
+     duration and easing as the AOS fade-up (15px, 0.6s, easeOutCubic). */
   @media (prefers-reduced-motion: no-preference) {
     :global(body.use-animations) .hero-enter {
-      animation: hero-enter 0.75s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+      animation: hero-enter 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) both;
     }
   }
 

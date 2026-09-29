@@ -192,7 +192,8 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
       if (siteData.useAnimations === true && typeof window !== 'undefined') {
         AOS.init({
           once: true,
-          duration: 0.75,
+          // Hero.astro's CSS entrance copies these two values and the default easeOutCubic.
+          duration: 0.6,
           distance: 15,
           // When disabled, AOS strips the data-aos attributes, so the hide rules
           // in src/styles/aos.scss stop matching and content stays visible.
