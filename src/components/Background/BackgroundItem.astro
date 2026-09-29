@@ -31,8 +31,12 @@ const { title, center, description, date, index, initialOpen } = Astro.props;
     border-image: linear-gradient(to bottom, #374151 14px, transparent 14px) 1;
   }
 
-  .bullet {
-    animation: scaleAnimation 2s infinite ease-in-out;
+  /* Only the newest entry, the one in progress, pulses. The gate lets motion in instead of
+     switching it off under reduce, which `.is-first .bullet` would outrank. */
+  @media (prefers-reduced-motion: no-preference) {
+    .is-first .bullet {
+      animation: scaleAnimation 2s infinite ease-in-out;
+    }
   }
 
   @keyframes scaleAnimation {
@@ -42,12 +46,6 @@ const { title, center, description, date, index, initialOpen } = Astro.props;
     }
     50% {
       transform: scale(1.2);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .bullet {
-      animation: none;
     }
   }
 </style>
