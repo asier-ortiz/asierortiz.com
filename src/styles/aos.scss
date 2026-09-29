@@ -31,7 +31,9 @@
    paint-before-JS window and any JS failure; the doubled attribute selector
    matches the (0,3,0) specificity of the hide rules above. Plain declarations
    on purpose: `@apply visible` would also pick up `.scroll-to-top.visible`
-   (buttons.scss) and emit a bogus re-rooted copy of that rule. */
+   (buttons.scss) and emit a bogus re-rooted copy of that rule. Layout.astro
+   repeats these declarations in a <noscript> style for visitors without
+   JavaScript. */
 @media (prefers-reduced-motion: reduce) {
   .use-animations [data-aos][data-aos] {
     visibility: visible;

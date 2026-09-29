@@ -154,6 +154,19 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
     <link rel="preload" href={poppins700} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={poppins400} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={serif400} as="font" type="font/woff2" crossorigin />
+
+    <!-- Without JavaScript the scroll entrances never play: show what src/styles/aos.scss hides
+         until they do (same declarations as its reduced-motion block). Astro links that
+         stylesheet after this tag, so `body` makes the selector outrank its hide rules. -->
+    <noscript>
+      <style is:inline>
+        body.use-animations [data-aos][data-aos] {
+          visibility: visible;
+          opacity: 1;
+          pointer-events: auto;
+        }
+      </style>
+    </noscript>
   </head>
 
   <body
