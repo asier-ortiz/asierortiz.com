@@ -44,28 +44,30 @@ import siteData from '@config/siteData.json.ts';
 <script>
   // Scroll-spy for the logo and the section links, header and drawer alike: underlines the link
   // of the section in view. Pages without section[id] keep their server-rendered underline.
+  const sections = document.querySelectorAll<HTMLElement>('section[id]');
+  const sectionLinks = document.querySelectorAll<HTMLElement>('[data-section]');
+  let activeSection: string | undefined;
+
   function highlightNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('[data-section] span');
-
-    if (!sections.length) return;
-
-    let index = sections.length;
-    while (--index && window.scrollY + 30 < sections[index].offsetTop) {}
-
-    navLinks.forEach((link) => link.classList.remove('active-navlink'));
-
-    if (sections[index]) {
-      const activeSection = sections[index].id;
-      document
-        .querySelectorAll(`[data-section="${activeSection}"] span`)
-        .forEach((link) => link.classList.add('active-navlink'));
+    // The last section whose top is at most 30px below the top of the window, else the first one.
+    let current = sections[0];
+    for (const section of sections) {
+      if (section.offsetTop <= window.scrollY + 30) current = section;
     }
+    // Scroll fires at most once per frame, and nearly every event stays in the same section.
+    if (current.id === activeSection) return;
+    activeSection = current.id;
+    sectionLinks.forEach((link) => {
+      const underline = link.querySelector('span');
+      underline?.classList.toggle('active-navlink', link.dataset.section === activeSection);
+    });
   }
 
-  highlightNavLink();
-  window.addEventListener('load', highlightNavLink);
-  window.addEventListener('scroll', highlightNavLink);
+  if (sections.length) {
+    highlightNavLink();
+    window.addEventListener('load', highlightNavLink);
+    window.addEventListener('scroll', highlightNavLink);
+  }
 
   // A nav link to the page already open (the logo on /, '/ blog' on /blog/) scrolls back to the
   // top instead of reloading it. Links to a #section keep the browser's own jump.
