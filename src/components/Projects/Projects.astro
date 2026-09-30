@@ -40,10 +40,10 @@ import Button from '@components/Button/Button.astro';
           data-filter="data science & machine learning">Data Science & Machine Learning</Button
         >
       </div>
-      <div data-aos="zoom-in-up" class="grid gap-x-4 gap-y-8 md:grid-cols-2 mt-6 project-container">
+      <div data-aos="zoom-in-up" class="grid gap-x-4 gap-y-8 md:grid-cols-2 mt-6">
         {
           projectData.map((project) => (
-            <ProjectCard {...project} class="project-card" />
+            <ProjectCard {...project} />
           ))
         }
       </div>

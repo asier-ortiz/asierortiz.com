@@ -17,7 +17,7 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
 ---
 
 <div
-  class="flex flex-col border-2 rounded border-base-700 p-4 project-container project-card"
+  class="flex flex-col border-2 rounded border-base-700 p-4 project-card"
   data-type={Array.isArray(type) ? type.join(',') : type}
   {...rest}
 >
@@ -83,7 +83,7 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
     margin-top: 1rem;
   }
 
-  .project-container {
+  .project-card {
     position: relative;
     overflow: hidden;
   }
@@ -96,10 +96,10 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
 </style>
 
 <script>
-  // Zoom the card's gallery while a mouse hovers the action button. Mouse only: a tap would
-  // synthesise the enter and never the leave.
+  // Zoom the card's gallery while a mouse hovers the action button. Mouse only: touch has no
+  // hover to zoom on.
   document.querySelectorAll<HTMLElement>('.hover-button').forEach((button) => {
-    const gallery = button.closest('.project-container')?.querySelector('.project-gallery');
+    const gallery = button.closest('.project-card')?.querySelector('.project-gallery');
     if (!gallery) return;
     button.addEventListener('pointerenter', (event) => {
       if (event.pointerType === 'mouse') gallery.classList.add('zoom');
