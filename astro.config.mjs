@@ -33,11 +33,23 @@ const lastmodFor = (pathname) => {
 
 export default defineConfig({
   vite: {
-    // Pre-bundle every package the islands load, so the dev server never discovers one
-    // mid-session: that re-optimisation changes the dependency hashes and leaves modules
-    // already served pointing at outdated files ("Failed to fetch dynamically imported module").
+    // Pre-bundle every package the browser loads (islands and page scripts alike), so the dev
+    // server never discovers one mid-session: that re-optimisation changes the dependency hashes
+    // and leaves modules already served pointing at outdated files ("Failed to fetch dynamically
+    // imported module", 404s, or a second copy of Vue that breaks hydration).
     optimizeDeps: {
-      include: ['fuse.js', 'medium-zoom', 'tsparticles-engine', 'tsparticles-preset-stars'],
+      include: [
+        'animejs/lib/anime.es.js',
+        'date-fns',
+        'date-fns/locale',
+        'fuse.js',
+        'lodash.debounce',
+        'lodash.throttle',
+        'medium-zoom',
+        'tsparticles-engine',
+        'tsparticles-preset-stars',
+        'vue',
+      ],
     },
   },
   site: 'https://asierortiz.com',
