@@ -1,3 +1,14 @@
+## [1.72.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.3...v1.72.4) (2026-10-01)
+
+### Bug Fixes
+
+* **dev:** pre-bundle every package the browser loads ([7178563](https://github.com/asier-ortiz/asierortiz.com/commit/71785636d2cce4c5ccb208e1dfb2c086678533e2))
+* **ui:** gradient headings keep the bottom of g, j, p and y ([6af5c06](https://github.com/asier-ortiz/asierortiz.com/commit/6af5c061e36a6dfec4dd5679ed8f80675b1fc107))
+
+### Performance Improvements
+
+* **nav:** the scroll-spy writes only when the section changes ([7854d2a](https://github.com/asier-ortiz/asierortiz.com/commit/7854d2afc79c7c0cfddbe7f5876962ee64574123))
+
 ## [1.72.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.2...v1.72.3) (2026-09-29)
 
 ### Bug Fixes
