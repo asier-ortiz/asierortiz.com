@@ -182,15 +182,6 @@
   .text-gradient::selection {
     @apply bg-secondary-300;
     color: #000000;
-    -webkit-background-clip: initial;
-    background-clip: initial;
-  }
-
-  .text-gradient::-moz-selection {
-    @apply bg-secondary-300;
-    color: #000000;
-    -webkit-background-clip: initial;
-    background-clip: initial;
   }
 
   /* On a blue row a white wash leaves the marked word at 2.6:1; a dark one keeps it readable. */
