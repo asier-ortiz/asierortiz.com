@@ -155,11 +155,26 @@
     display: none; /* Chrome, Safari, Opera */
   }
 
+  /* A background only covers its box, and the tight line heights of the big headings leave the
+     descenders (g, j, p, y) below it, unpainted. The transparent border extends the painted area
+     and the negative margin gives the space back, so nothing moves (an mb-* utility here would
+     undo that). The gradient still ends at the old box bottom; the descenders take its last
+     colour. 16px covers text-5xl, stays a whole number of device pixels at common screen scales,
+     and must not exceed the 16px (mt-4) under the closest headings, or the border would sit over
+     the next element and take its clicks. */
   .text-gradient {
+    --descender-room: 16px;
     position: relative;
     display: inline-block;
+    margin-bottom: calc(-1 * var(--descender-room));
+    border-bottom: var(--descender-room) solid transparent;
     color: transparent;
-    background: linear-gradient(to bottom, var(--color-primary-600), var(--color-secondary-50));
+    background: linear-gradient(
+      to bottom,
+      var(--color-primary-600),
+      var(--color-secondary-50) calc(100% - var(--descender-room))
+    );
+    background-origin: border-box;
     -webkit-background-clip: text;
     background-clip: text;
   }
