@@ -1,3 +1,9 @@
+## [1.72.6](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.5...v1.72.6) (2026-10-02)
+
+### Bug Fixes
+
+* **blog:** the reading progress bar follows the scroll on iPhone ([27aa195](https://github.com/asier-ortiz/asierortiz.com/commit/27aa195a33a1b5b756aeaca3e0dd85b65c65bff5))
+
 ## [1.72.5](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.4...v1.72.5) (2026-10-02)
 
 ### Bug Fixes
