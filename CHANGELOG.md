@@ -1,3 +1,15 @@
+## [1.72.5](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.4...v1.72.5) (2026-10-02)
+
+### Bug Fixes
+
+* **home:** the Background descriptions show without JavaScript ([b715cd1](https://github.com/asier-ortiz/asierortiz.com/commit/b715cd1bc05d68798e94d313d16a9a17659b11b4))
+* **projects:** the card grid zooms in from its top edge ([e6838bc](https://github.com/asier-ortiz/asierortiz.com/commit/e6838bcafb051398c4b1ffcdfdbc091dac80a495))
+* **site:** the iPhone Home Screen icon is named Asier Ortiz ([f82deba](https://github.com/asier-ortiz/asierortiz.com/commit/f82debae47b975cad4e71ef2f84dec7be1fbcd77))
+
+### Performance Improvements
+
+* **home:** scroll entrances animate on their own layer ([be28933](https://github.com/asier-ortiz/asierortiz.com/commit/be28933177390d2b5d3bf361530a24ce1066a08a))
+
 ## [1.72.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.3...v1.72.4) (2026-10-01)
 
 ### Bug Fixes
