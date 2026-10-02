@@ -1,8 +1,10 @@
 ---
 ---
 
-<!-- Scaled with transform rather than resized, so the update never triggers layout. -->
-<div id="reading-progress" class="fixed left-0 z-20 h-[4px] w-full origin-left scale-x-0 bg-gradient-to-r from-primary-600 to-primary-600 transition-transform duration-150"></div>
+<!-- Scaled with transform rather than resized, so the update never triggers layout. No transition:
+     the bar follows the scroll itself; a timed one trailed it and restarted on every scroll event,
+     which stuttered on iPhone. -->
+<div id="reading-progress" class="fixed left-0 z-20 h-[4px] w-full origin-left scale-x-0 bg-gradient-to-r from-primary-600 to-primary-600"></div>
 
 <script is:inline>
   if (typeof window !== 'undefined') {
