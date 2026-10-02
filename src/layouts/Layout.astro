@@ -167,6 +167,17 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
           opacity: 1;
           pointer-events: auto;
         }
+
+        /* The Background toggles (ToggleDescription.vue) only open with JavaScript: show every
+           description, over Vue's inline display:none, and drop the buttons that do nothing
+           (`button` so the selector outranks their inline-flex utility, linked later). */
+        [id^='background-description-'] {
+          display: block !important;
+        }
+
+        button[aria-controls^='background-description-'] {
+          display: none;
+        }
       </style>
     </noscript>
   </head>
