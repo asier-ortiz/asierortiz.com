@@ -1,3 +1,9 @@
+## [1.73.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.73.0...v1.73.1) (2026-10-03)
+
+### Bug Fixes
+
+* **projects:** the filter row fits on one line on phones ([df3278a](https://github.com/asier-ortiz/asierortiz.com/commit/df3278ae37e8d5eac3684488757befa1dec4a553))
+
 ## [1.73.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.6...v1.73.0) (2026-10-03)
 
 ### Features
