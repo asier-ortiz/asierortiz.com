@@ -53,7 +53,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
     <header class="text-left mb-12">
       <h1 class="h1 text-pretty text-gradient pb-2">{post.data.title}</h1>
 
-      {post.data.description && <p class="mt-4 font-serif text-base text-base-400">{post.data.description}</p>}
+      {post.data.description && <p class="description mt-4 max-w-[42rem] text-pretty">{post.data.description}</p>}
 
       <div class="flex flex-wrap items-center gap-2 text-base-400/75 text-xs mt-6">
         <time
