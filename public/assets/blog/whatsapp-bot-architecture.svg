@@ -3,6 +3,9 @@
   <style>
     /* Opaque page colour: the figure stays legible outside the site (own tab, feed readers). */
     svg { background: #0a0a0a; }
+    /* Safari lays text out at the size it is shown, and the system font widens at small sizes:
+       without this, labels change width as the figure is zoomed. */
+    svg { text-rendering: geometricPrecision; }
     .box { fill: #171717; stroke: #404040; stroke-width: 1; }
     .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
     .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
