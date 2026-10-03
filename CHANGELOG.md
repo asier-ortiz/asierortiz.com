@@ -1,3 +1,15 @@
+## [1.74.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.73.2...v1.74.0) (2026-10-03)
+
+### Features
+
+* **blog:** diagrams open in a full-screen viewer with pinch zoom ([20aaa34](https://github.com/asier-ortiz/asierortiz.com/commit/20aaa34f055e292d8657ff267dc49093c5df116b))
+
+### Bug Fixes
+
+* **blog:** diagram labels keep their width as the figure zooms ([a472595](https://github.com/asier-ortiz/asierortiz.com/commit/a472595d54627e8d165ccdb942f545473ec2807d))
+* **blog:** diagram labels stay inside their boxes ([5d42c1f](https://github.com/asier-ortiz/asierortiz.com/commit/5d42c1ff0583146d10d5072f205a42b9013e8b2e))
+* **home:** the hero says "5+ years" without "of experience" ([eb92733](https://github.com/asier-ortiz/asierortiz.com/commit/eb927339e4422abd25bc34072b107b6f1a01d149))
+
 ## [1.73.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.73.1...v1.73.2) (2026-10-03)
 
 ### Bug Fixes
