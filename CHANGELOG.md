@@ -1,3 +1,14 @@
+## [1.73.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.6...v1.73.0) (2026-10-03)
+
+### Features
+
+* **home:** the hero says what I build and what I enjoy about it ([6b2db4a](https://github.com/asier-ortiz/asierortiz.com/commit/6b2db4a21d1608df83fee9306215b59f9ad3c8e8))
+
+### Bug Fixes
+
+* **projects:** drop the generic intro under the section heading ([a208ba4](https://github.com/asier-ortiz/asierortiz.com/commit/a208ba43ca0eb67509681339cfde344f1d88287a))
+* **projects:** shorter labels on the project filters ([5253c54](https://github.com/asier-ortiz/asierortiz.com/commit/5253c54fb3224debaffa65806fbdbcbc2d0bb01f))
+
 ## [1.72.6](https://github.com/asier-ortiz/asierortiz.com/compare/v1.72.5...v1.72.6) (2026-10-02)
 
 ### Bug Fixes
