@@ -15,25 +15,26 @@ import Button from '@components/Button/Button.astro';
     </div>
     <div class="mx-auto mt-10 max-w-lg md:mt-10 md:max-w-full min-h-[600px]">
       <!-- aria-pressed drives the selected look. The press is grey, so a thumb resting on a filter
-           while scrolling never looks like a selection. -->
+           while scrolling never looks like a selection. Narrower sides on phones keep the three
+           on one line from 360px wide. -->
       <div class="flex flex-wrap gap-2">
         <Button
           variant="ghost"
-          class="filter-button active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
+          class="filter-button px-3.5 sm:px-5 active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
           aria-pressed="true"
           data-filter="all">All</Button
         >
         <Button
           variant="ghost"
-          class="filter-button active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
+          class="filter-button px-3.5 sm:px-5 active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
           aria-pressed="false"
           data-filter="mobile & web development">Web & Mobile</Button
         >
         <Button
           variant="ghost"
-          class="filter-button active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
+          class="filter-button px-3.5 sm:px-5 active:bg-base-600 active:text-base-100 aria-pressed:bg-primary-500 aria-pressed:text-white"
           aria-pressed="false"
-          data-filter="data science & machine learning">Data Science & ML</Button
+          data-filter="data science & machine learning">Data & ML</Button
         >
       </div>
       <!-- The zoom grows from the top edge: from the centre, a grid this tall starts with its
