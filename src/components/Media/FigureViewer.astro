@@ -1,0 +1,152 @@
+---
+/**
+ * Full-screen viewer for the figures of a page, the images marked `data-zoomable` in an article.
+ *
+ * A tap, a click, Enter or Space opens a figure over the page. It zooms there with a pinch, a
+ * double tap, the wheel or the zoom button, and pans with a drag. It closes with the close
+ * button, Escape, a click beside the figure, a vertical swipe, or Back: on a phone Back is the
+ * gesture readers try first, so the open viewer adds a history entry that closing it takes back.
+ * A tap beside the figure shows or hides the controls instead.
+ *
+ * Built on PhotoSwipe. Its lightbox (small) loads with the page, the viewer itself on the first
+ * open. Without JavaScript the figures stay plain images.
+ */
+import 'photoswipe/style.css';
+
+interface Props {
+  /** The images that open in the viewer. */
+  selector?: string;
+}
+
+const { selector = '.prose img[data-zoomable]' } = Astro.props;
+---
+
+<figure-viewer data-selector={selector} hidden></figure-viewer>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import type { SlideData } from 'photoswipe';
+
+  // Vector figures are declared this many times larger than drawn: the viewer never scales a
+  // figure past its declared size, and the browser redraws an SVG sharp at any size.
+  const VECTOR_HEADROOM = 3;
+  // Marks the history entry the open viewer adds.
+  const HISTORY_KEY = 'figureViewer';
+  // Phones (either way up) give the figure the whole screen, with the controls floating over it
+  // until a tap hides them. Larger screens keep it clear of the close and zoom buttons.
+  const isSmall = ({ x, y }: { x: number; y: number }) => x < 768 || y < 500;
+
+  function slideOf(img: HTMLImageElement): SlideData {
+    const src = img.currentSrc || img.src;
+    const headroom = /\.svg(?:[?#]|$)/i.test(src) ? VECTOR_HEADROOM : 1;
+    const width = Number(img.getAttribute('width')) || img.naturalWidth;
+    const height = Number(img.getAttribute('height')) || img.naturalHeight;
+    return {
+      src,
+      msrc: src,
+      width: width * headroom,
+      height: height * headroom,
+      alt: img.alt,
+      element: img,
+      headroom,
+    };
+  }
+
+  class FigureViewer extends HTMLElement {
+    connectedCallback() {
+      const figures = [...document.querySelectorAll<HTMLImageElement>(this.dataset.selector ?? '')];
+      if (!figures.length) return;
+
+      // A reload while the viewer was open keeps its entry, without a viewer to close.
+      if (history.state?.[HISTORY_KEY]) {
+        const state = { ...history.state };
+        delete state[HISTORY_KEY];
+        history.replaceState(state, '');
+      }
+
+      const lightbox = new PhotoSwipeLightbox({
+        pswpModule: () => import('photoswipe'),
+        bgOpacity: 1,
+        arrowPrev: false,
+        arrowNext: false,
+        counter: false,
+        wheelToZoom: true,
+        // A double tap or a click goes to the size the figure was drawn at, or twice the fitted
+        // size when that is larger; a pinch or the wheel can go up to the declared size.
+        secondaryZoomLevel: (zoom) => Math.min(1, Math.max(zoom.fit * 2, 1 / (zoom.itemData.headroom ?? 1))),
+        maxZoomLevel: 1,
+        paddingFn: (viewport) =>
+          isSmall(viewport) ? { top: 0, right: 0, bottom: 0, left: 0 } : { top: 60, right: 24, bottom: 24, left: 24 },
+      });
+
+      lightbox.on('afterInit', () => {
+        lightbox.pswp?.element?.setAttribute('aria-modal', 'true');
+        lightbox.pswp?.element?.setAttribute('aria-label', 'Figure viewer');
+      });
+      lightbox.on('beforeOpen', () => {
+        history.pushState({ ...history.state, [HISTORY_KEY]: true }, '');
+      });
+      // Closed from inside the viewer: take back the entry it added.
+      lightbox.on('close', () => {
+        if (history.state?.[HISTORY_KEY]) history.back();
+      });
+      // Back while it is open: the entry is already gone, so only the viewer closes. A Back during
+      // the opening animation is honoured when the animation ends (PhotoSwipe ignores it before).
+      const closeIfLeft = () => {
+        if (!history.state?.[HISTORY_KEY]) lightbox.pswp?.close();
+      };
+      window.addEventListener('popstate', closeIfLeft);
+      lightbox.on('openingAnimationEnd', closeIfLeft);
+      lightbox.init();
+
+      const open = (img: HTMLImageElement) => {
+        const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        lightbox.options.showHideAnimationType = still ? 'none' : 'zoom';
+        lightbox.options.zoomAnimationDuration = still ? 0 : 333;
+        lightbox.loadAndOpen(0, [slideOf(img)]);
+      };
+
+      for (const img of figures) {
+        img.classList.add('figure-viewer-trigger');
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-haspopup', 'dialog');
+        img.setAttribute('aria-label', `Enlarge: ${img.alt}`);
+        img.addEventListener('click', () => open(img));
+        img.addEventListener('keydown', (event) => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          open(img);
+        });
+      }
+    }
+  }
+
+  customElements.define('figure-viewer', FigureViewer);
+</script>
+
+<style is:global>
+  .figure-viewer-trigger {
+    cursor: zoom-in;
+  }
+
+  /* The page colour, which the SVG figures also carry as their own background: on any other
+     colour an enlarged figure would show as a box. */
+  .pswp {
+    --pswp-bg: theme('colors.base.950');
+    --pswp-placeholder-bg: theme('colors.base.950');
+    --pswp-icon-color: theme('colors.base.50');
+    --pswp-icon-color-secondary: theme('colors.base.700');
+    --pswp-icon-stroke-color: theme('colors.base.700');
+  }
+
+  /* PhotoSwipe clears the box-shadow of a focused button, where the site draws its focus ring.
+     Its root also takes focus on opening, and a ring round the whole screen says nothing. */
+  .pswp .pswp__button:focus-visible {
+    @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-base-950;
+  }
+
+  .pswp:focus-visible {
+    box-shadow: none;
+  }
+</style>

@@ -6,7 +6,7 @@ import SocialShare from '@/components/Social/SocialShare.astro';
 import PostImage from '@/components/Media/PostImage.astro';
 import siteData from '@/config/siteData.json';
 import { getReadingTime } from '@/utils/readingTime';
-import ZoomImages from '@/components/Media/ZoomImages.vue';
+import FigureViewer from '@/components/Media/FigureViewer.astro';
 import { formatDate } from '@/utils/formatDate';
 import ReadingProgress from '@/components/Blog/ReadingProgress.astro';
 import ScrollSpyToc from '@/components/Blog/ScrollSpyToc.astro';
@@ -108,8 +108,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
       <Content />
     </section>
 
-    <!-- Vue Island that applies medium-zoom only to images inside the Markdown content -->
-    <ZoomImages client:load />
+    <FigureViewer />
 
     <PostFooterCta title={post.data.title} />
 
