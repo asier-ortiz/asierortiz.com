@@ -1,3 +1,13 @@
+## [1.73.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.73.1...v1.73.2) (2026-10-03)
+
+### Bug Fixes
+
+* **blog:** a post's text starts at the edge of its title and cover ([70d6583](https://github.com/asier-ortiz/asierortiz.com/commit/70d6583b5e7f14337d30e3e26c3a3299dfdc259b))
+* **blog:** diagrams widen beyond the text on large screens ([04e15af](https://github.com/asier-ortiz/asierortiz.com/commit/04e15af242574b1ee1b60ff70b304c9ccb872484))
+* **blog:** the back arrows sit apart from their label ([55c03e1](https://github.com/asier-ortiz/asierortiz.com/commit/55c03e14893be83d4adf5c830fd0f6ef17e16f77))
+* **blog:** the post listing takes the home page's width ([36029b3](https://github.com/asier-ortiz/asierortiz.com/commit/36029b3aaea3d6f5970dcf070281a1ff4f284781))
+* **site:** page intros share one size and measure ([67a5f6d](https://github.com/asier-ortiz/asierortiz.com/commit/67a5f6db559322b191add50a2bb9eaecc595309d))
+
 ## [1.73.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.73.0...v1.73.1) (2026-10-03)
 
 ### Bug Fixes
