@@ -33,6 +33,20 @@
     @apply text-primary-300;
   }
 
+  /* Diagrams are drawn 800 wide with 10.5-12px text, which the 42rem column shrinks to ~9px.
+     From lg they widen up to the site's 62rem frame, centred on the post's 46rem column. The
+     width also follows the window: the tallest diagram so far (800x584) still fits under the
+     4.5rem header, and 4rem stay free on each side for the contents button fixed at the left
+     edge. It never drops below the column. */
+  @screen lg {
+    img[data-zoomable] {
+      --figure-width: clamp(46rem, min((100svh - 6rem) * 800 / 584, 100vw - 8rem), 62rem);
+      width: var(--figure-width);
+      max-width: none;
+      margin-left: calc((46rem - var(--figure-width)) / 2);
+    }
+  }
+
   /* Long text description under a diagram, folded by default. */
   .figure-description {
     @apply -mt-4 mb-8 text-sm;
