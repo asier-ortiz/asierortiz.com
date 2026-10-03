@@ -3,7 +3,7 @@
  * Post cover, on the listing cards and at the top of a post.
  *
  * Responsive candidates are generated from the asset; `sizes` matches the rendered width of
- * each placement (a ~340px card, a ~720px post header). `priority` marks the cover that is
+ * each placement (a ~340px card, a ~736px post header). `priority` marks the cover that is
  * the largest element of the first screen: it loads eagerly, first in the queue, and is
  * decoded before paint. The container carries a skeleton background until the image is in.
  */
@@ -22,7 +22,7 @@ const { src, alt, variant = 'card', priority = false, class: className = '' } = 
 
 const sizes =
   variant === 'hero'
-    ? '(min-width: 768px) 720px, calc(100vw - 48px)'
+    ? '(min-width: 768px) 736px, calc(100vw - 32px)'
     : '(min-width: 768px) 340px, calc(100vw - 48px)';
 ---
 

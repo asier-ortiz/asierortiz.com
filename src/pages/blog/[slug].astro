@@ -47,7 +47,7 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
     }
   />
 
-  <article class="mx-auto max-w-3xl px-6 pt-24 md:pt-36 lg:pt-44">
+  <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
     <ReadingProgress />
 
     <header class="text-left mb-12">
@@ -103,7 +103,8 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
       <SocialShare url={Astro.url} title={post.data.title} tags={post.data.tags} class="mb-8" />
     </div>
 
-    <section class="prose mx-auto mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
+    <!-- Not centred: the text starts at the edge of the title and the cover; .prose caps its width at 42rem. -->
+    <section class="prose mb-16 [&_h2]:scroll-mt-24 [&_h3]:scroll-mt-24">
       <Content />
     </section>
 
