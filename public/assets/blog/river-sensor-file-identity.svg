@@ -41,8 +41,8 @@
   <text class="lbl" x="44" y="98">Folder</text>
   <text class="s" x="44" y="114">STATION B</text>
   <rect class="inner" x="32" y="132" width="216" height="44" rx="6" />
-  <text class="lbl" x="44" y="150">Filename: sensor code S07, no station name</text>
-  <text class="s" x="44" y="166">recorded, not read as a claim</text>
+  <text class="lbl" x="44" y="150">Filename: sensor code S07</text>
+  <text class="s" x="44" y="166">no station name, not read as a claim</text>
   <rect class="inner" x="32" y="184" width="216" height="44" rx="6" />
   <text class="lbl" x="44" y="202">Export header LOCATION: S07</text>
   <text class="s" x="44" y="218">maps to STATION A</text>
@@ -83,11 +83,11 @@
   <rect class="inner" x="602" y="58" width="166" height="60" rx="6" />
   <text class="k" x="614" y="76">2 or more pieces</text>
   <text class="lbl" x="614" y="92">Relocate to X</text>
-  <text class="s" x="614" y="108">a suggestion, pending review</text>
+  <text class="s" x="614" y="108">suggested, pending review</text>
   <rect class="inner" x="602" y="128" width="166" height="60" rx="6" />
   <text class="k" x="614" y="146">profile or serial alone</text>
   <text class="lbl" x="614" y="162">Review: profile suggests X</text>
-  <text class="s" x="614" y="178">a person compares the series</text>
+  <text class="s" x="614" y="178">a person compares series</text>
   <rect class="inner" x="602" y="198" width="166" height="60" rx="6" />
   <text class="k" x="614" y="216">anything less</text>
   <text class="lbl" x="614" y="232">Review manually</text>

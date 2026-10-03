@@ -13,6 +13,8 @@
     .s { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
     .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
     .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
+    /* Lifts a label off the lines that cross it: a stroke in the background colour, under the fill. */
+    .halo { paint-order: stroke; stroke: #0a0a0a; stroke-width: 6px; stroke-linejoin: round; }
     .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
     .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; }
   </style>
@@ -51,12 +53,13 @@
   <rect class="inner" x="552" y="136" width="222" height="44" rx="6" />
   <text class="lbl" x="564" y="154">message ids and chat locks</text>
   <text class="s" x="564" y="170">dedup and per-citizen exclusion</text>
-  <rect class="inner" x="552" y="192" width="222" height="44" rx="6" />
+  <rect class="inner" x="552" y="192" width="222" height="60" rx="6" />
   <text class="lbl" x="564" y="210">report rows with outbox columns</text>
-  <text class="s" x="564" y="226">draft, received; pending, sent, review, dead</text>
-  <rect class="inner" x="552" y="248" width="222" height="44" rx="6" />
-  <text class="lbl" x="564" y="266">service-area polygon</text>
-  <text class="s" x="564" y="282">PostGIS coverage gate</text>
+  <text class="s" x="564" y="226">draft, received;</text>
+  <text class="s" x="564" y="242">pending, sent, review, dead</text>
+  <rect class="inner" x="552" y="264" width="222" height="44" rx="6" />
+  <text class="lbl" x="564" y="282">service-area polygon</text>
+  <text class="s" x="564" y="298">PostGIS coverage gate</text>
 
   <!-- arrows: inbound -->
   <path class="arrow" d="M 170 102 L 250 102" marker-end="url(#ah)" />
@@ -65,11 +68,11 @@
   <path class="arrow" d="M 410 102 L 552 102" marker-end="url(#ah)" />
   <text class="s" x="481" y="92" text-anchor="middle">INSERT raw body</text>
 
-  <!-- arrows: worker and database -->
-  <path class="arrow" d="M 552 262 L 410 262" marker-end="url(#ah)" />
-  <text class="s" x="481" y="252" text-anchor="middle">claim, SKIP LOCKED</text>
-  <path class="arrow" d="M 410 284 L 552 284" marker-end="url(#ah)" />
-  <text class="s" x="481" y="300" text-anchor="middle">lock, state, ack, outbox</text>
+  <!-- arrows: worker and database, to the database as a whole rather than one of its tables -->
+  <path class="arrow" d="M 540 262 L 410 262" marker-end="url(#ah)" />
+  <text class="s" x="475" y="252" text-anchor="middle">claim, SKIP LOCKED</text>
+  <path class="arrow" d="M 410 284 L 540 284" marker-end="url(#ah)" />
+  <text class="s" x="475" y="300" text-anchor="middle">lock, state, ack, outbox</text>
 
   <!-- outbound row -->
   <rect class="box" x="20" y="390" width="200" height="56" rx="8" />
@@ -85,5 +88,5 @@
   <path class="arrow-dim" d="M 300 294 L 140 390" marker-end="url(#ahd)" />
   <path class="arrow-dim" d="M 330 294 L 330 390" marker-end="url(#ahd)" />
   <path class="arrow-dim" d="M 360 294 L 520 390" marker-end="url(#ahd)" />
-  <text class="s" x="330" y="352" text-anchor="middle">every outbound call leaves from the worker</text>
+  <text class="s halo" x="330" y="352" text-anchor="middle">every outbound call leaves from the worker</text>
 </svg>
