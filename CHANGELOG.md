@@ -1,3 +1,9 @@
+## [1.74.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.74.1...v1.74.2) (2026-10-04)
+
+### Bug Fixes
+
+* **projects:** FlareWatch goes last while it is in development. ([646b7a0](https://github.com/asier-ortiz/asierortiz.com/commit/646b7a0a26e382419144df89ae8fcd2d220ef6e3))
+
 ## [1.74.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.74.0...v1.74.1) (2026-10-04)
 
 ### Bug Fixes
