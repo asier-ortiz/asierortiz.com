@@ -36,36 +36,6 @@ export const projectData: ProjectItem[] = [
   {
     images: [
       {
-        src: FlareWatch,
-        alt: 'FlareWatch on two phones: a flare-risk score with recommendations, and monthly symptom and lifestyle trend charts.',
-      },
-    ],
-    title: 'FlareWatch',
-    description: `An Android app for IBD patients to log daily symptoms, diet, and lifestyle habits.
-    Uses machine learning models on the backend to predict flare risk, track symptom trends over time,
-    and deliver personalized health recommendations based on each patient's data.
-    `,
-    languages: [
-      { language: 'Kotlin', color: '#A97BFF' },
-      { language: 'Jetpack Compose', color: '#4285F4' },
-      { language: 'Material 3', color: '#757575' },
-      { language: 'Vico', color: '#E91E63' },
-      { language: 'FastAPI', color: '#009688' },
-      { language: 'PostgreSQL', color: '#336791' },
-      { language: 'SQLAlchemy', color: '#D71F00' },
-      { language: 'Alembic', color: '#6BA81E' },
-      { language: 'scikit-learn', color: '#F7931E' },
-      { language: 'PyTorch', color: '#EE4C2C' },
-      { language: 'MLflow', color: '#0194E2' },
-      { language: 'Docker', color: '#2496ED' },
-    ],
-    type: ['mobile & web development', 'data science & machine learning'],
-    buttonText: 'In Development',
-    buttonIcon: 'tdesign:code',
-  },
-  {
-    images: [
-      {
         src: AlconFoldable,
         alt: 'ALCON on a foldable: live patrol tracking on the N-622 with speed and distance, and a finished surveillance with its route and the roads covered.',
       },
@@ -178,6 +148,36 @@ export const projectData: ProjectItem[] = [
     type: 'mobile & web development',
     buttonText: 'Available on App Store',
     buttonIcon: 'tdesign:logo-apple-filled',
+  },
+  {
+    images: [
+      {
+        src: FlareWatch,
+        alt: 'FlareWatch on two phones: a flare-risk score with recommendations, and monthly symptom and lifestyle trend charts.',
+      },
+    ],
+    title: 'FlareWatch',
+    description: `An Android app for IBD patients to log daily symptoms, diet, and lifestyle habits.
+    Uses machine learning models on the backend to predict flare risk, track symptom trends over time,
+    and deliver personalized health recommendations based on each patient's data.
+    `,
+    languages: [
+      { language: 'Kotlin', color: '#A97BFF' },
+      { language: 'Jetpack Compose', color: '#4285F4' },
+      { language: 'Material 3', color: '#757575' },
+      { language: 'Vico', color: '#E91E63' },
+      { language: 'FastAPI', color: '#009688' },
+      { language: 'PostgreSQL', color: '#336791' },
+      { language: 'SQLAlchemy', color: '#D71F00' },
+      { language: 'Alembic', color: '#6BA81E' },
+      { language: 'scikit-learn', color: '#F7931E' },
+      { language: 'PyTorch', color: '#EE4C2C' },
+      { language: 'MLflow', color: '#0194E2' },
+      { language: 'Docker', color: '#2496ED' },
+    ],
+    type: ['mobile & web development', 'data science & machine learning'],
+    buttonText: 'In Development',
+    buttonIcon: 'tdesign:code',
   },
 ];
 
