@@ -1,3 +1,9 @@
+## [1.74.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.74.0...v1.74.1) (2026-10-04)
+
+### Bug Fixes
+
+* **home:** the hero says "5+ years of programming experience" ([50534bf](https://github.com/asier-ortiz/asierortiz.com/commit/50534bf3c443b9b34567c65f8bc2465ea4256d0f))
+
 ## [1.74.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.73.2...v1.74.0) (2026-10-03)
 
 ### Features
