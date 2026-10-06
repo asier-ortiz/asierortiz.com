@@ -2,12 +2,16 @@ export interface academicItem {
   title: string;
   center: string;
   description: string;
+  /** Year of completion; the expected one while `ongoing`. */
   date: string;
+  /** Still in progress: the timeline marks it live and labels its year "Expected". */
+  ongoing?: boolean;
 }
 
 const academicData: academicItem[] = [
   {
     date: '2027',
+    ongoing: true,
     title: 'Advanced Program in Cloud Architecture',
     center: 'UNIR - International University of La Rioja',
     description:

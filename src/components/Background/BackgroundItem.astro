@@ -1,51 +1,196 @@
 ---
 import ToggleDescription from '@components/Background/ToggleDescription.vue';
-const { title, center, description, date, index, initialOpen } = Astro.props;
+import { type academicItem } from '@config/backgroundData.json';
+
+interface Props extends academicItem {
+  index: number;
+  initialOpen?: boolean;
+}
+
+const { title, center, description, date, ongoing, index, initialOpen } = Astro.props as Props;
+
+// "Cross-Platform" and "end-to-end" are single terms, but browsers break a line after any hyphen.
+// Odd parts are those terms, each kept whole in an inline-block: white-space: nowrap would do it
+// too, but it stops Chrome balancing the title.
+const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
 ---
 
-<div class="timeline-item relative pb-12 pl-6 border-l-4 border-gray-700">
-  <div
-    class="bullet absolute -left-4 top-0 w-7 h-7 bg-primary-400 rounded-full border-4 border-primary-900 flex items-center justify-center"
-  >
-    <div class="w-2 h-2 bg-primary-800 rounded-full"></div>
-  </div>
-  <div class="relative md:pb-0 md:col-span-2">
-    <h3 class="text-xl font-bold text-primary-500">{title}</h3>
-    <h4 class="font-semibold text-xl text-primary-100">{center}</h4>
-    <time class="p-0 m-0 text-sm text-primary-50">{date}</time>
+<li class:list={['entry', { 'is-current': ongoing }]}>
+  <span class="marker" aria-hidden="true"></span>
+  {/* The year is part of the heading, so moving through the headings announces it with the title:
+      "2027 Expected Advanced Program in Cloud Architecture". */}
+  <h3 class="text-lg font-bold text-base-50 md:text-xl">
+    <span class="year">
+      <time datetime={date}>{date}</time>
+      {ongoing && <span class="status">Expected</span>}
+    </span>
+    <span class="block text-balance">
+      {keepHyphenatedWords(title).map((part, i) => (i % 2 ? <span class="inline-block">{part}</span> : part))}
+    </span>
+  </h3>
+  <p class="mt-1 text-sm text-base-400 text-balance md:mt-2 md:text-base">{center}</p>
+  <div class="mt-3 max-w-xl">
     {/* Server-rendered (client:load, not client:only): the open description and the toggles count
         towards the page height from the first paint. Rendered only on the client they arrived after
         a fragment scroll had been computed, and any section below them landed short. */}
     <ToggleDescription client:load contentId={`background-description-${index}`} initialOpen={initialOpen}>
-      {description}
+      {keepHyphenatedWords(description).map((part, i) => (i % 2 ? <span class="inline-block">{part}</span> : part))}
     </ToggleDescription>
   </div>
-</div>
+</li>
 
-<style lang="scss" is:global>
-  .is-first .timeline-item {
-    border-image: linear-gradient(to bottom, transparent 14px, #374151 14px) 1;
+<style>
+  /* Timeline geometry. On phones the year sits above the title and each marker is centred on the
+     numeral; from md the year hangs in a column left of the line and the marker is centred on the
+     title's first line. */
+  .entry {
+    --dot: 0.75rem;
+    --rail-x: 0.375rem; /* centre of the line, from the list's left edge */
+    --text-x: 2rem; /* where the text starts */
+    --marker-y: 0.96rem; /* centre of the 2rem numeral's figures, 0.48em down its line box */
+
+    position: relative;
+    padding: 0 0 2.5rem var(--text-x);
   }
 
-  .is-last .timeline-item {
-    border-image: linear-gradient(to bottom, #374151 14px, transparent 14px) 1;
+  @screen md {
+    .entry {
+      --year-width: 5.5rem; /* "2025", the widest year, at 2.25rem */
+      --rail-x: calc(var(--year-width) + 2rem);
+      --text-x: calc(var(--rail-x) + 2rem);
+      --marker-y: 0.875rem; /* centre of the title's first line (text-xl: 1.75rem) */
+
+      padding-bottom: 3rem;
+    }
   }
 
-  /* Only the newest entry, the one in progress, pulses. The gate lets motion in instead of
-     switching it off under reduce, which `.is-first .bullet` would outrank. */
+  @screen lg {
+    .entry {
+      --dot: 0.875rem;
+      --year-width: 6.25rem; /* "2025" at 2.5rem */
+      --rail-x: calc(var(--year-width) + 2.5rem);
+      --text-x: calc(var(--rail-x) + 2.25rem);
+    }
+  }
+
+  /* Large but grey: the year orders the entries without competing with their titles. */
+  .year {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.02em; /* Poppins figures are wide; at this size the default looks loose */
+    color: theme('colors.base.500');
+  }
+
+  /* Says in words what the live marker shows. */
+  .status {
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: theme('colors.primary.300');
+  }
+
+  @screen md {
+    /* The top of the figures sits level with the title's capitals: 0.43rem is the space above the
+       capitals of the text-xl title on its line, 0.106em the space above Poppins figures in a
+       line-height-1 box. */
+    .year {
+      position: absolute;
+      left: 0;
+      top: calc(0.43rem - 0.106em);
+      font-size: 2.25rem;
+    }
+
+    .status {
+      display: block;
+      margin: 0.375rem 0 0;
+    }
+  }
+
+  @screen lg {
+    .year {
+      font-size: 2.5rem;
+    }
+  }
+
+  /* From this entry's marker to the next one's, so the line starts and ends on a marker. */
+  .entry:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--rail-x) - 1px);
+    top: var(--marker-y);
+    bottom: calc(-1 * var(--marker-y));
+    width: 2px;
+    background: theme('colors.base.700');
+  }
+
+  .marker {
+    position: absolute;
+    left: calc(var(--rail-x) - var(--dot) / 2);
+    top: calc(var(--marker-y) - var(--dot) / 2);
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 9999px;
+    background: theme('colors.base.500');
+  }
+
+  /* The programme in progress: a filled dot inside a ring, a shape the others lack, not only a
+     colour. The ring is a shadow, not an outline, which Safari before 16.4 draws square; the outer
+     shadow, in the page colour, stops the line just short of it. */
+  .is-current .marker {
+    background: theme('colors.primary.400');
+    box-shadow:
+      0 0 0 3px theme('colors.base.950'),
+      0 0 0 5px theme('colors.primary.400 / 50%'),
+      0 0 0 8px theme('colors.base.950');
+  }
+
+  /* A ring ripples out from the still one (inset: the ring's outer edge, 5px out). The gate lets
+     motion in instead of switching it off under reduce, which a later rule could outrank. */
   @media (prefers-reduced-motion: no-preference) {
-    .is-first .bullet {
-      animation: scaleAnimation 2s infinite ease-in-out;
+    .is-current .marker::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: inherit;
+      border: 2px solid theme('colors.primary.400 / 60%');
+      animation: timeline-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
     }
   }
 
-  @keyframes scaleAnimation {
-    0%,
+  @keyframes timeline-ping {
+    75%,
     100% {
-      transform: scale(1);
+      transform: scale(1.9);
+      opacity: 0;
     }
-    50% {
-      transform: scale(1.2);
+  }
+
+  /* Forced colours drop backgrounds and shadows: the line and the markers are drawn in system
+     colours, the live one in Highlight. */
+  @media (forced-colors: active) {
+    .entry:not(:last-child)::before,
+    .marker {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+
+    .is-current .marker {
+      background: Highlight;
+      box-shadow:
+        0 0 0 3px Canvas,
+        0 0 0 5px Highlight,
+        0 0 0 8px Canvas;
+    }
+
+    .is-current .marker::after {
+      border-color: Highlight;
     }
   }
 </style>

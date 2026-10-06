@@ -5,21 +5,18 @@ import Academic from '@components/Icons/Academic.astro';
 ---
 
 <section id="background" class="w-full" data-aos="fade-up">
-  <div class="container grid items-start gap-10 pt-24 md:pt-36 lg:pt-44 md:grid-cols-3 md:gap-20">
-    <div class="mx-auto max-w-lg md:col-span-2 md:ml-0 md:max-w-full">
+  <!-- The whole container, like Projects: the year column then costs the titles nothing. -->
+  <div class="container pt-24 md:pt-36 lg:pt-44">
+    <div class="mx-auto max-w-lg md:max-w-full">
       <h2 class="h2 flex items-center">
         <Academic class="mr-2 size-10 description" />
         <span>Academic <span class="text-gradient">background.</span></span>
       </h2>
-      <ol class="mt-10 ml-4">
+      <!-- role="list": Safari drops the list semantics of a list without markers. -->
+      <ol role="list" class="mt-10">
         {
           backgroundData.map((backgroundItem, index) => (
-            <li class:list={[
-              { 'is-first': index === 0 },
-              { 'is-last': index === backgroundData.length - 1 },
-            ]}>
-              <BackgroundItem {...backgroundItem} index={index} initialOpen={index === 0} />
-            </li>
+            <BackgroundItem {...backgroundItem} index={index} initialOpen={index === 0} />
           ))
         }
       </ol>
