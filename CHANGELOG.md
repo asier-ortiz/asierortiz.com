@@ -1,3 +1,14 @@
+## [1.75.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.74.2...v1.75.0) (2026-10-06)
+
+### Features
+
+* **home:** Background shows each year large in its own column ([01d3f3b](https://github.com/asier-ortiz/asierortiz.com/commit/01d3f3bd60dd1df52578ec4bd9eba76660608dd4))
+
+### Bug Fixes
+
+* **a11y:** gradient headings stay readable in forced colours ([47d5cad](https://github.com/asier-ortiz/asierortiz.com/commit/47d5cad7abaa5c574207816b8442a287be107c58))
+* **nav:** Background is underlined at the page bottom on tall windows ([fa3cd0e](https://github.com/asier-ortiz/asierortiz.com/commit/fa3cd0ecdc93b46e09637590a78dd5c3bdb2bbc6))
+
 ## [1.74.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.74.1...v1.74.2) (2026-10-04)
 
 ### Bug Fixes
