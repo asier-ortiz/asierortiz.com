@@ -54,6 +54,11 @@ import siteData from '@config/siteData.json.ts';
     for (const section of sections) {
       if (section.offsetTop <= window.scrollY + 30) current = section;
     }
+    // At the bottom of the page the last section is the one in view, even when it is too short to
+    // bring its top that far up (on a tall window).
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1) {
+      current = sections[sections.length - 1];
+    }
     // Scroll fires at most once per frame, and nearly every event stays in the same section.
     if (current.id === activeSection) return;
     activeSection = current.id;
