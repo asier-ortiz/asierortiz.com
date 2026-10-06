@@ -179,6 +179,16 @@
     background-clip: text;
   }
 
+  /* Forced colours drop the gradient, so there are no descenders to cover: Chrome would paint the
+     transparent border in the text colour, a solid bar under the word, and Firefox would keep the
+     transparent text, hiding the word. 0px, not 0: a unitless 0 breaks the gradient's calc(). */
+  @media (forced-colors: active) {
+    .text-gradient {
+      --descender-room: 0px;
+      color: CanvasText;
+    }
+  }
+
   .text-gradient::selection {
     @apply bg-secondary-300;
     color: #000000;
