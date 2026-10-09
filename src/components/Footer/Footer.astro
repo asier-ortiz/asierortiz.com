@@ -4,7 +4,11 @@ import siteData from '@config/siteData.json';
 const today = new Date();
 ---
 
-<footer class="container mb-12 mt-20">
+<!-- From sm to lg the floating buttons in the bottom corners (ScrollToTop from sm, ParticlesPause
+     from md) reach over this row's links. The deeper bottom margin there lets the row scroll
+     clear, 16px above the scroll-to-top button's top edge (96px up to md, 112px at lg). From xl
+     both buttons sit outside the container. -->
+<footer class="container mb-12 mt-20 sm:mb-28 lg:mb-32 xl:mb-12">
   <hr class="border-t-2 border-t-base-600" />
   <div class="mt-4 flex w-full flex-wrap items-center justify-between gap-x-8 gap-y-2">
     <div class="flex items-center">

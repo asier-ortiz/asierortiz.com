@@ -7,6 +7,21 @@
     @apply bg-base-950 font-sans leading-[1.6rem] text-base-50;
     scrollbar-gutter: stable;
 
+    /* Below xl the floating buttons in the bottom corners (scroll-to-top from sm, the pause
+       switch from md) reach over the content, so focus moved by the keyboard stops clear of
+       their top edges (WCAG 2.4.11). From xl they sit outside the container. */
+    @screen sm {
+      scroll-padding-bottom: 7rem;
+    }
+
+    @screen lg {
+      scroll-padding-bottom: 8rem;
+    }
+
+    @screen xl {
+      scroll-padding-bottom: auto;
+    }
+
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
     }
