@@ -151,16 +151,19 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
       0 0 0 8px theme('colors.base.950');
   }
 
-  /* A ring ripples out from the still one (inset: the ring's outer edge, 5px out). The gate lets
-     motion in instead of switching it off under reduce, which a later rule could outrank. */
+  /* A ring ripples out from the still one (inset: the ring's outer edge, 5px out), twice, once the
+     marker is on screen (the script below), then the still ring stays alone: an endless pulse
+     would need a control to stop it (WCAG 2.2.2). forwards holds the faded last frame; the base
+     one would leave a second ring over the still one. The gate lets motion in instead of
+     switching it off under reduce, which a later rule could outrank. */
   @media (prefers-reduced-motion: no-preference) {
-    .is-current .marker::after {
+    .marker.is-rippling::after {
       content: '';
       position: absolute;
       inset: -5px;
       border-radius: inherit;
       border: 2px solid theme('colors.primary.400 / 60%');
-      animation: timeline-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+      animation: timeline-ping 2.4s cubic-bezier(0, 0, 0.2, 1) 2 forwards;
     }
   }
 
@@ -189,8 +192,27 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
         0 0 0 8px Canvas;
     }
 
-    .is-current .marker::after {
+    .marker.is-rippling::after {
       border-color: Highlight;
     }
   }
 </style>
+
+<script>
+  // Not on load: AOS reveals the section while the live marker is still below the fold, and
+  // ripples started then would be over before anyone saw them.
+  const rippleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-rippling');
+        rippleObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 1 }
+  );
+
+  document.querySelectorAll('.is-current .marker').forEach((marker) => {
+    rippleObserver.observe(marker);
+  });
+</script>

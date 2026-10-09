@@ -99,7 +99,9 @@ import siteData from '@config/siteData.json';
       0 0 45px 12px rgba(var(--color-primary-600-rgb), 0.12),
       0 0 70px 20px rgba(var(--color-primary-600-rgb), 0.06);
     opacity: 0;
-    animation: corona-breathe 5s ease-in-out infinite;
+    /* One breath as the page opens, then the static glow alone: motion that runs on its own for
+       more than 5s would need a control to stop it (WCAG 2.2.2). */
+    animation: corona-breathe 4.8s ease-in-out;
   }
 
   @keyframes corona-breathe {
