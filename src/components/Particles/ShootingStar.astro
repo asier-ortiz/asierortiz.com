@@ -51,16 +51,24 @@
 <script is:inline>
   (function () {
     var timer = null;
+    var pauseSwitch = document.getElementById('particles-pause');
+
+    function clearStars() {
+      var container = document.getElementById('shooting-stars-container');
+      if (container) container.textContent = '';
+    }
 
     function createShootingStar() {
       var container = document.getElementById('shooting-stars-container');
       // Checked per spawn (not around the loop) so stars stop and resume with
-      // the OS reduced-motion setting without needing a media query listener.
+      // the OS reduced-motion setting and the pause switch (ParticlesPause.astro)
+      // without restarting the loop.
       if (
         !container ||
         document.hidden ||
         window.innerWidth < 768 ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        (pauseSwitch && pauseSwitch.checked)
       ) {
         return;
       }
@@ -101,8 +109,7 @@
       if (document.hidden) {
         clearTimeout(timer);
         timer = null;
-        var container = document.getElementById('shooting-stars-container');
-        if (container) container.textContent = '';
+        clearStars();
       } else {
         scheduleNext();
       }
@@ -111,6 +118,12 @@
     if (typeof window !== 'undefined') {
       document.addEventListener('DOMContentLoaded', scheduleNext);
       document.addEventListener('visibilitychange', onVisibilityChange);
+      // A star already in flight stops with the rest of the background.
+      if (pauseSwitch) {
+        pauseSwitch.addEventListener('change', function () {
+          if (pauseSwitch.checked) clearStars();
+        });
+      }
     }
   })();
 </script>

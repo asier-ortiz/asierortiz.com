@@ -16,6 +16,7 @@ import Nav from '@components/Nav/Nav.astro';
 import Footer from '@components/Footer/Footer.astro';
 import ScrollToTop from '@components/Button/ScrollToTop.astro';
 import ShootingStar from '@components/Particles/ShootingStar.astro';
+import ParticlesPause from '@components/Particles/ParticlesPause.astro';
 import siteData from '@config/siteData.json';
 import { absoluteUrl } from '@/utils/absoluteUrl';
 import { backgroundColor } from '@/config/theme';
@@ -185,6 +186,7 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
   <body
     class:list={['dark overflow-y-scroll', { 'use-animations': siteData.useAnimations === true }]}
   >
+    {!isPost && <ParticlesPause />}
     <div class="flex min-h-[100lvh] flex-col justify-between">
       <div>
         <Nav />
