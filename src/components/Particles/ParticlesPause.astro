@@ -16,6 +16,28 @@ import PauseSwitch from '@components/Button/PauseSwitch.astro';
   hidden
 />
 
-<script>
-  document.getElementById('particles-pause')?.closest('.pause-switch')?.removeAttribute('hidden');
+<!-- Inline, so it runs while the page is parsed: a pause from an earlier page is back on before
+     the stars start, with no moment of motion first. -->
+<script is:inline>
+  (function () {
+    var pauseSwitch = document.getElementById('particles-pause');
+    if (!pauseSwitch) return;
+
+    // Stored only while paused, so a visitor who never pauses has nothing in their browser (see
+    // the privacy page). Storage can throw (blocked site data, some private windows); the switch
+    // then just starts off on every page.
+    var key = 'particles-paused';
+    try {
+      pauseSwitch.checked = localStorage.getItem(key) === '1';
+    } catch (e) {}
+
+    pauseSwitch.addEventListener('change', function () {
+      try {
+        if (pauseSwitch.checked) localStorage.setItem(key, '1');
+        else localStorage.removeItem(key);
+      } catch (e) {}
+    });
+
+    pauseSwitch.closest('.pause-switch').removeAttribute('hidden');
+  })();
 </script>
