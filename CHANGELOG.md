@@ -1,3 +1,15 @@
+## [1.76.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.75.0...v1.76.0) (2026-10-09)
+
+### Features
+
+* **a11y:** a corner switch pauses the starry background ([20116b1](https://github.com/asier-ortiz/asierortiz.com/commit/20116b100ab370d50cc3bb48aebd1158008eba1b))
+* **a11y:** the background pause carries over to the next page ([deb9ae3](https://github.com/asier-ortiz/asierortiz.com/commit/deb9ae36d9037493ae69af3d069ced420309b5bb))
+
+### Bug Fixes
+
+* **a11y:** the corner buttons no longer cover the footer links ([a05ee91](https://github.com/asier-ortiz/asierortiz.com/commit/a05ee918e0a2ae1eddca802a406bb13c9e43c20c))
+* **a11y:** the hero glow breathes once instead of forever ([9782a12](https://github.com/asier-ortiz/asierortiz.com/commit/9782a12597a120c5eb6e22c94ee4ee44c8d862d2))
+
 ## [1.75.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.74.2...v1.75.0) (2026-10-06)
 
 ### Features
