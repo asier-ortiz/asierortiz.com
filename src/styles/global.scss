@@ -7,6 +7,12 @@
     @apply bg-base-950 font-sans leading-[1.6rem] text-base-50;
     scrollbar-gutter: stable;
 
+    /* The fixed header (72px, Nav.astro) covers the top of the window: focus moved by the
+       keyboard, #fragment jumps and find-in-page stop below it, with room to spare (WCAG
+       2.4.11). Post headings take this as is; the home sections, whose own top padding already
+       clears the header, opt out with -scroll-mt-24 (same token). */
+    scroll-padding-top: theme('spacing.24');
+
     /* Below xl the floating buttons in the bottom corners (scroll-to-top from sm, the pause
        switch from md) reach over the content, so focus moved by the keyboard stops clear of
        their top edges (WCAG 2.4.11). From xl they sit outside the container. */

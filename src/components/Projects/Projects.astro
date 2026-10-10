@@ -5,7 +5,9 @@ import Code from '@components/Icons/Code.astro';
 import Button from '@components/Button/Button.astro';
 ---
 
-<section id="projects" class="w-full pb-6" data-aos="fade-up">
+<!-- -scroll-mt-24 cancels the root's scroll-padding-top (global.scss): the top padding below
+     already clears the fixed header, so /#projects keeps landing with the section at the top. -->
+<section id="projects" class="w-full pb-6 -scroll-mt-24" data-aos="fade-up">
   <div class="container pt-24 md:pt-36 lg:pt-44">
     <div class="mx-auto max-w-lg md:max-w-full md:col-span-2">
       <h2 class="h2 flex items-center">
