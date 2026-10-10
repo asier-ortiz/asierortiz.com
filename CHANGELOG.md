@@ -1,3 +1,20 @@
+## [1.76.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.76.1...v1.76.2) (2026-10-10)
+
+### Bug Fixes
+
+* **a11y:** "In Development" reads as a status, at full contrast ([1129534](https://github.com/asier-ortiz/asierortiz.com/commit/1129534617fe119264b2c432e50f44a074232deb))
+* **a11y:** dark text on the selected filters and tag chips ([65084a7](https://github.com/asier-ortiz/asierortiz.com/commit/65084a7bc7d3bec846361d73f96715d0dee87a88))
+* **a11y:** Escape puts away the copy button over code ([afef806](https://github.com/asier-ortiz/asierortiz.com/commit/afef8061a304305d16614be43cdf1808e127904c))
+* **a11y:** mark the Spanish voice commands in the Android post ([9aefd42](https://github.com/asier-ortiz/asierortiz.com/commit/9aefd427e117b7b00c47492953c2056d3ad54c6b))
+* **a11y:** readable text on the selected search row ([d0d89e2](https://github.com/asier-ortiz/asierortiz.com/commit/d0d89e2d4e2f3d212a276babf99fbccecf49976b))
+* **a11y:** scroll-to-top leaves the tab order when hidden ([d2d9b06](https://github.com/asier-ortiz/asierortiz.com/commit/d2d9b06e68c8d07aa50ec10e686327414ce83b29))
+* **a11y:** the mobile drawer works as a modal for the keyboard ([8cf8e80](https://github.com/asier-ortiz/asierortiz.com/commit/8cf8e8081b26cf0ec2a86cdc7ebe09620425974a))
+* **a11y:** the newsletter link is named by its visible words ([820df75](https://github.com/asier-ortiz/asierortiz.com/commit/820df75f4378ad636f0085d8cf9b7d0fec2c8281))
+* **a11y:** the search dialog keeps focus in and gives it back ([d7ca325](https://github.com/asier-ortiz/asierortiz.com/commit/d7ca325736e185444f2bea23f542fd2ec65bf77e))
+* **a11y:** wide post tables are reachable by keyboard in Safari ([74d27d3](https://github.com/asier-ortiz/asierortiz.com/commit/74d27d32cd084985e8ba8aa9f6258b6fbd7de040))
+* **blog:** drop the emoji from the posts' contents heading ([06ec284](https://github.com/asier-ortiz/asierortiz.com/commit/06ec2841545a0f6049b591e228ab927ed0de9c9f))
+* **blog:** the copy confirmation fades out with its text ([24e92c8](https://github.com/asier-ortiz/asierortiz.com/commit/24e92c82830b57e96900113177ddddc049a2da6d))
+
 ## [1.76.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.76.0...v1.76.1) (2026-10-10)
 
 ### Bug Fixes
