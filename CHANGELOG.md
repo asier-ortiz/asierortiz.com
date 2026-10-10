@@ -1,3 +1,11 @@
+## [1.76.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.76.0...v1.76.1) (2026-10-10)
+
+### Bug Fixes
+
+* **a11y:** keyboard focus stops clear of the fixed header ([3439e91](https://github.com/asier-ortiz/asierortiz.com/commit/3439e91c32a4f7871895350320b9e169f512dfc1))
+* **a11y:** the closed table of contents leaves the tab order ([08c5276](https://github.com/asier-ortiz/asierortiz.com/commit/08c5276abb0e94cdf7b502c0814c77b67671e7fc))
+* **blog:** the table of contents panel keeps its gap and line breaks ([ea3f09d](https://github.com/asier-ortiz/asierortiz.com/commit/ea3f09d9483b029268452519063fcbbc138199f5))
+
 ## [1.76.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.75.0...v1.76.0) (2026-10-09)
 
 ### Features
