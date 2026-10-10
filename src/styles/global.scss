@@ -221,8 +221,10 @@
     color: inherit;
   }
 
+  /* The row's smaller lines (description, date, tags) on its primary-700: 90% white reads at
+     5.1:1, where 80% stopped at 4.4:1. Hover and the tapped row below share it. */
   [data-selected="true"] p {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     transition: color 0.2s ease-in-out;
   }
 
@@ -234,7 +236,7 @@
     }
 
     a:hover p {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.9);
       transition: color 0.2s ease-in-out;
     }
   }
@@ -247,7 +249,7 @@
   }
 
   a[data-pressed] p {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     transition: none;
   }
 

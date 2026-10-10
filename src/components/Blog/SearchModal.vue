@@ -277,15 +277,17 @@ const highlightMatch = (post, field) => {
           No results found.
         </p>
         <template v-else>
+          <!-- Picked with the arrows, hovered or tapped, a row takes the same primary-700: white reads
+               at 5.9:1 on it, 4.1:1 on primary-600. -->
           <a
             v-for="(post, index) in filteredPosts"
             :key="post.url"
             :href="post.url"
             :data-selected="selectedIndex !== -1 && index === selectedIndex ? 'true' : 'false'"
             :class="[
-            'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out data-[pressed]:bg-primary-600 data-[pressed]:text-white data-[pressed]:duration-0',
+            'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out data-[pressed]:bg-primary-700 data-[pressed]:text-white data-[pressed]:duration-0',
             {
-              'bg-primary-600 text-white': selectedIndex !== -1 && index === selectedIndex,
+              'bg-primary-700 text-white': selectedIndex !== -1 && index === selectedIndex,
               'hover:bg-primary-700 hover:text-white': !(
                 selectedIndex !== -1 && index === selectedIndex
               ),
