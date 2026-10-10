@@ -171,8 +171,10 @@
     @apply opacity-0;
   }
 
+  /* A still grey box: a pulse would run for as long as a cover takes to load, with no way to stop
+     it (WCAG 2.2.2). */
   .skeleton {
-    @apply bg-base-800 motion-safe:animate-pulse;
+    @apply bg-base-800;
   }
 
   .hide-scrollbar {

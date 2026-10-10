@@ -230,7 +230,7 @@ const highlightMatch = (post, field) => {
     >
       <div class="px-6 pt-6 sticky top-0 bg-base-900 z-10 flex items-center gap-2">
         <div class="relative search-input flex-1">
-          <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-base-400" aria-hidden="true" />
+          <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-base-400" />
           <!-- Not v-model: it skips input while a word is being composed, and Android keyboards compose
                every word as it is typed, so results would only update after a space. -->
           <!-- A combobox (APG pattern): focus stays here while the arrows pick a row, and

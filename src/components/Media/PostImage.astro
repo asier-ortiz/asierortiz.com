@@ -41,8 +41,8 @@ const sizes =
 </div>
 
 <script>
-  // Drop the pulsing placeholder once each cover has arrived (or failed), so the animation
-  // does not keep running underneath a loaded image.
+  // Drop the placeholder once each cover has arrived (or failed), so nothing paints underneath a
+  // loaded image.
   document.querySelectorAll<HTMLImageElement>('.skeleton > img').forEach((img) => {
     const settle = () => img.parentElement?.classList.remove('skeleton');
     if (img.complete) settle();
