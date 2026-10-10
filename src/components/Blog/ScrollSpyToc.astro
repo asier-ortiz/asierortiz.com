@@ -10,35 +10,42 @@ const { sections } = Astro.props as { sections: Section[] };
 <aside class="fixed left-4 top-1/2 -translate-y-1/2 z-[50] hidden lg:block">
   <div id="toc-wrapper" class="relative">
 
-    <!-- Compact mode -->
+    <!-- Compact mode. aria-expanded is the one open/closed state: the panel after it reads it
+         through peer-aria-expanded. Fixed width, so the longer active bullet never resizes it. -->
     <button
       id="toc-toggle"
       aria-label="Table of contents"
       aria-controls="toc-panel"
       aria-expanded="false"
-      class="flex flex-col gap-2 items-center p-2 bg-base-900 border border-base-700 rounded-md shadow hover:ring-2 hover:ring-primary-400 hover:ring-opacity-50 hover:shadow-lg hover:shadow-primary-400/50 active:ring-2 active:ring-primary-400 active:duration-0 transition-all duration-300"
+      class="peer flex w-10 flex-col gap-2 items-center p-2 bg-base-900 border border-base-500 rounded-md shadow hover:ring-2 hover:ring-primary-400 hover:ring-opacity-50 hover:shadow-lg hover:shadow-primary-400/50 active:ring-2 active:ring-primary-400 active:duration-0 transition-all duration-300"
     >
+      {/* The current section's bullet is longer as well as blue, so it does not rely on colour. */}
       {sections.map(({ id }) => (
         <span
-          key={id}
-          class="scrollspy-bullet h-0.5 w-4 rounded-sm bg-base-700 transition-all duration-300"
+          class="scrollspy-bullet h-0.5 w-3 rounded-sm bg-base-500 transition-[background-color,width] duration-300 motion-reduce:transition-none data-[active]:w-5 data-[active]:bg-primary-400"
           data-target={id}
         ></span>
       ))}
     </button>
 
-    <!-- Expanded mode -->
+    <!-- Expanded mode. Closed, visibility: hidden takes its links out of the tab order and the
+         accessibility tree (aria-hidden alone left them focusable while unseen); visibility flips
+         at the end of the fade-out. inert would do it too, but needs Safari 15.5. The zoom-in only
+         plays where motion is welcome. -->
     <div
       id="toc-panel"
-      class="absolute left-10 top-1/2 -translate-y-1/2 max-h-[75vh] overflow-y-auto bg-base-900 border border-base-700 rounded-xl p-4 shadow-2xl w-60 opacity-0 pointer-events-none scale-95 transition-all duration-300"
-      aria-hidden="true"
+      class="invisible absolute left-10 top-1/2 -translate-y-1/2 max-h-[75vh] overflow-y-auto bg-base-900 border border-base-700 rounded-xl p-4 shadow-2xl w-60 opacity-0 pointer-events-none motion-safe:scale-95 transition-[opacity,transform,visibility] duration-300 peer-aria-expanded:visible peer-aria-expanded:opacity-100 peer-aria-expanded:pointer-events-auto motion-safe:peer-aria-expanded:scale-100"
     >
-      <h2 class="mb-4 text-xs font-bold tracking-wide uppercase text-base-400">Contents</h2>
-      <nav id="scrollspy-nav" class="flex flex-col gap-1">
+      <h2 id="toc-heading" class="mb-4 text-xs font-bold tracking-wide uppercase text-base-400">
+        Contents
+      </h2>
+      <nav id="scrollspy-nav" aria-labelledby="toc-heading" class="flex flex-col gap-1">
+        {/* The current section takes a bar as well as a colour (aria-current drives both); the
+            transparent border keeps every link's text in the same place. */}
         {sections.map(({ id, title }) => (
           <a
             href={`#${id}`}
-            class="scrollspy-link group py-1.5 text-sm text-base-400 hover:text-primary-400 transition-colors"
+            class="scrollspy-link group border-l-2 border-transparent py-1.5 pl-3 text-sm text-base-400 hover:text-primary-400 transition-colors aria-[current=location]:border-primary-400 aria-[current=location]:text-primary-300"
             data-target={id}
           >
             {title}
@@ -54,6 +61,7 @@ const { sections } = Astro.props as { sections: Section[] };
     const compactBullets = document.querySelectorAll('#toc-toggle .scrollspy-bullet');
     const expandedLinks = document.querySelectorAll('#scrollspy-nav .scrollspy-link');
     const targets = Array.from(compactBullets).map(el => document.getElementById(el.dataset.target));
+    const tocWrapper = document.getElementById('toc-wrapper');
     const tocToggle = document.getElementById('toc-toggle');
     const tocPanel = document.getElementById('toc-panel');
 
@@ -70,43 +78,35 @@ const { sections } = Astro.props as { sections: Section[] };
         const next = targets[i + 1]?.offsetTop ?? Infinity;
         const isActive = (scroll >= top && scroll < next) || (isLast && isBottom);
 
-        const bullet = compactBullets[i];
+        compactBullets[i]?.toggleAttribute('data-active', isActive);
+
         const link = expandedLinks[i];
-
-        if (bullet) {
-          bullet.classList.toggle('bg-primary-400', isActive);
-          bullet.classList.toggle('bg-base-700', !isActive);
-        }
-
-        if (link) {
-          link.classList.toggle('text-primary-300', isActive);
-          link.classList.toggle('text-base-400', !isActive);
-        }
+        if (isActive) link?.setAttribute('aria-current', 'location');
+        else link?.removeAttribute('aria-current');
       });
     }
 
     document.addEventListener('scroll', updateHighlight);
     updateHighlight();
 
+    const isOpen = () => tocToggle.getAttribute('aria-expanded') === 'true';
+    const setOpen = (open) => tocToggle.setAttribute('aria-expanded', String(open));
+
     tocToggle?.addEventListener('click', (e) => {
       e.stopPropagation();
-      const expanded = tocPanel.getAttribute('aria-hidden') === 'false';
-      tocPanel.setAttribute('aria-hidden', expanded ? 'true' : 'false');
-      tocPanel.classList.toggle('opacity-0', expanded);
-      tocPanel.classList.toggle('pointer-events-none', expanded);
-      tocPanel.classList.toggle('scale-100', !expanded);
-      tocPanel.classList.toggle('scale-95', expanded);
+      setOpen(!isOpen());
     });
 
     document.addEventListener('click', (e) => {
-      const target = e.target;
-      if (!(target instanceof HTMLElement)) return;
+      if (isOpen() && !tocWrapper.contains(e.target)) setOpen(false);
+    });
 
-      if (!tocPanel.contains(target) && !tocToggle.contains(target)) {
-        tocPanel.setAttribute('aria-hidden', 'true');
-        tocPanel.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
-        tocPanel.classList.remove('scale-100');
-      }
+    // Escape closes it, and focus inside the panel goes back to the button instead of staying on
+    // a link that is about to hide.
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !isOpen()) return;
+      if (tocPanel.contains(document.activeElement)) tocToggle.focus();
+      setOpen(false);
     });
   });
 </script>
