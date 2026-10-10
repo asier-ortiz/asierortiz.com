@@ -39,16 +39,23 @@ function addCopyButtonsToCodeBlocks() {
     wrapper.appendChild(tooltip);
 
     let hideTimer;
+    let clearTimer;
     const showTooltip = (text) => {
+      clearTimeout(clearTimer);
       tooltip.textContent = text;
       tooltip.classList.replace('copy-tooltip-hidden', 'copy-tooltip-visible');
       clearTimeout(hideTimer);
       hideTimer = setTimeout(hideTooltip, 2000);
     };
+    // The text stays through the 300 ms fade-out (.copy-tooltip in global.scss), or the bubble
+    // would fade out empty, and goes after it, so the next outcome is announced again.
     const hideTooltip = () => {
       tooltip.classList.replace('copy-tooltip-visible', 'copy-tooltip-hidden');
-      tooltip.textContent = '';
       button.innerHTML = COPY_ICON;
+      clearTimeout(clearTimer);
+      clearTimer = setTimeout(() => {
+        tooltip.textContent = '';
+      }, 300);
     };
 
     button.addEventListener('click', async () => {
