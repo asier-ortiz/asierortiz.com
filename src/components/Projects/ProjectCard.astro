@@ -39,6 +39,9 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
       </div>
       <p class="description mt-4">{description}</p>
     </div>
+    <!-- Without a link, the slot holds a status label rather than a dimmed button: it is
+         information, so it reads at full contrast (6:1), and the darker fill and missing arrow
+         keep it from looking clickable. -->
     <div class="mt-6 flex">
       {href ? (
         <Button
@@ -54,7 +57,7 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
           <span class="sr-only">about {title}</span>
         </Button>
       ) : (
-        <span class="button button--ghost disabled-button">
+        <span class="button bg-base-800 text-base-400">
           {buttonIcon && <Icon name={buttonIcon} class="h-5 w-5 mr-2" aria-hidden="true" />}
           {buttonText}
         </span>
@@ -86,12 +89,6 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
   .project-card {
     position: relative;
     overflow: hidden;
-  }
-
-  .disabled-button {
-    opacity: 0.5;
-    cursor: default;
-    pointer-events: none;
   }
 </style>
 
