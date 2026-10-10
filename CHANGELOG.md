@@ -1,3 +1,19 @@
+## [1.77.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.76.2...v1.77.0) (2026-10-10)
+
+### Features
+
+* **a11y:** add a skip link to the page content ([ebf5e9b](https://github.com/asier-ortiz/asierortiz.com/commit/ebf5e9b4cb9f5b3dac94a074d06b98c22c8fe420))
+
+### Bug Fixes
+
+* **a11y:** hide decorative icons and still the cover placeholder ([4fac8e1](https://github.com/asier-ortiz/asierortiz.com/commit/4fac8e1fc1a0735c2163803ab760e9a45a4f8f19))
+* **a11y:** keep wide diagrams inside the window with enlarged text ([671480c](https://github.com/asier-ortiz/asierortiz.com/commit/671480c81eb5c8d417c0f97430da9294d513413c))
+* **a11y:** links that open a new tab say so to screen readers ([ba7ad8f](https://github.com/asier-ortiz/asierortiz.com/commit/ba7ad8f0988c2d19f7e57d08205e36fe879567c9))
+* **a11y:** mark the heading a contents link lands on with a bar ([e6d9382](https://github.com/asier-ortiz/asierortiz.com/commit/e6d93826709d197e2ac02d283187add876701973))
+* **a11y:** name the timeline toggles, navs and listing headings ([fe480b1](https://github.com/asier-ortiz/asierortiz.com/commit/fe480b11dc89717bb16f82a108b9f3fe6f3ee7af))
+* **a11y:** raise the outlines of the blog diagrams to 3:1 ([37a8aaa](https://github.com/asier-ortiz/asierortiz.com/commit/37a8aaa9989acc4d85df76e6011a45e91662419f)), closes [#404040](https://github.com/asier-ortiz/asierortiz.com/issues/404040) [#333333](https://github.com/asier-ortiz/asierortiz.com/issues/333333) [#737373](https://github.com/asier-ortiz/asierortiz.com/issues/737373)
+* **a11y:** screen readers announce the search row picked by arrows ([f339119](https://github.com/asier-ortiz/asierortiz.com/commit/f339119b652eecb8a326b11a03009ded0e10f340))
+
 ## [1.76.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.76.1...v1.76.2) (2026-10-10)
 
 ### Bug Fixes
