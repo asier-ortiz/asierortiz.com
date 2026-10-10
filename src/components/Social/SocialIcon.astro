@@ -12,12 +12,13 @@ interface Props {
 
 const { social, href, label, text = '', class: className } = Astro.props as Props;
 
-// Only pages on other sites open in a new tab; mailto: and same-origin links stay put.
+// Only pages on other sites open in a new tab, and their name says so to screen readers (WCAG
+// technique G201); mailto: and same-origin links stay put.
 const external = /^https?:\/\//.test(href);
 ---
 
 <a
-  aria-label={label}
+  aria-label={external ? `${label} (opens in a new tab)` : label}
   href={href}
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener noreferrer' : undefined}

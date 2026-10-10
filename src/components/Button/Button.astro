@@ -8,6 +8,8 @@ interface Props {
   arrow?: 'left' | 'right' | 'none';
   onclick?: any;
   class?: string;
+  target?: string;
+  'aria-label'?: string;
   rest?: any;
 }
 
@@ -20,6 +22,12 @@ const {
   class: className,
   ...rest
 } = Astro.props as Props;
+
+// A link that opens a new tab says so to screen readers (WCAG technique G201): at the end of its
+// aria-label when it has one, otherwise after its visible words.
+const NEW_TAB = ' (opens in a new tab)';
+const newTab = rest.target === '_blank';
+if (newTab && rest['aria-label']) rest['aria-label'] += NEW_TAB;
 ---
 
 {
@@ -56,6 +64,7 @@ const {
         />
       )}
       <slot />
+      {newTab && !rest['aria-label'] && <span class="sr-only">{NEW_TAB}</span>}
       {arrow === 'right' && (
         <Icon
           name="tdesign:arrow-right"
