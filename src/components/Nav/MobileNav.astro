@@ -8,7 +8,7 @@ import navData from '@config/navData.json';
   <button
     id="mobile-nav__burger"
     aria-label="open navigation menu"
-    aria-haspopup="true"
+    aria-controls="mobile-nav__content"
     aria-expanded="false"
     class="primary-focus h-10 w-10 rounded-md"
   >
@@ -40,10 +40,13 @@ import navData from '@config/navData.json';
       </nav>
     </div>
   </div>
+  <!-- For the finger and the mouse: keyboards close with Escape or the close button, so the
+       backdrop stays out of the tab order and the accessibility tree. -->
   <button
     id="mobile-nav__backdrop"
     class="mobile-nav__backdrop--fade-out fixed left-0 top-0 z-30 h-screen touch-none bg-black"
-    aria-label="close navigation menu"></button>
+    tabindex="-1"
+    aria-hidden="true"></button>
 </div>
 
 <style lang="scss">
@@ -122,6 +125,21 @@ import navData from '@config/navData.json';
   let mobileNavCloseBtn;
   let mobileNavBackdrop;
   let hideContentTimeout;
+  let pageBehind = [];
+
+  // Everything but the drawer and its backdrop: the siblings met on the way from the drawer up to
+  // body, so the header around it is covered too.
+  function outsideDrawer() {
+    const outside = [];
+    for (let el = mobileNavContent; el !== document.body; el = el.parentElement) {
+      for (const sibling of el.parentElement.children) {
+        if (sibling !== el && sibling !== mobileNavBackdrop && !sibling.inert) {
+          outside.push(sibling);
+        }
+      }
+    }
+    return outside;
+  }
 
   function toggleMobileNav(event) {
     if (mobileNavBurger && mobileNavContent && mobileNavContainer && mobileNavBackdrop) {
@@ -139,8 +157,15 @@ import navData from '@config/navData.json';
         mobileNavBackdrop.classList.remove('hidden');
         mobileNavBackdrop.classList.remove('mobile-nav__backdrop--fade-out');
         mobileNavBackdrop.classList.add('mobile-nav__backdrop--fade-in');
+
+        // Modal while open, like the search dialog: focus moves in and the page behind is inert,
+        // so Tab and screen readers stay in the drawer (WCAG 2.4.3). Safari before 15.5 ignores
+        // inert and lets Tab out.
+        mobileNavCloseBtn.focus({ preventScroll: true });
+        pageBehind = outsideDrawer();
+        pageBehind.forEach((el) => (el.inert = true));
       } else {
-        closeMobileNav();
+        closeMobileNav({ returnFocus: true });
       }
 
       event.preventDefault();
@@ -148,11 +173,17 @@ import navData from '@config/navData.json';
   }
 
   // No preventDefault: link clicks and page events call this too, and their default must run.
-  function closeMobileNav({ animate = true } = {}) {
+  // Focus goes back to the burger only when the drawer itself was dismissed (close button,
+  // backdrop, Escape): a link takes it to its own target.
+  function closeMobileNav({ animate = true, returnFocus = false } = {}) {
     if (mobileNavContent.classList.contains('hidden')) return;
 
     mobileNavContainer.classList.remove('open');
     mobileNavBurger.setAttribute('aria-expanded', 'false');
+
+    pageBehind.forEach((el) => (el.inert = false));
+    pageBehind = [];
+    if (returnFocus) mobileNavBurger.focus({ preventScroll: true });
 
     mobileNavContent.classList.remove('mobile-nav--slide-in');
     clearTimeout(hideContentTimeout);
@@ -181,6 +212,12 @@ import navData from '@config/navData.json';
         mobileNavBurger.addEventListener('click', toggleMobileNav);
         mobileNavCloseBtn.addEventListener('click', toggleMobileNav);
         mobileNavBackdrop.addEventListener('click', toggleMobileNav);
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && mobileNavContainer.classList.contains('open')) {
+            closeMobileNav({ returnFocus: true });
+          }
+        });
 
         // A link into this same page (Background or Projects on /) never unloads it, so nothing
         // else would close the drawer.
