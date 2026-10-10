@@ -186,11 +186,15 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
   <body
     class:list={['dark overflow-y-scroll', { 'use-animations': siteData.useAnimations === true }]}
   >
+    <!-- The first tab stop: past the header to the page's own content (WCAG 2.4.1). Following
+         #main moves the point the next Tab starts from (every current browser), so <main> needs
+         no tabindex, which would also make any click inside it take focus. -->
+    <a href="#main" class="skip-link">Skip to content</a>
     {!isPost && <ParticlesPause />}
     <div class="flex min-h-[100lvh] flex-col justify-between">
       <div>
         <Nav />
-        <main>
+        <main id="main">
           <slot />
         </main>
       </div>

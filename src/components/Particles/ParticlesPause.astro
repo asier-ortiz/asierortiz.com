@@ -4,9 +4,9 @@ import PauseSwitch from '@components/Button/PauseSwitch.astro';
 
 <!--
   Pauses the star field and the shooting stars, which move with no end (WCAG 2.2.2). Mirrors the
-  scroll-to-top button in the bottom-left corner, but comes first in the page so it is the first
-  tab stop. Only from md, where the stars are drawn, and hidden until its script runs: without
-  JavaScript nothing moves.
+  scroll-to-top button in the bottom-left corner, but comes early in the page so it is the second
+  tab stop, right after the skip link. Only from md, where the stars are drawn, and hidden until
+  its script runs: without JavaScript nothing moves.
 -->
 <PauseSwitch
   id="particles-pause"
