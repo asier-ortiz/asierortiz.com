@@ -149,7 +149,7 @@ const handleGlobalKeyDown = (event) => {
 watch(selectedIndex, (newIndex) => {
   if (newIndex !== -1) {
     nextTick(() => {
-      const selected = document.querySelector('a[data-selected="true"]');
+      const selected = document.getElementById(`search-result-${newIndex}`);
       if (selected) {
         const container = document.getElementById('results-container');
         const containerRect = container.getBoundingClientRect();
@@ -233,12 +233,19 @@ const highlightMatch = (post, field) => {
           <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-base-400" aria-hidden="true" />
           <!-- Not v-model: it skips input while a word is being composed, and Android keyboards compose
                every word as it is typed, so results would only update after a space. -->
+          <!-- A combobox (APG pattern): focus stays here while the arrows pick a row, and
+               aria-activedescendant has screen readers announce it (WCAG 4.1.2). -->
           <input
             ref="searchInput"
             :value="searchQuery"
             @input="searchQuery = $event.target.value"
             @keydown="handleKeyDown"
             type="search"
+            role="combobox"
+            :aria-expanded="filteredPosts.length > 0"
+            aria-controls="search-results"
+            aria-autocomplete="list"
+            :aria-activedescendant="selectedIndex === -1 ? undefined : `search-result-${selectedIndex}`"
             enterkeyhint="go"
             autocomplete="off"
             aria-label="Search posts"
@@ -261,12 +268,15 @@ const highlightMatch = (post, field) => {
 
       <p class="sr-only" role="status">{{ resultsStatus }}</p>
 
+      <!-- tabindex: Chrome makes a scroller with nothing focusable inside a tab stop of its own, and
+           the options below are left out of the Tab order on purpose. The arrows scroll it. -->
       <div
         id="results-container"
+        tabindex="-1"
         class="overflow-y-auto px-6 py-4 mt-4 transition-all duration-200"
         :class="[
           filteredPosts.length > 0
-          ? 'space-y-4 max-h-[min(300px,50dvh)]'
+          ? 'max-h-[min(300px,50dvh)]'
           : 'flex items-center justify-center h-[100px]'
         ]"
       >
@@ -276,14 +286,26 @@ const highlightMatch = (post, field) => {
         <p v-else-if="filteredPosts.length === 0" class="text-center text-base-400 text-sm">
           No results found.
         </p>
-        <template v-else>
+        <!-- The combobox's options. Out of the Tab order, as the pattern has them: the arrows reach
+             them and Enter, a click or a tap opens them. Hidden rather than removed while empty, so
+             aria-controls always points at it. -->
+        <div
+          v-show="filteredPosts.length > 0"
+          id="search-results"
+          role="listbox"
+          aria-label="Search results"
+          class="space-y-4"
+        >
           <!-- Picked with the arrows, hovered or tapped, a row takes the same primary-700: white reads
                at 5.9:1 on it, 4.1:1 on primary-600. -->
           <a
             v-for="(post, index) in filteredPosts"
+            :id="`search-result-${index}`"
             :key="post.url"
             :href="post.url"
-            :data-selected="selectedIndex !== -1 && index === selectedIndex ? 'true' : 'false'"
+            role="option"
+            :aria-selected="index === selectedIndex"
+            tabindex="-1"
             :class="[
             'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out data-[pressed]:bg-primary-700 data-[pressed]:text-white data-[pressed]:duration-0',
             {
@@ -304,7 +326,7 @@ const highlightMatch = (post, field) => {
               </p>
             </div>
           </a>
-        </template>
+        </div>
       </div>
     </div>
   </div>

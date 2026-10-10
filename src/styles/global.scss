@@ -224,14 +224,14 @@
   }
 
   /* On a blue row a white wash leaves the marked word at 2.6:1; a dark one keeps it readable. */
-  [data-selected="true"] mark {
+  [aria-selected="true"] mark {
     background-color: rgba(0, 0, 0, 0.3);
     color: inherit;
   }
 
   /* The row's smaller lines (description, date, tags) on its primary-700: 90% white reads at
      5.1:1, where 80% stopped at 4.4:1. Hover and the tapped row below share it. */
-  [data-selected="true"] p {
+  [aria-selected="true"] p {
     color: rgba(255, 255, 255, 0.9);
     transition: color 0.2s ease-in-out;
   }
