@@ -272,7 +272,7 @@ Online services like Google Speech API weren't an option: again, no guaranteed c
 
 VOSK uses lightweight ML models (~50MB); the Spanish one is downloaded once, over Wi-Fi unless the user allows mobile data. It processes audio locally with decent accuracy for a focused vocabulary set.
 
-The vocabulary is deliberately tiny. In driving mode, the app listens for one action with two accepted phrasings, "nueva incidencia" and "registrar incidencia", which opens an incident report with the location already filled in. Vosk runs with a closed grammar: those phrases plus an unknown-word token, nothing else.
+The vocabulary is deliberately tiny. In driving mode, the app listens for one action with two accepted phrasings, "<span lang="es">nueva incidencia</span>" and "<span lang="es">registrar incidencia</span>", which opens an incident report with the location already filled in. Vosk runs with a closed grammar: those phrases plus an unknown-word token, nothing else.
 
 The voice recognition doesn't need to be perfect: matching a couple of known phrases against a closed grammar keeps accuracy high even with road noise and regional accents, in a way free-form dictation never could.
 
