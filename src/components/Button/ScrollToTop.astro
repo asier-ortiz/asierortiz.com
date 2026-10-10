@@ -10,12 +10,17 @@ import { Icon } from 'astro-icon/components';
 <script is:client="load">
   document.addEventListener('DOMContentLoaded', () => {
     const scrollToTopButton = document.getElementById('scrollToTop');
+    const siteLogo = document.querySelector('#nav__container a'); // the header's first link
 
+    // Focus goes up with the page, so the next Tab carries on from the top instead of from a
+    // button that is about to hide (WCAG 2.4.3). Only keyboard users see it land there: after a
+    // click or a tap, :focus-visible draws no ring.
     function scrollToTop() {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         ? 'auto'
         : 'smooth';
       window.scrollTo({ top: 0, behavior });
+      siteLogo?.focus({ preventScroll: true });
     }
 
     scrollToTopButton.addEventListener('click', scrollToTop);

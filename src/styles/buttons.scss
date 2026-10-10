@@ -83,8 +83,14 @@
   @apply transition-all duration-500 ease-in-out opacity-0 pointer-events-none transform translate-x-full;
   @apply shadow-md;
 
+  /* Hidden, visibility takes it out of the tab order and the accessibility tree (opacity alone
+     left an unseen tab stop); it flips at the end of the slide-out. */
+  @apply invisible;
+
   &.visible {
     @apply opacity-100 pointer-events-auto translate-x-0;
+    /* Not `@apply visible`: it would pick up this very rule (see the note in aos.scss). */
+    visibility: visible;
   }
 
   &.hiding {
@@ -99,7 +105,7 @@
 
   @media (prefers-reduced-motion: no-preference) {
     &:active {
-      transition-property: opacity, transform;
+      transition-property: opacity, transform, visibility;
     }
   }
 
