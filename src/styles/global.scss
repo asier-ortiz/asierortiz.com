@@ -137,6 +137,14 @@
       &:focus-visible {
         opacity: 1;
       }
+
+      /* Revealed that way, it can sit over the end of the first lines, so Escape puts it away
+         until the pointer leaves the block (copy-code.js; WCAG 1.4.13). Not when it has keyboard
+         focus: that would hide the focused control. */
+      .code-block.copy-dismissed &:not(:focus-visible) {
+        opacity: 0;
+        pointer-events: none;
+      }
     }
   }
 

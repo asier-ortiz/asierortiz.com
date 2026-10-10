@@ -65,9 +65,19 @@ function addCopyButtonsToCodeBlocks() {
     });
 
     // Only a mouse leaving hides it early: on touch, the next tap anywhere else fires a
-    // compatibility mouseleave that would cut the 2 s confirmation short.
+    // compatibility mouseleave that would cut the 2 s confirmation short. Leaving also ends an
+    // Escape dismissal, so the next hover shows the button again.
     wrapper.addEventListener('pointerleave', (event) => {
       if (event.pointerType === 'mouse') hideTooltip();
+      wrapper.classList.remove('copy-dismissed');
+    });
+  });
+
+  // Escape puts away the button of the block under the pointer (styles in global.scss).
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('.code-block:hover').forEach((block) => {
+      block.classList.add('copy-dismissed');
     });
   });
 }
