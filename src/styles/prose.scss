@@ -44,13 +44,19 @@
      From lg they widen up to the site's 62rem frame, centred on the post's 46rem column. The
      width also follows the window: the tallest diagram so far (800x584) still fits under the
      4.5rem header, and 4rem stay free on each side for the contents button fixed at the left
-     edge. It never drops below the column. */
+     edge. It never drops below the column. Enlarged text (WCAG 1.4.4) can make 46rem wider than
+     the window: the column is then the window less the article's 2rem padding and the 0.5rem
+     scrollbar (global.scss), and the figure fills just that, so nothing spills sideways. */
   @screen lg {
     img[data-zoomable] {
-      --figure-width: clamp(46rem, min((100svh - 6rem) * 800 / 584, 100vw - 8rem), 62rem);
+      --figure-width: clamp(
+        min(46rem, 100vw - 2.5rem),
+        min((100svh - 6rem) * 800 / 584, 100vw - 8rem),
+        62rem
+      );
       width: var(--figure-width);
       max-width: none;
-      margin-left: calc((46rem - var(--figure-width)) / 2);
+      margin-left: min(0px, (46rem - var(--figure-width)) / 2);
     }
   }
 
