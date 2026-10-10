@@ -10,7 +10,8 @@ import siteData from '@config/siteData.json';
   <section class="container pt-24 md:pt-36 lg:pt-44">
     <div class="w-full py-20 text-center md:py-32">
       <div class="mx-auto max-w-xl px-4 text-center">
-        <h1 class="h1 text-gradient">404.</h1>
+        <!-- "404." alone tells a screen reader little; the hidden words say what happened. -->
+        <h1 class="h1 text-gradient">404.<span class="sr-only"> Page not found</span></h1>
         <p class="description mt-4">
           There is nothing at this address. The page may have moved, or the link that brought you
           here may be wrong. If you followed a link from this site, tell me and I will fix it.

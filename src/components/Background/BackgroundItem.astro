@@ -33,7 +33,12 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
     {/* Server-rendered (client:load, not client:only): the open description and the toggles count
         towards the page height from the first paint. Rendered only on the client they arrived after
         a fragment scroll had been computed, and any section below them landed short. */}
-    <ToggleDescription client:load contentId={`background-description-${index}`} initialOpen={initialOpen}>
+    <ToggleDescription
+      client:load
+      contentId={`background-description-${index}`}
+      title={title}
+      initialOpen={initialOpen}
+    >
       {keepHyphenatedWords(description).map((part, i) => (i % 2 ? <span class="inline-block">{part}</span> : part))}
     </ToggleDescription>
   </div>

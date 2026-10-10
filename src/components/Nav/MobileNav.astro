@@ -31,7 +31,7 @@ import navData from '@config/navData.json';
         </button>
       </div>
       <hr class="mx-5 border-b-2 border-base-600" />
-      <nav>
+      <nav aria-label="Main">
         <ul class="mx-1 mt-2 text-xl">
           {
             navData.map((navItem) => <NavLink navItem={navItem} />)

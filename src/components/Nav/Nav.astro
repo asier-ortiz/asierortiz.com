@@ -19,7 +19,9 @@ import siteData from '@config/siteData.json.ts';
           <SiteLogo />
         </div>
         <div class="flex flex-auto justify-end">
-          <nav class="hidden md:block">
+          <!-- Named like the drawer's (MobileNav): one site navigation, shown in one place at a
+               time. -->
+          <nav class="hidden md:block" aria-label="Main">
             <ul class="flex h-fit items-center px-4">
               {navData.map((navItem) => <NavLink navItem={navItem} />)}
             </ul>

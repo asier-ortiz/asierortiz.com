@@ -6,7 +6,9 @@
       :aria-expanded="open.toString()"
       :aria-controls="contentId"
     >
-      <span>{{ open ? 'Show less' : 'Show more' }}</span>
+      <span>
+        {{ open ? 'Show less' : 'Show more' }}<span class="sr-only"> about {{ title }}</span>
+      </span>
       <ChevronDown
         :class="[
           'size-4 motion-safe:transition-transform motion-safe:duration-300',
@@ -39,6 +41,12 @@ const props = defineProps({
   },
   // Given by the parent so the server-rendered markup and the hydrated one agree.
   contentId: {
+    type: String,
+    required: true,
+  },
+  // The entry's title, read after "Show more" by screen readers so the toggles of the timeline
+  // do not all share one name.
+  title: {
     type: String,
     required: true,
   },

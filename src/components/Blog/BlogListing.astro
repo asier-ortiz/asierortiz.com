@@ -22,6 +22,7 @@ interface Props {
 }
 
 const { allPosts, posts, pagination, activeTag } = Astro.props;
+const titleSuffix = activeTag ? `: posts tagged #${activeTag}` : '';
 
 // Chips are ordered by how many posts they group, so the themes of the blog come first.
 const tagCounts = new Map<string, number>();
@@ -58,7 +59,11 @@ const searchIndex = allPosts.map((post) => ({
      measure of the articles. -->
 <section class="container pt-24 md:pt-36 lg:pt-44">
   <header class="blog-header text-left mb-12">
-    <h1 class="h1 text-pretty text-gradient pb-2">{siteData.blog.title}</h1>
+    <!-- Every listing shows the blog's title; a tag page adds its tag for screen readers, and the
+         in-page filter below keeps that in step with the URL. -->
+    <h1 class="h1 text-pretty text-gradient pb-2">
+      {siteData.blog.title}<span id="blog-title-tag" class="sr-only">{titleSuffix}</span>
+    </h1>
     <!-- The link's name starts with its visible words, so voice control can click it by them
          (WCAG 2.5.3); the hidden part says where it goes. -->
     <p class="description mt-6 max-w-[42rem] text-pretty">
@@ -245,6 +250,7 @@ const searchIndex = allPosts.map((post) => ({
       const chips = [...filters.querySelectorAll<HTMLAnchorElement>('a[data-tag]')];
       const cards = [...document.querySelectorAll<HTMLElement>('#posts-grid .post-card')];
       const status = document.getElementById('tag-filters-status');
+      const titleTag = document.getElementById('blog-title-tag');
 
       const tagFromPath = (path: string) => path.match(/^\/blog\/tag\/([^/]+)\/?$/)?.[1] ?? 'all';
 
@@ -262,6 +268,7 @@ const searchIndex = allPosts.map((post) => ({
           else chip.removeAttribute('aria-current');
         });
         if (status) status.textContent = tag === 'all' ? '' : `${shown} ${shown === 1 ? 'post' : 'posts'} tagged #${tag}`;
+        if (titleTag) titleTag.textContent = tag === 'all' ? '' : `: posts tagged #${tag}`;
       };
 
       chips.forEach((chip) =>
