@@ -34,18 +34,19 @@ const { sections } = Astro.props as { sections: Section[] };
          plays where motion is welcome. -->
     <div
       id="toc-panel"
-      class="invisible absolute left-10 top-1/2 -translate-y-1/2 max-h-[75vh] overflow-y-auto bg-base-900 border border-base-700 rounded-xl p-4 shadow-2xl w-60 opacity-0 pointer-events-none motion-safe:scale-95 transition-[opacity,transform,visibility] duration-300 peer-aria-expanded:visible peer-aria-expanded:opacity-100 peer-aria-expanded:pointer-events-auto motion-safe:peer-aria-expanded:scale-100"
+      class="invisible absolute left-12 top-1/2 -translate-y-1/2 max-h-[75vh] overflow-y-auto bg-base-900 border border-base-700 rounded-xl p-4 shadow-2xl w-60 opacity-0 pointer-events-none motion-safe:scale-95 transition-[opacity,transform,visibility] duration-300 peer-aria-expanded:visible peer-aria-expanded:opacity-100 peer-aria-expanded:pointer-events-auto motion-safe:peer-aria-expanded:scale-100"
     >
       <h2 id="toc-heading" class="mb-4 text-xs font-bold tracking-wide uppercase text-base-400">
         Contents
       </h2>
       <nav id="scrollspy-nav" aria-labelledby="toc-heading" class="flex flex-col gap-1">
-        {/* The current section takes a bar as well as a colour (aria-current drives both); the
-            transparent border keeps every link's text in the same place. */}
+        {/* The current section takes a bar as well as a colour (aria-current drives both). The
+            bar sits in the panel's padding (-ml-3 = border + pl-2.5), so the titles keep their
+            width and wrap as they did without it; the transparent border holds every link still. */}
         {sections.map(({ id, title }) => (
           <a
             href={`#${id}`}
-            class="scrollspy-link group border-l-2 border-transparent py-1.5 pl-3 text-sm text-base-400 hover:text-primary-400 transition-colors aria-[current=location]:border-primary-400 aria-[current=location]:text-primary-300"
+            class="scrollspy-link group -ml-3 border-l-2 border-transparent py-1.5 pl-2.5 text-sm text-base-400 hover:text-primary-400 transition-colors aria-[current=location]:border-primary-400 aria-[current=location]:text-primary-300"
             data-target={id}
           >
             {title}
