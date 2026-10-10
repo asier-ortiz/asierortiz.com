@@ -59,6 +59,8 @@ const searchIndex = allPosts.map((post) => ({
 <section class="container pt-24 md:pt-36 lg:pt-44">
   <header class="blog-header text-left mb-12">
     <h1 class="h1 text-pretty text-gradient pb-2">{siteData.blog.title}</h1>
+    <!-- The link's name starts with its visible words, so voice control can click it by them
+         (WCAG 2.5.3); the hidden part says where it goes. -->
     <p class="description mt-6 max-w-[42rem] text-pretty">
       {siteData.blog.description}
       <Button
@@ -66,10 +68,9 @@ const searchIndex = allPosts.map((post) => ({
         href={siteData.newsletter.url}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={siteData.newsletter.label}
         class="inline"
       >
-        Get them by email.
+        Get them by email<span class="sr-only"> (newsletter)</span>.
       </Button>
     </p>
   </header>
