@@ -25,8 +25,23 @@ const fuse = ref(null);
 const normalizedPosts = ref([]);
 
 const searchInput = ref(null);
+const dialog = ref(null);
 
 useScrollLock();
+
+// Behind the open dialog the page is inert, as behind a native modal <dialog>: Tab, clicks and
+// screen readers stay in the dialog (WCAG 2.4.3). Teleported, the dialog is one of body's own
+// children, so the others are the page. Safari before 15.5 ignores inert and lets Tab out.
+let inertPage = [];
+
+onMounted(() => {
+  inertPage = [...document.body.children].filter((el) => el !== dialog.value && !el.inert);
+  inertPage.forEach((el) => (el.inert = true));
+});
+
+onBeforeUnmount(() => {
+  inertPage.forEach((el) => (el.inert = false));
+});
 
 onMounted(() => {
   normalizedPosts.value = props.posts.map((post) => ({
@@ -200,6 +215,7 @@ const highlightMatch = (post, field) => {
        in WebKit (blurred chips, no dialog on iPhone). -->
   <Teleport to="body">
   <div
+    ref="dialog"
     class="fixed inset-0 z-50 flex justify-center transition-opacity duration-200"
     :class="isClosing ? 'opacity-0' : 'opacity-100'"
     style="background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px)"

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import SearchModal from '@components/Blog/SearchModal.vue';
 import Search from '@components/Icons/Search.vue';
 
@@ -12,15 +12,23 @@ const props = defineProps({
 });
 
 const isOpen = ref(false);
+const searchButton = ref(null);
+let returnFocus = null;
 
-// Open the search modal
+// Open the search modal. On close, focus goes back to what had it (WCAG 2.4.3), or to this button
+// when a click left it nowhere: Safari does not focus a clicked button.
 const openModal = () => {
+  if (isOpen.value) return;
+  const active = document.activeElement;
+  returnFocus = active && active !== document.body ? active : searchButton.value;
   isOpen.value = true;
 };
 
-// Close the search modal
-const closeModal = () => {
+// Close the search modal. Focus waits for it to go: until then the page behind is inert.
+const closeModal = async () => {
   isOpen.value = false;
+  await nextTick();
+  returnFocus?.focus({ preventScroll: true });
 };
 
 // Global keyboard shortcut (Ctrl+K / Cmd+K) to open the modal
@@ -57,6 +65,7 @@ const hasPosts = computed(() => props.posts.length > 0);
 <template>
   <div v-if="hasPosts" class="relative group">
     <button
+      ref="searchButton"
       type="button"
       @click="openModal"
       class="filter-btn relative flex items-center gap-2 rounded-full bg-primary-500 px-3 py-2 text-xs font-medium text-black transition hover:bg-primary-400 active:bg-primary-400 active:duration-0 before:absolute before:-inset-1 before:content-['']"
