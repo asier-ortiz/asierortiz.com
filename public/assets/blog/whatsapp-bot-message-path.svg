@@ -6,7 +6,9 @@
     /* Safari lays text out at the size it is shown, and the system font widens at small sizes:
        without this, labels change width as the figure is zoomed. */
     svg { text-rendering: geometricPrecision; }
-    .lane { fill: #171717; stroke: #404040; stroke-width: 1; }
+    /* Grey outlines in #737373: 3:1 or more against the page and the fills they edge, so the
+       boxes stay apart at phone size too (WCAG 1.4.11). */
+    .lane { fill: #171717; stroke: #737373; stroke-width: 1; }
     .lane-title { font: 600 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
     .lane-sub { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
     .num { font: 600 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
@@ -16,7 +18,7 @@
     .legend { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
     .pg { fill: #38bdf8; }
     .http { fill: none; stroke: #a3a3a3; stroke-width: 1.2; }
-    .divider { stroke: #404040; stroke-width: 1; stroke-dasharray: 3 3; }
+    .divider { stroke: #737373; stroke-width: 1; stroke-dasharray: 3 3; }
     .link { stroke: #38bdf8; stroke-width: 1.2; fill: none; }
   </style>
 

@@ -6,10 +6,12 @@
     /* Safari lays text out at the size it is shown, and the system font widens at small sizes:
        without this, labels change width as the figure is zoomed. */
     svg { text-rendering: geometricPrecision; }
-    .lane { fill: #0f0f0f; stroke: #333333; stroke-width: 1; }
-    .box { fill: #171717; stroke: #404040; stroke-width: 1; }
+    /* Grey outlines in #737373: 3:1 or more against the page and the fills they edge, so the
+       boxes stay apart at phone size too (WCAG 1.4.11). */
+    .lane { fill: #0f0f0f; stroke: #737373; stroke-width: 1; }
+    .box { fill: #171717; stroke: #737373; stroke-width: 1; }
     .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
-    .inner { fill: #262626; stroke: #404040; stroke-width: 1; }
+    .inner { fill: #262626; stroke: #737373; stroke-width: 1; }
     .verb-box { fill: #1e293b; stroke: #38bdf8; stroke-width: 1.2; }
     .t { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
     .s { font: 10.5px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
