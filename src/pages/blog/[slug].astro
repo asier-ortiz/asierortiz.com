@@ -129,9 +129,31 @@ const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
       outer.classList.toggle('has-less', scroller.scrollLeft > 1);
       outer.classList.toggle('has-more', scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 1);
     };
+    // While the table overflows, its scroller is a named region the keyboard can reach and scroll
+    // with the arrow keys: Chrome and Firefox make such scrollers focusable on their own, Safari
+    // does not (WCAG 2.1.1). A table that fits adds no tab stop. The name carries the section the
+    // table sits in, so two of them on a page read apart in a screen reader's list of regions.
+    let heading = outer.previousElementSibling;
+    while (heading && !/^H[2-6]$/.test(heading.tagName)) heading = heading.previousElementSibling;
+    const label = heading ? `Scrollable table, ${heading.textContent?.trim()}` : 'Scrollable table';
+    const reach = () => {
+      if (scroller.clientWidth < scroller.scrollWidth - 1) {
+        scroller.tabIndex = 0;
+        scroller.setAttribute('role', 'region');
+        scroller.setAttribute('aria-label', label);
+      } else {
+        scroller.removeAttribute('tabindex');
+        scroller.removeAttribute('role');
+        scroller.removeAttribute('aria-label');
+      }
+    };
     scroller.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', () => {
+      update();
+      reach();
+    });
     update();
+    reach();
   });
 
   document.querySelectorAll<HTMLTimeElement>('time[data-relative-limit]').forEach((el) => {
