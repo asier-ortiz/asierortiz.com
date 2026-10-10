@@ -23,7 +23,7 @@ Code samples are adapted from the codebase: identifiers translated to English, n
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
   <ul class="flex flex-col gap-2">

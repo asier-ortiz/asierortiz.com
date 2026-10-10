@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings = [] } = await post.render();
 const readingDuration = getReadingTime(post.body);
-const EXCLUDED_HEADINGS_REGEX = /^(📋\s*)?table[-\s]*of[-\s]*contents$/i;
+const EXCLUDED_HEADINGS_REGEX = /^table[-\s]*of[-\s]*contents$/i;
 ---
 
 <Layout

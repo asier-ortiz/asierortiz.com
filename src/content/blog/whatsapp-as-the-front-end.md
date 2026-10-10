@@ -19,7 +19,7 @@ The stack is Python 3.12+ with FastAPI, psycopg 3 with an async pool, PostgreSQL
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 <div class="not-prose mb-8 rounded-lg border border-base-700 bg-base-900 p-4">
   <ul class="flex flex-col gap-2">
