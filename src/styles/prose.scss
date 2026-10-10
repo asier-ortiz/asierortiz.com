@@ -28,9 +28,16 @@
   @apply prose-p:my-4;
 
   /* The heading a table-of-contents link (or a shared #link) points at. It follows the URL, so it
-     stays right after Back and Forward; colour only, since shared links match it too. */
+     stays right after Back and Forward. Like the current entry of the contents panel, it takes a
+     bar as well as a colour (WCAG 1.4.1). The bar sits in the margin, so the title does not move,
+     and is a border, which forced colours keep where they drop the blue. */
   :is(h2, h3):target {
-    @apply text-primary-300;
+    @apply relative text-primary-300;
+
+    &::before {
+      content: '';
+      @apply absolute -left-3.5 inset-y-[0.15em] rounded-sm border-l-[3px] border-primary-400;
+    }
   }
 
   /* Diagrams are drawn 800 wide with 10.5-12px text, which the 42rem column shrinks to ~9px.
