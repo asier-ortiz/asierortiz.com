@@ -1,3 +1,13 @@
+## [1.78.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.77.0...v1.78.0) (2026-10-11)
+
+### Features
+
+* **a11y:** the starry background moves only as a short entrance ([bacd6ca](https://github.com/asier-ortiz/asierortiz.com/commit/bacd6ca29e61d4f9e5f05045b9c0eb6b77f16460))
+
+### Bug Fixes
+
+* **a11y:** use a text input for the search combobox ([1903c41](https://github.com/asier-ortiz/asierortiz.com/commit/1903c413ab7d7fbb15944e1e2972f7a60be8ce45))
+
 ## [1.77.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.76.2...v1.77.0) (2026-10-10)
 
 ### Features
