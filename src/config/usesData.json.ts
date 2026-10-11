@@ -65,7 +65,7 @@ const usesData: usesItem[] = [
         ],
       },
       {
-        title: 'DevOps & Tools',
+        title: 'DevOps & tools',
         items: ['Docker', 'Git', 'GitHub', 'GitKraken', 'Postman', 'Claude'],
       },
       {
