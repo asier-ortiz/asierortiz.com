@@ -234,13 +234,14 @@ const highlightMatch = (post, field) => {
           <!-- Not v-model: it skips input while a word is being composed, and Android keyboards compose
                every word as it is typed, so results would only update after a space. -->
           <!-- A combobox (APG pattern): focus stays here while the arrows pick a row, and
-               aria-activedescendant has screen readers announce it (WCAG 4.1.2). -->
+               aria-activedescendant has screen readers announce it (WCAG 4.1.2). A text field, as
+               in the APG: ARIA in HTML allows no role but searchbox on type="search". -->
           <input
             ref="searchInput"
             :value="searchQuery"
             @input="searchQuery = $event.target.value"
             @keydown="handleKeyDown"
-            type="search"
+            type="text"
             role="combobox"
             :aria-expanded="filteredPosts.length > 0"
             aria-controls="search-results"
