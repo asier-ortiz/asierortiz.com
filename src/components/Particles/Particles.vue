@@ -4,16 +4,16 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue';
+import { isSkySettled, onSkySettle } from './sky-entrance.js';
 
 let container = null;
 let motionQuery = null;
-let pauseSwitch = null;
 let opQueue = Promise.resolve();
 
-// Still under reduced motion or while the visitor holds the pause switch (ParticlesPause.astro):
-// the loop is paused, so nothing repaints the canvas on its own.
+// Still under reduced motion or once the sky's entrance is over (sky-entrance.js): the loop is
+// paused, so nothing repaints the canvas on its own.
 function isStill() {
-  return motionQuery.matches || Boolean(pauseSwitch?.checked);
+  return motionQuery.matches || isSkySettled();
 }
 
 // Serializes init/destroy: resize bursts and reduced-motion toggles would
@@ -38,7 +38,7 @@ async function initParticles(reducedMotion) {
     fullScreen: { enable: false },
     background: { color: 'transparent' },
     // The engine's IntersectionObserver must not call play() and undo a
-    // manual pause (reduced motion, the pause switch); the canvas is
+    // manual pause (reduced motion, the end of the entrance); the canvas is
     // viewport-fixed, so the option provides no value here anyway.
     pauseOnOutsideViewport: false,
     style: {
@@ -113,8 +113,29 @@ async function manageParticles() {
 let resizeHandler;
 let motionChangeHandler;
 let visibilityHandler;
-let pauseHandler;
+let removeSettleHandler;
 let frozenRepaintTimer = null;
+let restFrame = null;
+
+// Brings the stars to rest over `duration` ms instead of freezing them mid-step. The engine's own
+// loop stops, and the frames left are drawn here with time running ever slower, so the drift and
+// the twinkle ease out together.
+function easeToRest(loaded, duration) {
+  loaded.pause();
+  if (!duration) return;
+  const start = performance.now();
+  let last = start;
+  const step = async (now) => {
+    if (container !== loaded) return;
+    const t = Math.min(1, (now - start) / duration);
+    // Speed goes from full to none along 1 - smoothstep: no jolt where the slowing starts or ends.
+    const elapsed = (now - last) * (1 - t * t * (3 - 2 * t));
+    last = now;
+    await loaded.particles.draw({ value: elapsed, factor: (60 * elapsed) / 1000 });
+    if (t < 1) restFrame = requestAnimationFrame(step);
+  };
+  restFrame = requestAnimationFrame(step);
+}
 
 // A window resize clears the canvas bitmap, and the engine repaints it only
 // from its animation loop — which is paused while still. Repaint one frame
@@ -129,7 +150,6 @@ function scheduleFrozenRepaint() {
 
 onMounted(() => {
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  pauseSwitch = document.getElementById('particles-pause');
 
   enqueue(manageParticles);
 
@@ -152,18 +172,21 @@ onMounted(() => {
   // frozen container after a live reduced-motion re-init.
   visibilityHandler = () => {
     if (!container) return;
-    if (document.hidden) container.pause();
-    else if (!isStill()) container.play();
+    if (document.hidden) {
+      // Frames stop while hidden; resuming the slowdown later would jump the stars forward.
+      cancelAnimationFrame(restFrame);
+      container.pause();
+    } else if (!isStill()) {
+      container.play();
+    }
   };
   document.addEventListener('visibilitychange', visibilityHandler);
 
-  // A pause holds until the visitor lifts it: nothing above resumes the loop while it is on.
-  pauseHandler = () => {
-    if (!container) return;
-    if (pauseSwitch.checked) container.pause();
-    else if (!motionQuery.matches && !document.hidden) container.play();
-  };
-  pauseSwitch?.addEventListener('change', pauseHandler);
+  // The entrance ends once and for all: the stars come to rest where they are, and nothing above
+  // resumes the loop afterwards.
+  removeSettleHandler = onSkySettle((restMs) => {
+    if (container) easeToRest(container, motionQuery.matches ? 0 : restMs);
+  });
 });
 
 onBeforeUnmount(() => {
@@ -176,9 +199,8 @@ onBeforeUnmount(() => {
   if (visibilityHandler) {
     document.removeEventListener('visibilitychange', visibilityHandler);
   }
-  if (pauseSwitch && pauseHandler) {
-    pauseSwitch.removeEventListener('change', pauseHandler);
-  }
+  removeSettleHandler?.();
+  cancelAnimationFrame(restFrame);
   if (frozenRepaintTimer) {
     clearTimeout(frozenRepaintTimer);
   }

@@ -2,7 +2,8 @@
 ---
 
 <!-- Same background layer as the star field (Particles.vue): stars cross the sky behind the
-     content, so screenshots, cards and text cover them instead of being crossed by them. -->
+     content, so screenshots, cards and text cover them instead of being crossed by them. The one
+     star of the sky's entrance is launched into it by sky-entrance.js. -->
 <div id="shooting-stars-container" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden hidden md:block"></div>
 
 <style is:global>
@@ -47,83 +48,3 @@
     }
   }
 </style>
-
-<script is:inline>
-  (function () {
-    var timer = null;
-    var pauseSwitch = document.getElementById('particles-pause');
-
-    function clearStars() {
-      var container = document.getElementById('shooting-stars-container');
-      if (container) container.textContent = '';
-    }
-
-    function createShootingStar() {
-      var container = document.getElementById('shooting-stars-container');
-      // Checked per spawn (not around the loop) so stars stop and resume with
-      // the OS reduced-motion setting and the pause switch (ParticlesPause.astro)
-      // without restarting the loop.
-      if (
-        !container ||
-        document.hidden ||
-        window.innerWidth < 768 ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        (pauseSwitch && pauseSwitch.checked)
-      ) {
-        return;
-      }
-
-      var star = document.createElement('div');
-      star.className = 'shooting-star';
-      var angle = -(25 + Math.random() * 20);
-      star.style.setProperty('--angle', angle + 'deg');
-      star.style.top = Math.random() * 50 + '%';
-      star.style.left = Math.random() * 70 + '%';
-
-      container.appendChild(star);
-
-      star.addEventListener('animationend', function () {
-        star.remove();
-      });
-
-      // A reduced-motion toggle mid-flight cancels the animation instead of ending it.
-      star.addEventListener('animationcancel', function () {
-        star.remove();
-      });
-    }
-
-    function scheduleNext() {
-      // Only one chain of timers, whatever fires the reschedule.
-      clearTimeout(timer);
-      var delay = 8000 + Math.random() * 7000;
-      timer = setTimeout(function () {
-        createShootingStar();
-        scheduleNext();
-      }, delay);
-    }
-
-    // A hidden window paints no frames, so a star spawned while hidden never
-    // starts its animation and never removes itself; they pile up and all
-    // shoot at once on restore. Stop the loop while hidden, resume on return.
-    function onVisibilityChange() {
-      if (document.hidden) {
-        clearTimeout(timer);
-        timer = null;
-        clearStars();
-      } else {
-        scheduleNext();
-      }
-    }
-
-    if (typeof window !== 'undefined') {
-      document.addEventListener('DOMContentLoaded', scheduleNext);
-      document.addEventListener('visibilitychange', onVisibilityChange);
-      // A star already in flight stops with the rest of the background.
-      if (pauseSwitch) {
-        pauseSwitch.addEventListener('change', function () {
-          if (pauseSwitch.checked) clearStars();
-        });
-      }
-    }
-  })();
-</script>

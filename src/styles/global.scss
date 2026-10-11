@@ -13,9 +13,9 @@
        clears the header, opt out with -scroll-mt-24 (same token). */
     scroll-padding-top: theme('spacing.24');
 
-    /* Below xl the floating buttons in the bottom corners (scroll-to-top from sm, the pause
-       switch from md) reach over the content, so focus moved by the keyboard stops clear of
-       their top edges (WCAG 2.4.11). From xl they sit outside the container. */
+    /* Below xl the scroll-to-top button (from sm), fixed in the bottom-right corner, reaches
+       over the content, so focus moved by the keyboard stops clear of its top edge (WCAG
+       2.4.11). From xl it sits outside the container. */
     @screen sm {
       scroll-padding-bottom: 7rem;
     }
