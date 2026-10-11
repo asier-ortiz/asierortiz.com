@@ -1,3 +1,9 @@
+## [1.78.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.78.1...v1.78.2) (2026-10-11)
+
+### Bug Fixes
+
+* **a11y:** name the table of contents region ([72f1aa1](https://github.com/asier-ortiz/asierortiz.com/commit/72f1aa131019d89600ecfe99b431254c9836a0a9))
+
 ## [1.78.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.78.0...v1.78.1) (2026-10-11)
 
 ### Bug Fixes
