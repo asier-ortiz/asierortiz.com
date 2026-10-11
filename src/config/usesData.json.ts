@@ -78,7 +78,7 @@ const usesData: usesItem[] = [
     sectionTitle: 'Setup',
     items: [
       'Mac Studio M1 Max 10-core CPU 32-core GPU 32GB Unified Memory 1TB SSD Storage',
-      'MacBook Air M1 8-core CPU 8-Core GPU 16GB Unified Memory 512GB SSD Storage (Rose Gold 😎)',
+      'MacBook Air M1 8-core CPU 8-core GPU 16GB Unified Memory 512GB SSD Storage',
       'LG Ergo 32UN880W-B 3840x2160 @60Hz',
       'Dell UltraSharp UW3417W 3440x1440 @60Hz',
       'BenQ PD2700U 3840x2160 @60Hz (Portrait)',

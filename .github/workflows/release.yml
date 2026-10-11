@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v7
         with:
-          persist-credentials: false  # 🔧 prevent GitHub from using the default token
+          persist-credentials: false  # prevent GitHub from using the default token
 
       - name: Set remote URL to use GH_TOKEN
         run: git remote set-url origin https://${GH_TOKEN}@github.com/${{ github.repository }}.git
