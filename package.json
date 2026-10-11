@@ -8,6 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "test:a11y": "astro build && playwright test",
     "astro": "astro",
     "format": "prettier --write .",
     "semantic-release": "semantic-release"
@@ -43,6 +44,8 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.64.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.1",
