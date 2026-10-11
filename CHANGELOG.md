@@ -1,3 +1,9 @@
+## [1.78.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.78.0...v1.78.1) (2026-10-11)
+
+### Bug Fixes
+
+* **a11y:** the search button takes its name from its content ([65b8f6d](https://github.com/asier-ortiz/asierortiz.com/commit/65b8f6daa918eb0700c3339408caddb6a98d5ca1))
+
 ## [1.78.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.77.0...v1.78.0) (2026-10-11)
 
 ### Features
