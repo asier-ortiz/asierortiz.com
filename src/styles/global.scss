@@ -71,8 +71,10 @@
   @import 'buttons';
   @import 'prose';
 
+  /* One line height at every size, the phone's 1.2. Each text-* size brings its own, and
+     text-5xl's is 1: a title that wrapped left 1.5px between a g or p and the capital below. */
   .h1 {
-    @apply text-3xl font-medium md:text-4xl lg:text-5xl;
+    @apply text-3xl/[1.2] font-medium md:text-4xl/[1.2] lg:text-5xl/[1.2];
   }
 
   .h2 {
