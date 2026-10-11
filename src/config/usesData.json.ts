@@ -85,7 +85,7 @@ const usesData: usesItem[] = [
       'BenQ ScreenBar Plus',
       'Keychron K5 Pro RGB (Gateron red switches)',
       'Logitech G502 X',
-      'Logitech Master MX 3',
+      'Logitech MX Master 3',
       'Focusrite Scarlett Solo 2nd gen',
       'Sennheiser HD 598',
       'Rode NT1 Signature Black',
