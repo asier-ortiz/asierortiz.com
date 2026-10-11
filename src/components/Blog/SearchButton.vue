@@ -58,6 +58,11 @@ onMounted(() => {
   mounted.value = true;
 });
 
+// The same shortcut in words for screen readers, once the platform is known.
+const shortcut = computed(() =>
+  mounted.value ? ` (${isMac.value ? 'Command' : 'Control'} + K)` : ''
+);
+
 // Only display the search button if there are posts available
 const hasPosts = computed(() => props.posts.length > 0);
 </script>
@@ -69,11 +74,14 @@ const hasPosts = computed(() => props.posts.length > 0);
       type="button"
       @click="openModal"
       class="filter-btn relative flex items-center gap-2 rounded-full bg-primary-500 px-3 py-2 text-xs font-medium text-black transition hover:bg-primary-400 active:bg-primary-400 active:duration-0 before:absolute before:-inset-1 before:content-['']"
-      :aria-label="mounted ? `Search posts (${isMac ? 'Command + K' : 'Control + K'})` : 'Search posts'"
     >
       <Search class="h-4 w-4" />
 
-      <span class="hidden sm:inline">Search</span>
+      <!-- The name comes from the content, with no aria-label: the visible "Search" (WCAG 2.5.3),
+           then words only screen readers get. The key hint below is a symbol, not part of it.
+           Phones show no text, and "Search" is still read there. -->
+      <span class="sr-only sm:not-sr-only">Search</span
+      ><span class="sr-only"> posts{{ shortcut }}</span>
 
       <!-- Key labels are written without surrounding whitespace: the HTML minifier would
            collapse it in the served markup, and Vue would then flag a hydration mismatch. -->
