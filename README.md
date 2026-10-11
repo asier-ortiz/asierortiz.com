@@ -2,7 +2,7 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![semantic-release: conventionalcommits](https://img.shields.io/badge/semantic--release-conventionalcommits-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![semantic-release](https://img.shields.io/badge/semantic--release-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![Release Workflow](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/release.yml/badge.svg)](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/release.yml)
 [![Validate RSS Feed](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/validate-feed.yml/badge.svg)](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/validate-feed.yml)
 [![Broken Links Check](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/check-links.yml/badge.svg)](https://github.com/asier-ortiz/asierortiz.com/actions/workflows/check-links.yml)
