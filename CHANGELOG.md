@@ -1,3 +1,10 @@
+## [1.79.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.0...v1.79.1) (2026-10-11)
+
+### Bug Fixes
+
+* **style:** give page titles room between their lines ([f9ea5bd](https://github.com/asier-ortiz/asierortiz.com/commit/f9ea5bde3381209f576bada95fc1346b3da6eab8))
+* **uses:** name the mouse MX Master 3 ([968d8e9](https://github.com/asier-ortiz/asierortiz.com/commit/968d8e92f15fc257220218447378edfc093bd6d0))
+
 ## [1.79.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.78.2...v1.79.0) (2026-10-11)
 
 ### Features
