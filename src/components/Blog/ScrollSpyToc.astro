@@ -7,7 +7,12 @@ interface Section {
 const { sections } = Astro.props as { sections: Section[] };
 ---
 
-<aside class="fixed left-4 top-1/2 -translate-y-1/2 z-[50] hidden lg:block">
+<!-- Named because posts hold a second complementary region, the newsletter box (PostFooterCta):
+     a screen reader's list of regions can then tell the two apart. -->
+<aside
+  aria-label="Table of contents"
+  class="fixed left-4 top-1/2 -translate-y-1/2 z-[50] hidden lg:block"
+>
   <div id="toc-wrapper" class="relative">
 
     <!-- Compact mode. aria-expanded is the one open/closed state: the panel after it reads it
