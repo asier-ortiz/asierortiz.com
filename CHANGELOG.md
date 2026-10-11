@@ -1,3 +1,9 @@
+## [1.79.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.78.2...v1.79.0) (2026-10-11)
+
+### Features
+
+* **home:** the hero names APIs and data pipelines instead of ML ([963ae04](https://github.com/asier-ortiz/asierortiz.com/commit/963ae048f99b18c700007a935655fdca730b4504))
+
 ## [1.78.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.78.1...v1.78.2) (2026-10-11)
 
 ### Bug Fixes
