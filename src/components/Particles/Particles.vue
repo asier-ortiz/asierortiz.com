@@ -44,6 +44,10 @@ async function initParticles(reducedMotion) {
     style: {
       position: 'fixed',
       inset: '0',
+      // The large viewport, as if the browser's toolbars were hidden: phones and tablets slide
+      // them in and out as the page scrolls, and a canvas that followed them would be resized,
+      // and so cleared, every time.
+      height: '100lvh',
       zIndex: -10,
     },
     particles: {
@@ -114,7 +118,7 @@ let resizeHandler;
 let motionChangeHandler;
 let visibilityHandler;
 let removeSettleHandler;
-let frozenRepaintTimer = null;
+let resizeWatch = null;
 let restFrame = null;
 
 // Brings the stars to rest over `duration` ms instead of freezing them mid-step. The engine's own
@@ -137,27 +141,24 @@ function easeToRest(loaded, duration) {
   restFrame = requestAnimationFrame(step);
 }
 
-// A window resize clears the canvas bitmap, and the engine repaints it only
-// from its animation loop — which is paused while still. Repaint one frame
-// after the engine's own debounced resize (0.5s default) has settled.
-function scheduleFrozenRepaint() {
-  if (frozenRepaintTimer) clearTimeout(frozenRepaintTimer);
-  frozenRepaintTimer = setTimeout(() => {
-    frozenRepaintTimer = null;
-    if (container && isStill()) container.draw(true);
-  }, 700);
-}
-
 onMounted(() => {
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   enqueue(manageParticles);
 
-  resizeHandler = () => {
-    enqueue(manageParticles);
-    if (isStill()) scheduleFrozenRepaint();
-  };
+  resizeHandler = () => enqueue(manageParticles);
   window.addEventListener('resize', resizeHandler);
+
+  // Resizing a canvas clears it, and while the sky is still nothing else would draw it again.
+  // Redraw as soon as the engine resizes it (half a second after the last change, on its own
+  // timer): the stars are back before the next frame is painted.
+  resizeWatch = new MutationObserver(() => {
+    if (container && isStill()) container.draw(true);
+  });
+  resizeWatch.observe(document.getElementById('page-particles'), {
+    attributeFilter: ['width', 'height'],
+    subtree: true,
+  });
 
   // Live OS toggle: rebuild with the config matching the new preference.
   motionChangeHandler = () => {
@@ -200,10 +201,8 @@ onBeforeUnmount(() => {
     document.removeEventListener('visibilitychange', visibilityHandler);
   }
   removeSettleHandler?.();
+  resizeWatch?.disconnect();
   cancelAnimationFrame(restFrame);
-  if (frozenRepaintTimer) {
-    clearTimeout(frozenRepaintTimer);
-  }
   // Through the queue so an in-flight init is destroyed, not orphaned.
   enqueue(destroyParticles);
 });
