@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '@assets/images/asier-ortiz.webp';
 import siteData from '@config/siteData.json';
+import Button from '@components/Button/Button.astro';
 ---
 
 <section id="hero" class="hero-enter relative flex w-full z-[25]">
@@ -15,6 +16,17 @@ import siteData from '@config/siteData.json';
         building web and mobile products, APIs and data pipelines. I enjoy turning complex problems
         into simple, reliable software.
       </p>
+      <!-- The same action as Contact in the header, so the same primary style, a size up as the
+           call to action of the screen. The flex row keeps the button as wide as its label. -->
+      <div class="mt-8 flex">
+        <Button
+          variant="primary"
+          class="min-h-12 px-6 md:text-lg"
+          href={`mailto:${siteData.author.email}`}
+        >
+          Get in touch
+        </Button>
+      </div>
     </div>
     <div class="mx-auto max-w-sm md:col-span-1 md:max-w-full">
       <div class="eclipse-wrapper aspect-square relative z-[25]">
