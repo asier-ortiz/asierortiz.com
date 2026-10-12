@@ -1,3 +1,9 @@
+## [1.79.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.3...v1.79.4) (2026-10-12)
+
+### Bug Fixes
+
+* **particles:** the still stars no longer blink out when scrolling on phones and tablets ([8d0b342](https://github.com/asier-ortiz/asierortiz.com/commit/8d0b342ba40d510e4a8fa23baf2c4ee50e2885f0))
+
 ## [1.79.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.2...v1.79.3) (2026-10-12)
 
 ### Bug Fixes
