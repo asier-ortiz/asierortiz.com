@@ -17,11 +17,13 @@ import Button from '@components/Button/Button.astro';
         into simple, reliable software.
       </p>
       <!-- The same action as Contact in the header, so the same primary style, a size up as the
-           call to action of the screen. The flex row keeps the button as wide as its label. -->
-      <div class="mt-8 flex">
+           call to action of the screen. Only from md: below it the header holds just Contact and
+           the menu, a few lines above, and the button would repeat it. The flex row keeps the
+           button as wide as its label. -->
+      <div class="mt-8 hidden md:flex">
         <Button
           variant="primary"
-          class="min-h-12 px-6 md:text-lg"
+          class="min-h-12 px-6 text-lg"
           href={`mailto:${siteData.author.email}`}
         >
           Get in touch
