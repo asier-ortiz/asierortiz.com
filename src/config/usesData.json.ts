@@ -18,11 +18,11 @@ const usesData: usesItem[] = [
       },
       {
         title: 'Frontend',
-        items: ['Vue', 'Angular', 'Astro'],
+        items: ['Angular', 'Vue', 'Astro'],
       },
       {
         title: 'Backend',
-        items: ['Node.js', 'Laravel', 'Symfony'],
+        items: ['Node.js', 'Spring Boot', 'Laravel', 'Symfony'],
       },
       {
         title: 'Mobile',
@@ -40,9 +40,9 @@ const usesData: usesItem[] = [
         title: 'IDE',
         items: [
           'WebStorm',
-          'PhpStorm',
           'PyCharm',
           'IntelliJ IDEA',
+          'PhpStorm',
           'Android Studio',
         ],
       },
@@ -70,7 +70,7 @@ const usesData: usesItem[] = [
       },
       {
         title: 'ML & AI',
-        items: ['TensorFlow', 'PyTorch', 'scikit-learn', 'Redis', 'AWS', 'Qdrant', 'Firebase'],
+        items: ['TensorFlow', 'PyTorch', 'scikit-learn', 'Redis', 'AWS', 'Firebase'],
       },
     ],
   },

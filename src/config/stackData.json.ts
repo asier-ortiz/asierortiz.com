@@ -17,11 +17,12 @@ const stackData: StackItem[] = [
   { name: 'JavaScript', icon: 'simple-icons:javascript', color: '#F7DF1E' },
   { name: 'PHP', icon: 'simple-icons:php', color: '#777BB4' },
   // Frontend
-  { name: 'Vue', icon: 'simple-icons:vuedotjs', color: '#4FC08D' },
   { name: 'Angular', icon: 'simple-icons:angular', color: '#DD0031' },
+  { name: 'Vue', icon: 'simple-icons:vuedotjs', color: '#4FC08D' },
   { name: 'Astro', icon: 'simple-icons:astro', color: '#BC52EE' },
   // Backend
   { name: 'Node.js', icon: 'simple-icons:nodedotjs', color: '#5FA04E' },
+  { name: 'Spring Boot', icon: 'simple-icons:springboot', color: '#6DB33F' },
   { name: 'Laravel', icon: 'simple-icons:laravel', color: '#FF2D20' },
   { name: 'Symfony', icon: 'simple-icons:symfony', color: '#F5F5F5' },
   // Mobile
@@ -31,7 +32,6 @@ const stackData: StackItem[] = [
   { name: 'Tailwind CSS', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
   // Data & cloud
   { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
-  { name: 'Qdrant', icon: 'simple-icons:qdrant', color: '#DC244C' },
   { name: 'AWS', icon: 'devicon-plain:amazonwebservices', color: '#FF9900' },
   // ML & AI
   { name: 'TensorFlow', icon: 'simple-icons:tensorflow', color: '#FF6F00' },
