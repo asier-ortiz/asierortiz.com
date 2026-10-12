@@ -12,12 +12,12 @@ const academicData: academicItem[] = [
   {
     date: '2027',
     ongoing: true,
-    title: 'Advanced Program in Cloud Architecture',
+    title: 'Advanced Program in DevOps and Cloud',
     center: 'UNIR - International University of La Rioja',
     description:
-      'Cloud architecture design and deployment on AWS and Azure, ' +
-      'covering microservices, serverless, containers, and DevOps, ' +
-      'building scalable and secure systems with infrastructure as code.',
+      'CI/CD pipelines and cloud deployment on AWS and Azure, ' +
+      'covering automated testing, Docker, Kubernetes, and monitoring, ' +
+      'managing infrastructure as code with Terraform.',
   },
   {
     date: '2025',
