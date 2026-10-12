@@ -71,19 +71,28 @@ const { sections } = Astro.props as { sections: Section[] };
     const tocToggle = document.getElementById('toc-toggle');
     const tocPanel = document.getElementById('toc-panel');
 
+    // One current section at a time: the last whose heading has passed the reading line, a third
+    // of the way down the window but no more than 300px (a third of a laptop's). On a tall window
+    // a third would reach past a short section the reader has just jumped to, which lands 96px
+    // down (scroll-padding-top), onto the next heading. At the bottom of the page the closing
+    // headings can stay below the line: there the section is the one the reader jumped to, if it
+    // is on screen, else the last one.
     function updateHighlight() {
-      const scroll = window.scrollY + window.innerHeight / 3;
-      const scrollBottom = window.scrollY + window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
+      const line = window.scrollY + Math.min(window.innerHeight / 3, 300);
+      const atBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
 
+      let current = -1;
       targets.forEach((el, i) => {
-        const isLast = i === targets.length - 1;
-        const isBottom = scrollBottom >= docHeight - 5;
+        if (el && el.offsetTop <= line) current = i;
+      });
+      if (atBottom) {
+        const jumped = targets.findIndex((el) => el?.matches(':target'));
+        current = jumped >= 0 && jumped >= current ? jumped : targets.length - 1;
+      }
 
-        const top = el?.offsetTop ?? 0;
-        const next = targets[i + 1]?.offsetTop ?? Infinity;
-        const isActive = (scroll >= top && scroll < next) || (isLast && isBottom);
-
+      targets.forEach((_, i) => {
+        const isActive = i === current;
         compactBullets[i]?.toggleAttribute('data-active', isActive);
 
         const link = expandedLinks[i];
@@ -93,6 +102,8 @@ const { sections } = Astro.props as { sections: Section[] };
     }
 
     document.addEventListener('scroll', updateHighlight);
+    // At the bottom of the page, a jump between two headings already on screen scrolls nothing.
+    window.addEventListener('hashchange', updateHighlight);
     updateHighlight();
 
     const isOpen = () => tocToggle.getAttribute('aria-expanded') === 'true';
