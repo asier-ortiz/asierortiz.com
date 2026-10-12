@@ -1,3 +1,9 @@
+## [1.79.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.1...v1.79.2) (2026-10-11)
+
+### Bug Fixes
+
+* **uses:** write the page title in sentence case ([de6c1e8](https://github.com/asier-ortiz/asierortiz.com/commit/de6c1e8732c740a2e85a6927b199577badbcbf0e))
+
 ## [1.79.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.0...v1.79.1) (2026-10-11)
 
 ### Bug Fixes
