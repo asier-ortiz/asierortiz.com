@@ -131,10 +131,11 @@ export const projectData: ProjectItem[] = [
       },
     ],
     title: 'Araba Market',
-    description: `A hybrid mobile app for discovering local shops, producers, and services across the province of Álava.
-    Features an interactive map, business directory organized by districts, and a promotional voucher system to boost local commerce.
+    description: `A platform for discovering local shops, producers, and services across the province of Álava,
+    built as a hybrid mobile app and a public website on a shared backend.
+    Features an interactive map, a business directory organized by districts, and a promotional voucher system to boost local commerce.
     `,
-    href: 'https://apps.apple.com/es/app/arabamarket/id1574698689/',
+    href: 'https://www.arabamarket.eus/',
     languages: [
       { language: 'Ionic', color: '#3880FF' },
       { language: 'Vue', color: '#41B883' },
@@ -144,9 +145,9 @@ export const projectData: ProjectItem[] = [
       { language: 'PostgreSQL', color: '#336791' },
       { language: 'Leaflet', color: '#76B041' },
     ],
-    type: 'mobile',
-    buttonText: 'Available on App Store',
-    buttonIcon: 'tdesign:logo-apple-filled',
+    type: ['mobile', 'web'],
+    buttonText: 'Visit Website',
+    buttonIcon: 'tdesign:internet',
   },
 ];
 
