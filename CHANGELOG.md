@@ -1,3 +1,11 @@
+## [1.79.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.2...v1.79.3) (2026-10-12)
+
+### Bug Fixes
+
+* **projects:** drop FlareWatch and filter by Web and Mobile ([d56c831](https://github.com/asier-ortiz/asierortiz.com/commit/d56c8311ebdbaf1fb4730a545b5e0c7757c8189d))
+* **projects:** link Araba Market to its live website ([26fb217](https://github.com/asier-ortiz/asierortiz.com/commit/26fb217a4166833027ce2defe16eaa26702bf384))
+* **uses:** add Spring Boot, lead Frontend with Angular and drop Qdrant ([1251f4f](https://github.com/asier-ortiz/asierortiz.com/commit/1251f4ff583fdabe9fefa400c0d6a74882f4f78f))
+
 ## [1.79.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.1...v1.79.2) (2026-10-11)
 
 ### Bug Fixes
