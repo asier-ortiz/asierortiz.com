@@ -1,3 +1,9 @@
+## [1.79.5](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.4...v1.79.5) (2026-10-12)
+
+### Bug Fixes
+
+* **background:** swap the cloud architecture program for UNIR's DevOps and Cloud ([318abf2](https://github.com/asier-ortiz/asierortiz.com/commit/318abf277e16c89ac177cb814d8482ca4b559628))
+
 ## [1.79.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.3...v1.79.4) (2026-10-12)
 
 ### Bug Fixes
