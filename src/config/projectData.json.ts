@@ -21,7 +21,6 @@ export interface ProjectItem {
   /** A same-site path such as /blog/<slug>/, or an absolute URL, which opens in a new tab. */
   href?: string;
   languages: Language[];
-  type: string | string[];
   buttonText: string;
   buttonIcon?: string;
 }
@@ -65,7 +64,6 @@ export const projectData: ProjectItem[] = [
       { language: 'Firebase', color: '#DD2C00' },
       { language: 'VOSK', color: '#FF6F00' },
     ],
-    type: 'mobile',
     buttonText: 'Read Blog Post',
   },
   {
@@ -94,7 +92,6 @@ export const projectData: ProjectItem[] = [
       { language: 'Docker', color: '#2496ED' },
       { language: 'JWT', color: '#FB015B' },
     ],
-    type: 'web',
     buttonText: 'Read Blog Post',
   },
   {
@@ -120,7 +117,6 @@ export const projectData: ProjectItem[] = [
       { language: 'WhatsApp Flows', color: '#128C7E' },
       { language: 'Docker', color: '#2496ED' },
     ],
-    type: 'web',
     buttonText: 'Read Blog Post',
   },
   {
@@ -145,7 +141,6 @@ export const projectData: ProjectItem[] = [
       { language: 'PostgreSQL', color: '#336791' },
       { language: 'Leaflet', color: '#76B041' },
     ],
-    type: ['mobile', 'web'],
     buttonText: 'Visit Website',
     buttonIcon: 'tdesign:internet',
   },

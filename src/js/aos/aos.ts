@@ -225,9 +225,9 @@ const init = function init(settings?: Partial<AOSDefaultOptions>) {
   );
 
   /**
-   * Recalculate them as well when the document changes height on its own (cards hidden by a filter,
-   * a toggle opening, a late font swap): an element further down would otherwise keep waiting for
-   * a scroll position the page may no longer reach.
+   * Recalculate them as well when the document changes height on its own (a toggle opening, a late
+   * font swap): an element further down would otherwise keep waiting for a scroll position the page
+   * may no longer reach.
    * Animations only change opacity and transform, so they never feed the observer.
    */
   new ResizeObserver(debounce(recalculatePositions, options.debounceDelay)).observe(document.body);
