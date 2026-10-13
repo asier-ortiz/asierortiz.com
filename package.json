@@ -2,7 +2,7 @@
   "name": "asierortiz",
   "private": true,
   "type": "module",
-  "version": "1.80.0",
+  "version": "1.81.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
