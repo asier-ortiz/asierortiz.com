@@ -1,3 +1,13 @@
+## [1.81.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.80.0...v1.81.0) (2026-10-13)
+
+### Features
+
+* **site:** point the arrow up and out on buttons that leave the site ([2fefb66](https://github.com/asier-ortiz/asierortiz.com/commit/2fefb662c1826bb8e0636b0f1e05534ce38632c6))
+
+### Bug Fixes
+
+* **privacy:** the subscription page is on Buttondown's site ([08053b1](https://github.com/asier-ortiz/asierortiz.com/commit/08053b12a27b730a43f07ed1fb23a998d2d0f17a))
+
 ## [1.80.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.5...v1.80.0) (2026-10-12)
 
 ### Features
