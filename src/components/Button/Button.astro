@@ -5,7 +5,8 @@ interface Props {
   type?: 'button' | 'submit' | 'reset' | null | undefined;
   variant?: 'primary' | 'secondary' | 'ghost' | 'post-ghost' | 'link';
   href?: URL | string;
-  arrow?: 'left' | 'right' | 'none';
+  /** → stays on this site; ↗ (external) leaves it for another one, in a new tab. */
+  arrow?: 'left' | 'right' | 'external' | 'none';
   onclick?: any;
   class?: string;
   target?: string;
@@ -69,6 +70,13 @@ if (newTab && rest['aria-label']) rest['aria-label'] += NEW_TAB;
         <Icon
           name="tdesign:arrow-right"
           class="h-6 w-6 transition-[transform] motion-safe:group-hover:translate-x-1 ml-2"
+          aria-hidden="true"
+        />
+      )}
+      {arrow === 'external' && (
+        <Icon
+          name="tdesign:arrow-right-up"
+          class="h-6 w-6 transition-[transform] motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5 ml-2"
           aria-hidden="true"
         />
       )}

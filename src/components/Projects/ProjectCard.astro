@@ -10,7 +10,8 @@ interface Props extends ProjectItem {
 
 const { images, title, description, href, languages, buttonText, buttonIcon, ...rest } =
   Astro.props as Props;
-// A write-up on this site stays in the tab, so it cross-fades and Back returns to the card.
+// A write-up on this site stays in the tab, so it cross-fades and Back returns to the card;
+// another site opens in a new tab, and its arrow points out of the page.
 const external = /^https?:\/\//.test(href ?? '');
 // Titles are unique on the page, so they make the gallery's id.
 const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
@@ -43,7 +44,7 @@ const galleryId = `${title.toLowerCase().replace(/\s+/g, '-')}-gallery`;
         <Button
           variant="ghost"
           href={href}
-          arrow="right"
+          arrow={external ? 'external' : 'right'}
           target={external ? '_blank' : undefined}
           rel={external ? 'noopener noreferrer' : undefined}
           class="hover-button"
