@@ -1,3 +1,9 @@
+## [1.82.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.81.0...v1.82.0) (2026-10-13)
+
+### Features
+
+* **uses:** lead with the development stack in a compact list ([7fbd71c](https://github.com/asier-ortiz/asierortiz.com/commit/7fbd71ce5ee5539b3f4fe6c0eb0f5e705ac57a9b))
+
 ## [1.81.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.80.0...v1.81.0) (2026-10-13)
 
 ### Features
