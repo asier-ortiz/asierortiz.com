@@ -1,3 +1,15 @@
+## [1.80.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.5...v1.80.0) (2026-10-12)
+
+### Features
+
+* **hero:** add a Get in touch button below the introduction ([7ccac64](https://github.com/asier-ortiz/asierortiz.com/commit/7ccac6417a27eab5b887a1d1ffa02197f709d07a))
+
+### Bug Fixes
+
+* **blog:** the table of contents marks one section at a time ([467769c](https://github.com/asier-ortiz/asierortiz.com/commit/467769c86e27b4393b01632bfecc8d967ad46682))
+* **hero:** hide the Get in touch button on phones ([91a6ba3](https://github.com/asier-ortiz/asierortiz.com/commit/91a6ba3e9788bedbfda1a3d0b117e1369757ff65))
+* **projects:** drop the Web and Mobile filter ([5ca4203](https://github.com/asier-ortiz/asierortiz.com/commit/5ca42033709f2c2d23461b800984d87b3436a5e9))
+
 ## [1.79.5](https://github.com/asier-ortiz/asierortiz.com/compare/v1.79.4...v1.79.5) (2026-10-12)
 
 ### Bug Fixes
