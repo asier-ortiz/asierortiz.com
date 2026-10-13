@@ -3,7 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import Particles from '@components/Particles/Particles.vue';
 import StackMarquee from '@components/Stack/StackMarquee.astro';
 import siteData from '@config/siteData.json';
-import usesData from '@config/usesData.json';
+import { development, setup } from '@config/usesData.json';
 import stackData from '@config/stackData.json';
 ---
 
@@ -14,62 +14,98 @@ import stackData from '@config/stackData.json';
   <Particles client:media="(min-width: 768px)" />
   <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
     <header>
-      <h1 class="h1 text-pretty text-gradient lg:pb-2">My essential tools and setup</h1>
+      <h1 class="h1 text-pretty text-gradient lg:pb-2">My tools and setup</h1>
       <p class="description mt-6 max-w-[42rem] text-pretty">
-        Curious about what tools I use for development and my work setup? Here’s a comprehensive
-        list of my essential software and hardware that power my daily workflow.
+        The software I build with and the hardware I use every day.
       </p>
     </header>
     <StackMarquee items={stackData} class="mt-12" />
     <section class="prose mt-14">
-      {
-        usesData
-          .sort((a, _) => (a.sectionTitle === 'Setup' ? -1 : 1))
-          .map((usesItem, _) => (
+      <h2 class="h3 text-pretty text-primary-500">Development</h2>
+      <dl class="uses-list text-pretty">
+        {
+          development.map(({ title, items }) => (
             <div>
-              <h2
-                class={`h3 text-pretty text-primary-500 ${usesItem.sectionTitle === 'Development' ? 'mt-16' : ''}`}
-              >
-                {usesItem.sectionTitle}
-              </h2>
-              {usesItem.sectionTitle === 'Development' ? (
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {usesItem.items.map((item) =>
-                    typeof item === 'string' ? (
-                      <div>{item}</div>
-                    ) : (
-                      <div class="border-2 rounded border-base-700 p-4 bg-base-950 text-white">
-                        <h3 class="h4 text-primary-100 font-bold text-lg mb-2">{item.title}</h3>
-                        <ul class="list-disc list-inside">
-                          {item.items.map((subItem) => (
-                            <li>{subItem}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )
-                  )}
-                </div>
-              ) : (
-                <ul class="mt-4">
-                  {usesItem.items.map((item) =>
-                    typeof item === 'string' ? (
-                      <li>{item}</li>
-                    ) : (
-                      <li>
-                        <span class="font-bold">{item.title}</span>
-                        <ul class="ml-6 mt-2">
-                          {item.items.map((subItem) => (
-                            <li>{subItem}</li>
-                          ))}
-                        </ul>
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
+              <dt>{title}</dt>
+              {/* Each name stays whole: a line breaks only after a comma, never inside "IntelliJ
+                  IDEA" or after the hyphen of "scikit-learn". Not inline-block, which lets a line
+                  break before the comma. An array rather than a fragment: Prettier splits a
+                  fragment into lines, and Astro renders those line breaks as a space before each
+                  comma. */}
+              <dd>
+                {items.map((item, i) => [
+                  i > 0 && ', ',
+                  <span class="whitespace-nowrap">{item}</span>,
+                ])}
+              </dd>
             </div>
           ))
-      }
+        }
+      </dl>
+      <h2 class="h3 mt-16 text-pretty text-primary-500">Setup</h2>
+      <dl class="uses-list text-pretty">
+        {
+          setup.map(({ title, items }) => (
+            <div>
+              <dt>{title}</dt>
+              <dd>
+                <ul role="list">
+                  {items.map(({ name, details }) => (
+                    <li>
+                      {name}
+                      {details && (
+                        <span class="details">
+                          <span aria-hidden="true">·</span>{' '}
+                          {/* Kept whole like the names above, so "512 GB" never splits. */}
+                          {details.map((detail, i) => [
+                            i > 0 && ', ',
+                            <span class="whitespace-nowrap">{detail}</span>,
+                          ])}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
     </section>
   </article>
 </Layout>
+
+<style>
+  /* Each category sits beside its items from md and above them on phones, with a hairline between
+     rows to carry the eye across. These rules outrank the typography plugin's dl, dd, ul and li
+     styles, which are meant for definitions and bullets in running text. */
+  .uses-list > div {
+    @apply grid items-baseline gap-y-0.5 border-t border-base-800 py-3 md:grid-cols-[9.5rem_1fr] md:gap-x-6 md:py-3.5;
+  }
+
+  .uses-list > div:first-child {
+    @apply border-t-0 pt-0;
+  }
+
+  /* A label, quieter than the items it introduces. */
+  .uses-list dt {
+    @apply m-0 font-sans text-sm font-medium text-base-400 md:text-[0.9375rem];
+  }
+
+  .uses-list dd {
+    @apply m-0 p-0;
+  }
+
+  .uses-list ul {
+    @apply m-0 list-none p-0;
+  }
+
+  /* A device that wraps indents its later lines, so a new one is always the line at the edge. */
+  .uses-list li {
+    @apply my-0 pl-[1em] -indent-[1em];
+  }
+
+  .details {
+    @apply text-[0.9em] text-base-400;
+  }
+</style>

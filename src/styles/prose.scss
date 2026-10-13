@@ -11,12 +11,12 @@
   @apply max-w-[42rem];
   /* Reading sizes. The serif has a lower x-height than a sans, so it gets one extra point:
      17px on phones, 19px from md. Tables, code and captions keep their own sizes. */
-  :is(p, li, blockquote) {
+  :is(p, li, dd, blockquote) {
     font-size: 1.0625rem;
     line-height: 1.75;
   }
   @screen md {
-    :is(p, li, blockquote) {
+    :is(p, li, dd, blockquote) {
       font-size: 1.1875rem;
     }
   }

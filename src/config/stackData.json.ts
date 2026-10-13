@@ -30,19 +30,23 @@ const stackData: StackItem[] = [
   { name: 'Ionic', icon: 'simple-icons:ionic', color: '#3880FF' },
   // Styling
   { name: 'Tailwind CSS', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
-  // Data & cloud
+  // Database
   { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
-  { name: 'AWS', icon: 'devicon-plain:amazonwebservices', color: '#FF9900' },
-  // ML & AI
+  // Data
+  { name: 'pandas', icon: 'simple-icons:pandas', color: '#E70488' },
+  { name: 'DuckDB', icon: 'simple-icons:duckdb', color: '#FFF000' },
   { name: 'TensorFlow', icon: 'simple-icons:tensorflow', color: '#FF6F00' },
   { name: 'PyTorch', icon: 'simple-icons:pytorch', color: '#EE4C2C' },
   { name: 'scikit-learn', icon: 'simple-icons:scikitlearn', color: '#F7931E' },
+  // Cloud
+  { name: 'AWS', icon: 'devicon-plain:amazonwebservices', color: '#FF9900' },
   // DevOps & tools
   { name: 'Docker', icon: 'simple-icons:docker', color: '#2496ED' },
   { name: 'Git', icon: 'simple-icons:git', color: '#F05032' },
   { name: 'GitHub', icon: 'simple-icons:github', color: '#FFFFFF' },
-  { name: 'JetBrains', icon: 'simple-icons:jetbrains', color: '#FF318C' },
   { name: 'Claude', icon: 'simple-icons:claude', color: '#D97757' },
+  // IDE
+  { name: 'JetBrains', icon: 'simple-icons:jetbrains', color: '#FF318C' },
 ];
 
 export default stackData;
