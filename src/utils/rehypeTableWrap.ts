@@ -1,9 +1,12 @@
 /**
- * Wraps every Markdown table in `div.table-scroll > div.table-wrap`: the inner div scrolls
+ * Wraps every Markdown table in `div.table-frame > div.table-wrap`: the inner div scrolls
  * horizontally so wide tables do not widen the page on narrow screens, and the outer one
  * hosts the fade that signals columns out of view (toggled by the post page script).
  * Tables with four or more columns also get `data-wide`, which the stylesheet uses to
  * keep their columns readable.
+ *
+ * No class here may contain "scroll": Safari's Reader drops any container whose class
+ * matches its list of non-article words, which includes it, and the table goes with it.
  */
 export default function rehypeTableWrap() {
   return (tree: any) => {
@@ -20,7 +23,7 @@ export default function rehypeTableWrap() {
         parent.children[index] = {
           type: 'element',
           tagName: 'div',
-          properties: { className: ['table-scroll'] },
+          properties: { className: ['table-frame'] },
           children: [
             { type: 'element', tagName: 'div', properties: { className: ['table-wrap'] }, children: [node] },
           ],

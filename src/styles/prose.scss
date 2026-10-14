@@ -75,7 +75,7 @@
 
   /* Tables scroll inside the article on narrow screens instead of widening the page.
      Each edge fades into the background while columns remain out of view on that side. */
-  .table-scroll {
+  .table-frame {
     @apply relative my-8;
 
     &::before,

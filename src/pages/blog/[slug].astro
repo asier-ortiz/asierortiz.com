@@ -122,7 +122,7 @@ const EXCLUDED_HEADINGS_REGEX = /^table[-\s]*of[-\s]*contents$/i;
 
 <script>
   // Fade each edge of a wide table only while there is something to scroll to on that side.
-  document.querySelectorAll<HTMLElement>('.table-scroll').forEach((outer) => {
+  document.querySelectorAll<HTMLElement>('.table-frame').forEach((outer) => {
     const scroller = outer.querySelector<HTMLElement>('.table-wrap');
     if (!scroller) return;
     const update = () => {
