@@ -12,7 +12,11 @@ import stackData from '@config/stackData.json';
   description={`The tools and setup ${siteData.author.name} works with every day: editor, terminal, languages, services and hardware.`}
 >
   <Particles client:media="(min-width: 768px)" />
-  <article class="mx-auto max-w-3xl px-4 pt-24 md:pt-36 lg:pt-44">
+  <!-- The home page's frame, as this is a page of the menu like Projects, Background and the blog:
+       the title starts under the logo and, from lg, the labels and items of the lists fall on the
+       years and titles of the Background timeline. The lists keep their reading width. The band
+       takes the whole frame, so its faded edges end at the frame's, not in the middle of the page. -->
+  <article class="container pt-24 md:pt-36 lg:pt-44">
     <header>
       <h1 class="h1 text-pretty text-gradient lg:pb-2">My tools and setup</h1>
       <p class="description mt-6 max-w-[42rem] text-pretty">
