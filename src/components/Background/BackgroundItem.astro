@@ -1,13 +1,9 @@
 ---
-import ToggleDescription from '@components/Background/ToggleDescription.vue';
 import { type academicItem } from '@config/backgroundData.json';
 
-interface Props extends academicItem {
-  index: number;
-  initialOpen?: boolean;
-}
+type Props = academicItem;
 
-const { title, center, description, date, ongoing, index, initialOpen } = Astro.props as Props;
+const { title, center, description, date, ongoing } = Astro.props as Props;
 
 // "Cross-Platform" and "end-to-end" are single terms, but browsers break a line after any hyphen.
 // Odd parts are those terms, each kept whole in an inline-block: white-space: nowrap would do it
@@ -29,19 +25,12 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
     </span>
   </h3>
   <p class="mt-1 text-sm text-base-400 text-balance md:mt-2 md:text-base">{center}</p>
-  <div class="mt-3 max-w-xl">
-    {/* Server-rendered (client:load, not client:only): the open description and the toggles count
-        towards the page height from the first paint. Rendered only on the client they arrived after
-        a fragment scroll had been computed, and any section below them landed short. */}
-    <ToggleDescription
-      client:load
-      contentId={`background-description-${index}`}
-      title={title}
-      initialOpen={initialOpen}
-    >
-      {keepHyphenatedWords(description).map((part, i) => (i % 2 ? <span class="inline-block">{part}</span> : part))}
-    </ToggleDescription>
-  </div>
+  {/* Always shown, one sentence each: folded behind a toggle, with display: none, a description
+      was missing from reading modes (Chrome's reads the accessibility tree) and from find in
+      page. */}
+  <p class="description mt-3 max-w-xl text-pretty">
+    {keepHyphenatedWords(description).map((part, i) => (i % 2 ? <span class="inline-block">{part}</span> : part))}
+  </p>
 </li>
 
 <style>

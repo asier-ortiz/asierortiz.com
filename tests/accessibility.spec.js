@@ -32,11 +32,6 @@ const report = (violations) =>
   );
 
 async function expectNoViolations(page, testInfo, state, { disableRules = [] } = {}) {
-  // Astro wraps an island's children in <astro-slot>, drawn with display: contents, and axe skips
-  // the contrast of text whose parent has no box: the descriptions behind "Show more" would go
-  // unmeasured. An inline box for the scan lets axe see them; no colour changes. :root outranks
-  // Astro's own rule, which comes later in the page.
-  await page.addStyleTag({ content: ':root astro-slot { display: inline; }' });
   const results = await new AxeBuilder({ page })
     .withTags(WCAG_TAGS)
     .disableRules(disableRules)
@@ -89,15 +84,9 @@ for (const url of urls) {
     await reveal(page);
     await expectNoViolations(page, testInfo, 'as loaded');
 
-    // Folded content open: the descriptions behind "Show more" and the <details> in posts. One
-    // click per button found, so a toggle that does not respond cannot loop forever.
-    const showMore = page.locator('button[aria-expanded="false"]:visible', {
-      hasText: 'Show more',
-    });
-    const toggles = await showMore.count();
+    // Folded content open: the <details> in posts.
     const details = await page.locator('details:not([open])').count();
-    if (!toggles && !details) return;
-    for (let i = 0; i < toggles; i++) await showMore.first().click();
+    if (!details) return;
     await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
     await settle(page);
     await expectNoViolations(page, testInfo, 'with folded content open');

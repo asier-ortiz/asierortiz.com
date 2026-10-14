@@ -15,11 +15,7 @@ import Academic from '@components/Icons/Academic.astro';
       </h2>
       <!-- role="list": Safari drops the list semantics of a list without markers. -->
       <ol role="list" class="mt-10">
-        {
-          backgroundData.map((backgroundItem, index) => (
-            <BackgroundItem {...backgroundItem} index={index} initialOpen={index === 0} />
-          ))
-        }
+        {backgroundData.map((backgroundItem) => <BackgroundItem {...backgroundItem} />)}
       </ol>
     </div>
   </div>
