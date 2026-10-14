@@ -32,12 +32,26 @@ interface Props {
   pubDate?: Date | string;
   updatedDate?: Date | string;
   isPost?: boolean;
+  /** A post's full title, its structured data's headline when `title` is a shorter one for the
+   *  tab and search results. Firefox's Reader View takes its title from the headline and drops
+   *  the first heading in the text that matches it: with the short title, that was a section. */
+  headline?: string;
   /** Keep the page out of search results (confirmation and error pages). */
   noindex?: boolean;
 }
 
-const { title, bareTitle, description, image, imageAlt, pubDate, updatedDate, isPost, noindex } =
-  Astro.props as Props;
+const {
+  title,
+  bareTitle,
+  description,
+  image,
+  imageAlt,
+  pubDate,
+  updatedDate,
+  isPost,
+  headline,
+  noindex,
+} = Astro.props as Props;
 const pageTitle = bareTitle ? title : `${title} · ${siteData.author.name}`;
 const pageUrl = Astro.url;
 const shareImage = image ?? siteData.defaultImage.src;
@@ -132,7 +146,7 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
         <script type="application/ld+json" set:html={JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',
-          headline: title,
+          headline: headline ?? title,
           description: description,
           url: pageUrl,
           image: ogImage,
