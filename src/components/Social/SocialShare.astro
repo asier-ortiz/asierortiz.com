@@ -41,7 +41,9 @@ const shareLinks = [
 ];
 ---
 
-<div class="mt-8 flex items-center gap-1">
+<!-- post-share: a class with "share" in it marks the bar as not part of the text for reading views
+     (Firefox's Reader View drops it), which otherwise kept the "Share:" label alone. No styles. -->
+<div class="post-share mt-8 flex items-center gap-1">
   <span class="mr-2 text-sm text-base-400">Share:</span>
 
   {shareLinks.map((share) => (
