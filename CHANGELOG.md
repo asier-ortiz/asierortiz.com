@@ -1,3 +1,14 @@
+## [1.82.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.1...v1.82.2) (2026-10-14)
+
+### Bug Fixes
+
+* **blog:** a post's structured data carries its full title ([8982451](https://github.com/asier-ortiz/asierortiz.com/commit/8982451db118ac75963671233cdf862525633815))
+* **blog:** reading views leave out the newsletter box and the way back ([6580f15](https://github.com/asier-ortiz/asierortiz.com/commit/6580f15e824e3a95673de962f66aa133f14c919f))
+* **blog:** reading views leave out the share bar's label ([6dcfd7a](https://github.com/asier-ortiz/asierortiz.com/commit/6dcfd7a83947b254ec12abd510e35e71af3ca918))
+* **blog:** Safari's Reader keeps the tables in posts ([8454135](https://github.com/asier-ortiz/asierortiz.com/commit/84541354e1c354599cf8ed8e89625630d6ff105f))
+* **home:** show the background descriptions instead of folding them ([cc1306e](https://github.com/asier-ortiz/asierortiz.com/commit/cc1306ea5485ca8abc55171e6c97e82096a3ad93))
+* **home:** the institution in each background entry stands apart ([ad3bbe7](https://github.com/asier-ortiz/asierortiz.com/commit/ad3bbe77053a8d34ba696a6d37edd6e9baab7419)), closes [#a3a3a3](https://github.com/asier-ortiz/asierortiz.com/issues/a3a3a3) [#d4d4d4](https://github.com/asier-ortiz/asierortiz.com/issues/d4d4d4)
+
 ## [1.82.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.0...v1.82.1) (2026-10-14)
 
 ### Bug Fixes
