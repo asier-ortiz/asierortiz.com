@@ -24,7 +24,9 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
       {keepHyphenatedWords(title).map((part, i) => (i % 2 ? <span class="inline-block">{part}</span> : part))}
     </span>
   </h3>
-  <p class="mt-1 text-sm text-base-400 text-balance md:mt-2 md:text-base">{center}</p>
+  {/* A step lighter than the description below: the institution reads with the title, and in one
+      grey the two lines merged into a single block. */}
+  <p class="mt-1 text-sm text-base-300 text-balance md:mt-2 md:text-base">{center}</p>
   {/* Always shown, one sentence each: folded behind a toggle, with display: none, a description
       was missing from reading modes (Chrome's reads the accessibility tree) and from find in
       page. */}
