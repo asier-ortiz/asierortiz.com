@@ -1,3 +1,9 @@
+## [1.82.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.0...v1.82.1) (2026-10-14)
+
+### Bug Fixes
+
+* **uses:** the page starts under the logo, like the other menu pages ([e77e771](https://github.com/asier-ortiz/asierortiz.com/commit/e77e771e9320300bcec6ffa620a9495efe19ef35))
+
 ## [1.82.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.81.0...v1.82.0) (2026-10-13)
 
 ### Features
