@@ -12,14 +12,15 @@
     const nav = document.getElementById('nav__container');
 
     const updateReadingProgress = () => {
-      const article = document.querySelector('article');
-      if (!progressBar || !article || !nav) return;
+      // The bar's own container: the post's column, the article and what follows it.
+      const column = progressBar?.parentElement;
+      if (!progressBar || !column || !nav) return;
 
       const navBottom = nav.offsetTop + nav.offsetHeight;
       progressBar.style.top = `${navBottom}px`;
 
-      const totalHeight = article.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY - article.offsetTop;
+      const totalHeight = column.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY - column.offsetTop;
       const percentage = Math.max(0, Math.min((scrolled / totalHeight) * 100, 100));
       progressBar.style.transform = `scaleX(${percentage / 100})`;
     };
