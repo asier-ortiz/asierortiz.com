@@ -30,7 +30,7 @@
   /* The heading a table-of-contents link (or a shared #link) points at. It follows the URL, so it
      stays right after Back and Forward. Like the current entry of the contents panel, it takes a
      bar as well as a colour (WCAG 1.4.1). The bar sits in the margin, so the title does not move,
-     and is a border, which forced colours keep where they drop the blue. */
+     and is a border, which forced colours keep where they drop the accent. */
   :is(h2, h3):target {
     @apply relative text-primary-300;
 

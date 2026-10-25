@@ -45,16 +45,17 @@
     @apply rounded-none bg-base-600 bg-opacity-90;
   }
 
+  /* Lighter than the accent fills (primary-500), so a selection still shows on them and on the
+     search hits. Gradient headings included: their transparent text takes this colour when
+     selected. */
   ::selection {
-    @apply bg-secondary-400;
-    color: #000000;
+    @apply bg-primary-300 text-primary-content;
   }
 
   mark {
-    /* Only the search results use it: bright enough to read as the hit over the base-400 a
-       description is set in. The rows that recolour it below keep their own text colour. */
-    background-color: rgba(59, 130, 246, 0.45);
-    @apply text-base-50;
+    /* Only the search results use it: an accent fill, so the hit stands out from the grey a
+       description is set in and from the white text of a picked row alike. */
+    @apply bg-primary-500 text-primary-content;
     padding: 0 0.15em;
     border-radius: 0.25rem;
   }
@@ -129,7 +130,7 @@
   }
 
   .copy-code-button {
-    @apply absolute top-1 right-1 bg-primary-600 text-white p-3 rounded-md transition-opacity active:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
+    @apply absolute top-1 right-1 bg-primary-500 text-primary-content p-3 rounded-md transition-opacity active:bg-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
 
     /* Revealed by hovering the block where a fine pointer hovers; always visible elsewhere. */
     @media (hover: hover) and (pointer: fine) {
@@ -204,8 +205,8 @@
     color: transparent;
     background: linear-gradient(
       to bottom,
-      var(--color-primary-600),
-      var(--color-secondary-50) calc(100% - var(--descender-room))
+      theme('colors.primary.600'),
+      theme('colors.primary.50') calc(100% - var(--descender-room))
     );
     background-origin: border-box;
     -webkit-background-clip: text;
@@ -222,19 +223,8 @@
     }
   }
 
-  .text-gradient::selection {
-    @apply bg-secondary-300;
-    color: #000000;
-  }
-
-  /* On a blue row a white wash leaves the marked word at 2.6:1; a dark one keeps it readable. */
-  [aria-selected="true"] mark {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: inherit;
-  }
-
-  /* The row's smaller lines (description, date, tags) on its primary-700: 90% white reads at
-     5.1:1, where 80% stopped at 4.4:1. Hover and the tapped row below share it. */
+  /* The row's smaller lines (description, date, tags) on its base-700: the base-400 they are set
+     in drops to 4.1:1 there, 90% white reads at 8.8:1. Hover and the tapped row below share it. */
   [aria-selected="true"] p {
     color: rgba(255, 255, 255, 0.9);
     transition: color 0.2s ease-in-out;
@@ -242,11 +232,6 @@
 
   /* Hand-written hover rules are gated like the Tailwind ones (see tailwind.config.mjs). */
   @media (hover: hover) and (pointer: fine) {
-    a:hover mark {
-      background-color: rgba(0, 0, 0, 0.3);
-      color: inherit;
-    }
-
     a:hover p {
       color: rgba(255, 255, 255, 0.9);
       transition: color 0.2s ease-in-out;
@@ -254,12 +239,6 @@
   }
 
   /* A tapped link while the next page loads (pressed-links.js) takes the selected look at once. */
-  a[data-pressed] mark {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: inherit;
-    transition: none;
-  }
-
   a[data-pressed] p {
     color: rgba(255, 255, 255, 0.9);
     transition: none;
@@ -309,7 +288,11 @@
   .underline-ltr {
     position: relative;
     display: inline-block;
-    background-image: linear-gradient(to right, var(--color-primary-600), var(--color-primary-600));
+    background-image: linear-gradient(
+      to right,
+      theme('colors.primary.600'),
+      theme('colors.primary.600')
+    );
     background-repeat: no-repeat;
     background-size: 0% 2px;
     background-position: left bottom;

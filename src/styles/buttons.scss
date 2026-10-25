@@ -6,7 +6,7 @@
 
 .button--primary {
   @apply relative border border-primary-500 bg-base-800;
-  @apply hover:bg-primary-500 hover:text-base-800 active:bg-primary-500 active:text-base-800;
+  @apply hover:bg-primary-500 hover:text-primary-content active:bg-primary-500 active:text-primary-content;
   @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
 
   &::after {
@@ -24,10 +24,10 @@
 
 .button--ghost {
   @apply bg-base-700 text-base-300;
-  @apply hover:bg-primary-500 hover:text-base-800 active:bg-primary-500 active:text-base-800;
+  @apply hover:bg-primary-500 hover:text-primary-content active:bg-primary-500 active:text-primary-content;
   /* data-pressed: a tapped same-tab link while the next page loads (pressed-links.js); instant, as iOS
      freezes transitions then. */
-  @apply data-[pressed]:bg-primary-500 data-[pressed]:text-base-800 data-[pressed]:duration-0;
+  @apply data-[pressed]:bg-primary-500 data-[pressed]:text-primary-content data-[pressed]:duration-0;
   @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
 }
 
@@ -48,9 +48,8 @@
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-900;
 }
 
-/* On the blue the text is dark, as on every primary-500 fill: white reads at 2.77:1. */
 .button--chip {
-  @apply relative px-3 py-2 text-xs rounded-full bg-base-800 text-primary-400 hover:bg-primary-500 hover:text-base-800 active:bg-primary-500 active:text-base-800;
+  @apply relative px-3 py-2 text-xs rounded-full bg-base-800 text-primary-400 hover:bg-primary-500 hover:text-primary-content active:bg-primary-500 active:text-primary-content;
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-0;
 
   /* The chip draws at 32px; the tap area reaches 40px into the 8px gap around it. */
@@ -61,13 +60,13 @@
 }
 
 .button--chip-active {
-  @apply bg-primary-500 text-base-800;
+  @apply bg-primary-500 text-primary-content;
 }
 
 /* A tag page stays up until the next one arrives: the tapped chip (data-pressed, pressed-links.js) takes
    the selected look at once and the current selection lets go of it, as when /blog/ filters in place. */
 .button--chip[data-pressed] {
-  @apply bg-primary-500 text-base-800 duration-0;
+  @apply bg-primary-500 text-primary-content duration-0;
 }
 
 :has(> .button--chip[data-pressed]) > .button--chip-active {
@@ -101,7 +100,7 @@
   /* Only the colours skip the transition on press: a slide-out that starts mid-press still
      animates, and reduced motion keeps transitions off. */
   &:active {
-    @apply bg-primary-500 text-base-800;
+    @apply bg-primary-500 text-primary-content;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -127,7 +126,7 @@
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        @apply transform scale-110 bg-primary-500 text-base-800 shadow-lg;
+        @apply transform scale-110 bg-primary-500 text-primary-content shadow-lg;
       }
     }
   }

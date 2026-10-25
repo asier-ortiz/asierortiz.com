@@ -297,8 +297,9 @@ const highlightMatch = (post, field) => {
           aria-label="Search results"
           class="space-y-4"
         >
-          <!-- Picked with the arrows, hovered or tapped, a row takes the same primary-700: white reads
-               at 5.9:1 on it, 4.1:1 on primary-600. -->
+          <!-- Picked with the arrows, hovered or tapped, a row takes the same look: a lighter grey
+               and an accent ring. The text stays white, so any accent colour works. One background
+               class at a time: bg-base-800 comes later in the CSS and would beat bg-base-700. -->
           <a
             v-for="(post, index) in filteredPosts"
             :id="`search-result-${index}`"
@@ -308,13 +309,10 @@ const highlightMatch = (post, field) => {
             :aria-selected="index === selectedIndex"
             tabindex="-1"
             :class="[
-            'block p-3 bg-base-800 rounded-lg transition-colors duration-200 ease-in-out data-[pressed]:bg-primary-700 data-[pressed]:text-white data-[pressed]:duration-0',
-            {
-              'bg-primary-700 text-white': selectedIndex !== -1 && index === selectedIndex,
-              'hover:bg-primary-700 hover:text-white': !(
-                selectedIndex !== -1 && index === selectedIndex
-              ),
-            },
+            'block p-3 rounded-lg transition duration-200 ease-in-out data-[pressed]:bg-base-700 data-[pressed]:text-white data-[pressed]:ring-2 data-[pressed]:ring-inset data-[pressed]:ring-primary-500 data-[pressed]:duration-0',
+            selectedIndex !== -1 && index === selectedIndex
+              ? 'bg-base-700 text-white ring-2 ring-inset ring-primary-500'
+              : 'bg-base-800 hover:bg-base-700 hover:text-white hover:ring-2 hover:ring-inset hover:ring-primary-500',
           ]"
           >
             <div>

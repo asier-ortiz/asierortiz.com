@@ -3,26 +3,30 @@
   <style>
     /* Opaque page colour: the figure stays legible outside the site (own tab, feed readers). */
     svg { background: #0a0a0a; }
+    /* The site's accent, primary-400 in tailwind.config.mjs: declared once, everything drawn in it
+       takes it as currentColor. */
+    svg { color: #38bdf8; }
     /* Safari lays text out at the size it is shown, and the system font widens at small sizes:
        without this, labels change width as the figure is zoomed. */
     svg { text-rendering: geometricPrecision; }
     /* Grey outlines in #737373: 3:1 or more against the page and the fills they edge, so the
        boxes stay apart at phone size too (WCAG 1.4.11). */
     .box { fill: #171717; stroke: #737373; stroke-width: 1; }
-    .box-accent { fill: #171717; stroke: #38bdf8; stroke-width: 1.2; }
+    .box-accent { fill: #171717; stroke: currentColor; stroke-width: 1.2; }
     .inner { fill: #262626; stroke: #737373; stroke-width: 1; }
     .t { font: 600 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #e5e5e5; }
     .s { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #a3a3a3; }
-    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #38bdf8; }
+    .k { font: 600 12px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: currentColor; }
     .lbl { font: 11px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #d4d4d4; }
     .mono { font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #d4d4d4; }
+    /* Caveats, in a colour that must stay apart from the accent. */
     .warn { fill: #fbbf24; }
-    .arrow { stroke: #38bdf8; stroke-width: 1.4; fill: none; }
+    .arrow { stroke: currentColor; stroke-width: 1.4; fill: none; }
     .arrow-dim { stroke: #737373; stroke-width: 1.2; fill: none; }
   </style>
   <defs>
     <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M 0 0 L 8 4 L 0 8 z" fill="#38bdf8" />
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="currentColor" />
     </marker>
     <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 0 L 8 4 L 0 8 z" fill="#737373" />

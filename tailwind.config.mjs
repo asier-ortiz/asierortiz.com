@@ -21,8 +21,13 @@ export default {
     },
     extend: {
       colors: {
+        // The accent, the one colour that is not grey: everything takes it from these two
+        // entries, except the blog diagrams, which are images and declare primary-400 once each
+        // (public/assets/blog/*.svg). Accent fills are primary-500, primary-400 when pressed, and
+        // selected text primary-300, all under primary-content: a new accent needs a content
+        // colour at 4.5:1 or more on the three.
         primary: colors.sky,
-        secondary: colors.cyan,
+        'primary-content': colors.neutral['800'],
 
         //////////////////////////////////////////////////////////////
 
@@ -368,21 +373,5 @@ export default {
       ],
     },
   },
-  plugins: [
-    typography,
-    forms,
-    function ({ addBase, theme }) {
-      const hex = theme('colors.primary.600');
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      addBase({
-        ':root': {
-          '--color-primary-600': hex,
-          '--color-primary-600-rgb': `${r}, ${g}, ${b}`,
-          '--color-secondary-50': theme('colors.secondary.50'),
-        },
-      });
-    },
-  ],
+  plugins: [typography, forms],
 };

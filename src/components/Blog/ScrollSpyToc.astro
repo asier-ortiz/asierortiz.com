@@ -24,7 +24,8 @@ const { sections } = Astro.props as { sections: Section[] };
       aria-expanded="false"
       class="peer flex w-10 flex-col gap-2 items-center p-2 bg-base-900 border border-base-500 rounded-md shadow hover:ring-2 hover:ring-primary-400 hover:ring-opacity-50 hover:shadow-lg hover:shadow-primary-400/50 active:ring-2 active:ring-primary-400 active:duration-0 transition-all duration-300"
     >
-      {/* The current section's bullet is longer as well as blue, so it does not rely on colour. */}
+      {/* The current section's bullet is longer as well as accent-coloured, so it does not rely
+          on colour. */}
       {sections.map(({ id }) => (
         <span
           class="scrollspy-bullet h-0.5 w-3 rounded-sm bg-base-500 transition-[background-color,width] duration-300 motion-reduce:transition-none data-[active]:w-5 data-[active]:bg-primary-400"
