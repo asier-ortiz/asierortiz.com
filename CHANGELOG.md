@@ -1,3 +1,9 @@
+## [1.82.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.2...v1.82.3) (2026-10-25)
+
+### Bug Fixes
+
+* **projects:** Araba Market lists MySQL as its database ([45bcadf](https://github.com/asier-ortiz/asierortiz.com/commit/45bcadf09d5b3ff754154493f50aeda51cb0d57f))
+
 ## [1.82.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.1...v1.82.2) (2026-10-14)
 
 ### Bug Fixes
