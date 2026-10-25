@@ -138,7 +138,7 @@ export const projectData: ProjectItem[] = [
       { language: 'Vuex', color: '#35495E' },
       { language: 'Symfony', color: '#333333' },
       { language: 'API Platform', color: '#38A9B4' },
-      { language: 'PostgreSQL', color: '#336791' },
+      { language: 'MySQL', color: '#4479A1' },
       { language: 'Leaflet', color: '#76B041' },
     ],
     buttonText: 'Visit Website',
