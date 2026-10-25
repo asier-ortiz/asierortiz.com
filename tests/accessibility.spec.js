@@ -1,12 +1,15 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join, sep } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import loadConfig from 'tailwindcss/loadConfig.js';
+import resolveConfig from 'tailwindcss/resolveConfig.js';
 
 // axe on every page the build publishes, as it loads and with its folded content open, plus the
 // states only a click reaches. Only WCAG 2.0, 2.1 and 2.2 A/AA rules fail the run: axe's best
 // practices are advice, not requirements. Automated rules catch only part of WCAG; keyboard,
-// screen reader and motion checks stay manual.
+// screen reader and motion checks stay manual. The last test checks the accent's colour pairs
+// in the Tailwind config, for the states axe never reaches.
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 const DIST = 'dist';
@@ -139,4 +142,61 @@ test('figure viewer open', async ({ page }, testInfo) => {
   await expect(page.getByRole('dialog', { name: 'Figure viewer' })).toBeVisible();
   await settle(page);
   await expectNoViolations(page, testInfo, 'figure viewer open');
+});
+
+// axe only measures the text it finds on the page, so it never sees hover, pressed or selected
+// states, nor the 3:1 that icons and focus rings need (WCAG 1.4.11). Every accent use takes its
+// colours from two entries in the Tailwind config, so the pairs are checked there instead; accent
+// text, icons and rings on the lightest grey they sit on. A new kind of accent use adds its pair.
+const ACCENT_PAIRS = [
+  ['primary-content', 'primary-500', 4.5, 'accent fills: buttons, chips, search hits, copy button'],
+  ['primary-content', 'primary-400', 4.5, 'the same fills, hovered or pressed'],
+  ['primary-content', 'primary-300', 4.5, 'selected text'],
+  ['primary-400', 'base-800', 4.5, 'accent text and links, as on tag chips and in diagrams'],
+  ['primary-300', 'base-900', 4.5, 'current contents entry, hero highlight, text buttons'],
+  ['primary-500', 'base-700', 3, "focus rings, the picked search row's ring"],
+  ['primary-600', 'base-950', 3, 'social icons on hover, top of the gradient headings'],
+];
+
+// WCAG 2 contrast ratio between two hex colours.
+function contrast(first, second) {
+  const luminance = (hex) => {
+    const six = /^#[0-9a-f]{3}$/i.test(hex) ? hex.replace(/[0-9a-f]/gi, '$&$&') : hex;
+    const channels = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(six);
+    if (!channels) throw new Error(`Expected a hex colour, got ${hex}`);
+    const [r, g, b] = channels.slice(1).map((c) => {
+      const v = parseInt(c, 16) / 255;
+      return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const [lighter, darker] = [luminance(first), luminance(second)].sort((x, y) => y - x);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+test('accent colours in every state', async ({}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'Colours are the same at every width.');
+  const colours = resolveConfig(loadConfig(resolve('tailwind.config.mjs'))).theme.colors;
+  const hex = (name) => {
+    const [, family, step] = /^(.+?)(?:-(\d+))?$/.exec(name);
+    return step ? colours[family][step] : colours[family];
+  };
+
+  const failures = ACCENT_PAIRS.flatMap(([fg, bg, min, use]) => {
+    const ratio = contrast(hex(fg), hex(bg));
+    return ratio < min ? [`${fg} on ${bg} (${use}): ${ratio.toFixed(2)}:1, needs ${min}:1`] : [];
+  });
+
+  // The diagrams are images and cannot read the config: each one declares primary-400 itself.
+  const accent = hex('primary-400');
+  const diagrams = 'public/assets/blog';
+  for (const file of readdirSync(diagrams).filter((name) => name.endsWith('.svg'))) {
+    const svg = readFileSync(join(diagrams, file), 'utf8');
+    const declared = /svg \{ color: (#[0-9a-f]{6}); \}/i.exec(svg)?.[1] ?? 'no accent';
+    if (declared.toLowerCase() !== accent.toLowerCase()) {
+      failures.push(`${file} declares ${declared}, primary-400 is ${accent}`);
+    }
+  }
+
+  expect(failures, 'Accent pairs below their minimum, or a diagram out of step').toEqual([]);
 });
