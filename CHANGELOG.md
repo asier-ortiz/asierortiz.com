@@ -1,3 +1,9 @@
+## [1.82.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.3...v1.82.4) (2026-10-26)
+
+### Bug Fixes
+
+* **hero:** update the portrait ([9c94fc5](https://github.com/asier-ortiz/asierortiz.com/commit/9c94fc5b8de7593b98e17d25f9a76c0d4de172e8))
+
 ## [1.82.3](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.2...v1.82.3) (2026-10-25)
 
 ### Bug Fixes
