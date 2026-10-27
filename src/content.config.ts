@@ -1,4 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 /**
  * Tags are the themes a reader browses by, not the keywords of a post: the full-text
@@ -22,6 +24,7 @@ const TAGS = [
 const MAX_TAGS_PER_POST = 4;
 
 const blogCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: ({ image }) =>
     z.object({
     title: z.string().min(5, { message: 'Title must be at least 5 characters long.' }),

@@ -49,7 +49,7 @@ const filterable = posts.length === allPosts.length;
 const searchIndex = allPosts.map((post) => ({
   title: post.data.title || '',
   description: post.data.description || '',
-  url: `/blog/${post.slug}/`,
+  url: `/blog/${post.id}/`,
   pubDate: post.data.pubDate,
   tags: post.data.tags ?? [],
 }));
@@ -146,7 +146,7 @@ const searchIndex = allPosts.map((post) => ({
         const readingDuration = getReadingTime(post.body);
         return (
           <a
-            href={`/blog/${post.slug}/`}
+            href={`/blog/${post.id}/`}
             class="post-card group block overflow-hidden rounded-2xl border border-base-700 bg-base-900 hover:border-primary-500 hover:shadow-xl motion-safe:hover:scale-[1.02] transform transition-all duration-300 data-[pressed]:border-primary-500 data-[pressed]:duration-0"
             data-tags={post.data.tags?.join(',')}
           >
