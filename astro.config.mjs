@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
 import { readdirSync, readFileSync } from 'node:fs';
 import vue from '@astrojs/vue';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import { unified } from '@astrojs/markdown-remark';
 import compress, { Default as compressDefaults } from 'astro-compress';
 import icon from 'astro-icon';
 import rehypeTableWrap from './src/utils/rehypeTableWrap.ts';
@@ -31,6 +33,14 @@ const lastmodFor = (pathname) => {
 
 export default defineConfig({
   vite: {
+    // Tailwind 3 through PostCSS: @astrojs/tailwind stops at Astro 5, and global.scss carries
+    // the @tailwind directives itself.
+    css: { postcss: { plugins: [tailwindcss(), autoprefixer()] } },
+    // Vite 8 builds for Safari 16.4 by default, and its CSS minifier then turns every min-width
+    // query into range syntax that older Safari ignores (iPhone 6s/7 and macOS Catalina stop at
+    // 15); the astro-compress pass below does not undo it. Rolldown adds es2020 itself and
+    // rejects it in this list.
+    build: { target: ['chrome87', 'edge88', 'firefox78', 'safari15', 'ios15'] },
     // Pre-bundle every package the browser loads (islands and page scripts alike), so the dev
     // server never discovers one mid-session: that re-optimisation changes the dependency hashes
     // and leaves modules already served pointing at outdated files ("Failed to fetch dynamically
@@ -52,6 +62,9 @@ export default defineConfig({
     },
   },
   site: 'https://asierortiz.com',
+  // Astro 7 defaults to JSX whitespace rules, which drop the space between elements written on
+  // separate lines ("this?Reply by email."); the templates are written for HTML's rules.
+  compressHTML: true,
   trailingSlash: 'ignore',
   integrations: [
     vue(),
@@ -64,7 +77,6 @@ export default defineConfig({
       },
     }),
     icon(),
-    tailwind(),
     // Rasters are already optimised by astro:assets, and astro-compress's own image pass is a
     // no-op on lossy WebP (its size check measures the UTF-8 length of binary data), so it is
     // off. The SVG pass keeps role="img" on the diagrams, which svgo strips by default.
@@ -97,7 +109,11 @@ export default defineConfig({
     // github-dark-default keeps GitHub's palette with comments above 6:1, on a
     // near-black background that matches the site.
     shikiConfig: { theme: 'github-dark-default' },
-    rehypePlugins: [rehypeTableWrap, rehypeImageSize],
+    // Astro 7 renders Markdown with Sätteri by default, which does not run rehype plugins; the
+    // unified processor keeps the pipeline these two are written for.
+    processor: unified({
+      rehypePlugins: [rehypeTableWrap, rehypeImageSize],
+    }),
   },
   server: {
     port: 3_000,

@@ -17,13 +17,13 @@ export async function GET(context) {
     authors: [{ name: siteData.author.name, url: context.site }],
     items: posts
       .map((post) => ({
-        id: absoluteUrl(`/blog/${post.slug}/`, context.site),
-        url: absoluteUrl(`/blog/${post.slug}/`, context.site),
+        id: absoluteUrl(`/blog/${post.id}/`, context.site),
+        url: absoluteUrl(`/blog/${post.id}/`, context.site),
         title: post.data.title,
         content_html: `
           <img src="${absoluteUrl(post.data.image.src, context.site)}" alt="${post.data.title}" />
           <p>${post.data.description}</p>
-          <p><a href="${absoluteUrl(`/blog/${post.slug}/`, context.site)}">→ Read the full post</a></p>
+          <p><a href="${absoluteUrl(`/blog/${post.id}/`, context.site)}">→ Read the full post</a></p>
         `,
         summary: post.data.description,
         date_published: new Date(post.data.pubDate).toISOString(),

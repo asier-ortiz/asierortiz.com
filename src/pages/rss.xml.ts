@@ -31,7 +31,7 @@ export async function GET(context) {
       .map((post) => ({
         title: post.data.title,
         description: post.data.description,
-        link: `/blog/${post.slug}`,
+        link: `/blog/${post.id}`,
         pubDate: post.data.pubDate,
         author: `${siteData.author.email} (${siteData.author.name})`,
         customData: `
@@ -40,7 +40,7 @@ export async function GET(context) {
           <content:encoded><![CDATA[
             <img src="${absoluteUrl(post.data.image.src, context.site)}" alt="${post.data.title}" />
             <p>${post.data.description}</p>
-            <p><a href="${absoluteUrl(`/blog/${post.slug}/`, context.site)}">→ Read the full post</a></p>
+            <p><a href="${absoluteUrl(`/blog/${post.id}/`, context.site)}">→ Read the full post</a></p>
           ]]></content:encoded>
         `,
       })),

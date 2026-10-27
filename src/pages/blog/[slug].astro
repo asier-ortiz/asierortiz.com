@@ -1,4 +1,5 @@
 ---
+import { render } from 'astro:content';
 import { getPublishedPosts } from '@/utils/posts';
 import Layout from '@layouts/Layout.astro';
 import Button from '@/components/Button/Button.astro';
@@ -15,13 +16,13 @@ import PostFooterCta from '@/components/Blog/PostFooterCta.astro';
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content, headings = [] } = await post.render();
+const { Content, headings = [] } = await render(post);
 const readingDuration = getReadingTime(post.body);
 const EXCLUDED_HEADINGS_REGEX = /^table[-\s]*of[-\s]*contents$/i;
 ---

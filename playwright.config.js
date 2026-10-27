@@ -30,7 +30,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run preview -- --port 4321',
+    // --ignore-lock: Astro 7 sends `astro preview` to the background when it detects an AI
+    // agent, and Playwright would take that exit for a crash.
+    command: 'npm run preview -- --port 4321 --ignore-lock',
     url: 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
   },
