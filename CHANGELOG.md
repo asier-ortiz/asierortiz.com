@@ -1,3 +1,9 @@
+## [1.82.5](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.4...v1.82.5) (2026-10-27)
+
+### Bug Fixes
+
+* **blog:** share to Threads through threads.com ([8d53c71](https://github.com/asier-ortiz/asierortiz.com/commit/8d53c71d8ca2eb8fa817d6b51db3a2b88998362d))
+
 ## [1.82.4](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.3...v1.82.4) (2026-10-26)
 
 ### Bug Fixes
