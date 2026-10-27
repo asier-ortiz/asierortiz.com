@@ -1,5 +1,7 @@
 name: Check for Broken Links
 
+# lychee on every built page. Netlify deploys without waiting for it: a broken link flags the
+# commit, and the run's summary lists it.
 on:
   push:
     branches:
@@ -28,6 +30,18 @@ jobs:
         run: npm run build
 
       - name: Check links in dist/
-        uses: lycheeverse/lychee-action@v1.8.0
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
-          args: --verbose ./dist
+          # Pages only: the feed and sitemaps hold XML namespaces and escaped markup that read as
+          # broken links. --root-dir resolves the links that start with /. LinkedIn, X's share
+          # links and Oxford University Press turn automated requests away, so they would fail
+          # every run although they work for readers.
+          args: >-
+            --verbose
+            --no-progress
+            --extensions html
+            --root-dir ${{ github.workspace }}/dist
+            --exclude 'linkedin\.com'
+            --exclude 'twitter\.com/intent/'
+            --exclude 'doi\.org/10\.1093/'
+            -- ./dist
