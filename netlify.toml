@@ -6,6 +6,10 @@ framework = "astro"
 command = "npm run build"
 publish = "dist"
 
+# Same Node major as the GitHub workflows, so deploys build on the version CI tests.
+[build.environment]
+NODE_VERSION = "24"
+
 # Netlify serves .webmanifest as application/octet-stream by default.
 [[headers]]
 for = "/favicons/site.webmanifest"
