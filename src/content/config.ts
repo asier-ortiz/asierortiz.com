@@ -51,14 +51,6 @@ const blogCollection = defineCollection({
       .array(z.enum(TAGS))
       .nonempty({ message: 'Tags must contain at least one tag.' })
       .max(MAX_TAGS_PER_POST, { message: `Use at most ${MAX_TAGS_PER_POST} tags; keywords belong in the text.` }),
-
-    headings: z.array(
-      z.object({
-        depth: z.number(),
-        slug: z.string(),
-        text: z.string(),
-      })
-    ).optional(),
   }),
 });
 

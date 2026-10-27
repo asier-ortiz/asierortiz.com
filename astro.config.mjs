@@ -3,10 +3,8 @@ import { readdirSync, readFileSync } from 'node:fs';
 import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import mdx from '@astrojs/mdx';
 import compress, { Default as compressDefaults } from 'astro-compress';
 import icon from 'astro-icon';
-import remarkExtractHeadings from './src/utils/remarkHeadings.ts';
 import rehypeTableWrap from './src/utils/rehypeTableWrap.ts';
 import rehypeImageSize from './src/utils/rehypeImageSize.ts';
 
@@ -66,7 +64,6 @@ export default defineConfig({
       },
     }),
     icon(),
-    mdx(),
     tailwind(),
     // Rasters are already optimised by astro:assets, and astro-compress's own image pass is a
     // no-op on lossy WebP (its size check measures the UTF-8 length of binary data), so it is
@@ -100,11 +97,9 @@ export default defineConfig({
     // github-dark-default keeps GitHub's palette with comments above 6:1, on a
     // near-black background that matches the site.
     shikiConfig: { theme: 'github-dark-default' },
-    remarkPlugins: [remarkExtractHeadings],
     rehypePlugins: [rehypeTableWrap, rehypeImageSize],
   },
   server: {
     port: 3_000,
   },
-  pageExtensions: ['astro', 'md', 'mdx', 'ts'],
 });
