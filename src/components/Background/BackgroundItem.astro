@@ -11,7 +11,7 @@ const { title, center, description, date, ongoing } = Astro.props as Props;
 const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
 ---
 
-<li class:list={['entry', { 'is-current': ongoing }]}>
+<li class:list={['entry', { 'is-current': ongoing }]} data-aos="fade-up">
   <span class="marker" aria-hidden="true"></span>
   {/* The year is part of the heading, so moving through the headings announces it with the title:
       "2027 Expected Advanced Program in DevOps and Cloud". */}
@@ -195,8 +195,9 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
 </style>
 
 <script>
-  // Not on load: AOS reveals the section while the live marker is still below the fold, and
-  // ripples started then would be over before anyone saw them.
+  // Not on load: the marker may still be below the fold, and ripples started then would be over
+  // before anyone saw them. The margin matches the AOS offset: in the last 100px of the screen the
+  // entry has not begun to fade in yet.
   const rippleObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -205,7 +206,7 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
         rippleObserver.unobserve(entry.target);
       });
     },
-    { threshold: 1 }
+    { threshold: 1, rootMargin: '0px 0px -100px 0px' }
   );
 
   document.querySelectorAll('.is-current .marker').forEach((marker) => {

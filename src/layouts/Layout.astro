@@ -212,9 +212,12 @@ const modified = updatedDate ? new Date(updatedDate) : undefined;
       if (siteData.useAnimations === true && typeof window !== 'undefined') {
         AOS.init({
           once: true,
-          // Hero.astro's CSS entrance copies these two values and the default easeOutCubic.
-          duration: 0.6,
-          distance: 15,
+          // Hero.astro's CSS entrance copies these three values.
+          duration: 1,
+          distance: 30,
+          // Decelerating: on the dark page a screenshot lets out most of its light late in the fade,
+          // and an S curve packs that into a flash.
+          easing: 'easeOutSine',
           // When disabled, AOS strips the data-aos attributes, so the hide rules
           // in src/styles/aos.scss stop matching and content stays visible.
           // Evaluated once per full page load.
