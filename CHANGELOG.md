@@ -1,3 +1,9 @@
+## [1.83.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.83.0...v1.83.1) (2026-10-30)
+
+### Bug Fixes
+
+* **uses:** update the phones ([1fe5c85](https://github.com/asier-ortiz/asierortiz.com/commit/1fe5c8516dab034c168f6418fba9a8f1b1a6383d))
+
 ## [1.83.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.5...v1.83.0) (2026-10-30)
 
 ### Features
