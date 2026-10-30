@@ -111,7 +111,7 @@ export const setup: UsesGroup<Device>[] = [
   },
   {
     title: 'Phones',
-    items: [{ name: 'iPhone 13 Pro' }, { name: 'iPhone 11 Pro', details: ['Continuity Camera'] }],
+    items: [{ name: 'iPhone 18 Pro' }, { name: 'iPhone 13 Pro', details: ['Continuity Camera'] }],
   },
   {
     title: 'Storage & network',
