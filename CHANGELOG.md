@@ -1,3 +1,9 @@
+## [1.83.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.5...v1.83.0) (2026-10-30)
+
+### Features
+
+* **home:** reveal the home page piece by piece ([0d4afe3](https://github.com/asier-ortiz/asierortiz.com/commit/0d4afe31b6e40b9656387f8c88677033c910a03b))
+
 ## [1.82.5](https://github.com/asier-ortiz/asierortiz.com/compare/v1.82.4...v1.82.5) (2026-10-27)
 
 ### Bug Fixes
