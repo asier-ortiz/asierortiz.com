@@ -47,9 +47,10 @@
 
   /* Lighter than the accent fills (primary-500), so a selection still shows on them and on the
      search hits. Gradient headings included: their transparent text takes this colour when
-     selected. */
+     selected. Just short of opaque: Safari turns an opaque selection colour into a translucent one
+     that matches on a white page, and on this dark one it came out far darker (2.8:1, not 9:1). */
   ::selection {
-    @apply bg-primary-300 text-primary-content;
+    @apply bg-primary-300/[.99] text-primary-content;
   }
 
   mark {
