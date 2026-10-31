@@ -1,3 +1,9 @@
+## [1.83.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.83.1...v1.83.2) (2026-10-31)
+
+### Bug Fixes
+
+* **ui:** keep the selection colour in Safari ([7246e0d](https://github.com/asier-ortiz/asierortiz.com/commit/7246e0d3749ac848c9dbc6c84456606f2de20629))
+
 ## [1.83.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.83.0...v1.83.1) (2026-10-30)
 
 ### Bug Fixes
