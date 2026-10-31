@@ -48,13 +48,14 @@ onBeforeUnmount(() => {
 });
 
 // The shortcut hint depends on the platform, which only the browser knows. The button is
-// server-rendered, so the hint is kept invisible (but sized) until mount, then filled in;
-// nothing shifts and nothing shows the wrong key first.
+// server-rendered, so the hint is kept invisible until mount, then filled in; the `is-mac` class,
+// set before the first paint (BlogListing.astro), already gives it the width of the keys to come,
+// so nothing shifts and nothing shows the wrong key first.
 const mounted = ref(false);
 const isMac = ref(false);
 
 onMounted(() => {
-  isMac.value = /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
+  isMac.value = document.documentElement.classList.contains('is-mac');
   mounted.value = true;
 });
 
@@ -86,7 +87,7 @@ const hasPosts = computed(() => props.posts.length > 0);
       <!-- Key labels are written without surrounding whitespace: the HTML minifier would
            collapse it in the served markup, and Vue would then flag a hydration mismatch. -->
       <span
-        class="hidden sm:flex items-center gap-1 opacity-70 text-[0.65rem] min-w-[3.25rem]"
+        class="hidden sm:flex items-center justify-end gap-1 opacity-70 text-[0.65rem] w-[4.3rem] [.is-mac_&]:w-[3.25rem]"
         :class="{ invisible: !mounted }"
         aria-hidden="true"
       >
