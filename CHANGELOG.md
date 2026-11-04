@@ -1,3 +1,13 @@
+## [1.84.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.83.2...v1.84.0) (2026-10-31)
+
+### Features
+
+* **blog:** fade in the covers that arrive late ([f0f6647](https://github.com/asier-ortiz/asierortiz.com/commit/f0f6647fa349764df818fd899beda000f6850bb0))
+
+### Bug Fixes
+
+* **blog:** keep the search button from resizing on load ([5d5d049](https://github.com/asier-ortiz/asierortiz.com/commit/5d5d049f91c7e39391c32c8ca19276478129667c))
+
 ## [1.83.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.83.1...v1.83.2) (2026-10-31)
 
 ### Bug Fixes
