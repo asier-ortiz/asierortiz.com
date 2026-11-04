@@ -1,3 +1,9 @@
+## [1.84.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.84.0...v1.84.1) (2026-11-04)
+
+### Bug Fixes
+
+* **hero:** keep the portrait's space while the photo loads ([3e5e50c](https://github.com/asier-ortiz/asierortiz.com/commit/3e5e50cd30ad33e4f8d8cd7202ec3c427df4fbb4))
+
 ## [1.84.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.83.2...v1.84.0) (2026-10-31)
 
 ### Features
