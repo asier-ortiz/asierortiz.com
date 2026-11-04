@@ -30,7 +30,9 @@ import Button from '@components/Button/Button.astro';
         </Button>
       </div>
     </div>
-    <div class="mx-auto max-w-sm md:col-span-1 md:max-w-full">
+    <!-- w-full: the column keeps the portrait's size before the photo arrives. Sized by its
+         content alone, it measured 0 until the image loaded and then pushed the page down. -->
+    <div class="mx-auto w-full max-w-sm md:col-span-1 md:max-w-full">
       <div class="eclipse-wrapper aspect-square relative z-[25]">
         <div class="eclipse-ring"></div>
         <div class="overflow-hidden rounded-full">
