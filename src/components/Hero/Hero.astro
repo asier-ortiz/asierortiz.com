@@ -126,6 +126,21 @@ import Button from '@components/Button/Button.astro';
     }
   }
 
+  /* A photo still in flight (the inline script marks it fade-in) holds the corona back: a glow
+     around an empty circle reads as a broken image. The ring fades in with the photo, at the
+     same 0.4s, and its one breath starts then instead of running out around the empty space. */
+  .eclipse-ring {
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .eclipse-wrapper:has(img.fade-in:not(.loaded)) .eclipse-ring {
+    opacity: 0;
+  }
+
+  .eclipse-wrapper:has(img.fade-in:not(.loaded)) .eclipse-ring::after {
+    animation-play-state: paused;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     /* Keep the static glow; only stop the breathing. */
     .eclipse-ring::after {
