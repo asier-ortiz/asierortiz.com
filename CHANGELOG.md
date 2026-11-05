@@ -1,3 +1,9 @@
+## [1.84.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.84.1...v1.84.2) (2026-11-05)
+
+### Bug Fixes
+
+* **hero:** hold the corona back until the portrait arrives ([78f8235](https://github.com/asier-ortiz/asierortiz.com/commit/78f8235dc0957eb3fd21e08ead1afed02c676e5d))
+
 ## [1.84.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.84.0...v1.84.1) (2026-11-04)
 
 ### Bug Fixes
