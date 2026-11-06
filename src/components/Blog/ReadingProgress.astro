@@ -3,8 +3,10 @@
 
 <!-- Scaled with transform rather than resized, so the update never triggers layout. No transition:
      the bar follows the scroll itself; a timed one trailed it and restarted on every scroll event,
-     which stuttered on iPhone. -->
-<div id="reading-progress" class="fixed left-0 z-20 h-[4px] w-full origin-left scale-x-0 bg-gradient-to-r from-primary-600 to-primary-600"></div>
+     which stuttered on iPhone. Under the header below md, where the drawer and its backdrop must
+     cover it; from md it runs above the floating header, over the strip there (Nav.astro), which
+     is z-30 too and comes earlier. -->
+<div id="reading-progress" class="fixed left-0 z-20 h-[4px] w-full origin-left scale-x-0 bg-gradient-to-r from-primary-600 to-primary-600 md:z-30"></div>
 
 <script is:inline>
   if (typeof window !== 'undefined') {
@@ -16,8 +18,9 @@
       const column = progressBar?.parentElement;
       if (!progressBar || !column || !nav) return;
 
-      const navBottom = nav.offsetTop + nav.offsetHeight;
-      progressBar.style.top = `${navBottom}px`;
+      // Right under the header while it spans the top of the window; from md the header floats
+      // clear of it (Nav.astro) and the bar takes the window's top edge.
+      progressBar.style.top = nav.offsetTop ? '0px' : `${nav.offsetHeight}px`;
 
       const totalHeight = column.scrollHeight - window.innerHeight;
       const scrolled = window.scrollY - column.offsetTop;

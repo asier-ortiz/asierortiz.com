@@ -74,7 +74,7 @@ const { sections } = Astro.props as { sections: Section[] };
 
     // One current section at a time: the last whose heading has passed the reading line, a third
     // of the way down the window but no more than 300px (a third of a laptop's). On a tall window
-    // a third would reach past a short section the reader has just jumped to, which lands 96px
+    // a third would reach past a short section the reader has just jumped to, which lands 112px
     // down (scroll-padding-top), onto the next heading. At the bottom of the page the closing
     // headings can stay below the line: there the section is the one the reader jumped to, if it
     // is on screen, else the last one.

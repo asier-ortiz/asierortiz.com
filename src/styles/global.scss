@@ -7,11 +7,12 @@
     @apply bg-base-950 font-sans leading-[1.6rem] text-base-50;
     scrollbar-gutter: stable;
 
-    /* The fixed header (72px, Nav.astro) covers the top of the window: focus moved by the
-       keyboard, #fragment jumps and find-in-page stop below it, with room to spare (WCAG
-       2.4.11). Post headings take this as is; the home sections, whose own top padding already
-       clears the header, opt out with -scroll-mt-24 (same token). */
-    scroll-padding-top: theme('spacing.24');
+    /* The fixed header covers the top of the window, 72px down (90px from md, where it floats
+       1rem below the edge; Nav.astro): focus moved by the keyboard, #fragment jumps and
+       find-in-page stop below it, with room to spare (WCAG 2.4.11). Post headings take this as
+       is; the home sections, whose own top padding already clears the header, opt out with
+       -scroll-mt-28 (same token). */
+    scroll-padding-top: theme('spacing.28');
 
     /* Below xl the scroll-to-top button (from sm), fixed in the bottom-right corner, reaches
        over the content, so focus moved by the keyboard stops clear of its top edge (WCAG
@@ -258,6 +259,13 @@
   .skip-link {
     @apply fixed top-4 z-40 rounded border border-primary-500 bg-base-800 px-4 py-2 text-sm font-semibold text-base-50;
     left: max(theme('spacing.4'), calc((100% - theme('maxWidth.5xl')) / 2 + theme('spacing.4')));
+
+    /* From md the header floats 1rem down, inside a 1px border (Nav.astro), and the logo moves
+       with it: down by both, and in by both, as its .container's padding is now inside the box. */
+    @screen md {
+      top: calc(2 * theme('spacing.4') + 1px);
+      margin-left: calc(theme('spacing.4') + 1px);
+    }
 
     &:not(:focus) {
       @apply sr-only;
