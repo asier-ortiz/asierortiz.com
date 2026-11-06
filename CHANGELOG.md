@@ -1,3 +1,9 @@
+## [1.85.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.84.2...v1.85.0) (2026-11-06)
+
+### Features
+
+* **nav:** float the header as a box on tablets and desktops ([b987d54](https://github.com/asier-ortiz/asierortiz.com/commit/b987d549f6edafd5efe5cd85a048adaf5e9f3412))
+
 ## [1.84.2](https://github.com/asier-ortiz/asierortiz.com/compare/v1.84.1...v1.84.2) (2026-11-05)
 
 ### Bug Fixes
