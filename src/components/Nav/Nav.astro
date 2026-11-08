@@ -17,10 +17,12 @@ import siteData from '@config/siteData.json.ts';
 </div>
 <!-- Spans the top of the window below md. From md, where the links leave the drawer, it floats over
      the sky: 1rem down and as wide as the page's column (.container's 64rem less its 1rem sides),
-     so its edges line up with the cards'. -->
+     so its edges line up with the cards'. It changes shape at once (a phone turning crosses md):
+     ReadingProgress places itself from this box's position on resize, which a transition would
+     still hold at the old shape, and the border would fade in from the default pale grey. -->
 <div
   id="nav__container"
-  class="fixed left-0 top-0 z-30 flex w-full flex-col bg-base-900/70 backdrop-blur-md py-1 duration-500 md:inset-x-4 md:top-4 md:mx-auto md:w-auto md:max-w-[62rem] md:rounded-xl md:border md:border-base-700 md:shadow-lg md:shadow-black/50"
+  class="fixed left-0 top-0 z-30 flex w-full flex-col bg-base-900/70 backdrop-blur-md py-1 md:inset-x-4 md:top-4 md:mx-auto md:w-auto md:max-w-[62rem] md:rounded-xl md:border md:border-base-700 md:shadow-lg md:shadow-black/50"
   transition:name={`nav`}
 >
   <div class="mx-auto flex w-full">
