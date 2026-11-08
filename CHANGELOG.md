@@ -1,3 +1,9 @@
+## [1.85.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.85.0...v1.85.1) (2026-11-08)
+
+### Bug Fixes
+
+* **nav:** stop the header animating when a phone turns ([2e17c9c](https://github.com/asier-ortiz/asierortiz.com/commit/2e17c9c54af227e5617eed49208ffec286ace576))
+
 ## [1.85.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.84.2...v1.85.0) (2026-11-06)
 
 ### Features
