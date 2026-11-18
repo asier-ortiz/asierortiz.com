@@ -1,3 +1,9 @@
+## [1.86.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.85.1...v1.86.0) (2026-11-18)
+
+### Features
+
+* **hero:** a second paragraph tells how I got here and links the blog ([0e696da](https://github.com/asier-ortiz/asierortiz.com/commit/0e696da07357fc360aa1146372d4e50929e03539))
+
 ## [1.85.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.85.0...v1.85.1) (2026-11-08)
 
 ### Bug Fixes
