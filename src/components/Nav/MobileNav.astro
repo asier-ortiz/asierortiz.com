@@ -1,35 +1,48 @@
 ---
-import { Icon } from 'astro-icon/components';
 import NavLink from '@components/Nav/NavLink.astro';
 import navData from '@config/navData.json';
 ---
 
 <div id="mobile-nav__container">
+  <!-- One button opens and closes the drawer. It stays above it, where the thumb already is, and its
+       three lines turn into the X. The before: box takes the 40px button to a 48px target, as big
+       as the drawer's own close button used to be. -->
   <button
-    id="mobile-nav__burger"
-    aria-label="open navigation menu"
+    id="mobile-nav__toggle"
+    aria-label="Navigation menu"
     aria-controls="mobile-nav__content"
     aria-expanded="false"
-    class="primary-focus h-10 w-10 rounded-md"
+    class="primary-focus relative z-50 h-10 w-10 rounded-md before:absolute before:-inset-1"
   >
-    <Icon
-      name="tabler-menu-2"
-      class="m-auto inline-block h-8 w-8 stroke-current"
-      aria-hidden="true"
-    />
+    <span class="mobile-nav__icon" aria-hidden="true">
+      <svg
+        class="mobile-nav__lines"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      >
+        <path class="mobile-nav__bar mobile-nav__bar--top" d="M4 6h16"></path>
+        <path class="mobile-nav__bar mobile-nav__bar--middle" d="M4 12h16"></path>
+        <path class="mobile-nav__bar mobile-nav__bar--bottom" d="M4 18h16"></path>
+      </svg>
+      <span class="mobile-nav__star">
+        <span class="mobile-nav__star-tail"></span>
+        <span class="mobile-nav__star-head"></span>
+      </span>
+    </span>
   </button>
   <!-- touch-none here and on the backdrop keeps a swipe over the open drawer from scrolling the
        page behind; overflow: hidden on body does not stop it on iOS (WebKit bug 240859). -->
   <div
     id="mobile-nav__content"
-    class="whitespace-nowrap fixed -right-72 top-0 z-40 hidden h-screen w-72 touch-none items-center overflow-x-hidden bg-base-900 text-lg font-normal transition-all duration-300"
+    class="whitespace-nowrap fixed right-0 top-0 z-40 hidden h-screen w-72 touch-none items-center overflow-x-hidden bg-base-900 text-lg font-normal"
   >
     <div class="w-full px-2">
-      <div class="mx-1 my-2 flex w-full justify-end pl-6 pr-4">
-        <button id="mobile-nav__close" class="primary-focus p-2" aria-label="close navigation menu">
-          <Icon name="tdesign:close" class="h-8 w-8" aria-hidden="true" />
-        </button>
-      </div>
+      <!-- The toggle stands over this corner as the X; the row keeps the rule and the links where
+           they were. -->
+      <div class="h-16"></div>
       <hr class="mx-5 border-b-2 border-base-600" />
       <nav aria-label="Main">
         <ul class="mx-1 mt-2 text-xl">
@@ -40,7 +53,7 @@ import navData from '@config/navData.json';
       </nav>
     </div>
   </div>
-  <!-- For the finger and the mouse: keyboards close with Escape or the close button, so the
+  <!-- For the finger and the mouse: keyboards close with Escape or the toggle, so the
        backdrop stays out of the tab order and the accessibility tree. -->
   <button
     id="mobile-nav__backdrop"
@@ -68,47 +81,161 @@ import navData from '@config/navData.json';
     }
   }
 
-  .mobile-nav--slide-in {
-    animation: mobileNavSlideInAnimation ease-in-out 0.3s forwards;
+  /* A transition, not keyframes: a second tap halfway turns the drawer back from where it is
+     instead of jumping to the far end first. */
+  #mobile-nav__content {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
   }
 
-  .mobile-nav--slide-out {
-    animation: mobileNavSlideOutAnimation ease-in-out 0.3s forwards;
+  .open #mobile-nav__content {
+    transform: none;
   }
 
-  @keyframes mobileNavSlideInAnimation {
+  /* The toggle's icon is tabler's menu-2 with each line its own path, so each can move, and still
+     an SVG: boxes would snap to whole pixels and come out thinner or thicker than the 2 units of
+     the stroke. The X is the outer two lines moved the 6 units to the middle (8px at 32px) and
+     turned 45 degrees about their centres. The box is middle-aligned like the plain SVG it was
+     (Tailwind's preflight does that for svg), or it sits 4px high. */
+  .mobile-nav__icon {
+    @apply relative m-auto inline-block h-8 w-8 align-middle;
+  }
+
+  .mobile-nav__lines {
+    @apply absolute inset-0 h-full w-full overflow-visible;
+  }
+
+  .mobile-nav__bar {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Each state carries the transitions that lead into it, so opening and closing can differ and a
+     second tap turns back from wherever the icon is. Closing is the quiet one (310ms): the X
+     untwists, the lines spread with a slight overshoot and the middle one grows back from its
+     centre. */
+  .mobile-nav__bar--top,
+  .mobile-nav__bar--bottom {
+    transition:
+      rotate 170ms cubic-bezier(0.4, 0, 0.2, 1),
+      translate 200ms cubic-bezier(0.34, 1.4, 0.64, 1) 110ms;
+  }
+
+  .mobile-nav__bar--middle {
+    transition: scale 170ms cubic-bezier(0, 0, 0.2, 1) 130ms;
+  }
+
+  /* Opening (410ms): the outer lines meet in the middle and turn into the X with a little
+     overshoot, while the middle one draws back into its right end, where the star leaves from. */
+  .open .mobile-nav__bar--top,
+  .open .mobile-nav__bar--bottom {
+    transition:
+      translate 150ms cubic-bezier(0.4, 0, 0.6, 1),
+      rotate 300ms cubic-bezier(0.34, 1.56, 0.64, 1) 110ms;
+  }
+
+  .open .mobile-nav__bar--top {
+    translate: 0 6px;
+    rotate: 45deg;
+  }
+
+  .open .mobile-nav__bar--bottom {
+    translate: 0 -6px;
+    rotate: -45deg;
+  }
+
+  .open .mobile-nav__bar--middle {
+    transform-origin: right;
+    scale: 0 1;
+    transition: scale 130ms cubic-bezier(0.55, 0, 1, 0.45);
+  }
+
+  /* The desktop sky's shooting star (ShootingStar.astro) at the icon's scale, for the phones that
+     never see the sky: it is drawn from md up only, where this button is gone. It leaves the end
+     of the middle line up and to the right, at an angle the big ones also take, and is gone within
+     half a second. The script restarts it on every opening. */
+  .mobile-nav__star {
+    position: absolute;
+    left: 27px;
+    top: 16px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mobile-nav__star--flying {
+    animation: mobileNavStarFlight 420ms cubic-bezier(0.2, 0.6, 0.35, 1) 70ms forwards;
+  }
+
+  .mobile-nav__star-tail {
+    position: absolute;
+    right: 0;
+    top: -1px;
+    width: 16px;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.85));
+    transform-origin: right;
+  }
+
+  .mobile-nav__star--flying .mobile-nav__star-tail {
+    animation: mobileNavStarTail 420ms ease-out 70ms both;
+  }
+
+  .mobile-nav__star-head {
+    position: absolute;
+    left: -1.5px;
+    top: -1.5px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    box-shadow:
+      0 0 4px 1px rgba(255, 255, 255, 0.75),
+      0 0 10px 2px theme('colors.primary.300 / 35%');
+  }
+
+  @keyframes mobileNavStarFlight {
     0% {
-      @apply -right-72;
+      opacity: 0;
+      transform: rotate(-42deg) translateX(0);
+    }
+    12%,
+    55% {
+      opacity: 1;
     }
     100% {
-      @apply right-0;
+      opacity: 0;
+      transform: rotate(-42deg) translateX(30px);
     }
   }
 
-  @keyframes mobileNavSlideOutAnimation {
+  @keyframes mobileNavStarTail {
     0% {
-      @apply right-0;
+      transform: scaleX(0.1);
+    }
+    50% {
+      transform: scaleX(1);
     }
     100% {
-      @apply -right-72;
+      transform: scaleX(0.6);
     }
+  }
+
+  /* A close with no animation (leaving the page, turning to the desktop header) snaps the icon
+     back too. */
+  .mobile-nav--instant .mobile-nav__bar {
+    transition: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #mobile-nav__content {
-      /* The open position lives in animation-fill-mode: forwards, and the
-         element's transition-all would animate the pinned `right` change. */
-      @apply transition-none;
+    #mobile-nav__content,
+    .mobile-nav__bar,
+    .open .mobile-nav__bar {
+      transition: none;
+    }
 
-      &.mobile-nav--slide-in {
-        animation: none;
-        @apply right-0;
-      }
-
-      &.mobile-nav--slide-out {
-        animation: none;
-        @apply -right-72;
-      }
+    .mobile-nav__star {
+      display: none;
     }
 
     .mobile-nav__backdrop--fade-in {
@@ -120,20 +247,26 @@ import navData from '@config/navData.json';
 
 <script>
   let mobileNavContainer;
-  let mobileNavBurger;
+  let mobileNavToggle;
   let mobileNavContent;
-  let mobileNavCloseBtn;
   let mobileNavBackdrop;
+  let mobileNavStar;
   let hideContentTimeout;
   let pageBehind = [];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Everything but the drawer and its backdrop: the siblings met on the way from the drawer up to
-  // body, so the header around it is covered too.
+  // Everything but the drawer, its backdrop and the toggle that closes it: the siblings met on the
+  // way from the drawer up to body, so the header around them is covered too.
   function outsideDrawer() {
     const outside = [];
     for (let el = mobileNavContent; el !== document.body; el = el.parentElement) {
       for (const sibling of el.parentElement.children) {
-        if (sibling !== el && sibling !== mobileNavBackdrop && !sibling.inert) {
+        if (
+          sibling !== el &&
+          sibling !== mobileNavBackdrop &&
+          sibling !== mobileNavToggle &&
+          !sibling.inert
+        ) {
           outside.push(sibling);
         }
       }
@@ -141,27 +274,37 @@ import navData from '@config/navData.json';
     return outside;
   }
 
-  function toggleMobileNav(event) {
-    if (mobileNavBurger && mobileNavContent && mobileNavContainer && mobileNavBackdrop) {
-      if (!mobileNavContainer.classList.contains('open')) {
-        mobileNavContainer.classList.add('open');
-        mobileNavBurger.setAttribute('aria-expanded', 'true');
+  // From the start on every opening, even if the last star is still in flight.
+  function launchStar() {
+    if (reducedMotion.matches) return;
+    mobileNavStar.classList.remove('mobile-nav__star--flying');
+    void mobileNavStar.offsetWidth;
+    mobileNavStar.classList.add('mobile-nav__star--flying');
+  }
 
+  function toggleMobileNav(event) {
+    if (mobileNavToggle && mobileNavContent && mobileNavContainer && mobileNavBackdrop) {
+      if (!mobileNavContainer.classList.contains('open')) {
         // A close scheduled this hide; reopening within its 300ms must cancel
         // it or the open drawer gets display:none under a live backdrop.
         clearTimeout(hideContentTimeout);
-        mobileNavContent.classList.remove('hidden');
-        mobileNavContent.classList.remove('mobile-nav--slide-out');
-        mobileNavContent.classList.add('mobile-nav--slide-in');
+        // Out of display: none, the drawer needs one style pass off-screen to slide in from.
+        if (mobileNavContent.classList.contains('hidden')) {
+          mobileNavContent.classList.remove('hidden');
+          void mobileNavContent.offsetWidth;
+        }
+        mobileNavContainer.classList.add('open');
+        mobileNavToggle.setAttribute('aria-expanded', 'true');
+        launchStar();
 
-        mobileNavBackdrop.classList.remove('hidden');
         mobileNavBackdrop.classList.remove('mobile-nav__backdrop--fade-out');
         mobileNavBackdrop.classList.add('mobile-nav__backdrop--fade-in');
 
-        // Modal while open, like the search dialog: focus moves in and the page behind is inert,
-        // so Tab and screen readers stay in the drawer (WCAG 2.4.3). Safari before 15.5 ignores
-        // inert and lets Tab out.
-        mobileNavCloseBtn.focus({ preventScroll: true });
+        // Modal while open, like the search dialog: the page behind is inert, so Tab and screen
+        // readers stay in the drawer and on the toggle that closes it (WCAG 2.4.3). Safari before
+        // 15.5 ignores inert and lets Tab out. Safari does not focus a clicked button, so the
+        // focus is put on the toggle here.
+        mobileNavToggle.focus({ preventScroll: true });
         pageBehind = outsideDrawer();
         pageBehind.forEach((el) => (el.inert = true));
       } else {
@@ -173,27 +316,31 @@ import navData from '@config/navData.json';
   }
 
   // No preventDefault: link clicks and page events call this too, and their default must run.
-  // Focus goes back to the burger only when the drawer itself was dismissed (close button,
-  // backdrop, Escape): a link takes it to its own target.
+  // Focus goes back to the toggle only when the drawer itself was dismissed (toggle, backdrop,
+  // Escape): a link takes it to its own target.
   function closeMobileNav({ animate = true, returnFocus = false } = {}) {
-    if (mobileNavContent.classList.contains('hidden')) return;
+    const open = mobileNavContainer.classList.contains('open');
+    if (!open && mobileNavContent.classList.contains('hidden')) return;
 
+    if (!animate) mobileNavContainer.classList.add('mobile-nav--instant');
     mobileNavContainer.classList.remove('open');
-    mobileNavBurger.setAttribute('aria-expanded', 'false');
+    mobileNavToggle.setAttribute('aria-expanded', 'false');
 
     pageBehind.forEach((el) => (el.inert = false));
     pageBehind = [];
-    if (returnFocus) mobileNavBurger.focus({ preventScroll: true });
+    if (returnFocus) mobileNavToggle.focus({ preventScroll: true });
 
-    mobileNavContent.classList.remove('mobile-nav--slide-in');
     clearTimeout(hideContentTimeout);
     if (animate) {
-      mobileNavContent.classList.add('mobile-nav--slide-out');
       hideContentTimeout = setTimeout(() => {
         mobileNavContent.classList.add('hidden');
       }, 300);
     } else {
       mobileNavContent.classList.add('hidden');
+      mobileNavStar.classList.remove('mobile-nav__star--flying');
+      // Settle the snap before the transitions come back.
+      void mobileNavContainer.offsetWidth;
+      mobileNavContainer.classList.remove('mobile-nav--instant');
     }
 
     mobileNavBackdrop.classList.remove('mobile-nav__backdrop--fade-in');
@@ -203,15 +350,24 @@ import navData from '@config/navData.json';
   function initMobileNav() {
     if (typeof window !== 'undefined') {
       mobileNavContainer = document.getElementById('mobile-nav__container');
-      mobileNavBurger = document.getElementById('mobile-nav__burger');
+      mobileNavToggle = document.getElementById('mobile-nav__toggle');
       mobileNavContent = document.getElementById('mobile-nav__content');
-      mobileNavCloseBtn = document.getElementById('mobile-nav__close');
       mobileNavBackdrop = document.getElementById('mobile-nav__backdrop');
+      mobileNavStar = mobileNavToggle?.querySelector('.mobile-nav__star');
 
-      if (mobileNavBurger && mobileNavContent && mobileNavCloseBtn && mobileNavBackdrop) {
-        mobileNavBurger.addEventListener('click', toggleMobileNav);
-        mobileNavCloseBtn.addEventListener('click', toggleMobileNav);
+      if (mobileNavToggle && mobileNavContent && mobileNavBackdrop && mobileNavStar) {
+        mobileNavToggle.addEventListener('click', toggleMobileNav);
         mobileNavBackdrop.addEventListener('click', toggleMobileNav);
+
+        // Back to rest when the flight ends, or when reduced motion cuts it short, so a later
+        // opening starts it afresh.
+        const land = (event) => {
+          if (event.target === mobileNavStar) {
+            mobileNavStar.classList.remove('mobile-nav__star--flying');
+          }
+        };
+        mobileNavStar.addEventListener('animationend', land);
+        mobileNavStar.addEventListener('animationcancel', land);
 
         document.addEventListener('keydown', (event) => {
           if (event.key === 'Escape' && mobileNavContainer.classList.contains('open')) {

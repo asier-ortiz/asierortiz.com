@@ -115,9 +115,9 @@ test('search with results, one picked by the arrows', async ({ page }, testInfo)
 test('mobile menu open', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'phone', 'The menu button shows on small screens only.');
   await page.goto('/');
-  const burger = page.locator('#mobile-nav__burger');
-  await burger.click();
-  await expect(burger).toHaveAttribute('aria-expanded', 'true');
+  const toggle = page.locator('#mobile-nav__toggle');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await settle(page);
   await expectNoViolations(page, testInfo, 'mobile menu open');
 });
