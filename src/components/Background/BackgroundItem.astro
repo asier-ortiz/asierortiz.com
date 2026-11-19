@@ -149,10 +149,11 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
 
   /* A pulsar, once the marker is on screen (the script below): the core flashes and a thin ring
      goes out fast from the still one (inset: its outer edge, 5px out), then nothing until the next
-     pulse, every 1.337s, the period of CP 1919, the first pulsar found. 3.3 cycles are four
-     pulses, the last cut off once it has faded (4.4s): an endless one would need a control to
-     stop it (WCAG 2.2.2). forwards holds that faded frame. The gate lets motion in instead of
-     switching it off under reduce, which a later rule could outrank. */
+     pulse, every 1.337s, the period of CP 1919, the first pulsar found. 2.3 cycles are three
+     pulses, the fewest that show a steady beat, the last cut off once it has faded (3.1s): an
+     endless one would need a control to stop it (WCAG 2.2.2). forwards holds that faded frame.
+     The gate lets motion in instead of switching it off under reduce, which a later rule could
+     outrank. */
   @media (prefers-reduced-motion: no-preference) {
     .marker.is-pulsing::before,
     .marker.is-pulsing::after {
@@ -166,13 +167,13 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
       inset: 0;
       background: theme('colors.primary.50');
       box-shadow: 0 0 6px 2px theme('colors.primary.300 / 75%');
-      animation: pulsar-flash 1.337s linear 3.3 forwards;
+      animation: pulsar-flash 1.337s linear 2.3 forwards;
     }
 
     .marker.is-pulsing::after {
       inset: -5px;
       border: 1.5px solid theme('colors.primary.300 / 85%');
-      animation: pulsar-ring 1.337s linear 3.3 forwards;
+      animation: pulsar-ring 1.337s linear 2.3 forwards;
     }
   }
 
