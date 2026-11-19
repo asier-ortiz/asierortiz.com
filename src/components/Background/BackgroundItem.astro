@@ -147,32 +147,64 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
       0 0 0 8px theme('colors.base.950');
   }
 
-  /* A ring ripples out from the still one (inset: the ring's outer edge, 5px out), twice, once the
-     marker is on screen (the script below), then the still ring stays alone: an endless pulse
-     would need a control to stop it (WCAG 2.2.2). forwards holds the faded last frame; the base
-     one would leave a second ring over the still one. The gate lets motion in instead of
+  /* A pulsar, once the marker is on screen (the script below): the core flashes and a thin ring
+     goes out fast from the still one (inset: its outer edge, 5px out), then nothing until the next
+     pulse, every 1.337s, the period of CP 1919, the first pulsar found. 3.3 cycles are four
+     pulses, the last cut off once it has faded (4.4s): an endless one would need a control to
+     stop it (WCAG 2.2.2). forwards holds that faded frame. The gate lets motion in instead of
      switching it off under reduce, which a later rule could outrank. */
   @media (prefers-reduced-motion: no-preference) {
-    .marker.is-rippling::after {
+    .marker.is-pulsing::before,
+    .marker.is-pulsing::after {
       content: '';
       position: absolute;
-      inset: -5px;
       border-radius: inherit;
-      border: 2px solid theme('colors.primary.400 / 60%');
-      animation: timeline-ping 2.4s cubic-bezier(0, 0, 0.2, 1) 2 forwards;
+      opacity: 0;
+    }
+
+    .marker.is-pulsing::before {
+      inset: 0;
+      background: theme('colors.primary.50');
+      box-shadow: 0 0 6px 2px theme('colors.primary.300 / 75%');
+      animation: pulsar-flash 1.337s linear 3.3 forwards;
+    }
+
+    .marker.is-pulsing::after {
+      inset: -5px;
+      border: 1.5px solid theme('colors.primary.300 / 85%');
+      animation: pulsar-ring 1.337s linear 3.3 forwards;
     }
   }
 
-  @keyframes timeline-ping {
-    75%,
+  /* A real pulse lasts a few hundredths of a second; a quarter of one is what the eye can catch. */
+  @keyframes pulsar-flash {
+    0% {
+      opacity: 0;
+    }
+    3% {
+      opacity: 1;
+    }
+    18%,
     100% {
-      transform: scale(1.9);
       opacity: 0;
     }
   }
 
+  @keyframes pulsar-ring {
+    0% {
+      opacity: 0.95;
+      transform: scale(1);
+      animation-timing-function: cubic-bezier(0.1, 0.6, 0.3, 1);
+    }
+    28%,
+    100% {
+      opacity: 0;
+      transform: scale(2.2);
+    }
+  }
+
   /* Forced colours drop backgrounds and shadows: the line and the markers are drawn in system
-     colours, the live one in Highlight. */
+     colours, the live one in Highlight, and its pulses flash in the text colour over it. */
   @media (forced-colors: active) {
     .entry:not(:last-child)::before,
     .marker {
@@ -188,28 +220,33 @@ const keepHyphenatedWords = (text: string) => text.split(/(\S+-\S+)/);
         0 0 0 8px Canvas;
     }
 
-    .marker.is-rippling::after {
+    .marker.is-pulsing::before {
+      background: CanvasText;
+      box-shadow: none;
+    }
+
+    .marker.is-pulsing::after {
       border-color: Highlight;
     }
   }
 </style>
 
 <script>
-  // Not on load: the marker may still be below the fold, and ripples started then would be over
+  // Not on load: the marker may still be below the fold, and pulses started then would be over
   // before anyone saw them. The margin matches the AOS offset: in the last 100px of the screen the
   // entry has not begun to fade in yet.
-  const rippleObserver = new IntersectionObserver(
+  const pulseObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-rippling');
-        rippleObserver.unobserve(entry.target);
+        entry.target.classList.add('is-pulsing');
+        pulseObserver.unobserve(entry.target);
       });
     },
     { threshold: 1, rootMargin: '0px 0px -100px 0px' }
   );
 
   document.querySelectorAll('.is-current .marker').forEach((marker) => {
-    rippleObserver.observe(marker);
+    pulseObserver.observe(marker);
   });
 </script>
