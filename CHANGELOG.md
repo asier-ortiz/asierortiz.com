@@ -1,3 +1,9 @@
+## [1.88.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.87.0...v1.88.0) (2026-11-19)
+
+### Features
+
+* **background:** the live marker pulses like a pulsar ([c548fd0](https://github.com/asier-ortiz/asierortiz.com/commit/c548fd0cb5cc2be1eefa74cfb44d9404ccc76e05))
+
 ## [1.87.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.86.0...v1.87.0) (2026-11-19)
 
 ### Features
