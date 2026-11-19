@@ -1,3 +1,9 @@
+## [1.87.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.86.0...v1.87.0) (2026-11-19)
+
+### Features
+
+* **nav:** the menu button morphs into the X with a shooting star ([a6ed063](https://github.com/asier-ortiz/asierortiz.com/commit/a6ed0639e1f5f1577938b33e44b11dd949442bbe))
+
 ## [1.86.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.85.1...v1.86.0) (2026-11-18)
 
 ### Features
