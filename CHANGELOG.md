@@ -1,3 +1,9 @@
+## [1.88.1](https://github.com/asier-ortiz/asierortiz.com/compare/v1.88.0...v1.88.1) (2026-11-19)
+
+### Bug Fixes
+
+* **background:** the pulsar beats three times instead of four ([ec2c2e3](https://github.com/asier-ortiz/asierortiz.com/commit/ec2c2e31b740aff424a93fb5c048b233b156a495))
+
 ## [1.88.0](https://github.com/asier-ortiz/asierortiz.com/compare/v1.87.0...v1.88.0) (2026-11-19)
 
 ### Features
